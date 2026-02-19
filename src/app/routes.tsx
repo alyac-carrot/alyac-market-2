@@ -2,6 +2,7 @@ import { createBrowserRouter } from 'react-router-dom';
 
 import RootLayout from '@/app/layouts/RootLayout';
 import { HomePage } from '@/pages/home';
+import { SearchPage } from '@/pages/home/search';
 
 // TODO: 아래 3개는 페이지 만들고 추가
 // import { ChatPage } from "@/pages/chat";
@@ -14,11 +15,7 @@ export const router = createBrowserRouter([
     element: <RootLayout />,
     children: [
       { index: true, element: <HomePage /> },
-
-      // 페이지 만들면 아래 주석 해제
-      // { path: "chat", element: <ChatPage /> },
-      // { path: "write", element: <WritePage /> },
-      // { path: "profile", element: <ProfilePage /> },
+      { path: 'search', element: <SearchPage /> }, // ✅ /search
     ],
   },
 ]);
