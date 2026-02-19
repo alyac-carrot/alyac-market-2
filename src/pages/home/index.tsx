@@ -4,9 +4,8 @@ import { AlertDialog } from '@/shared/ui';
 export function HomePage() {
   return (
     <div className="flex min-h-[calc(100vh-56px-72px)] items-center justify-center">
-      <div className="flex -translate-y-8 flex-col items-center gap-4">
-        {/* 캐릭터 이미지 (public/mascot.png 추가하면 됨) */}
-        <img src="/mascot.png" alt="mascot" className="h-[110px] w-[70px] object-contain" />
+      <div className="flex flex-col items-center gap-4">
+        <img src="/mascot.png" alt="마스코트" className="h-auto w-[90px]" />
 
         <p className="text-sm text-zinc-900">유저를 검색해 팔로우 해보세요!</p>
 
