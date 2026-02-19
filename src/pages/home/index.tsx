@@ -1,6 +1,5 @@
 import { useNavigate } from 'react-router-dom';
 
-import { AlertDialog } from '@/shared/ui';
 import { Button } from '@/shared/ui';
 
 export function HomePage() {
