@@ -13,7 +13,7 @@ type UserItem = {
 
 const MOCK_USERS: UserItem[] = [
   { id: '1', name: '이스트 시큐리티', handle: '@estSecurity_alyac', tag: '알약' },
-  { id: '2', name: '알약_클라우드 이스트 시큐리티', handle: '@alyac_cloud', tag: '알약' },
+  { id: '2', name: '알약 클라우드 이스트 시큐리티', handle: '@alyac_cloud', tag: '알약' },
   { id: '3', name: '보안 닥터스 알약', handle: '@security_alyac', tag: '알약' },
 ];
 
@@ -50,7 +50,7 @@ export function SearchPage() {
             value={q}
             onChange={(e) => setQ(e.target.value)}
             placeholder="계정 검색"
-            className="h-10 w-full rounded-full bg-zinc-100 px-4 text-sm outline-none focus:bg-white focus:ring-2 focus:ring-green-500"
+            className="h-11 w-full rounded-full bg-zinc-100 px-5 text-sm text-zinc-900 outline-none placeholder:text-zinc-400 focus:bg-white focus:ring-2 focus:ring-blue-500"
           />
         </div>
       </div>
