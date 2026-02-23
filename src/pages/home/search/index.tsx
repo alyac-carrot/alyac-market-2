@@ -8,11 +8,11 @@ type UserItem = {
   id: string;
   name: string;
   handle: string;
-  tag: string; // 예: "알약"
+  tag: string;
 };
 
 const MOCK_USERS: UserItem[] = [
-  { id: '1', name: '이스트 시큐리티', handle: '@estSecurity_alyac', tag: '알약' },
+  { id: '1', name: '이스트 시큐리티', handle: '@es', tag: '알약' },
   { id: '2', name: '알약 클라우드 이스트 시큐리티', handle: '@alyac_cloud', tag: '알약' },
   { id: '3', name: '보안 닥터스 알약', handle: '@security_alyac', tag: '알약' },
 ];
