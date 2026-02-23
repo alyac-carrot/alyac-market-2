@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { Search } from 'lucide-react';
 import { HeaderShell } from './HeaderShell';
 
-export function DefaultHeader() {
+export function FeedHeader() {
   return (
     <HeaderShell
       left={

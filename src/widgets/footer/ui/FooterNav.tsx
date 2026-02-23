@@ -28,7 +28,7 @@ export function Footer() {
           )}
         </NavLink>
 
-        <NavLink to="/chat" className="flex flex-col items-center">
+        <NavLink to="/post" className="flex flex-col items-center">
           {({ isActive }) => (
             <>
               {isActive ? (
@@ -41,7 +41,7 @@ export function Footer() {
           )}
         </NavLink>
 
-        <NavLink to="/post-create" className="flex flex-col items-center">
+        <NavLink to="/upload" className="flex flex-col items-center">
             <>
               <PostCreateIcon className="h-6 w-6" />
               <span className="text-xs">게시물 작성</span>
