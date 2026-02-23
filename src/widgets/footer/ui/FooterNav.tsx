@@ -10,7 +10,7 @@ import {
   ProfileIconFill,
 } from '@/assets/icon';
 
-export function Footer() {
+export function FooterNav() {
   return (
     <footer className="fixed bottom-0 left-0 right-0 h-16 border-t bg-background">
       <nav className="mx-auto flex h-full items-center justify-around">
