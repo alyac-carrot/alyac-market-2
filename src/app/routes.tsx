@@ -1,8 +1,9 @@
 import { createBrowserRouter } from 'react-router-dom';
 
 import { RootLayout } from '@/app/layouts/RootLayout';
+import { ChatListPage } from '@/pages/chat';
+import { ChatRoomPage } from '@/pages/chat/room';
 import { HomePage } from '@/pages/home';
-
 import { SearchPage } from '@/pages/home/search';
 import { PostPage } from '@/pages/post';
 import { UploadPage } from '@/pages/upload';
@@ -14,6 +15,8 @@ export const router = createBrowserRouter([
     children: [
       { index: true, element: <HomePage /> },
       { path: 'search', element: <SearchPage /> }, // ✅ /search
+      { path: 'chat', element: <ChatListPage /> },
+      { path: 'chat/:roomId', element: <ChatRoomPage /> },
     ],
   },
   {
