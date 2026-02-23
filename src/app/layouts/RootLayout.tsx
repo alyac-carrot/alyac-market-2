@@ -1,16 +1,18 @@
 import { Outlet } from 'react-router-dom';
-
-import { Footer } from '@/widgets/footer';
 import { Header } from '@/widgets/header';
+import { Footer } from '@/widgets/footer';
 
 export function RootLayout() {
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="min-h-screen">
       <Header />
 
-      <main className="flex-1">
-        <Outlet />
+      <main className="pt-16 pb-16">
+        <div className="mx-auto w-full max-w-7xl px-4">
+          <Outlet />
+        </div>
       </main>
+
       <Footer />
     </div>
   );
