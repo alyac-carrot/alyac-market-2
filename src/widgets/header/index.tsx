@@ -2,6 +2,7 @@ import { useLocation } from 'react-router-dom';
 import { FeedHeader } from './ui/FeedHeader';
 import { SearchHeader } from './ui/SearchHeader';
 import { AppHeader } from './ui/AppHeader';
+import { PostCreateHeader } from './ui/PostCreateHeader';
 
 export function Header() {
   const { pathname } = useLocation();
@@ -15,7 +16,7 @@ export function Header() {
   }
 
    if (pathname.startsWith('/upload')) {
-    return <AppHeader />;
+    return <PostCreateHeader />;
   }
 
   return <FeedHeader />;

@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+
 import { ArrowLeft } from 'lucide-react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+
 import { HeaderShell } from './HeaderShell';
 
 function useDebouncedValue<T>(value: T, delay = 300) {
@@ -35,7 +37,7 @@ export function SearchHeader() {
 
     setSearchParams(next, { replace: true });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [debounced]); 
+  }, [debounced]);
 
   return (
     <HeaderShell
@@ -43,7 +45,7 @@ export function SearchHeader() {
         <button
           type="button"
           onClick={() => navigate(-1)}
-          className="flex h-10 w-10 items-center justify-center rounded hover:bg-muted"
+          className="hover:bg-muted flex h-10 w-10 items-center justify-center rounded"
           aria-label="뒤로가기"
         >
           <ArrowLeft className="h-6 w-6" />
