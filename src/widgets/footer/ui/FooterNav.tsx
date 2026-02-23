@@ -23,7 +23,7 @@ export function Footer() {
           )}
         </NavLink>
 
-        <NavLink to="/post" className="flex flex-col items-center">
+        <NavLink to="/chat" className="flex flex-col items-center">
           {({ isActive }) => (
             <>
               {isActive ? <ChatIconFill className="h-6 w-6" /> : <ChatIcon className="h-6 w-6" />}

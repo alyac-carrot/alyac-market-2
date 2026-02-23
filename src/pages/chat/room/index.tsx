@@ -31,13 +31,12 @@ export function ChatRoomPage() {
     {
       id: 'a',
       from: 'them',
-      text: '지능형 사이버 위협에 가장 실질적으로 대응할 수 있는…',
+      text: '테스트용 말',
       time: '12:39',
     },
-    { id: 'b', from: 'them', text: '시간과 비용 확인 부탁드려요.', time: '12:44' },
-    { id: 'c', from: 'me', text: 'Treat Inside 입니다.', time: '12:50' },
-    { id: 'd', from: 'me', imageUrl: 'https://via.placeholder.com/320x180', time: '12:51' },
-    { id: 'e', from: 'them', text: '괜찮습니다.', time: '12:55' },
+    { id: 'b', from: 'them', text: '테스트 확인입니다', time: '12:44' },
+    { id: 'c', from: 'me', text: '알겠습니다.', time: '12:50' },
+    { id: 'e', from: 'them', text: '사진은 나중에', time: '12:55' },
   ]);
 
   const listRef = useRef<HTMLDivElement | null>(null);

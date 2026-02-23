@@ -20,12 +20,12 @@ export function SearchPage() {
   const nav = useNavigate();
   const [sp] = useSearchParams();
 
-  // ✅ 헤더 입력값이 여기로 들어오게 됨
   const q = (sp.get('q') ?? '').trim();
 
   const results = useMemo(() => {
     const keyword = q.toLowerCase();
     if (!keyword) return [];
+
     return MOCK_USERS.filter((u) => {
       return (
         u.name.toLowerCase().includes(keyword) ||
@@ -37,10 +37,14 @@ export function SearchPage() {
 
   return (
     <div className="px-4 pt-16">
-      {/* ✅ 여기서 회색 검색창 렌더링하던 부분 제거 */}
-      {results.length === 0 ? (
-        <div className="text-muted-foreground mt-10 text-center">검색어를 입력해보세요.</div>
+      {/* ✅ 검색어 없을 때 */}
+      {!q ? (
+        <div className="text-muted-foreground mt-20 text-center">검색어를 입력해보세요.</div>
+      ) : results.length === 0 ? (
+        /* ✅ 검색어는 있는데 결과 없을 때 */
+        <div className="text-muted-foreground mt-20 text-center">검색 결과가 없어요.</div>
       ) : (
+        /* ✅ 결과 리스트 */
         <ul className="mt-4 space-y-3">
           {results.map((u) => (
             <li
