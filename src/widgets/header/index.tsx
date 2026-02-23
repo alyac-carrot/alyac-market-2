@@ -1,7 +1,7 @@
-// src/widgets/header/index.tsx
 import { useLocation } from 'react-router-dom';
-import { DefaultHeader } from './ui/DefaultHeader';
+import { FeedHeader } from './ui/FeedHeader';
 import { SearchHeader } from './ui/SearchHeader';
+import { AppHeader } from './ui/AppHeader';
 
 export function Header() {
   const { pathname } = useLocation();
@@ -10,5 +10,13 @@ export function Header() {
     return <SearchHeader />;
   }
 
-  return <DefaultHeader />;
+  if (pathname.startsWith('/post')) { // 임시
+    return <AppHeader />;
+  }
+
+   if (pathname.startsWith('/upload')) {
+    return <AppHeader />;
+  }
+
+  return <FeedHeader />;
 }
