@@ -12,8 +12,8 @@ import {
 
 export function Footer() {
   return (
-    <footer className="fixed bottom-0 left-0 right-0 border-t bg-background">
-      <nav className="mx-auto flex h-16 max-w-3xl items-center justify-around">
+    <footer className="fixed bottom-0 left-0 right-0 h-16 border-t bg-background">
+      <nav className="mx-auto flex h-full items-center justify-around">
 
         <NavLink to="/" className="flex flex-col items-center">
           {({ isActive }) => (
