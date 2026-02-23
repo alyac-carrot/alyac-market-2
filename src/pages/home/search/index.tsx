@@ -1,8 +1,8 @@
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 
-import { ArrowLeftIcon } from '@/shared/ui/icons';
+import { useSearchValue } from '@/shared/lib/search/useSearchValue';
 
 type UserItem = {
   id: string;
@@ -18,12 +18,15 @@ const MOCK_USERS: UserItem[] = [
 ];
 
 export function SearchPage() {
-  const nav = useNavigate();
-  const [q, setQ] = useState('');
+  // const nav = useNavigate();
+  const { value } = useSearchValue();
+
+  const q = value.trim();
 
   const results = useMemo(() => {
-    const keyword = q.trim().toLowerCase();
+    const keyword = q.toLowerCase();
     if (!keyword) return [];
+
     return MOCK_USERS.filter((u) => {
       return (
         u.name.toLowerCase().includes(keyword) ||
@@ -35,7 +38,7 @@ export function SearchPage() {
 
   return (
     <div className="px-4 pt-3">
-      {/* 상단 검색 바 */}
+      {/* 상단 검색 바
       <div className="flex items-center gap-2">
         <button
           type="button"
@@ -44,7 +47,6 @@ export function SearchPage() {
         >
           <ArrowLeftIcon className="h-6 w-6" />
         </button>
-
         <div className="flex-1">
           <input
             value={q}
@@ -53,11 +55,10 @@ export function SearchPage() {
             className="h-11 w-full rounded-full bg-zinc-100 px-5 text-sm text-zinc-900 outline-none placeholder:text-zinc-400 focus:bg-white focus:ring-2 focus:ring-blue-500"
           />
         </div>
-      </div>
-
+      </div> */}
       {/* 결과 영역 */}
       <div className="mt-4">
-        {!q.trim() ? (
+        {!q ? (
           <p className="text-sm text-zinc-400">검색어를 입력해보세요.</p>
         ) : results.length === 0 ? (
           <p className="text-sm text-zinc-400">검색 결과가 없어요.</p>
@@ -71,7 +72,6 @@ export function SearchPage() {
               >
                 {/* 프로필 이미지 자리(회색 원) */}
                 <div className="h-10 w-10 rounded-full bg-zinc-200" />
-
                 <div className="min-w-0 flex-1">
                   <div className="flex items-center gap-2">
                     <p className="truncate text-sm font-semibold text-zinc-900">{u.name}</p>

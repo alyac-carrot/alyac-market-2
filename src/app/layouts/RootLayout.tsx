@@ -1,19 +1,23 @@
 import { Outlet } from 'react-router-dom';
-import { Header } from '@/widgets/header';
+
+import { SearchProvider } from '@/shared/lib/search/SearchProvider';
 import { Footer } from '@/widgets/footer';
+import { Header } from '@/widgets/header';
 
 export function RootLayout() {
   return (
-    <div className="min-h-screen">
-      <Header />
+    <SearchProvider>
+      <div className="min-h-screen">
+        <Header />
 
-      <main className="pt-16 pb-16">
-        <div className="mx-auto w-full max-w-7xl px-4">
-          <Outlet />
-        </div>
-      </main>
+        <main className="pt-16 pb-16">
+          <div className="mx-auto w-full px-4">
+            <Outlet />
+          </div>
+        </main>
 
-      <Footer />
-    </div>
+        <Footer />
+      </div>
+    </SearchProvider>
   );
 }

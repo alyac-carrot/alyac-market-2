@@ -1,5 +1,8 @@
 import { ArrowLeft, MoreVertical } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+
+import { Button } from '@/shared/ui/button';
+
 import { HeaderShell } from './HeaderShell';
 
 export function AppHeader() {
@@ -8,29 +11,29 @@ export function AppHeader() {
   return (
     <HeaderShell
       left={
-        <button
+        <Button
           type="button"
+          variant="ghost"
+          size="icon"
           onClick={() => navigate(-1)}
-          className="flex h-10 w-10 items-center justify-center"
           aria-label="뒤로가기"
         >
           <ArrowLeft className="h-6 w-6" />
-        </button>
+        </Button>
       }
-
       center={null}
-      
       right={
-        <button
+        <Button
           type="button"
+          variant="ghost"
+          size="icon"
           onClick={() => {
             console.log('menu');
           }}
-          className="flex h-10 w-10 items-center justify-center"
           aria-label="메뉴"
         >
           <MoreVertical className="h-6 w-6" />
-        </button>
+        </Button>
       }
     />
   );
