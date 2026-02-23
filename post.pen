@@ -1,0 +1,3387 @@
+{
+  "version": "2.8",
+  "children": [
+    {
+      "type": "frame",
+      "id": "S6Vdy",
+      "x": 163.71181050374162,
+      "y": -122,
+      "name": "Post",
+      "clip": true,
+      "width": 390,
+      "height": 844,
+      "fill": "#ffffffff",
+      "stroke": {
+        "align": "inside",
+        "thickness": 1
+      },
+      "layout": "none",
+      "children": [
+        {
+          "type": "frame",
+          "id": "RlbFG",
+          "x": 16,
+          "y": 92,
+          "name": "home-post",
+          "width": 358,
+          "height": 434,
+          "fill": "#ffffffff",
+          "stroke": {
+            "align": "inside",
+            "thickness": 1
+          },
+          "layout": "none",
+          "children": [
+            {
+              "type": "frame",
+              "id": "XPeXD",
+              "x": 0,
+              "y": 0,
+              "name": "upload-image",
+              "width": 42,
+              "height": 42,
+              "fill": "#dbdbdbff",
+              "cornerRadius": 55,
+              "stroke": {
+                "align": "inside",
+                "thickness": 1,
+                "fill": "#d4d4d4ff"
+              },
+              "layout": "vertical",
+              "gap": 10,
+              "padding": [
+                5,
+                12
+              ],
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "path",
+                  "id": "HCmuS",
+                  "name": "알약로고_gray",
+                  "geometry": "M0 0l40 0 0 69-40 0 0-69z",
+                  "fill": {
+                    "type": "image",
+                    "enabled": true,
+                    "url": "",
+                    "mode": "stretch"
+                  },
+                  "width": "fill_container",
+                  "height": "fill_container",
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1
+                  }
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "LdKVI",
+              "x": 54,
+              "y": 4,
+              "name": "Frame 4",
+              "stroke": {
+                "align": "inside",
+                "thickness": 1
+              },
+              "layout": "vertical",
+              "gap": 16,
+              "children": [
+                {
+                  "type": "group",
+                  "id": "glgfF",
+                  "name": "user-name",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "cxOS9",
+                      "x": 0,
+                      "y": 0,
+                      "name": "이스트 시큐리티 알약",
+                      "fill": "#000000ff",
+                      "content": "이스트 시큐리티 알약",
+                      "textAlignVertical": "bottom",
+                      "fontFamily": "Noto Sans Lao",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "rYbuO",
+                      "x": 0,
+                      "y": 25,
+                      "name": "@ estSecurity_Alyac",
+                      "fill": "#767676ff",
+                      "content": "@ estSecurity_Alyac",
+                      "lineHeight": 1.1666666666666667,
+                      "textAlignVertical": "bottom",
+                      "fontFamily": "Noto Sans Lao",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "npBBH",
+                  "name": "알려지지 않은 위협의 즉각적인 차단부터 식별, 대응까지. 10년이상의 백신 운영 노하우와 악성코드 분석 전문성을 담은 알약 EDR 솔루션은 위협 인텔리전스와의 결합으로 확장된 엔드포인트 위협 대응 체계를 제공합니다.",
+                  "fill": "#000000ff",
+                  "textGrowth": "fixed-width",
+                  "width": 304,
+                  "content": "알려지지 않은 위협의 즉각적인 차단부터 식별, 대응까지. 10년이상의 백신 운영 노하우와 악성코드 분석 전문성을 담은 알약 EDR 솔루션은 위협 인텔리전스와의 결합으로 확장된 엔드포인트 위협 대응 체계를 제공합니다.",
+                  "fontFamily": "Noto Sans Lao",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "group",
+                  "id": "iW8wO",
+                  "name": "img+icon",
+                  "children": [
+                    {
+                      "type": "group",
+                      "id": "rwoxe",
+                      "x": 0,
+                      "y": 240,
+                      "name": "icon-group",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "Fclty",
+                          "x": 0,
+                          "y": 0,
+                          "name": "heart",
+                          "clip": true,
+                          "width": 20,
+                          "height": 20,
+                          "fill": {
+                            "type": "color",
+                            "color": "#ffffffff",
+                            "enabled": false
+                          },
+                          "stroke": {
+                            "align": "inside",
+                            "thickness": 1
+                          },
+                          "layout": "none",
+                          "children": [
+                            {
+                              "type": "path",
+                              "id": "Z4ZEt",
+                              "x": 1.818359375,
+                              "y": 2.727294921875,
+                              "name": "Vector",
+                              "geometry": "M17.68368 1.47751c-0.46819-0.46841-1.02409-0.83999-1.63592-1.09351-0.61184-0.25352-1.26763-0.384-1.92991-0.384-0.66228 0-1.31807 0.13048-1.92991 0.384-0.61184 0.25352-1.16773 0.62509-1.63592 1.09351l-0.97167 0.97166-0.97167-0.97166c-0.94572-0.94572-2.22839-1.47702-3.56583-1.47702-1.33745 0-2.62012 0.5313-3.56583 1.47702-0.94572 0.94572-1.47702 2.22839-1.47702 3.56583 0 1.33745 0.5313 2.62012 1.47702 3.56583l0.97166 0.97167 7.13167 7.13166 7.13167-7.13166 0.97166-0.97167c0.46841-0.46819 0.83999-1.02409 1.09351-1.63592 0.25352-0.61184 0.384-1.26763 0.384-1.92991 0-0.66228-0.13049-1.31807-0.384-1.92991-0.25352-0.61184-0.62509-1.16773-1.09351-1.63592z",
+                              "width": 16.363636016845703,
+                              "height": 14.545455932617188,
+                              "stroke": {
+                                "align": "center",
+                                "thickness": 1.5,
+                                "join": "round",
+                                "cap": "round",
+                                "fill": "#767676ff"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "text",
+                          "id": "cNC16",
+                          "x": 26,
+                          "y": 4,
+                          "name": "58",
+                          "fill": "#767676ff",
+                          "content": "58",
+                          "lineHeight": 1,
+                          "textAlignVertical": "bottom",
+                          "fontFamily": "Noto Sans Lao",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "Z28mj",
+                          "x": 83,
+                          "y": 4,
+                          "name": "12",
+                          "fill": "#767676ff",
+                          "content": "12",
+                          "lineHeight": 1,
+                          "textAlignVertical": "bottom",
+                          "fontFamily": "Noto Sans Lao",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "SZLLu",
+                          "x": 57,
+                          "y": 0,
+                          "name": "message-circle",
+                          "clip": true,
+                          "width": 20,
+                          "height": 20,
+                          "fill": {
+                            "type": "color",
+                            "color": "#ffffffff",
+                            "enabled": false
+                          },
+                          "stroke": {
+                            "align": "inside",
+                            "thickness": 1
+                          },
+                          "layout": "none",
+                          "children": [
+                            {
+                              "type": "path",
+                              "id": "SXpfE",
+                              "x": 2.5,
+                              "y": 2.5,
+                              "name": "Vector",
+                              "geometry": "M18 8.50003c0.00344 1.31987-0.30493 2.62189-0.9 3.8-0.70557 1.41174-1.79025 2.59917-3.13255 3.42928-1.3423 0.83011-2.88921 1.27011-4.46745 1.27072-1.31987 0.00344-2.62188-0.30493-3.8-0.9l-5.7 1.9 1.9-5.7c-0.59507-1.17812-0.90344-2.48013-0.9-3.8 0.00061-1.57824 0.44061-3.12515 1.27072-4.46745 0.83011-1.3423 2.01754-2.42698 3.42928-3.13255 1.17812-0.59507 2.48013-0.90344 3.8-0.9l0.5 0c2.08435 0.11499 4.05304 0.99476 5.52914 2.47086 1.4761 1.4761 2.35587 3.44479 2.47086 5.52914l0 0.5z",
+                              "width": 15.000022888183594,
+                              "height": 15.000022888183594,
+                              "stroke": {
+                                "align": "center",
+                                "thickness": 1.5,
+                                "join": "round",
+                                "cap": "round",
+                                "fill": "#767676ff"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "rectangle",
+                      "cornerRadius": 10,
+                      "id": "M0eEs",
+                      "x": 0,
+                      "y": 0,
+                      "name": "unsplash:FWtiv70Z_ZY",
+                      "fill": [
+                        "#c4c4c4ff",
+                        {
+                          "type": "image",
+                          "enabled": true,
+                          "url": "",
+                          "mode": "fill"
+                        }
+                      ],
+                      "width": 304,
+                      "height": 228,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 0.5,
+                        "fill": "#dbdbdbff"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "26Ip6",
+                  "name": "2020년 10월 21일",
+                  "fill": "#767676ff",
+                  "textGrowth": "fixed-width-height",
+                  "width": 80,
+                  "height": 12,
+                  "content": "2020년 10월 21일",
+                  "lineHeight": 1.2,
+                  "textAlignVertical": "bottom",
+                  "fontFamily": "Noto Sans Lao",
+                  "fontSize": 10,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "pQfgW",
+              "x": 340,
+              "y": 4,
+              "name": "s-icon-more-vertical",
+              "clip": true,
+              "width": 18,
+              "height": 18,
+              "fill": {
+                "type": "color",
+                "color": "#ffffffff",
+                "enabled": false
+              },
+              "stroke": {
+                "align": "inside",
+                "thickness": 1
+              },
+              "layout": "none",
+              "children": [
+                {
+                  "type": "path",
+                  "id": "deUlY",
+                  "x": 8.24998664855957,
+                  "y": 8.25001335144043,
+                  "name": "Vector",
+                  "geometry": "M2 1c0 0.55228-0.44772 1-1 1-0.55228 0-1-0.44772-1-1 0-0.55228 0.44772-1 1-1 0.55228 0 1 0.44772 1 1z",
+                  "fill": "#c4c4c4ff",
+                  "width": 1.4999990463256836,
+                  "height": 1.4999990463256836,
+                  "stroke": {
+                    "align": "center",
+                    "thickness": 1,
+                    "join": "round",
+                    "cap": "round",
+                    "fill": "#c4c4c4ff"
+                  }
+                },
+                {
+                  "type": "path",
+                  "id": "OmkRA",
+                  "x": 8.24998664855957,
+                  "y": 2.9999873638153076,
+                  "name": "Vector",
+                  "geometry": "M2 1c0 0.55228-0.44772 1-1 1-0.55228 0-1-0.44772-1-1 0-0.55228 0.44772-1 1-1 0.55228 0 1 0.44772 1 1z",
+                  "fill": "#c4c4c4ff",
+                  "width": 1.4999990463256836,
+                  "height": 1.499999761581421,
+                  "stroke": {
+                    "align": "center",
+                    "thickness": 1,
+                    "join": "round",
+                    "cap": "round",
+                    "fill": "#c4c4c4ff"
+                  }
+                },
+                {
+                  "type": "path",
+                  "id": "laPeM",
+                  "x": 8.24998664855957,
+                  "y": 13.5,
+                  "name": "Vector",
+                  "geometry": "M2 1c0 0.55228-0.44772 1-1 1-0.55228 0-1-0.44772-1-1 0-0.55228 0.44772-1 1-1 0.55228 0 1 0.44772 1 1z",
+                  "fill": "#c4c4c4ff",
+                  "width": 1.4999990463256836,
+                  "height": 1.4999971389770508,
+                  "stroke": {
+                    "align": "center",
+                    "thickness": 1,
+                    "join": "round",
+                    "cap": "round",
+                    "fill": "#c4c4c4ff"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "0Td4G",
+          "x": 16,
+          "y": 567,
+          "name": "Group 5",
+          "width": 358,
+          "height": 58,
+          "stroke": {
+            "align": "inside",
+            "thickness": 1
+          },
+          "layout": "none",
+          "children": [
+            {
+              "type": "frame",
+              "id": "JpevK",
+              "x": 48,
+              "y": 6,
+              "name": "Frame 6",
+              "stroke": {
+                "align": "inside",
+                "thickness": 1
+              },
+              "gap": 6,
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "BAjQ8",
+                  "name": "이스트 소프트",
+                  "fill": "#000000ff",
+                  "content": "이스트 소프트",
+                  "textAlignVertical": "bottom",
+                  "fontFamily": "Noto Sans Lao",
+                  "fontSize": 14,
+                  "fontWeight": "500"
+                },
+                {
+                  "type": "text",
+                  "id": "DxnFT",
+                  "name": "· 5분 전",
+                  "fill": "#767676ff",
+                  "content": "· 5분 전",
+                  "textAlignVertical": "middle",
+                  "fontFamily": "Noto Sans Lao",
+                  "fontSize": 10,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "Ovjfl",
+              "x": 48,
+              "y": 40,
+              "name": "게시글 답글 ~~ !! 최고최고",
+              "fill": "#333333ff",
+              "textGrowth": "fixed-width",
+              "width": 310,
+              "content": "게시글 답글 ~~ !! 최고최고",
+              "fontFamily": "Noto Sans Lao",
+              "fontSize": 14,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "ellipse",
+              "id": "Mq4Ya",
+              "x": 0,
+              "y": 0,
+              "name": "Ellipse 4",
+              "sweepAngle": -360.00001001791264,
+              "fill": {
+                "type": "image",
+                "enabled": true,
+                "url": "",
+                "mode": "fill"
+              },
+              "width": 36,
+              "height": 36,
+              "stroke": {
+                "align": "inside",
+                "thickness": 0.5,
+                "fill": "#dbdbdbff"
+              }
+            },
+            {
+              "type": "frame",
+              "id": "YYTiG",
+              "x": 338,
+              "y": 5,
+              "name": "more-vertical",
+              "clip": true,
+              "width": 20,
+              "height": 20,
+              "fill": {
+                "type": "color",
+                "color": "#ffffffff",
+                "enabled": false
+              },
+              "stroke": {
+                "align": "inside",
+                "thickness": 1
+              },
+              "layout": "none",
+              "children": [
+                {
+                  "type": "path",
+                  "id": "mQqgr",
+                  "x": 9.166712760925293,
+                  "y": 9.166682243347168,
+                  "name": "Vector",
+                  "geometry": "M2 1c0 0.55228-0.44772 1-1 1-0.55228 0-1-0.44772-1-1 0-0.55228 0.44772-1 1-1 0.55228 0 1 0.44772 1 1z",
+                  "fill": "#767676ff",
+                  "width": 1.666666030883789,
+                  "height": 1.666666030883789,
+                  "stroke": {
+                    "align": "center",
+                    "thickness": 1,
+                    "join": "round",
+                    "cap": "round",
+                    "fill": "#767676ff"
+                  }
+                },
+                {
+                  "type": "path",
+                  "id": "gP4nL",
+                  "x": 9.166712760925293,
+                  "y": 3.3333187103271484,
+                  "name": "Vector",
+                  "geometry": "M2 1c0 0.55228-0.44772 1-1 1-0.55228 0-1-0.44772-1-1 0-0.55228 0.44772-1 1-1 0.55228 0 1 0.44772 1 1z",
+                  "fill": "#767676ff",
+                  "width": 1.666666030883789,
+                  "height": 1.666666030883789,
+                  "stroke": {
+                    "align": "center",
+                    "thickness": 1,
+                    "join": "round",
+                    "cap": "round",
+                    "fill": "#767676ff"
+                  }
+                },
+                {
+                  "type": "path",
+                  "id": "4ROrO",
+                  "x": 9.166712760925293,
+                  "y": 15,
+                  "name": "Vector",
+                  "geometry": "M2 1c0 0.55228-0.44772 1-1 1-0.55228 0-1-0.44772-1-1 0-0.55228 0.44772-1 1-1 0.55228 0 1 0.44772 1 1z",
+                  "fill": "#767676ff",
+                  "width": 1.666666030883789,
+                  "height": 1.6666641235351562,
+                  "stroke": {
+                    "align": "center",
+                    "thickness": 1,
+                    "join": "round",
+                    "cap": "round",
+                    "fill": "#767676ff"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "4G8WY",
+          "x": 16,
+          "y": 641,
+          "name": "Group 8",
+          "width": 358,
+          "height": 76,
+          "stroke": {
+            "align": "inside",
+            "thickness": 1
+          },
+          "layout": "none",
+          "children": [
+            {
+              "type": "frame",
+              "id": "6jGtK",
+              "x": 48,
+              "y": 6,
+              "name": "Frame 6",
+              "stroke": {
+                "align": "inside",
+                "thickness": 1
+              },
+              "gap": 6,
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "xH95G",
+                  "name": "이스트 소프트",
+                  "fill": "#000000ff",
+                  "content": "보안 백신 전문가",
+                  "textAlignVertical": "bottom",
+                  "fontFamily": "Noto Sans Lao",
+                  "fontSize": 14,
+                  "fontWeight": "500"
+                },
+                {
+                  "type": "text",
+                  "id": "qFKYZ",
+                  "name": "· 5분 전",
+                  "fill": "#767676ff",
+                  "content": "· 15분 전",
+                  "textAlignVertical": "middle",
+                  "fontFamily": "Noto Sans Lao",
+                  "fontSize": 10,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "H9rwa",
+              "x": 48,
+              "y": 40,
+              "name": "게시글 답글 ~~ !! 최고최고",
+              "fill": "#333333ff",
+              "textGrowth": "fixed-width",
+              "width": 310,
+              "content": "너무 기대됩니다. 블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라...",
+              "fontFamily": "Noto Sans Lao",
+              "fontSize": 14,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "ellipse",
+              "id": "ByRng",
+              "x": 0,
+              "y": 0,
+              "name": "Ellipse 4",
+              "sweepAngle": -360.00001001791264,
+              "fill": {
+                "type": "image",
+                "enabled": true,
+                "url": "",
+                "mode": "fill"
+              },
+              "width": 36,
+              "height": 36,
+              "stroke": {
+                "align": "inside",
+                "thickness": 0.5,
+                "fill": "#dbdbdbff"
+              }
+            },
+            {
+              "type": "frame",
+              "id": "OSKmp",
+              "x": 338,
+              "y": 5,
+              "name": "more-vertical",
+              "clip": true,
+              "width": 20,
+              "height": 20,
+              "fill": {
+                "type": "color",
+                "color": "#ffffffff",
+                "enabled": false
+              },
+              "stroke": {
+                "align": "inside",
+                "thickness": 1
+              },
+              "layout": "none",
+              "children": [
+                {
+                  "type": "path",
+                  "id": "G8UnD",
+                  "x": 9.166712760925293,
+                  "y": 9.166682243347168,
+                  "name": "Vector",
+                  "geometry": "M2 1c0 0.55228-0.44772 1-1 1-0.55228 0-1-0.44772-1-1 0-0.55228 0.44772-1 1-1 0.55228 0 1 0.44772 1 1z",
+                  "fill": "#767676ff",
+                  "width": 1.666666030883789,
+                  "height": 1.666666030883789,
+                  "stroke": {
+                    "align": "center",
+                    "thickness": 1,
+                    "join": "round",
+                    "cap": "round",
+                    "fill": "#767676ff"
+                  }
+                },
+                {
+                  "type": "path",
+                  "id": "0P71X",
+                  "x": 9.166712760925293,
+                  "y": 3.3333187103271484,
+                  "name": "Vector",
+                  "geometry": "M2 1c0 0.55228-0.44772 1-1 1-0.55228 0-1-0.44772-1-1 0-0.55228 0.44772-1 1-1 0.55228 0 1 0.44772 1 1z",
+                  "fill": "#767676ff",
+                  "width": 1.666666030883789,
+                  "height": 1.666666030883789,
+                  "stroke": {
+                    "align": "center",
+                    "thickness": 1,
+                    "join": "round",
+                    "cap": "round",
+                    "fill": "#767676ff"
+                  }
+                },
+                {
+                  "type": "path",
+                  "id": "VQCs8",
+                  "x": 9.166712760925293,
+                  "y": 15,
+                  "name": "Vector",
+                  "geometry": "M2 1c0 0.55228-0.44772 1-1 1-0.55228 0-1-0.44772-1-1 0-0.55228 0.44772-1 1-1 0.55228 0 1 0.44772 1 1z",
+                  "fill": "#767676ff",
+                  "width": 1.666666030883789,
+                  "height": 1.6666641235351562,
+                  "stroke": {
+                    "align": "center",
+                    "thickness": 1,
+                    "join": "round",
+                    "cap": "round",
+                    "fill": "#767676ff"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "rectangle",
+          "id": "2uPsU",
+          "x": 0,
+          "y": 546,
+          "name": "Rectangle 16",
+          "fill": "#dbdbdbff",
+          "width": 390,
+          "height": 1,
+          "stroke": {
+            "align": "inside",
+            "thickness": 1
+          }
+        },
+        {
+          "type": "group",
+          "id": "Yx6qC",
+          "x": 207,
+          "y": 444,
+          "name": "Group 12",
+          "children": [
+            {
+              "type": "ellipse",
+              "id": "W2NDe",
+              "x": 12,
+              "y": 0,
+              "name": "Ellipse 7",
+              "sweepAngle": -360.00001001791264,
+              "fill": "#ffffffff",
+              "width": 6,
+              "height": 6,
+              "stroke": {
+                "align": "inside",
+                "thickness": 1
+              }
+            },
+            {
+              "type": "ellipse",
+              "id": "VfVuK",
+              "x": 24,
+              "y": 0,
+              "name": "Ellipse 8",
+              "sweepAngle": -360.00001001791264,
+              "fill": "#ffffffff",
+              "width": 6,
+              "height": 6,
+              "stroke": {
+                "align": "inside",
+                "thickness": 1
+              }
+            },
+            {
+              "type": "path",
+              "id": "ePdJy",
+              "x": 0,
+              "y": 0,
+              "name": "Ellipse 7",
+              "geometry": "M6 3c0 1.65685-1.34315 3-3 3-1.65685 0-3-1.34315-3-3 0-1.65685 1.34315-3 3-3 1.65685 0 3 1.34315 3 3z",
+              "fill": "#f26e22ff",
+              "width": 6,
+              "height": 6,
+              "stroke": {
+                "align": "inside",
+                "thickness": 1
+              }
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "TobhA",
+          "x": 0,
+          "y": 773,
+          "name": "comment",
+          "clip": true,
+          "width": 390,
+          "height": 61,
+          "fill": "#ffffffff",
+          "stroke": {
+            "align": "inside",
+            "thickness": 1
+          },
+          "layout": "none",
+          "children": [
+            {
+              "type": "text",
+              "id": "c74FK",
+              "x": 70,
+              "y": 18,
+              "name": "댓글 입력하기...",
+              "fill": "#c4c4c4ff",
+              "content": "댓글 입력하기...",
+              "textAlignVertical": "bottom",
+              "fontFamily": "Noto Sans Lao",
+              "fontSize": 14,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "rectangle",
+              "id": "wyJHJ",
+              "x": 0,
+              "y": 0,
+              "name": "Rectangle 17",
+              "fill": "#dbdbdbff",
+              "width": 390,
+              "height": 0.5,
+              "stroke": {
+                "align": "inside",
+                "thickness": 1
+              }
+            },
+            {
+              "type": "text",
+              "id": "lGCQv",
+              "x": 348,
+              "y": 18,
+              "name": "게시",
+              "fill": "#c4c4c4ff",
+              "content": "게시",
+              "textAlign": "right",
+              "textAlignVertical": "bottom",
+              "fontFamily": "Noto Sans Lao",
+              "fontSize": 14,
+              "fontWeight": "500"
+            },
+            {
+              "type": "frame",
+              "id": "a6FiM",
+              "x": 13,
+              "y": 14,
+              "name": "upload-image",
+              "width": 36,
+              "height": 36,
+              "fill": "#dbdbdbff",
+              "cornerRadius": 55,
+              "stroke": {
+                "align": "inside",
+                "thickness": 1,
+                "fill": "#d4d4d4ff"
+              },
+              "layout": "vertical",
+              "gap": 10,
+              "padding": [
+                6,
+                11
+              ],
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "path",
+                  "id": "EQ8Iq",
+                  "name": "알약로고_gray",
+                  "geometry": "M0 0l40 0 0 69-40 0 0-69z",
+                  "fill": {
+                    "type": "image",
+                    "enabled": true,
+                    "url": "",
+                    "mode": "stretch"
+                  },
+                  "width": "fill_container",
+                  "height": "fill_container",
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "VHMg6",
+          "x": 0,
+          "y": 0,
+          "name": "status-bar",
+          "width": 390,
+          "height": 24,
+          "stroke": {
+            "align": "inside",
+            "thickness": 1
+          },
+          "layout": "none",
+          "children": [
+            {
+              "type": "rectangle",
+              "id": "yMb7V",
+              "x": 0,
+              "y": 0,
+              "name": "Rectangle 1",
+              "fill": "#d4d4d4ff",
+              "width": 390,
+              "height": 24,
+              "stroke": {
+                "align": "inside",
+                "thickness": 1
+              }
+            },
+            {
+              "type": "path",
+              "id": "0xuHW",
+              "x": 0,
+              "y": 0,
+              "name": "Background",
+              "geometry": "M0 0l0 20 375 0 0-20-375 0z",
+              "fillRule": "evenodd",
+              "fill": "#00000000",
+              "width": 390,
+              "height": 24,
+              "effect": {
+                "type": "blur",
+                "radius": 11.89248263835907,
+                "enabled": false
+              }
+            },
+            {
+              "type": "frame",
+              "id": "wSd3P",
+              "x": 0,
+              "y": 0,
+              "name": "status_bar",
+              "width": 390,
+              "height": 24,
+              "fill": {
+                "type": "color",
+                "color": "#ffffffff",
+                "enabled": false
+              },
+              "stroke": {
+                "align": "inside",
+                "thickness": 1
+              },
+              "layout": "none",
+              "children": [
+                {
+                  "type": "group",
+                  "id": "p9Ok0",
+                  "x": 358,
+                  "y": 8,
+                  "name": "battery",
+                  "children": [
+                    {
+                      "type": "group",
+                      "id": "2PL5n",
+                      "x": 0,
+                      "y": 0,
+                      "name": "Battery",
+                      "children": [
+                        {
+                          "type": "path",
+                          "id": "Av9qh",
+                          "x": 0,
+                          "y": 0,
+                          "name": "Rectangle",
+                          "opacity": 0.4000000059604645,
+                          "geometry": "M0 0l22 0 0 10.5-3.53133 0-18.46867 0 0-10.5z",
+                          "fillRule": "evenodd",
+                          "fill": {
+                            "type": "color",
+                            "color": "#d8d8d8ff",
+                            "enabled": false
+                          },
+                          "width": 21.5510196685791,
+                          "height": 10,
+                          "stroke": {
+                            "align": "inside",
+                            "thickness": 1,
+                            "fill": "#ffffffff"
+                          }
+                        },
+                        {
+                          "type": "path",
+                          "id": "Vn9dB",
+                          "x": 1.959197998046875,
+                          "y": 1.9047622680664062,
+                          "name": "Rectangle",
+                          "geometry": "M0 0l18 0 0 6.5-18 0 0-6.5z",
+                          "fillRule": "evenodd",
+                          "fill": "#ffffffff",
+                          "width": 17.632652282714844,
+                          "height": 6.190475940704346
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "457F1",
+                  "x": 8,
+                  "y": 5,
+                  "name": "Time",
+                  "fill": "#ffffffff",
+                  "content": "9:41 AM",
+                  "textAlign": "center",
+                  "textAlignVertical": "bottom",
+                  "fontFamily": "Noto Sans Lao",
+                  "fontSize": 12,
+                  "fontWeight": "600"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "iZMmQ",
+          "x": 0,
+          "y": 24,
+          "name": "top-basic-nav",
+          "clip": true,
+          "width": 390,
+          "height": 48,
+          "stroke": {
+            "align": "inside",
+            "thickness": 1
+          },
+          "layout": "none",
+          "children": [
+            {
+              "type": "rectangle",
+              "id": "0ScNV",
+              "x": 0,
+              "y": 48,
+              "name": "Rectangle 9",
+              "rotation": 180,
+              "flipX": true,
+              "fill": "#ffffffff",
+              "width": 390,
+              "height": 48,
+              "stroke": {
+                "align": "inside",
+                "thickness": 0.5
+              }
+            },
+            {
+              "type": "rectangle",
+              "id": "OcWVZ",
+              "x": 0,
+              "y": 47.5,
+              "name": "Rectangle 81",
+              "fill": "#dbdbdbff",
+              "width": 390,
+              "height": 0.5,
+              "stroke": {
+                "align": "inside",
+                "thickness": 1
+              }
+            },
+            {
+              "type": "frame",
+              "id": "i9SZg",
+              "x": 354,
+              "y": 12,
+              "name": "icon- more-vertical",
+              "clip": true,
+              "width": 24,
+              "height": 24,
+              "fill": {
+                "type": "color",
+                "color": "#ffffffff",
+                "enabled": false
+              },
+              "stroke": {
+                "align": "inside",
+                "thickness": 1
+              },
+              "layout": "none",
+              "children": [
+                {
+                  "type": "path",
+                  "id": "gPnoR",
+                  "x": 11,
+                  "y": 11,
+                  "name": "Vector",
+                  "geometry": "M2 1c0 0.55228-0.44772 1-1 1-0.55228 0-1-0.44772-1-1 0-0.55228 0.44772-1 1-1 0.55228 0 1 0.44772 1 1z",
+                  "fill": "#767676ff",
+                  "width": 2,
+                  "height": 2,
+                  "stroke": {
+                    "align": "center",
+                    "thickness": 1,
+                    "join": "round",
+                    "cap": "round",
+                    "fill": "#767676ff"
+                  }
+                },
+                {
+                  "type": "path",
+                  "id": "7j6vg",
+                  "x": 11,
+                  "y": 4,
+                  "name": "Vector",
+                  "geometry": "M2 1c0 0.55228-0.44772 1-1 1-0.55228 0-1-0.44772-1-1 0-0.55228 0.44772-1 1-1 0.55228 0 1 0.44772 1 1z",
+                  "fill": "#767676ff",
+                  "width": 2,
+                  "height": 2,
+                  "stroke": {
+                    "align": "center",
+                    "thickness": 1,
+                    "join": "round",
+                    "cap": "round",
+                    "fill": "#767676ff"
+                  }
+                },
+                {
+                  "type": "path",
+                  "id": "SLjCi",
+                  "x": 11,
+                  "y": 18,
+                  "name": "Vector",
+                  "geometry": "M2 1c0 0.55228-0.44772 1-1 1-0.55228 0-1-0.44772-1-1 0-0.55228 0.44772-1 1-1 0.55228 0 1 0.44772 1 1z",
+                  "fill": "#767676ff",
+                  "width": 2,
+                  "height": 2,
+                  "stroke": {
+                    "align": "center",
+                    "thickness": 1,
+                    "join": "round",
+                    "cap": "round",
+                    "fill": "#767676ff"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "tlt9W",
+              "x": 16,
+              "y": 13,
+              "name": "icon-arrow-left",
+              "clip": true,
+              "width": 22,
+              "height": 22,
+              "fill": {
+                "type": "color",
+                "color": "#767676ff",
+                "enabled": false
+              },
+              "stroke": {
+                "align": "inside",
+                "thickness": 1
+              },
+              "layout": "none",
+              "children": [
+                {
+                  "type": "path",
+                  "id": "FpXCy",
+                  "x": 4.5833330154418945,
+                  "y": 11,
+                  "name": "Vector",
+                  "geometry": "M14 0l-14 0",
+                  "width": 12.833334922790527,
+                  "height": 0,
+                  "stroke": {
+                    "align": "center",
+                    "thickness": 2,
+                    "join": "round",
+                    "cap": "round",
+                    "fill": "#000000ff"
+                  }
+                },
+                {
+                  "type": "path",
+                  "id": "tXzcs",
+                  "x": 4.5833330154418945,
+                  "y": 4.5833330154418945,
+                  "name": "Vector",
+                  "geometry": "M7 14l-7-7 7-7",
+                  "width": 6.4166669845581055,
+                  "height": 12.833334922790527,
+                  "stroke": {
+                    "align": "center",
+                    "thickness": 2,
+                    "join": "round",
+                    "cap": "round",
+                    "fill": "#000000ff"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "ch2II",
+      "x": 588.4409474812919,
+      "y": -122,
+      "name": "Upload",
+      "clip": true,
+      "width": 390,
+      "height": 844,
+      "fill": "#ffffffff",
+      "stroke": {
+        "align": "inside",
+        "thickness": 1
+      },
+      "layout": "none",
+      "children": [
+        {
+          "type": "frame",
+          "id": "JhrE0",
+          "x": 16,
+          "y": 92,
+          "name": "upload-image",
+          "width": 42,
+          "height": 42,
+          "fill": "#dbdbdbff",
+          "cornerRadius": 55,
+          "stroke": {
+            "align": "inside",
+            "thickness": 1,
+            "fill": "#d4d4d4ff"
+          },
+          "layout": "vertical",
+          "gap": 10,
+          "padding": [
+            5,
+            12
+          ],
+          "justifyContent": "center",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "path",
+              "id": "Sfbbj",
+              "name": "알약로고_gray",
+              "geometry": "M0 0l40 0 0 69-40 0 0-69z",
+              "fill": {
+                "type": "image",
+                "enabled": true,
+                "url": "",
+                "mode": "stretch"
+              },
+              "width": "fill_container",
+              "height": "fill_container",
+              "stroke": {
+                "align": "inside",
+                "thickness": 1
+              }
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "O71O7",
+          "x": 71,
+          "y": 104,
+          "name": "게시글 입력하기...",
+          "fill": "#c4c4c4ff",
+          "content": "게시글 입력하기...",
+          "fontFamily": "Noto Sans Lao",
+          "fontSize": 14,
+          "fontWeight": "normal"
+        },
+        {
+          "type": "frame",
+          "id": "4CLpq",
+          "x": 324,
+          "y": 778,
+          "name": "upload-file",
+          "width": 50,
+          "height": 50,
+          "stroke": {
+            "align": "inside",
+            "thickness": 1
+          },
+          "layout": "none",
+          "children": [
+            {
+              "type": "ellipse",
+              "id": "YTZh2",
+              "x": 0,
+              "y": 0,
+              "name": "Ellipse 9",
+              "sweepAngle": -360.00001001791264,
+              "fill": "#11cc27ff",
+              "width": 50,
+              "height": 50,
+              "stroke": {
+                "align": "inside",
+                "thickness": 1
+              }
+            },
+            {
+              "type": "frame",
+              "id": "b7J7S",
+              "x": 11,
+              "y": 11,
+              "name": "image",
+              "clip": true,
+              "width": 28,
+              "height": 28,
+              "fill": {
+                "type": "color",
+                "color": "#606367ff",
+                "enabled": false
+              },
+              "stroke": {
+                "align": "inside",
+                "thickness": 1
+              },
+              "layout": "none",
+              "children": [
+                {
+                  "type": "path",
+                  "id": "ecwCj",
+                  "x": 3.5,
+                  "y": 3.5,
+                  "name": "Vector",
+                  "geometry": "M2 0l14 0c1.10457 0 2 0.89543 2 2l0 14c0 1.10457-0.89543 2-2 2l-14 0c-1.10457 0-2-0.89543-2-2l0-14c0-1.10457 0.89543-2 2-2z",
+                  "width": 21,
+                  "height": 21,
+                  "stroke": {
+                    "align": "center",
+                    "thickness": 1.5,
+                    "join": "round",
+                    "cap": "round",
+                    "fill": "#ffffffff"
+                  }
+                },
+                {
+                  "type": "path",
+                  "id": "oGJPF",
+                  "x": 8.166662216186523,
+                  "y": 8.166658401489258,
+                  "name": "Vector",
+                  "geometry": "M3 1.5c0 0.82843-0.67157 1.5-1.5 1.5-0.82843 0-1.5-0.67157-1.5-1.5 0-0.82843 0.67157-1.5 1.5-1.5 0.82843 0 1.5 0.67157 1.5 1.5z",
+                  "width": 3.5,
+                  "height": 3.5,
+                  "stroke": {
+                    "align": "center",
+                    "thickness": 1.5,
+                    "join": "round",
+                    "cap": "round",
+                    "fill": "#ffffffff"
+                  }
+                },
+                {
+                  "type": "path",
+                  "id": "UhhfZ",
+                  "x": 5.833335876464844,
+                  "y": 11.666658401489258,
+                  "name": "Vector",
+                  "geometry": "M16 5l-5-5-11 11",
+                  "width": 18.666667938232422,
+                  "height": 12.833333969116211,
+                  "stroke": {
+                    "align": "center",
+                    "thickness": 1.5,
+                    "join": "round",
+                    "cap": "round",
+                    "fill": "#ffffffff"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "WcFl5",
+          "x": 0,
+          "y": 24,
+          "name": "top-upload-nav",
+          "clip": true,
+          "width": 390,
+          "height": 48,
+          "stroke": {
+            "align": "inside",
+            "thickness": 1
+          },
+          "layout": "none",
+          "children": [
+            {
+              "type": "rectangle",
+              "id": "wmjGT",
+              "x": 0,
+              "y": 48,
+              "name": "Rectangle 9",
+              "rotation": 180,
+              "flipX": true,
+              "fill": "#ffffffff",
+              "width": 390,
+              "height": 48,
+              "stroke": {
+                "align": "inside",
+                "thickness": 0.5
+              }
+            },
+            {
+              "type": "rectangle",
+              "id": "q5dEk",
+              "x": 0,
+              "y": 47.5,
+              "name": "Rectangle 81",
+              "fill": "#dbdbdbff",
+              "width": 390,
+              "height": 0.5,
+              "stroke": {
+                "align": "inside",
+                "thickness": 1
+              }
+            },
+            {
+              "type": "frame",
+              "id": "jYIRs",
+              "x": 16,
+              "y": 13,
+              "name": "icon-arrow-left",
+              "clip": true,
+              "width": 22,
+              "height": 22,
+              "fill": {
+                "type": "color",
+                "color": "#767676ff",
+                "enabled": false
+              },
+              "stroke": {
+                "align": "inside",
+                "thickness": 1
+              },
+              "layout": "none",
+              "children": [
+                {
+                  "type": "path",
+                  "id": "MQHie",
+                  "x": 4.5833330154418945,
+                  "y": 11,
+                  "name": "Vector",
+                  "geometry": "M14 0l-14 0",
+                  "width": 12.833334922790527,
+                  "height": 0,
+                  "stroke": {
+                    "align": "center",
+                    "thickness": 2,
+                    "join": "round",
+                    "cap": "round",
+                    "fill": "#000000ff"
+                  }
+                },
+                {
+                  "type": "path",
+                  "id": "htwgv",
+                  "x": 4.5833330154418945,
+                  "y": 4.5833330154418945,
+                  "name": "Vector",
+                  "geometry": "M7 14l-7-7 7-7",
+                  "width": 6.4166669845581055,
+                  "height": 12.833334922790527,
+                  "stroke": {
+                    "align": "center",
+                    "thickness": 2,
+                    "join": "round",
+                    "cap": "round",
+                    "fill": "#000000ff"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "WletQ",
+              "x": 284,
+              "y": 8,
+              "name": "Ms--Disabled-button",
+              "width": 90,
+              "height": 32,
+              "fill": "#a7ffb9ff",
+              "cornerRadius": 32,
+              "stroke": {
+                "align": "inside",
+                "thickness": 1
+              },
+              "layout": "vertical",
+              "gap": 10,
+              "padding": [
+                7,
+                31
+              ],
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "iT1GD",
+                  "name": "저장",
+                  "fill": "#ffffffff",
+                  "content": "업로드",
+                  "textAlign": "center",
+                  "textAlignVertical": "bottom",
+                  "fontFamily": "Noto Sans Lao",
+                  "fontSize": 14,
+                  "fontWeight": "500"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "7qu3t",
+          "x": 0,
+          "y": 0,
+          "name": "status-bar",
+          "width": 390,
+          "height": 24,
+          "stroke": {
+            "align": "inside",
+            "thickness": 1
+          },
+          "layout": "none",
+          "children": [
+            {
+              "type": "rectangle",
+              "id": "TFI7X",
+              "x": 0,
+              "y": 0,
+              "name": "Rectangle 1",
+              "fill": "#d4d4d4ff",
+              "width": 390,
+              "height": 24,
+              "stroke": {
+                "align": "inside",
+                "thickness": 1
+              }
+            },
+            {
+              "type": "path",
+              "id": "2lYU0",
+              "x": 0,
+              "y": 0,
+              "name": "Background",
+              "geometry": "M0 0l0 20 375 0 0-20-375 0z",
+              "fillRule": "evenodd",
+              "fill": "#00000000",
+              "width": 390,
+              "height": 24,
+              "effect": {
+                "type": "blur",
+                "radius": 11.89248263835907,
+                "enabled": false
+              }
+            },
+            {
+              "type": "frame",
+              "id": "40Wmf",
+              "x": 0,
+              "y": 0,
+              "name": "status_bar",
+              "width": 390,
+              "height": 24,
+              "fill": {
+                "type": "color",
+                "color": "#ffffffff",
+                "enabled": false
+              },
+              "stroke": {
+                "align": "inside",
+                "thickness": 1
+              },
+              "layout": "none",
+              "children": [
+                {
+                  "type": "group",
+                  "id": "FvMUL",
+                  "x": 358,
+                  "y": 8,
+                  "name": "battery",
+                  "children": [
+                    {
+                      "type": "group",
+                      "id": "LCsT9",
+                      "x": 0,
+                      "y": 0,
+                      "name": "Battery",
+                      "children": [
+                        {
+                          "type": "path",
+                          "id": "5SnpT",
+                          "x": 0,
+                          "y": 0,
+                          "name": "Rectangle",
+                          "opacity": 0.4000000059604645,
+                          "geometry": "M0 0l22 0 0 10.5-3.53133 0-18.46867 0 0-10.5z",
+                          "fillRule": "evenodd",
+                          "fill": {
+                            "type": "color",
+                            "color": "#d8d8d8ff",
+                            "enabled": false
+                          },
+                          "width": 21.5510196685791,
+                          "height": 10,
+                          "stroke": {
+                            "align": "inside",
+                            "thickness": 1,
+                            "fill": "#ffffffff"
+                          }
+                        },
+                        {
+                          "type": "path",
+                          "id": "vScpF",
+                          "x": 1.959197998046875,
+                          "y": 1.9047622680664062,
+                          "name": "Rectangle",
+                          "geometry": "M0 0l18 0 0 6.5-18 0 0-6.5z",
+                          "fillRule": "evenodd",
+                          "fill": "#ffffffff",
+                          "width": 17.632652282714844,
+                          "height": 6.190475940704346
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "w0ePR",
+                  "x": 8,
+                  "y": 5,
+                  "name": "Time",
+                  "fill": "#ffffffff",
+                  "content": "9:41 AM",
+                  "textAlign": "center",
+                  "textAlignVertical": "bottom",
+                  "fontFamily": "Noto Sans Lao",
+                  "fontSize": 12,
+                  "fontWeight": "600"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "ZLV0w",
+      "x": 1014.6746810176237,
+      "y": -121.32472473676916,
+      "name": "Upload",
+      "clip": true,
+      "width": 390,
+      "height": 844,
+      "fill": "#ffffffff",
+      "stroke": {
+        "align": "inside",
+        "thickness": 1
+      },
+      "layout": "none",
+      "children": [
+        {
+          "type": "frame",
+          "id": "V941v",
+          "x": 0,
+          "y": 0,
+          "name": "status-bar",
+          "width": 390,
+          "height": 24,
+          "stroke": {
+            "align": "inside",
+            "thickness": 1
+          },
+          "layout": "none",
+          "children": [
+            {
+              "type": "rectangle",
+              "id": "wm1ZQ",
+              "x": 0,
+              "y": 0,
+              "name": "Rectangle 1",
+              "fill": "#d4d4d4ff",
+              "width": 390,
+              "height": 24,
+              "stroke": {
+                "align": "inside",
+                "thickness": 1
+              }
+            },
+            {
+              "type": "path",
+              "id": "1bf1D",
+              "x": 0,
+              "y": 0,
+              "name": "Background",
+              "geometry": "M0 0l0 20 375 0 0-20-375 0z",
+              "fillRule": "evenodd",
+              "fill": "#00000000",
+              "width": 390,
+              "height": 24,
+              "effect": {
+                "type": "blur",
+                "radius": 11.89248263835907,
+                "enabled": false
+              }
+            },
+            {
+              "type": "frame",
+              "id": "I1Ki3",
+              "x": 0,
+              "y": 0,
+              "name": "status_bar",
+              "width": 390,
+              "height": 24,
+              "fill": {
+                "type": "color",
+                "color": "#ffffffff",
+                "enabled": false
+              },
+              "stroke": {
+                "align": "inside",
+                "thickness": 1
+              },
+              "layout": "none",
+              "children": [
+                {
+                  "type": "group",
+                  "id": "k4dGk",
+                  "x": 358,
+                  "y": 8,
+                  "name": "battery",
+                  "children": [
+                    {
+                      "type": "group",
+                      "id": "gO19e",
+                      "x": 0,
+                      "y": 0,
+                      "name": "Battery",
+                      "children": [
+                        {
+                          "type": "path",
+                          "id": "gwJaP",
+                          "x": 0,
+                          "y": 0,
+                          "name": "Rectangle",
+                          "opacity": 0.4000000059604645,
+                          "geometry": "M0 0l22 0 0 10.5-3.53133 0-18.46867 0 0-10.5z",
+                          "fillRule": "evenodd",
+                          "fill": {
+                            "type": "color",
+                            "color": "#d8d8d8ff",
+                            "enabled": false
+                          },
+                          "width": 21.5510196685791,
+                          "height": 10,
+                          "stroke": {
+                            "align": "inside",
+                            "thickness": 1,
+                            "fill": "#ffffffff"
+                          }
+                        },
+                        {
+                          "type": "path",
+                          "id": "61a1G",
+                          "x": 1.959197998046875,
+                          "y": 1.9047622680664062,
+                          "name": "Rectangle",
+                          "geometry": "M0 0l18 0 0 6.5-18 0 0-6.5z",
+                          "fillRule": "evenodd",
+                          "fill": "#ffffffff",
+                          "width": 17.632652282714844,
+                          "height": 6.190475940704346
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "Q4W4a",
+                  "x": 8,
+                  "y": 5,
+                  "name": "Time",
+                  "fill": "#ffffffff",
+                  "content": "9:41 AM",
+                  "textAlign": "center",
+                  "textAlignVertical": "bottom",
+                  "fontFamily": "Noto Sans Lao",
+                  "fontSize": 12,
+                  "fontWeight": "600"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "VGeNe",
+          "x": 16,
+          "y": 92,
+          "name": "upload-image",
+          "width": 42,
+          "height": 42,
+          "fill": "#dbdbdbff",
+          "cornerRadius": 55,
+          "stroke": {
+            "align": "inside",
+            "thickness": 1,
+            "fill": "#d4d4d4ff"
+          },
+          "layout": "vertical",
+          "gap": 10,
+          "padding": [
+            5,
+            12
+          ],
+          "justifyContent": "center",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "path",
+              "id": "k62KY",
+              "name": "알약로고_gray",
+              "geometry": "M0 0l40 0 0 69-40 0 0-69z",
+              "fill": {
+                "type": "image",
+                "enabled": true,
+                "url": "",
+                "mode": "stretch"
+              },
+              "width": "fill_container",
+              "height": "fill_container",
+              "stroke": {
+                "align": "inside",
+                "thickness": 1
+              }
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "id": "ZDPhs",
+          "x": 229,
+          "y": 257,
+          "name": "post-img",
+          "children": [
+            {
+              "type": "rectangle",
+              "cornerRadius": 10,
+              "id": "uos3t",
+              "x": 0,
+              "y": 0,
+              "name": "unsplash:UC6GI4mtVCw",
+              "fill": [
+                "#c4c4c4ff",
+                {
+                  "type": "image",
+                  "enabled": true,
+                  "url": "",
+                  "mode": "fill"
+                }
+              ],
+              "width": 158,
+              "height": 118,
+              "stroke": {
+                "align": "inside",
+                "thickness": 0.5,
+                "fill": "#dbdbdbff"
+              }
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "Hu7hY",
+          "x": 70,
+          "y": 104,
+          "name": "이스트시큐리티는 엔드포인트 보안 위협의 핵심인 악성코드 노하우와 분석 기술을 기반으로 한 알약 백신에서 출발한 알약 EDR과 악성코드 위협 대응 솔루션 Threat Inside와의 연동을 통해 알려진 위협의 차단, 알려지지 않은 위협의 차단과 식별 및 대응까지, 엔드포인트 위협 대응 범위를 확장합니다.",
+          "fill": "#000000ff",
+          "textGrowth": "fixed-width",
+          "width": 304,
+          "content": "이스트시큐리티는 엔드포인트 보안 위협의 핵심인 악성코드 노하우와 분석 기술을 기반으로 한 알약 백신에서 출발한 알약 EDR과 악성코드 위협 대응 솔루션 Threat Inside와의 연동을 통해 알려진 위협의 차단, 알려지지 않은 위협의 차단과 식별 및 대응까지, 엔드포인트 위협 대응 범위를 확장합니다.",
+          "fontFamily": "Noto Sans Lao",
+          "fontSize": 14,
+          "fontWeight": "normal"
+        },
+        {
+          "type": "group",
+          "id": "LYByO",
+          "x": 68,
+          "y": 257,
+          "name": "post-img",
+          "children": [
+            {
+              "type": "rectangle",
+              "cornerRadius": 10,
+              "id": "pXX1R",
+              "x": 0,
+              "y": 0,
+              "name": "unsplash:FWtiv70Z_ZY",
+              "fill": {
+                "type": "image",
+                "enabled": true,
+                "url": "",
+                "mode": "fill"
+              },
+              "width": 158,
+              "height": 118,
+              "stroke": {
+                "align": "inside",
+                "thickness": 0.5,
+                "fill": "#dbdbdbff"
+              }
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "zq3jv",
+          "x": 0,
+          "y": 24,
+          "name": "top-upload-nav",
+          "clip": true,
+          "width": 390,
+          "height": 48,
+          "stroke": {
+            "align": "inside",
+            "thickness": 1
+          },
+          "layout": "none",
+          "children": [
+            {
+              "type": "rectangle",
+              "id": "AGUjg",
+              "x": 0,
+              "y": 48,
+              "name": "Rectangle 9",
+              "rotation": 180,
+              "flipX": true,
+              "fill": "#ffffffff",
+              "width": 390,
+              "height": 48,
+              "stroke": {
+                "align": "inside",
+                "thickness": 0.5
+              }
+            },
+            {
+              "type": "rectangle",
+              "id": "ieQeQ",
+              "x": 0,
+              "y": 47.5,
+              "name": "Rectangle 81",
+              "fill": "#dbdbdbff",
+              "width": 390,
+              "height": 0.5,
+              "stroke": {
+                "align": "inside",
+                "thickness": 1
+              }
+            },
+            {
+              "type": "frame",
+              "id": "KfTnl",
+              "x": 16,
+              "y": 13,
+              "name": "icon-arrow-left",
+              "clip": true,
+              "width": 22,
+              "height": 22,
+              "fill": {
+                "type": "color",
+                "color": "#767676ff",
+                "enabled": false
+              },
+              "stroke": {
+                "align": "inside",
+                "thickness": 1
+              },
+              "layout": "none",
+              "children": [
+                {
+                  "type": "path",
+                  "id": "kq6uC",
+                  "x": 4.5833330154418945,
+                  "y": 11,
+                  "name": "Vector",
+                  "geometry": "M14 0l-14 0",
+                  "width": 12.833334922790527,
+                  "height": 0,
+                  "stroke": {
+                    "align": "center",
+                    "thickness": 2,
+                    "join": "round",
+                    "cap": "round",
+                    "fill": "#000000ff"
+                  }
+                },
+                {
+                  "type": "path",
+                  "id": "xVP5c",
+                  "x": 4.5833330154418945,
+                  "y": 4.5833330154418945,
+                  "name": "Vector",
+                  "geometry": "M7 14l-7-7 7-7",
+                  "width": 6.4166669845581055,
+                  "height": 12.833334922790527,
+                  "stroke": {
+                    "align": "center",
+                    "thickness": 2,
+                    "join": "round",
+                    "cap": "round",
+                    "fill": "#000000ff"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "SwM1f",
+              "x": 284,
+              "y": 8,
+              "name": "Ms--Disabled-button",
+              "width": 90,
+              "height": 32,
+              "fill": "#a7ffb9ff",
+              "cornerRadius": 32,
+              "stroke": {
+                "align": "inside",
+                "thickness": 1
+              },
+              "layout": "vertical",
+              "gap": 10,
+              "padding": [
+                7,
+                31
+              ],
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "VBFQZ",
+                  "name": "저장",
+                  "fill": "#ffffffff",
+                  "content": "업로드",
+                  "textAlign": "center",
+                  "textAlignVertical": "bottom",
+                  "fontFamily": "Noto Sans Lao",
+                  "fontSize": 14,
+                  "fontWeight": "500"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "4Ldfi",
+          "x": 319,
+          "y": 777,
+          "name": "upload-file",
+          "width": 50,
+          "height": 50,
+          "stroke": {
+            "align": "inside",
+            "thickness": 1
+          },
+          "layout": "none",
+          "children": [
+            {
+              "type": "ellipse",
+              "id": "kD7h3",
+              "x": 0,
+              "y": 0,
+              "name": "Ellipse 9",
+              "sweepAngle": -360.00001001791264,
+              "fill": "#11cc27ff",
+              "width": 50,
+              "height": 50,
+              "stroke": {
+                "align": "inside",
+                "thickness": 1
+              }
+            },
+            {
+              "type": "frame",
+              "id": "LClvE",
+              "x": 11,
+              "y": 11,
+              "name": "image",
+              "clip": true,
+              "width": 28,
+              "height": 28,
+              "fill": {
+                "type": "color",
+                "color": "#606367ff",
+                "enabled": false
+              },
+              "stroke": {
+                "align": "inside",
+                "thickness": 1
+              },
+              "layout": "none",
+              "children": [
+                {
+                  "type": "path",
+                  "id": "GVppx",
+                  "x": 3.5,
+                  "y": 3.5,
+                  "name": "Vector",
+                  "geometry": "M2 0l14 0c1.10457 0 2 0.89543 2 2l0 14c0 1.10457-0.89543 2-2 2l-14 0c-1.10457 0-2-0.89543-2-2l0-14c0-1.10457 0.89543-2 2-2z",
+                  "width": 21,
+                  "height": 21,
+                  "stroke": {
+                    "align": "center",
+                    "thickness": 1.5,
+                    "join": "round",
+                    "cap": "round",
+                    "fill": "#ffffffff"
+                  }
+                },
+                {
+                  "type": "path",
+                  "id": "ZVKWU",
+                  "x": 8.166662216186523,
+                  "y": 8.166658401489258,
+                  "name": "Vector",
+                  "geometry": "M3 1.5c0 0.82843-0.67157 1.5-1.5 1.5-0.82843 0-1.5-0.67157-1.5-1.5 0-0.82843 0.67157-1.5 1.5-1.5 0.82843 0 1.5 0.67157 1.5 1.5z",
+                  "width": 3.5,
+                  "height": 3.5,
+                  "stroke": {
+                    "align": "center",
+                    "thickness": 1.5,
+                    "join": "round",
+                    "cap": "round",
+                    "fill": "#ffffffff"
+                  }
+                },
+                {
+                  "type": "path",
+                  "id": "Eg3Hd",
+                  "x": 5.833335876464844,
+                  "y": 11.666658401489258,
+                  "name": "Vector",
+                  "geometry": "M16 5l-5-5-11 11",
+                  "width": 18.666667938232422,
+                  "height": 12.833333969116211,
+                  "stroke": {
+                    "align": "center",
+                    "thickness": 1.5,
+                    "join": "round",
+                    "cap": "round",
+                    "fill": "#ffffffff"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "dj5lx",
+          "x": 200,
+          "y": 263,
+          "name": "x",
+          "clip": true,
+          "width": 22,
+          "height": 22,
+          "fill": {
+            "type": "color",
+            "color": "#ffffffff",
+            "enabled": false
+          },
+          "stroke": {
+            "align": "inside",
+            "thickness": 1
+          },
+          "effect": {
+            "type": "shadow",
+            "shadowType": "outer",
+            "color": "#00000040",
+            "offset": {
+              "x": 0,
+              "y": 4
+            },
+            "blur": 3.5
+          },
+          "layout": "none"
+        },
+        {
+          "type": "group",
+          "id": "rSgC8",
+          "x": 68,
+          "y": 378,
+          "name": "post-img",
+          "children": [
+            {
+              "type": "rectangle",
+              "cornerRadius": 10,
+              "id": "jPJlw",
+              "x": 0,
+              "y": 0,
+              "name": "unsplash:RD2JvnigzL4",
+              "fill": [
+                "#c4c4c4ff",
+                {
+                  "type": "image",
+                  "enabled": true,
+                  "url": "",
+                  "mode": "fill"
+                }
+              ],
+              "width": 158,
+              "height": 118,
+              "stroke": {
+                "align": "inside",
+                "thickness": 0.5,
+                "fill": "#dbdbdbff"
+              }
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "NxUwz",
+          "x": 200,
+          "y": 383,
+          "name": "x",
+          "clip": true,
+          "width": 22,
+          "height": 22,
+          "fill": {
+            "type": "color",
+            "color": "#ffffffff",
+            "enabled": false
+          },
+          "stroke": {
+            "align": "inside",
+            "thickness": 1
+          },
+          "effect": {
+            "type": "shadow",
+            "shadowType": "outer",
+            "color": "#00000040",
+            "offset": {
+              "x": 0,
+              "y": 4
+            },
+            "blur": 3.5
+          },
+          "layout": "none"
+        },
+        {
+          "type": "frame",
+          "id": "2VB45",
+          "x": 359,
+          "y": 263,
+          "name": "x",
+          "clip": true,
+          "width": 22,
+          "height": 22,
+          "fill": {
+            "type": "color",
+            "color": "#ffffffff",
+            "enabled": false
+          },
+          "stroke": {
+            "align": "inside",
+            "thickness": 1
+          },
+          "effect": {
+            "type": "shadow",
+            "shadowType": "outer",
+            "color": "#00000040",
+            "offset": {
+              "x": 0,
+              "y": 4
+            },
+            "blur": 3.5
+          },
+          "layout": "none"
+        },
+        {
+          "type": "group",
+          "id": "6oBhR",
+          "x": 0,
+          "y": 580,
+          "name": "keyboard",
+          "enabled": false,
+          "children": [
+            {
+              "type": "rectangle",
+              "id": "fgsb5",
+              "x": 0,
+              "y": 40,
+              "name": "Rectangle 63",
+              "fill": "#dbdbdbff",
+              "width": 390,
+              "height": 224,
+              "stroke": {
+                "align": "inside",
+                "thickness": 1
+              }
+            },
+            {
+              "type": "frame",
+              "id": "1BojK",
+              "x": 0,
+              "y": 40,
+              "name": "IOS Keyboard - Phone 1",
+              "clip": true,
+              "width": 390,
+              "height": 224,
+              "fill": {
+                "type": "color",
+                "color": "#ffffffff",
+                "enabled": false
+              },
+              "stroke": {
+                "align": "inside",
+                "thickness": 1
+              },
+              "layout": "none",
+              "children": [
+                {
+                  "type": "group",
+                  "id": "1aVvf",
+                  "x": 11.605047225952148,
+                  "y": 19.887845993041992,
+                  "name": "Group",
+                  "effect": [
+                    {
+                      "type": "shadow",
+                      "shadowType": "outer",
+                      "color": "#0000001c",
+                      "offset": {
+                        "x": 6,
+                        "y": 9
+                      },
+                      "blur": 14.875
+                    },
+                    {
+                      "type": "shadow",
+                      "shadowType": "outer",
+                      "color": "#fefeff2e",
+                      "offset": {
+                        "x": -9,
+                        "y": -6
+                      },
+                      "blur": 21
+                    }
+                  ],
+                  "children": [
+                    {
+                      "type": "path",
+                      "id": "GNbY5",
+                      "x": 18.990079879760742,
+                      "y": 51.28972625732422,
+                      "name": "Vector",
+                      "geometry": "M0 10c0-5.523 4.4772-10 10-10l70 0c5.523 0 10 4.477 10 10l0 95c0 5.523-4.477 10-10 10l-70 0c-5.5228 0-10-4.477-10-10l0-95z",
+                      "fill": "#ffffffff",
+                      "width": 31.650131225585938,
+                      "height": 40.12461853027344,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "id": "lAqU5",
+                      "x": 30.199495315551758,
+                      "y": 67.24002075195312,
+                      "name": "Vector",
+                      "geometry": "M20.479 32.285c-0.313-0.625-0.56701-1.738-0.762-3.33999-2.52 2.617-5.528 3.92599-9.02401 3.92599-3.125 0-5.69299-0.87899-7.70499-2.63699-1.992-1.777-2.988-4.02301-2.988-6.73801 0-3.301 1.25-5.859 3.75-7.67599 2.52-1.836 6.055-2.754 10.605-2.754l5.274 0 0-2.49002c0-1.895-0.56601-3.39798-1.69901-4.51198-1.133-1.133-2.80299-1.69901-5.00999-1.699-1.934 0-3.555 0.488-4.863 1.46499-1.309 0.976-1.963 2.158-1.963 3.545l-5.449 0c0-1.582 0.55601-3.10599 1.669-4.56999 1.133-1.485 2.657-2.65701 4.571-3.51601 1.933-0.859 4.052-1.289 6.357-1.289 3.653 0 6.514 0.918 8.584 2.754 2.07 1.816 3.14499 4.32599 3.223 7.52899l0 14.59003c0 2.91 0.37101 5.22399 1.113 6.94299l0 0.46899-5.683 0z m-8.99501-4.13101c1.7 0 3.311-0.43899 4.834-1.31799 1.524-0.879 2.627-2.02201 3.31101-3.42801l0-6.504-4.248 0c-6.641 0-9.961 1.94302-9.961 5.83002 0 1.699 0.56601 3.02798 1.699 3.98498 1.133 0.957 2.58799 1.435 4.36499 1.435z",
+                      "fill": "#586c9dff",
+                      "width": 9.20034408569336,
+                      "height": 11.469024658203125,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "id": "YZkSC",
+                      "x": 0,
+                      "y": 0,
+                      "name": "Vector",
+                      "geometry": "M0 10c0-5.5228 4.4772-10 10-10l70 0c5.523 0 10 4.4772 10 10l0 95c0 5.523-4.477 10-10 10l-70 0c-5.5228 0-10-4.477-10-10l0-95z",
+                      "fill": "#ffffffff",
+                      "width": 31.65013313293457,
+                      "height": 40.124610900878906,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "id": "NH06m",
+                      "x": 10.80759048461914,
+                      "y": 15.950414657592773,
+                      "name": "Vector",
+                      "geometry": "M0 16.172c0-4.981 1.1426-8.916 3.4278-11.80699 2.2851-2.91 5.3515-4.36501 9.1992-4.36501 3.75 0 6.709 1.26001 8.8769 3.77901l0.2344-3.193 4.9805 0 0 43.887-5.42 0 0-15.118c-2.1874 2.344-5.0976 3.51599-8.7304 3.51599-3.8281 0-6.8848-1.484-9.1699-4.453-2.2657-2.988-3.3985-6.944-3.3985-11.865l0-0.38099z m5.4199 0.615c0 3.633 0.7618 6.48401 2.2852 8.55501 1.543 2.07 3.6133 3.105 6.2109 3.105 3.2227 0 5.6836-1.426 7.3828-4.277l0-15.528c-1.7187-2.793-4.1601-4.189-7.3242-4.18901-2.6172 0-4.6972 1.045-6.2402 3.13501-1.543 2.07-2.3145 5.136-2.3145 9.19899z",
+                      "fill": "#586c9dff",
+                      "width": 9.396148681640625,
+                      "height": 15.51706314086914,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "id": "0M4lr",
+                      "x": 56.618560791015625,
+                      "y": 51.28972625732422,
+                      "name": "Vector",
+                      "geometry": "M0 10c0-5.523 4.477-10 10-10l70 0c5.523 0 10 4.477 10 10l0 95c0 5.523-4.477 10-10 10l-70 0c-5.523 0-10-4.477-10-10l0-95z",
+                      "fill": "#ffffffff",
+                      "width": 31.650131225585938,
+                      "height": 40.12461853027344,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "id": "SYIxG",
+                      "x": 67.98238372802734,
+                      "y": 67.24002075195312,
+                      "name": "Vector",
+                      "geometry": "M19.776 23.87701c0-1.465-0.557-2.59802-1.67-3.39901-1.094-0.82-3.018-1.52298-5.772-2.10898-2.734-0.586-4.91199-1.28901-6.53299-2.10901-1.601-0.821-2.793-1.79699-3.574-2.92999-0.762-1.133-1.14301-2.481-1.14301-4.043 0-2.598 1.094-4.79501 3.282-6.59201 2.207-1.797 5.01901-2.69501 8.43701-2.69501 3.594 0 6.504 0.928 8.731 2.783 2.246 1.856 3.36899 4.229 3.36899 7.11901l-5.44899 0c0-1.484-0.635-2.763-1.905-3.838-1.25-1.074-2.832-1.61101-4.746-1.61101-1.972 0-3.515 0.43-4.629 1.289-1.113 0.859-1.67001 1.98199-1.67001 3.36899 0 1.309 0.51801 2.29502 1.55301 2.95902 1.035 0.664 2.89999 1.29899 5.59599 1.90399 2.715 0.606 4.91201 1.329 6.59201 2.168 1.679 0.84 2.92 1.856 3.72 3.04699 0.821 1.172 1.23099 2.60801 1.23099 4.30701 0 2.832-1.133 5.10699-3.399 6.82599-2.265 1.699-5.20499 2.54901-8.818 2.54901-2.539 0-4.78501-0.44899-6.738-1.34799-1.953-0.898-3.48699-2.148-4.59999-3.75-1.094-1.621-1.64101-3.36902-1.64101-5.24402l5.42 0c0.098 1.817 0.821 3.262 2.168 4.336 1.368 1.055 3.16401 1.582 5.391 1.582 2.051 0 3.691-0.40998 4.922-1.22998 1.25-0.84 1.875-1.953 1.875-3.34z",
+                      "fill": "#097cfbff",
+                      "width": 8.860626220703125,
+                      "height": 11.469024658203125,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "id": "aL81X",
+                      "x": 56.618560791015625,
+                      "y": 102.57943725585938,
+                      "name": "Vector",
+                      "geometry": "M0 10c0-5.523 4.477-10 10-10l70 0c5.523 0 10 4.477 10 10l0 95c0 5.523-4.477 10-10 10l-70 0c-5.523 0-10-4.477-10-10l0-95z",
+                      "fill": "#ffffffff",
+                      "width": 31.650131225585938,
+                      "height": 40.1246337890625,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "id": "s6X08",
+                      "x": 68.11631774902344,
+                      "y": 118.73431396484375,
+                      "name": "Vector",
+                      "geometry": "M6.62099 27.27499l18.545 0-0.00001 4.42402-25.16598 0 0-3.98401 17.491-23.23301-17.22701 0 0-4.48199 24.023 0 0 3.83801-17.666 23.43698z",
+                      "fill": "#586c9dff",
+                      "width": 8.850074768066406,
+                      "height": 11.060073852539062,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "id": "tWUYn",
+                      "x": 37.62847900390625,
+                      "y": 0,
+                      "name": "Vector",
+                      "geometry": "M0 10c0-5.5228 4.477-10 10-10l70 0c5.523 0 10 4.4772 10 10l0 95c0 5.523-4.477 10-10 10l-70 0c-5.523 0-10-4.477-10-10l0-95z",
+                      "fill": "#ffffffff",
+                      "width": 31.65013885498047,
+                      "height": 40.124610900878906,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "id": "UYrFH",
+                      "x": 45.96343231201172,
+                      "y": 16.154836654663086,
+                      "name": "Vector",
+                      "geometry": "M30.90799 24.228l6.09401-24.228 5.42 0-9.228 31.699-4.395 0-7.70501-24.02301-7.5 24.02301-4.395 0-9.19899-31.699 5.39099 0 6.24001 23.73 7.38299-23.73 4.36501 0 7.52899 24.228z",
+                      "fill": "#586c9dff",
+                      "width": 14.918464660644531,
+                      "height": 11.06009292602539,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "id": "KEBCT",
+                      "x": 94.24707794189453,
+                      "y": 51.28972625732422,
+                      "name": "Vector",
+                      "geometry": "M0 10c0-5.523 4.477-10 10-10l70 0c5.523 0 10 4.477 10 10l0 95c0 5.523-4.477 10-10 10l-70 0c-5.523 0-10-4.477-10-10l0-95z",
+                      "fill": "#ffffffff",
+                      "width": 31.650146484375,
+                      "height": 40.12461853027344,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "id": "wXT1B",
+                      "x": 105.0959701538086,
+                      "y": 62.80374526977539,
+                      "name": "Vector",
+                      "geometry": "M0 28.88699c0-4.864 1.152-8.76999 3.457-11.71899 2.304-2.969 5.322-4.453 9.052-4.453 3.711 0 6.651 1.269 8.819 3.808l0-16.523 5.41999 0 0 45-4.98099 0-0.263-3.39801c-2.168 2.656-5.18601 3.98401-9.05301 3.98401-3.672 0-6.66999-1.50399-8.99399-4.512-2.305-3.008-3.457-6.93301-3.457-11.777l0-0.41001z m5.41998 0.61502c0 3.594 0.74201 6.40598 2.22602 8.43698 1.484 2.032 3.53501 3.047 6.152 3.047 3.438 0 5.948-1.543 7.53-4.629l0-14.55999c-1.621-2.988-4.11201-4.483-7.47101-4.48301-2.656 0-4.727 1.026-6.21099 3.077-1.484 2.05-2.22601 5.08802-2.22602 9.11102z",
+                      "fill": "#586c9dff",
+                      "width": 9.406379699707031,
+                      "height": 15.905380249023438,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "id": "We9ZO",
+                      "x": 94.24707794189453,
+                      "y": 102.57943725585938,
+                      "name": "Vector",
+                      "geometry": "M0 10c0-5.523 4.477-10 10-10l70 0c5.523 0 10 4.477 10 10l0 95c0 5.523-4.477 10-10 10l-70 0c-5.523 0-10-4.477-10-10l0-95z",
+                      "fill": "#ffffffff",
+                      "width": 31.650146484375,
+                      "height": 40.1246337890625,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "id": "cvLFU",
+                      "x": 105.26071166992188,
+                      "y": 118.73431396484375,
+                      "name": "Vector",
+                      "geometry": "M13.53601 11.57199l7.03101-11.57199 6.328 0-10.371 15.67401 10.69299 16.02499-6.26901 0-7.32498-11.86499-7.32401 11.86499-6.29901 0 10.694-16.02499-10.371-15.67401 6.26901 0 6.944 11.57199z",
+                      "fill": "#586c9dff",
+                      "width": 9.57135009765625,
+                      "height": 11.060073852539062,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "id": "OjwRv",
+                      "x": 75.25699615478516,
+                      "y": 0,
+                      "name": "Vector",
+                      "geometry": "M0 10c0-5.5228 4.477-10 10-10l70 0c5.523 0 10 4.4772 10 10l0 95c0 5.523-4.477 10-10 10l-70 0c-5.523 0-10-4.477-10-10l0-95z",
+                      "fill": "#ffffffff",
+                      "width": 31.650146484375,
+                      "height": 40.124610900878906,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "id": "4ptxa",
+                      "x": 86.44573974609375,
+                      "y": 15.950414657592773,
+                      "name": "Vector",
+                      "geometry": "M14.53198 32.871c-4.297 0-7.79298-1.40599-10.48898-4.21899-2.695-2.832-4.043-6.611-4.043-11.33801l0-0.996c0-3.144 0.59599-5.947 1.78799-8.408 1.21-2.48 2.89-4.414 5.03901-5.801 2.168-1.406 4.51101-2.109 7.031-2.109 4.121 0 7.32398 1.35701 9.60898 4.07201 2.285 2.715 3.42801 6.602 3.42801 11.65999l0 2.25601-21.47501 0c0.078 3.125 0.98701 5.654 2.72501 7.58799 1.758 1.914 3.98399 2.871 6.67999 2.87101 1.914 0 3.53501-0.391 4.86301-1.172 1.328-0.781 2.48999-1.816 3.48599-3.105l3.31101 2.57799c-2.656 4.082-6.641 6.123-11.95301 6.123z m-0.67398-28.418c-2.188 0-4.02403 0.801-5.50802 2.402-1.484 1.582-2.402 3.809-2.754 6.68l15.879 0 0-0.41c-0.156-2.754-0.89799-4.88299-2.22699-6.38699-1.328-1.523-3.12499-2.285-5.38999-2.28501z",
+                      "fill": "#586c9dff",
+                      "width": 9.458114624023438,
+                      "height": 11.469013214111328,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "id": "G0UqU",
+                      "x": 131.87554931640625,
+                      "y": 51.28972625732422,
+                      "name": "Vector",
+                      "geometry": "M0 10c0-5.523 4.477-10 10-10l70 0c5.523 0 10 4.477 10 10l0 95c0 5.523-4.477 10-10 10l-70 0c-5.523 0-10-4.477-10-10l0-95z",
+                      "fill": "#ffffffff",
+                      "width": 31.650146484375,
+                      "height": 40.12461853027344,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "id": "tOOjs",
+                      "x": 144.65089416503906,
+                      "y": 62.58912658691406,
+                      "name": "Vector",
+                      "geometry": "M5.01001 45.615l0-27.50999-5.01001 0 0-4.18901 5.01001 0 0-3.252c0-3.399 0.908-6.026 2.724-7.881 1.817-1.856 4.38499-2.783 7.70599-2.783 1.25 0 2.49 0.166 3.72 0.498l-0.293 4.394c-0.918-0.175-1.89402-0.26299-2.92901-0.26299-1.758 0-3.116 0.51699-4.073 1.55199-0.957 1.016-1.435 2.481-1.435 4.395l0 3.34 6.767 0 0 4.18901-6.767 0 0 27.50999-5.41998 0z",
+                      "fill": "#586c9dff",
+                      "width": 6.7379913330078125,
+                      "height": 15.91552734375,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "id": "3uOo5",
+                      "x": 131.87554931640625,
+                      "y": 102.57943725585938,
+                      "name": "Vector",
+                      "geometry": "M0 10c0-5.523 4.477-10 10-10l70 0c5.523 0 10 4.477 10 10l0 95c0 5.523-4.477 10-10 10l-70 0c-5.523 0-10-4.477-10-10l0-95z",
+                      "fill": "#ffffffff",
+                      "width": 31.650146484375,
+                      "height": 40.1246337890625,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "id": "ULWIy",
+                      "x": 143.1261749267578,
+                      "y": 118.52976989746094,
+                      "name": "Vector",
+                      "geometry": "M14.121 28.44699c1.934 0 3.623-0.586 5.069-1.758 1.445-1.172 2.24601-2.63598 2.40201-4.39398l5.12698 0c-0.098 1.816-0.723 3.545-1.875 5.185-1.152 1.641-2.695 2.94999-4.62899 3.926-1.914 0.977-3.94499 1.465-6.094 1.46499-4.316 0-7.75401-1.43601-10.31201-4.30701-2.539-2.89-3.80899-6.836-3.80899-11.83599l0-0.90799c0-3.086 0.56701-5.82999 1.69901-8.232 1.133-2.403 2.75398-4.26801 4.86398-5.59601 2.129-1.328 4.63802-1.992 7.52902-1.992 3.555 0 6.50399 1.06399 8.84799 3.19299 2.363 2.129 3.62299 4.89302 3.77899 8.29102l-5.12698 0c-0.156-2.051-0.93802-3.73-2.34402-5.039-1.386-1.328-3.10497-1.992-5.15598-1.99201-2.754 0-4.89302 0.99601-6.41602 2.98801-1.504 1.973-2.25601 4.83398-2.25601 8.58398l0 1.026c0 3.652 0.75201 6.46401 2.25601 8.43702 1.504 1.973 3.65201 2.95898 6.44501 2.95898z",
+                      "fill": "#586c9dff",
+                      "width": 9.396209716796875,
+                      "height": 11.468994140625,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "id": "uSA5X",
+                      "x": 112.88549041748047,
+                      "y": 0,
+                      "name": "Vector",
+                      "geometry": "M0 10c0-5.5228 4.477-10 10-10l70 0c5.523 0 10 4.4772 10 10l0 95c0 5.523-4.477 10-10 10l-70 0c-5.523 0-10-4.477-10-10l0-95z",
+                      "fill": "#ffffffff",
+                      "width": 31.650131225585938,
+                      "height": 40.124610900878906,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "id": "fvqPk",
+                      "x": 126.57799530029297,
+                      "y": 15.950414657592773,
+                      "name": "Vector",
+                      "geometry": "M15.32199 5.44901c-0.82-0.137-1.70899-0.205-2.66598-0.20501-3.555 0-5.967 1.514-7.237 4.541l0 22.5-5.41901 0 0-31.69899 5.27301 0 0.08798 3.66199c1.777-2.832 4.29701-4.248 7.55802-4.248 1.055 0 1.85599 0.137 2.40298 0.41l0 5.03901z",
+                      "fill": "#586c9dff",
+                      "width": 5.38824462890625,
+                      "height": 11.26455307006836,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "id": "VFjlv",
+                      "x": 169.50404357910156,
+                      "y": 51.28972625732422,
+                      "name": "Vector",
+                      "geometry": "M0 10c0-5.523 4.477-10 10-10l70 0c5.523 0 10 4.477 10 10l0 95c0 5.523-4.477 10-10 10l-70 0c-5.523 0-10-4.477-10-10l0-95z",
+                      "fill": "#ffffffff",
+                      "width": 31.650131225585938,
+                      "height": 40.12461853027344,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "id": "DkWWW",
+                      "x": 180.39413452148438,
+                      "y": 67.24005126953125,
+                      "name": "Vector",
+                      "geometry": "M0 16.172c0-4.942 1.14204-8.867 3.42804-11.778 2.285-2.929 5.31197-4.394 9.08197-4.394 3.867 0 6.884 1.367 9.052 4.101l0.26404-3.515 4.95099 0 0 30.93701c0 4.102-1.22105 7.334-3.66205 9.698-2.422 2.363-5.68397 3.54401-9.78497 3.544-2.285 0-4.52198-0.48802-6.70899-1.46401-2.188-0.977-3.85801-2.31498-5.01001-4.01398l2.81299-3.25202c2.324 2.871 5.16602 4.30701 8.52503 4.30701 2.637 0 4.68798-0.74302 6.15197-2.22702 1.485-1.484 2.22699-3.57398 2.22699-6.26898l0-2.72501c-2.168 2.5-5.12695 3.75-8.87695 3.75-3.711 0-6.71901-1.49399-9.02301-4.48199-2.286-2.989-3.42804-7.06101-3.42804-12.21701z m5.44904 0.61502c0 3.574 0.73196 6.38698 2.19696 8.43698 1.465 2.032 3.51601 3.047 6.15301 3.047 3.418 0 5.92699-1.55199 7.52899-4.65799l0-14.473c-1.66-3.027-4.15001-4.54102-7.47101-4.54101-2.636 0-4.69697 1.026-6.18096 3.07699-1.485 2.05-2.22699 5.08802-2.22699 9.11103z",
+                      "fill": "#586c9dff",
+                      "width": 9.4166259765625,
+                      "height": 15.61895751953125,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "id": "zt4cW",
+                      "x": 169.50404357910156,
+                      "y": 102.57943725585938,
+                      "name": "Vector",
+                      "geometry": "M0 10c0-5.523 4.477-10 10-10l70 0c5.523 0 10 4.477 10 10l0 95c0 5.523-4.477 10-10 10l-70 0c-5.523 0-10-4.477-10-10l0-95z",
+                      "fill": "#ffffffff",
+                      "width": 31.650131225585938,
+                      "height": 40.1246337890625,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "id": "Rk6S8",
+                      "x": 180.55905151367188,
+                      "y": 118.73431396484375,
+                      "name": "Vector",
+                      "geometry": "M13.59302 24.345l7.85199-24.345 5.53705 0-11.36701 31.699-4.13104 0-11.48401-31.699 5.53705 0 8.05597 24.345z",
+                      "fill": "#586c9dff",
+                      "width": 9.48870849609375,
+                      "height": 11.060073852539062,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "id": "HI2z1",
+                      "x": 131.87554931640625,
+                      "y": 153.86917114257812,
+                      "name": "Vector",
+                      "geometry": "M0 10c0-5.523 4.477-10 10-10l391 0c5.52301 0 10 4.477 10 10l0 95c0 5.523-4.47699 10-10 10l-391 0c-5.523 0-10-4.477-10-10l0-95z",
+                      "fill": "#ffffffff",
+                      "width": 144.53561401367188,
+                      "height": 40.12461853027344,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "id": "0DdLB",
+                      "x": 186.6634063720703,
+                      "y": 171.3404541015625,
+                      "name": "Vector",
+                      "geometry": "M12.81702 15.47601c0-0.949-0.36103-1.68296-1.08203-2.20196-0.709-0.532-1.95597-0.98804-3.74097-1.36804-1.772-0.379-3.18401-0.835-4.23401-1.36701-1.038-0.532-1.81102-1.16399-2.31702-1.89899-0.494-0.734-0.74103-1.607-0.74102-2.61999 0-1.684 0.70901-3.10801 2.12701-4.27301 1.431-1.164 3.25399-1.74701 5.46899-1.74701 2.329 0 4.215 0.60202 5.659 1.80402 1.455 1.203 2.18304 2.74099 2.18304 4.61499l-3.53204 0c0-0.962-0.41095-1.79198-1.23395-2.48798-0.81-0.696-1.83505-1.04401-3.07605-1.04401-1.279 0-2.279 0.27802-3 0.83503-0.722 0.557-1.08301 1.28496-1.083 2.18396 0 0.848 0.33602 1.48703 1.00701 1.91803 0.671 0.43 1.88001 0.84201 3.62702 1.234 1.759 0.392 3.18297 0.86097 4.27197 1.40497 1.089 0.545 1.89305 1.20304 2.41205 1.97504 0.531 0.76 0.797 1.68996 0.797 2.79095 0 1.836-0.734 3.31105-2.20301 4.42505-1.468 1.101-3.37303 1.65198-5.71502 1.65198-1.646 0-3.10198-0.29102-4.36798-0.87402-1.265-0.582-2.25902-1.39199-2.98102-2.43-0.709-1.051-1.06299-2.18399-1.06299-3.39898l3.513 0c0.063 1.177 0.53097 2.114 1.40497 2.81 0.886 0.684 2.05102 1.02502 3.49402 1.02502 1.329 0 2.392-0.265 3.19-0.797 0.81-0.544 1.21503-1.26604 1.21503-2.16504z m25.445-4.59497c0 3.127-0.71506 5.64601-2.14605 7.55701-1.43 1.912-3.367 2.86798-5.81 2.86798-2.494 0-4.45596-0.79102-5.88696-2.37402l0 9.893-3.513 0 0-28.44501 3.20996 0 0.17004 2.279c1.431-1.772 3.41801-2.659 5.96301-2.659 2.468 0 4.41796 0.93105 5.84796 2.79205 1.444 1.861 2.16504 4.44899 2.16504 7.76599l0 0.323z m-3.513-0.39898c0-2.316-0.49402-4.14604-1.48101-5.48804-0.987-1.341-2.34203-2.01196-4.06403-2.01196-2.126 0-3.72097 0.94298-4.78497 2.82898l0 9.81701c1.051 1.874 2.659 2.81 4.82299 2.81 1.684 0 3.02002-0.66404 4.00702-1.99304 1-1.342 1.5-3.32995 1.5-5.96295z m20.67896 10.44396c-0.203-0.405-0.36696-1.12698-0.49396-2.16497-1.633 1.697-3.58202 2.54498-5.84802 2.54498-2.026 0-3.69002-0.56998-4.99402-1.70898-1.292-1.152-1.93701-2.60804-1.93701-4.36805 0-2.139 0.81006-3.79698 2.43005-4.97497 1.633-1.19 3.92496-1.78497 6.87396-1.78497l3.41803 0 0-1.61402c0-1.228-0.36701-2.20201-1.10101-2.92401-0.734-0.734-1.81701-1.10101-3.24701-1.10101-1.253 0-2.30398 0.31604-3.15198 0.94903-0.848 0.633-1.27301 1.39897-1.27301 2.29798l-3.531 0c0-1.026 0.35997-2.01298 1.08197-2.96198 0.734-0.963 1.72204-1.72205 2.96203-2.27905 1.253-0.557 2.62697-0.836 4.12098-0.836 2.367 0 4.22199 0.59503 5.56298 1.78503 1.342 1.178 2.03805 2.804 2.08905 4.88001l0 9.45697c0 1.886 0.24099 3.386 0.72199 4.5l0 0.30401-3.68402 0z m-5.82996-2.677c1.102 0 2.146-0.28498 3.133-0.85498 0.988-0.57 1.703-1.31004 2.14599-2.22204l0-4.21497-2.75299 0c-4.304 0-6.45605 1.25999-6.45605 3.77899 0 1.101 0.36701 1.96203 1.10101 2.58203 0.734 0.62 1.67704 0.93097 2.82904 0.93097z m22.53998 0.18903c1.253 0 2.34798-0.37904 3.28497-1.13904 0.937-0.759 1.45601-1.70896 1.55701-2.84796l3.323 0c-0.063 1.177-0.46796 2.29696-1.21497 3.36096-0.747 1.063-1.747 1.91101-3 2.54401-1.241 0.633-2.55801 0.95001-3.95001 0.95001-2.798 0-5.02602-0.93099-6.68402-2.79199-1.646-1.873-2.46899-4.43002-2.46899-7.67102l0-0.58899c0-2 0.36799-3.77802 1.10198-5.33502 0.734-1.558 1.78504-2.76695 3.15204-3.62696 1.38-0.861 3.006-1.29205 4.88001-1.29205 2.304 0 4.21499 0.69001 5.73498 2.07001 1.531 1.38 2.34798 3.17102 2.44898 5.37402l-3.323 0c-0.101-1.329-0.60798-2.41799-1.51898-3.26599-0.899-0.861-2.01298-1.29102-3.34198-1.29102-1.785 0-3.171 0.64501-4.159 1.93702-0.974 1.278-1.46204 3.13299-1.46203 5.56298l0 0.66498c0 2.367 0.48804 4.18999 1.46203 5.469 0.975 1.278 2.36798 1.91705 4.17798 1.91705z m20.64099 2.86798c-2.785 0-5.05097-0.91199-6.79797-2.73498-1.747-1.835-2.62103-4.28502-2.62104-7.34803l0-0.64599c0-2.038 0.38599-3.85501 1.159-5.45002 0.784-1.607 1.87299-2.86097 3.26599-3.75897 1.405-0.912 2.924-1.36804 4.55701-1.36804 2.671 0 4.74702 0.88001 6.22803 2.64001 1.481 1.759 2.22198 4.27901 2.22198 7.55701l0 1.46301-13.919 0c0.051 2.025 0.63899 3.66397 1.76599 4.91797 1.139 1.24 2.58302 1.86005 4.33001 1.86005 1.24 0 2.29098-0.25303 3.15198-0.75903 0.861-0.506 1.61404-1.177 2.25903-2.013l2.146 1.67102c-1.722 2.646-4.30401 3.96899-7.74701 3.96899z m-0.43701-18.41901c-1.418 0-2.60801 0.51901-3.57001 1.55701-0.962 1.025-1.55698 2.46798-1.78497 4.32898l10.29199 0 0-0.26599c-0.101-1.785-0.58199-3.16398-1.44299-4.13898-0.861-0.988-2.02602-1.48102-3.49402-1.48102z",
+                      "fill": "#586c9dff",
+                      "width": 35.445343017578125,
+                      "height": 10.057327270507812,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "id": "UUSE4",
+                      "x": 282.3895568847656,
+                      "y": 153.86917114257812,
+                      "name": "Vector",
+                      "geometry": "M0 10c0-5.523 4.477-10 10-10l230 0c5.52 0 10 4.477 10 10l0 95c0 5.523-4.48 10-10 10l-230 0c-5.523 0-10-4.477-10-10l0-95z",
+                      "fill": "#f2f6ffff",
+                      "width": 87.91702270507812,
+                      "height": 40.12461853027344,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "id": "D6u3J",
+                      "x": 309.482421875,
+                      "y": 169.73724365234375,
+                      "name": "Vector",
+                      "geometry": "M9.93097 8.12701c-0.532-0.088-1.10797-0.133-1.72797-0.13299-2.304 0-3.867 0.98197-4.69 2.94397l0 14.58301-3.513 0 0-20.54602 3.41797 0 0.05701 2.37402c1.152-1.836 2.78499-2.75403 4.89898-2.75403 0.683 0 1.20201 0.08905 1.55701 0.26605l0 3.26599z m11.39301 17.77399c-2.785 0-5.05097-0.91199-6.79798-2.73498-1.747-1.835-2.62-4.28502-2.61999-7.34803l0-0.64599c0-2.038 0.38596-3.85501 1.15795-5.45002 0.785-1.607 1.87399-2.86097 3.266-3.75897 1.405-0.912 2.92401-1.36804 4.557-1.36804 2.671 0 4.748 0.88001 6.22901 2.64002 1.481 1.759 2.22101 4.27901 2.221 7.557l0 1.46302-13.91796 0c0.05 2.025 0.63899 3.66397 1.76599 4.91796 1.139 1.24 2.58198 1.86005 4.32898 1.86005 1.241 0 2.29098-0.25303 3.15198-0.75903 0.861-0.506 1.61401-1.177 2.26-2.013l2.146 1.67102c-1.722 2.646-4.30499 3.96899-7.74798 3.96899z m-0.43702-18.41901c-1.417 0-2.60697 0.51901-3.56897 1.55701-0.963 1.025-1.55803 2.46798-1.78503 4.32898l10.29101 0 0-0.26599c-0.101-1.785-0.58199-3.16398-1.44299-4.13898-0.861-0.988-2.02502-1.48102-3.49402-1.48102z m17.29901-7.48199l0 4.97498 3.836 0 0 2.716-3.836 0 0 12.74103c0 0.823 0.171 1.44296 0.513 1.86096 0.342 0.405 0.92401 0.60803 1.74701 0.60803 0.405 0 0.96202-0.07603 1.67102-0.22803l0 2.84803c-0.924 0.253-1.82302 0.38001-2.69702 0.38-1.569 0-2.75303-0.47501-3.55102-1.42401-0.797-0.95-1.19598-2.29798-1.19599-4.04498l0-12.74103-3.74096 0 0-2.716 3.74096 0 0-4.97498 3.513 0z m20.641 23.48901c-1.367 1.608-3.37396 2.41199-6.01996 2.41199-2.19 0-3.861-0.63299-5.013-1.89899-1.139-1.279-1.71503-3.165-1.72803-5.65899l0-13.36804 3.513 0 0 13.27301c0 3.114 1.26603 4.672 3.79803 4.67199 2.684 0 4.46898-1.00098 5.35498-3.00097l0-14.94403 3.51301 0 0 20.54602-3.34205 0-0.07598-2.03199z m18.70404-15.362c-0.532-0.088-1.10803-0.133-1.72803-0.13299-2.304 0-3.868 0.98197-4.69 2.94397l0 14.58301-3.513 0 0-20.54602 3.41803 0 0.057 2.37402c1.152-1.836 2.78499-2.75403 4.89899-2.75403 0.683 0 1.202 0.08905 1.55701 0.26605l0 3.26599z m6.57-3.15203l0.11396 2.583c1.569-1.975 3.62399-2.96301 6.15399-2.96301 4.34 0 6.53001 2.45 6.57 7.349l0 13.57703-3.51 0 0-13.59601c-0.02-1.481-0.35997-2.57597-1.02997-3.28498-0.66-0.709-1.68997-1.06299-3.09998-1.06298-1.13 0-2.13006 0.30295-2.99505 0.91095-0.861 0.608-1.532 1.40501-2.01301 2.393l0 14.64002-3.513 0 0-20.54602 3.32306 0z",
+                      "fill": "#586c9dff",
+                      "width": 34.090362548828125,
+                      "height": 9.037109375,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "id": "nSwvl",
+                      "x": 150.51402282714844,
+                      "y": 0,
+                      "name": "Vector",
+                      "geometry": "M0 10c0-5.5228 4.477-10 10-10l70 0c5.523 0 10 4.4772 10 10l0 95c0 5.523-4.477 10-10 10l-70 0c-5.523 0-10-4.477-10-10l0-95z",
+                      "fill": "#ffffffff",
+                      "width": 31.650100708007812,
+                      "height": 40.124610900878906,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "id": "lry3z",
+                      "x": 162.9802703857422,
+                      "y": 13.47663688659668,
+                      "name": "Vector",
+                      "geometry": "M11.19199 0l0 7.676 5.91803 0 0 4.189-5.91803 0 0 19.658c0 1.27 0.26302 2.227 0.79101 2.872 0.527 0.625 1.42501 0.937 2.69501 0.937 0.625 0 1.484-0.117 2.578-0.352l0 4.395c-1.426 0.391-2.812 0.586-4.16 0.586-2.422 0-4.248-0.73199-5.47901-2.19699-1.23-1.465-1.845-3.54501-1.845-6.24101l0-19.658-5.772 0 0-4.189 5.772 0 0-7.676 5.41999 0z",
+                      "fill": "#586c9dff",
+                      "width": 6.0683746337890625,
+                      "height": 13.94278335571289,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "id": "Ln9O2",
+                      "x": 207.13258361816406,
+                      "y": 51.28972625732422,
+                      "name": "Vector",
+                      "geometry": "M0 10c0-5.523 4.477-10 10-10l70 0c5.523 0 10 4.477 10 10l0 95c0 5.523-4.477 10-10 10l-70 0c-5.523 0-10-4.477-10-10l0-95z",
+                      "fill": "#ffffffff",
+                      "width": 31.650177001953125,
+                      "height": 40.12461853027344,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "id": "IGFKN",
+                      "x": 218.589111328125,
+                      "y": 62.80374526977539,
+                      "name": "Vector",
+                      "geometry": "M5.41998 17.13901c2.402-2.95 5.527-4.42401 9.375-4.42401 6.699 0 10.07802 3.77901 10.13703 11.33801l0 20.94699-5.41999 0 0-20.97699c-0.02-2.285-0.54703-3.97401-1.58203-5.06801-1.016-1.094-2.608-1.64101-4.776-1.64101-1.757 0-3.29999 0.469-4.62799 1.407-1.329 0.937-2.36402 2.16799-3.10602 3.691l0 22.58801-5.41998 0 0-45 5.41998 0 0 17.13901z",
+                      "fill": "#586c9dff",
+                      "width": 8.76776123046875,
+                      "height": 15.700942993164062,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "id": "cwLBb",
+                      "x": 207.13258361816406,
+                      "y": 102.57943725585938,
+                      "name": "Vector",
+                      "geometry": "M0 10c0-5.523 4.477-10 10-10l70 0c5.523 0 10 4.477 10 10l0 95c0 5.523-4.477 10-10 10l-70 0c-5.523 0-10-4.477-10-10l0-95z",
+                      "fill": "#ffffffff",
+                      "width": 31.650177001953125,
+                      "height": 40.1246337890625,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "id": "tNrQ3",
+                      "x": 218.47605895996094,
+                      "y": 114.09347534179688,
+                      "name": "Vector",
+                      "geometry": "M26.836 29.50201c0 4.844-1.11297 8.73999-3.33997 11.689-2.227 2.93-5.21503 4.39499-8.96502 4.39499-4.004 0-7.09899-1.41599-9.28699-4.24799l-0.26398 3.66199-4.98004 0 0-45 5.42004 0 0 16.78699c2.187-2.715 5.20498-4.07199 9.05298-4.07199 3.847 0 6.865 1.45499 9.052 4.36499 2.207 2.91 3.31098 6.895 3.31098 11.953l0 0.46902z m-5.41998-0.61502c0-3.692-0.71298-6.54299-2.13898-8.55499-1.426-2.012-3.47604-3.01801-6.15204-3.01801-3.574 0-6.14296 1.66102-7.70496 4.98102l0 13.711c1.66 3.32 4.248 4.97998 7.763 4.97998 2.598 0 4.62-1.006 6.06501-3.017 1.445-2.012 2.16797-5.039 2.16797-9.082z",
+                      "fill": "#586c9dff",
+                      "width": 9.437362670898438,
+                      "height": 15.905380249023438,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "id": "OBjVa",
+                      "x": 188.1424560546875,
+                      "y": 0,
+                      "name": "Vector",
+                      "geometry": "M0 10c0-5.5228 4.477-10 10-10l70 0c5.523 0 10 4.4772 10 10l0 95c0 5.523-4.477 10-10 10l-70 0c-5.523 0-10-4.477-10-10l0-95z",
+                      "fill": "#ffffffff",
+                      "width": 31.650146484375,
+                      "height": 40.124610900878906,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "id": "nbOrf",
+                      "x": 199.19744873046875,
+                      "y": 16.154836654663086,
+                      "name": "Vector",
+                      "geometry": "M13.828 23.75999l7.38202-23.75999 5.80103 0-12.74402 36.592c-1.973 5.273-5.10699 7.90999-9.40399 7.90999l-1.026-0.088-2.021-0.38099 0-4.39501 1.46497 0.11801c1.836 0 3.26204-0.37101 4.27703-1.11401 1.035-0.742 1.88501-2.09899 2.54902-4.07199l1.20098-3.22301-11.30804-31.34699 5.91803 0 7.90997 23.76z",
+                      "fill": "#586c9dff",
+                      "width": 9.498931884765625,
+                      "height": 15.527179718017578,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "id": "wzxg5",
+                      "x": 244.76107788085938,
+                      "y": 51.28972625732422,
+                      "name": "Vector",
+                      "geometry": "M0 10c0-5.523 4.477-10 10-10l70 0c5.523 0 10 4.477 10 10l0 95c0 5.523-4.477 10-10 10l-70 0c-5.523 0-10-4.477-10-10l0-95z",
+                      "fill": "#ffffffff",
+                      "width": 31.65008544921875,
+                      "height": 40.12461853027344,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "id": "S5cRw",
+                      "x": 257.392333984375,
+                      "y": 63.41709899902344,
+                      "name": "Vector",
+                      "geometry": "M11.60199 11.543l0 35.36099c0 6.094-2.76402 9.14102-8.29102 9.14102-1.192 0-2.29497-0.17601-3.31097-0.52801l0-4.336c0.625 0.157 1.445 0.23502 2.461 0.23502 1.211 0 2.12897-0.332 2.75397-0.99601 0.644-0.645 0.96698-1.77802 0.96698-3.39901l0-35.478 5.42004 0z m-5.97699-8.40799c0-0.86 0.26395-1.592 0.79095-2.198 0.547-0.625 1.33799-0.93701 2.37299-0.93701 1.055 0 1.85504 0.303 2.40204 0.908 0.547 0.605 0.82098 1.34801 0.82098 2.22701 0 0.878-0.27398 1.61099-0.82098 2.19699-0.547 0.586-1.34704 0.879-2.40204 0.879-1.055 0-1.84599-0.293-2.37299-0.879-0.527-0.586-0.79095-1.31899-0.79095-2.19699z",
+                      "fill": "#586c9dff",
+                      "width": 4.2242431640625,
+                      "height": 19.554641723632812,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "id": "qKJUC",
+                      "x": 244.76107788085938,
+                      "y": 102.57943725585938,
+                      "name": "Vector",
+                      "geometry": "M0 10c0-5.523 4.477-10 10-10l70 0c5.523 0 10 4.477 10 10l0 95c0 5.523-4.477 10-10 10l-70 0c-5.523 0-10-4.477-10-10l0-95z",
+                      "fill": "#ffffffff",
+                      "width": 31.65008544921875,
+                      "height": 40.1246337890625,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "id": "m5YwM",
+                      "x": 256.2074890136719,
+                      "y": 118.52976989746094,
+                      "name": "Vector",
+                      "geometry": "M5.12701 0.586l0.17597 3.98401c2.421-3.047 5.586-4.57001 9.492-4.57001 6.699 0 10.07799 3.77901 10.13599 11.33801l0 20.94699-5.41901 0 0-20.97699c-0.02-2.285-0.54697-3.97402-1.58197-5.06802-1.016-1.094-2.608-1.64099-4.776-1.64099-1.758 0-3.30103 0.46901-4.62903 1.40701-1.328 0.937-2.36298 2.16798-3.10498 3.69098l0 22.58801-5.41998 0 0-31.699 5.12701 0z",
+                      "fill": "#586c9dff",
+                      "width": 8.76739501953125,
+                      "height": 11.264556884765625,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "id": "RR0gP",
+                      "x": 225.77099609375,
+                      "y": 0,
+                      "name": "Vector",
+                      "geometry": "M0 10c0-5.5228 4.477-10 10-10l70 0c5.523 0 10 4.4772 10 10l0 95c0 5.523-4.477 10-10 10l-70 0c-5.523 0-10-4.477-10-10l0-95z",
+                      "fill": "#ffffffff",
+                      "width": 31.650146484375,
+                      "height": 40.124610900878906,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "id": "KbKpb",
+                      "x": 237.17617797851562,
+                      "y": 16.154836654663086,
+                      "name": "Vector",
+                      "geometry": "M19.68701 28.564c-2.109 2.481-5.20505 3.72099-9.28705 3.721-3.379 0-5.95695-0.97699-7.73394-2.93-1.758-1.972-2.64702-4.883-2.66602-8.73l0-20.625 5.41998 0 0 20.478c0 4.805 1.95301 7.20699 5.85901 7.20699 4.141 0 6.89402-1.54299 8.26203-4.62899l0-23.056 5.41998 0 0 31.699-5.15698 0-0.11701-3.135z",
+                      "fill": "#586c9dff",
+                      "width": 8.77801513671875,
+                      "height": 11.26455307006836,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "id": "L967r",
+                      "x": 282.3895568847656,
+                      "y": 51.28972625732422,
+                      "name": "Vector",
+                      "geometry": "M0 10c0-5.523 4.477-10 10-10l70 0c5.523 0 10 4.477 10 10l0 95c0 5.523-4.477 10-10 10l-70 0c-5.523 0-10-4.477-10-10l0-95z",
+                      "fill": "#ffffffff",
+                      "width": 31.65008544921875,
+                      "height": 40.12461853027344,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "id": "jV3Ow",
+                      "x": 294.32025146484375,
+                      "y": 62.80374526977539,
+                      "name": "Vector",
+                      "geometry": "M8.81799 30.32199l-3.39801 3.54501 0 11.133-5.41998 0 0-45 5.41998 0 0 27.21701 2.89997-3.487 9.87304-10.42901 6.59198 0-12.33398 13.242 13.76898 18.457-6.35699 0-11.04499-14.67801z",
+                      "fill": "#586c9dff",
+                      "width": 9.220703125,
+                      "height": 15.700942993164062,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "id": "rTsWL",
+                      "x": 282.3895568847656,
+                      "y": 102.57943725585938,
+                      "name": "Vector",
+                      "geometry": "M0 10c0-5.523 4.477-10 10-10l70 0c5.523 0 10 4.477 10 10l0 95c0 5.523-4.477 10-10 10l-70 0c-5.523 0-10-4.477-10-10l0-95z",
+                      "fill": "#ffffffff",
+                      "width": 31.65008544921875,
+                      "height": 40.1246337890625,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "id": "h45Op",
+                      "x": 290.39495849609375,
+                      "y": 118.52976989746094,
+                      "name": "Vector",
+                      "geometry": "M5.12701 0.586l0.146 3.51501c2.324-2.734 5.45899-4.10101 9.40399-4.10101 4.434 0 7.45204 1.69902 9.05304 5.09702 1.055-1.523 2.42199-2.75301 4.10199-3.69101 1.699-0.937 3.70098-1.40601 6.00598-1.40601 6.953 0 10.48798 3.68101 10.60498 11.04501l0 21.23999-5.41998 0 0-20.918c0-2.266-0.51698-3.95499-1.55298-5.06799-1.035-1.133-2.77299-1.70001-5.21399-1.70001-2.012 0-3.68201 0.60602-5.01001 1.81702-1.328 1.191-2.1 2.80298-2.315 4.83398l0 21.035-5.44903 0 0-20.77099c0-4.61-2.25597-6.91501-6.76697-6.91501-3.555 0-5.98698 1.51402-7.29499 4.54101l0 23.14499-5.42004 0 0-31.699 5.12701 0z",
+                      "fill": "#586c9dff",
+                      "width": 15.629150390625,
+                      "height": 11.264556884765625,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "id": "aIBsY",
+                      "x": 263.39947509765625,
+                      "y": 0,
+                      "name": "Vector",
+                      "geometry": "M0 10c0-5.5228 4.477-10 10-10l70 0c5.523 0 10 4.4772 10 10l0 95c0 5.523-4.477 10-10 10l-70 0c-5.523 0-10-4.477-10-10l0-95z",
+                      "fill": "#ffffffff",
+                      "width": 31.650146484375,
+                      "height": 40.124610900878906,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "id": "xFiYq",
+                      "x": 278.1119079589844,
+                      "y": 12.127328872680664,
+                      "name": "Vector",
+                      "geometry": "M5.85901 43.2422l-5.41998 0 0-31.69899 5.41998 0 0 31.69899z m-5.85901-40.1074c0-0.8789 0.26402-1.6211 0.79102-2.2266 0.547-0.6055 1.34798-0.9082 2.40197-0.9082 1.055 0 1.85602 0.3027 2.40302 0.9082 0.547 0.6055 0.82001 1.3477 0.82001 2.2266 0 0.8789-0.27301 1.6113-0.82001 2.1972-0.547 0.586-1.34802 0.87901-2.40302 0.87901-1.054 0-1.85498-0.29301-2.40197-0.87901-0.527-0.5859-0.79102-1.3183-0.79102-2.1972z",
+                      "fill": "#586c9dff",
+                      "width": 2.256317138671875,
+                      "height": 15.08761978149414,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "id": "QqXsD",
+                      "x": 320.01812744140625,
+                      "y": 51.28972625732422,
+                      "name": "Vector",
+                      "geometry": "M0 10c0-5.523 4.477-10 10-10l70 0c5.52 0 10 4.477 10 10l0 95c0 5.523-4.48 10-10 10l-70 0c-5.523 0-10-4.477-10-10l0-95z",
+                      "fill": "#ffffffff",
+                      "width": 31.6500244140625,
+                      "height": 40.12461853027344,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "id": "bgj57",
+                      "x": 334.8848876953125,
+                      "y": 62.80374526977539,
+                      "name": "Vector",
+                      "geometry": "M5.41998 45l-5.41998 0 0-45 5.41998 0 0 45z",
+                      "fill": "#586c9dff",
+                      "width": 1.906036376953125,
+                      "height": 15.700942993164062,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "id": "xXOG9",
+                      "x": 301.0279541015625,
+                      "y": 0,
+                      "name": "Vector",
+                      "geometry": "M0 10c0-5.5228 4.477-10 10-10l70 0c5.523 0 10 4.4772 10 10l0 95c0 5.523-4.477 10-10 10l-70 0c-5.523 0-10-4.477-10-10l0-95z",
+                      "fill": "#ffffffff",
+                      "width": 31.650115966796875,
+                      "height": 40.124610900878906,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "id": "NYw2v",
+                      "x": 311.7738037109375,
+                      "y": 15.950414657592773,
+                      "name": "Vector",
+                      "geometry": "M0 16.14201c0-3.105 0.60498-5.89801 1.81598-8.37801 1.231-2.481 2.93002-4.395 5.09802-5.743 2.187-1.347 4.67697-2.021 7.46997-2.021 4.317 0 7.80305 1.494 10.45905 4.482 2.676 2.989 4.01398 6.963 4.01398 11.92401l0 0.38099c0 3.086-0.59599 5.859-1.78699 8.32-1.172 2.442-2.86099 4.346-5.068 5.71301-2.188 1.367-4.70702 2.05099-7.55902 2.05099-4.297 0-7.78298-1.49399-10.45898-4.48199-2.656-2.989-3.98401-6.944-3.98401-11.86601l0-0.38099z m5.44897 0.64499c0 3.516 0.81001 6.338 2.43201 8.46701 1.64 2.129 3.82801 3.193 6.56201 3.193 2.754 0 4.94101-1.074 6.56202-3.223 1.622-2.168 2.43201-5.195 2.432-9.082 0-3.476-0.82999-6.289-2.48999-8.43701-1.641-2.168-3.82805-3.252-6.56305-3.252-2.675 0-4.834 1.064-6.474 3.193-1.641 2.129-2.461 5.176-2.461 9.141z",
+                      "fill": "#586c9dff",
+                      "width": 10.1480712890625,
+                      "height": 11.469013214111328,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "id": "gddJ3",
+                      "x": 338.65643310546875,
+                      "y": 0,
+                      "name": "Vector",
+                      "geometry": "M0 10c0-5.5228 4.48-10 10-10l70 0c5.52 0 10 4.4772 10 10l0 95c0 5.523-4.48 10-10 10l-70 0c-5.52 0-10-4.477-10-10l0-95z",
+                      "fill": "#ffffffff",
+                      "width": 31.650177001953125,
+                      "height": 40.124610900878906,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "id": "KEtKQ",
+                      "x": 350.0012512207031,
+                      "y": 15.950414657592773,
+                      "name": "Vector",
+                      "geometry": "M26.77002 16.787c0 4.824-1.10006 8.711-3.31006 11.66001-2.2 2.949-5.18996 4.424-8.95996 4.42399-3.85 0-6.87996-1.221-9.07996-3.662l0 15.26401-5.42004 0 0-43.887 4.94995 0 0.26001 3.515c2.21-2.734 5.27007-4.10101 9.20007-4.10101 3.81 0 6.8199 1.43501 9.0199 4.30601 2.23 2.872 3.34009 6.86599 3.34009 11.98299l0 0.498z m-5.42004-0.615c0-3.575-0.76003-6.397-2.28003-8.467-1.53-2.07-3.6199-3.106-6.2699-3.10599-3.28 0-5.74001 1.456-7.38001 4.36599l0 15.146c1.62 2.891 4.09994 4.33601 7.43995 4.33601 2.59 0 4.66005-1.025 6.18005-3.07601 1.54-2.07 2.30994-5.137 2.30994-9.199z",
+                      "fill": "#586c9dff",
+                      "width": 9.414154052734375,
+                      "height": 15.51706314086914,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "id": "Wdnvh",
+                      "x": 94.24707794189453,
+                      "y": 153.86917114257812,
+                      "name": "Vector",
+                      "geometry": "M0 10c0-5.523 4.477-10 10-10l70 0c5.523 0 10 4.477 10 10l0 95c0 5.523-4.477 10-10 10l-70 0c-5.523 0-10-4.477-10-10l0-95z",
+                      "fill": "#ffffffff",
+                      "width": 31.650146484375,
+                      "height": 40.12461853027344,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "id": "mLMcy",
+                      "x": 105.50045776367188,
+                      "y": 170.9657440185547,
+                      "name": "Vector",
+                      "geometry": "M25 0l0 10.362c0 6.903-5.596 12.5-12.5 12.5l12.5-22.862z m-25 0l0 10.362c0 6.903 5.596 12.5 12.5 12.5l-12.5-22.862z m12.5 22.862l0 9.138 0-9.138z m0 9.138l7.328 0-7.328 0z m0 0l-7.328 0",
+                      "width": 8.791679382324219,
+                      "height": 11.16510009765625,
+                      "stroke": {
+                        "align": "center",
+                        "thickness": 3,
+                        "join": "round",
+                        "cap": "round",
+                        "fill": "#586c9dff"
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "id": "UunSZ",
+                      "x": 107.78629302978516,
+                      "y": 166.2554473876953,
+                      "name": "Vector",
+                      "geometry": "M6 0c3.31371 0 6 2.68629 6 6l0 18c0 3.31371-2.68629 6-6 6-3.31371 0-6-2.68629-6-6l0-18c0-3.31371 2.68629-6 6-6z",
+                      "width": 4.220001220703125,
+                      "height": 10.46728515625,
+                      "stroke": {
+                        "align": "center",
+                        "thickness": 3,
+                        "fill": "#586c9dff"
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "id": "JDSrm",
+                      "x": 47.12352752685547,
+                      "y": 153.86917114257812,
+                      "name": "Vector",
+                      "geometry": "M0 10c0-5.523 4.477-10 10-10l97 0c5.523 0 10 4.477 10 10l0 95c0 5.523-4.477 10-10 10l-97 0c-5.523 0-10-4.477-10-10l0-95z",
+                      "fill": "#f2f6ffff",
+                      "width": 41.14516830444336,
+                      "height": 40.12461853027344,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "id": "Mo2Ff",
+                      "x": 58.9044189453125,
+                      "y": 165.208740234375,
+                      "name": "Vector",
+                      "geometry": "M51 25.5c0 7.489-3.226 14.22198-8.369 18.88898-4.528 4.109-10.536 6.61102-17.131 6.61102-6.844 0-13.05599-2.69401-17.63699-7.08301-4.848-4.644-7.86301-11.17699-7.86301-18.41699 0-6.762 2.62999-12.90698 6.92599-17.47198 4.653-4.944 11.252-8.02802 18.57401-8.02802 6.595 0 12.603 2.50202 17.131 6.61102 5.143 4.667 8.369 11.39998 8.369 18.88898z",
+                      "width": 17.935096740722656,
+                      "height": 17.794387817382812,
+                      "stroke": {
+                        "align": "center",
+                        "thickness": 3,
+                        "fill": "#586c9dff"
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "id": "Jlv5x",
+                      "x": 0,
+                      "y": 153.86917114257812,
+                      "name": "Vector",
+                      "geometry": "M0 10c0-5.523 4.4772-10 10-10l97 0c5.523 0 10 4.477 10 10l0 95c0 5.523-4.477 10-10 10l-97 0c-5.5228 0-10-4.477-10-10l0-95z",
+                      "fill": "#f2f6ffff",
+                      "width": 41.145179748535156,
+                      "height": 40.12461853027344,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "id": "VEQUn",
+                      "x": 10.364526748657227,
+                      "y": 168.86277770996094,
+                      "name": "Vector",
+                      "geometry": "M10.6146 28.02698l-3.5319 0 0-23.41303-7.0827 2.60102 0-3.19001 10.064-3.77801 0.5506 0 0 27.78003z m28.4068 0l-18.1149 0 0-2.52503 9.5703-10.63397c1.4179-1.608 2.3926-2.91199 2.9243-3.91199 0.5443-1.013 0.8165-2.057 0.8165-3.13299 0-1.443-0.4367-2.62703-1.3102-3.55103-0.8735-0.924-2.0381-1.38599-3.4939-1.38598-1.747 0-3.1079 0.5-4.0826 1.5-0.9621 0.987-1.4431 2.36701-1.4431 4.14001l-3.513 0c0-2.545 0.8166-4.602 2.4496-6.172 1.6457-1.569 3.842-2.354 6.5891-2.354 2.5698 0 4.6016 0.67701 6.0953 2.03101 1.4938 1.342 2.2406 3.13396 2.2406 5.37396 0 2.722-1.7342 5.96298-5.2028 9.72198l-7.4056 8.03302 13.8804 0 0 2.86701z m8.83-15.53302l2.64 0c1.658-0.025 2.962-0.462 3.911-1.31 0.95-0.848 1.424-1.99401 1.42401-3.43701 0-3.241-1.614-4.86096-4.84201-4.86096-1.519 0-2.73401 0.437-3.646 1.30999-0.898 0.861-1.348 2.00701-1.348 3.43702l-3.513 0c0-2.19 0.798-4.00601 2.393-5.45002 1.608-1.455 3.646-2.18298 6.114-2.18298 2.608 0 4.652 0.68997 6.134 2.06897 1.481 1.38 2.22099 3.29803 2.221 5.75403 0 1.203-0.39199 2.36696-1.177 3.49396-0.772 1.127-1.82901 1.96802-3.171 2.52502 1.519 0.481 2.69 1.279 3.513 2.39301 0.835 1.114 1.25301 2.47501 1.253 4.083 0 2.481-0.81 4.44897-2.43099 5.90497-1.62 1.456-3.72801 2.18402-6.32301 2.18402-2.595 0-4.709-0.70303-6.342-2.10803-1.62-1.405-2.431-3.25996-2.431-5.56396l3.532 0c0 1.456 0.475 2.62102 1.425 3.49401 0.949 0.874 2.22099 1.31 3.816 1.31 1.697 0 2.99401-0.44304 3.893-1.32904 0.899-0.886 1.348-2.15798 1.348-3.81598 0-1.608-0.494-2.842-1.481-3.703-0.987-0.861-2.412-1.30398-4.272-1.32898l-2.64 0 0-2.86804z",
+                      "fill": "#586c9dff",
+                      "width": 21.0147705078125,
+                      "height": 9.911483764648438,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "id": "tqses",
+                      "x": 0,
+                      "y": 102.57943725585938,
+                      "name": "Vector",
+                      "geometry": "M0 10c0-5.523 4.4772-10 10-10l97 0c5.523 0 10 4.477 10 10l0 95c0 5.523-4.477 10-10 10l-97 0c-5.5228 0-10-4.477-10-10l0-95z",
+                      "fill": "#f2f6ffff",
+                      "width": 41.145179748535156,
+                      "height": 40.1246337890625,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "id": "8D2iU",
+                      "x": 12.246614456176758,
+                      "y": 113.68472290039062,
+                      "name": "Vector",
+                      "geometry": "M0.58978 22.25775l21.67161-21.672c0.781-0.781 2.0474-0.781 2.8284 0l21.67179 21.672c1.26 1.26 0.367 3.414-1.414 3.414l-7.172 0c-1.105 0-2 0.895-2 2l0 11c0 2.209-1.791 4-4 4l-16.5 0c-2.2091 0-4-1.791-4-4l0-11c0-1.105-0.8954-2-2-2l-7.6716 0c-1.7818 0-2.6741-2.154-1.4142-3.414z",
+                      "fill": "#586c9dff",
+                      "width": 16.65194320678711,
+                      "height": 14.888595581054688,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "id": "ADfON",
+                      "x": 329.16143798828125,
+                      "y": 102.57943725585938,
+                      "name": "Vector",
+                      "geometry": "M0 10c0-5.523 4.477-10 10-10l97 0c5.52 0 10 4.477 10 10l0 95c0 5.523-4.48 10-10 10l-97 0c-5.523 0-10-4.477-10-10l0-95z",
+                      "fill": "#f2f6ffff",
+                      "width": 41.145172119140625,
+                      "height": 40.1246337890625,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "id": "p74zB",
+                      "x": 339.73602294921875,
+                      "y": 115.83799743652344,
+                      "name": "Vector",
+                      "geometry": "M53.92999 4c0-2.209-1.79-4-4-4l-29.59997 0c-1.55 0-2.87001 0.662-3.76001 1.987l-16.57001 17.888 16.57001 17.88699c0.89 1.105 2.21001 1.98801 3.76001 1.98801l29.59997 0c2.21 0 4-1.791 4-4 0-10.583 0-21.167 0-31.75z m-13.15002 24.95499c0.59 0.586 1.53999 0.586 2.11999 0 0.59-0.585 0.59-1.53497 0-2.12097l-7.29992-7.30802 7.29992-7.30801c0.59-0.585 0.59-1.535 0-2.121-0.58-0.586-1.52999-0.586-2.11999 0l-7.30994 7.30801-7.30005-7.30801c-0.59-0.586-1.53999-0.586-2.11999 0-0.59 0.586-0.59 1.536 0 2.121l7.30005 7.30801-7.30005 7.30802c-0.59 0.586-0.59 1.53597 0 2.12097 0.58 0.586 1.52999 0.586 2.11999 0l7.30005-7.30698 7.30994 7.30698z",
+                      "fillRule": "evenodd",
+                      "fill": "#586c9dff",
+                      "width": 18.9654541015625,
+                      "height": 13.869155883789062,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "rectangle",
+              "id": "FcKQn",
+              "x": 0,
+              "y": 0,
+              "name": "Rectangle 64",
+              "fill": "#c4c4c4ff",
+              "width": 390,
+              "height": 40,
+              "stroke": {
+                "align": "inside",
+                "thickness": 1
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

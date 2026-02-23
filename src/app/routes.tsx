@@ -2,7 +2,10 @@ import { createBrowserRouter } from 'react-router-dom';
 
 import { RootLayout } from '@/app/layouts/RootLayout';
 import { HomePage } from '@/pages/home';
+
 import { SearchPage } from '@/pages/home/search';
+import { PostPage } from '@/pages/post';
+import { UploadPage } from '@/pages/upload';
 
 export const router = createBrowserRouter([
   {
@@ -12,5 +15,13 @@ export const router = createBrowserRouter([
       { index: true, element: <HomePage /> },
       { path: 'search', element: <SearchPage /> }, // ✅ /search
     ],
+  },
+  {
+    path: '/post',
+    element: <PostPage />,
+  },
+  {
+    path: '/upload',
+    element: <UploadPage />,
   },
 ]);
