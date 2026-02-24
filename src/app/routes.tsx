@@ -21,11 +21,18 @@ export const router = createBrowserRouter([
       { path: 'chat', element: <ChatListPage /> },
       { path: 'chat/:roomId', element: <ChatRoomPage /> },
 
-      { path: 'post-create', element: <PostPage /> },
       { path: 'upload', element: <UploadPage /> },
 
       { path: 'profile', element: <ProfilePage /> },
       { path: 'profile/:userId', element: <ProfilePage /> },
     ],
+  },
+  {
+    path: '/post-create',
+    element: <PostPage />,
+  },
+  {
+    path: '/post/:postId',
+    element: <PostPage />,
   },
 ]);
