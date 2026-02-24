@@ -1,7 +1,5 @@
 import { useNavigate } from 'react-router-dom';
 
-import { ArrowLeftIcon } from '@/shared/ui/icons';
-
 type ChatItem = {
   id: string;
   name: string;
@@ -27,19 +25,6 @@ export function ChatListPage() {
 
   return (
     <div className="px-4 pt-3">
-      <div className="flex items-center gap-2">
-        <button
-          type="button"
-          onClick={() => nav(-1)}
-          className="grid h-10 w-10 place-items-center rounded-full text-zinc-700 active:scale-95"
-        >
-          <ArrowLeftIcon className="h-6 w-6" />
-        </button>
-        <h2 className="text-base font-bold">돌아가기</h2>
-
-        <div className="ml-auto text-zinc-500">⋮</div>
-      </div>
-
       <ul className="mt-4 space-y-4">
         {MOCK_CHATS.map((c) => (
           <li
