@@ -1,7 +1,8 @@
 import { useLocation } from 'react-router-dom';
+
+import { AppHeader } from './ui/AppHeader';
 import { FeedHeader } from './ui/FeedHeader';
 import { SearchHeader } from './ui/SearchHeader';
-import { AppHeader } from './ui/AppHeader';
 
 export function Header() {
   const { pathname } = useLocation();
@@ -10,7 +11,7 @@ export function Header() {
     return <SearchHeader />;
   }
 
-  if (pathname.startsWith('/chat')) { 
+  if (pathname.startsWith('/chat') || pathname.startsWith('/profile')) {
     return <AppHeader />;
   }
 

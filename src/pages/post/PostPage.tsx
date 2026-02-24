@@ -1,7 +1,9 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { ArrowLeft, Heart, MessageCircle, MoreVertical } from 'lucide-react';
 
+import { ArrowLeft, Heart, MessageCircle, MoreVertical } from 'lucide-react';
+import { useNavigate, useParams } from 'react-router-dom';
+
+import { useCreateComment, useGetComments } from '@/entities/post/hooks/useComments';
 import { Avatar } from '@/shared/ui/Avatar';
 
 /* ── sample data (replace with real API later) ── */
@@ -75,13 +77,37 @@ function CommentItem({
 /* ── main page ── */
 export function PostPage() {
   const navigate = useNavigate();
+  const { postId = '1' } = useParams();
   const [commentText, setCommentText] = useState('');
 
+  // Fetch comments for this post
+  const { data: commentsData, isLoading: isLoadingComments } = useGetComments(postId);
+  const { mutate: submitComment, isPending: isSubmitting } = useCreateComment(postId);
+
+  const comments = commentsData?.comments || COMMENTS; // Use mock data as fallback
+
+  const handleSubmitComment = () => {
+    if (!commentText.trim()) return;
+
+    submitComment(
+      { content: commentText, postId },
+      {
+        onSuccess: () => {
+          setCommentText('');
+        },
+      },
+    );
+  };
+
   return (
-    <div className="bg-background flex min-h-screen flex-col pb-20 text-left">
+    <div className="bg-background flex min-h-screen flex-col pb-24 text-left">
       {/* ─ sticky top nav ─ */}
       <header className="border-border bg-background sticky top-0 z-10 flex items-center justify-between border-b px-4 py-3">
-        <button type="button" onClick={() => navigate(-1)} className="text-foreground hover:text-foreground/80">
+        <button
+          type="button"
+          onClick={() => navigate(-1)}
+          className="text-foreground hover:text-foreground/80"
+        >
           <ArrowLeft className="h-6 w-6" />
         </button>
         <button type="button">
@@ -120,7 +146,7 @@ export function PostPage() {
             </div>
           ) : (
             <div className="mb-4 space-y-2 px-4">
-              <div className="bg-muted flex h-64 w-full items-center justify-center rounded-xl p-4 text-sm text-muted-foreground">
+              <div className="bg-muted text-muted-foreground flex h-64 w-full items-center justify-center rounded-xl p-4 text-sm">
                 이미지
               </div>
             </div>
@@ -142,24 +168,35 @@ export function PostPage() {
           <p className="text-muted-foreground mt-3 px-4 text-left text-xs">{POST.date}</p>
         </article>
 
+        {/* divider */}
+        <div className="border-muted border-b" />
+
         {/* comments */}
-        <div className="divide-border divide-y">
-          {COMMENTS.map((c) => (
-            <CommentItem
-              key={c.id}
-              avatar={c.avatar}
-              userName={c.userName}
-              time={c.time}
-              text={c.text}
-            />
-          ))}
+        <div className="divide-muted divide-y">
+          {isLoadingComments ? (
+            <div className="text-muted-foreground px-4 py-8 text-center text-sm">로드 중...</div>
+          ) : comments.length === 0 ? (
+            <div className="text-muted-foreground px-4 py-8 text-center text-sm">
+              댓글이 없습니다.
+            </div>
+          ) : (
+            comments.map((c) => (
+              <CommentItem
+                key={c.id}
+                avatar={c.avatar}
+                userName={c.userName}
+                time={c.time}
+                text={c.text}
+              />
+            ))
+          )}
         </div>
       </main>
 
       {/* ─ fixed comment input bar ─ */}
-      <div className="border-border bg-background fixed right-0 bottom-0 left-0 border-t px-4 py-3">
+      <div className="border-muted bg-background fixed right-0 bottom-0 left-0 w-full border-t px-4 py-3">
         <div className="flex items-center gap-3">
-          <div className="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-full bg-gray-300">
+          <div className="bg-muted flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-full">
             <Avatar size="sm" />
           </div>
           <div className="relative flex-1">
@@ -168,14 +205,22 @@ export function PostPage() {
               value={commentText}
               onChange={(e) => setCommentText(e.target.value)}
               placeholder="댓글 입력하기..."
-              className="bg-muted h-10 w-full rounded-full border-none pr-12 pl-4 text-left text-sm outline-none focus-visible:ring-0"
+              className="border-muted bg-muted placeholder:text-muted-foreground focus:border-muted focus:bg-background h-10 w-full rounded-full border px-4 py-2 text-sm outline-none focus:ring-0"
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' && !isSubmitting) handleSubmitComment();
+              }}
             />
             <button
               type="button"
-              className="text-muted-foreground hover:text-primary absolute top-1/2 right-2 h-8 -translate-y-1/2 text-sm font-semibold"
-              disabled={!commentText.trim()}
+              onClick={handleSubmitComment}
+              disabled={!commentText.trim() || isSubmitting}
+              className={`absolute top-1/2 right-3 -translate-y-1/2 text-sm font-medium transition-colors ${
+                commentText.trim() && !isSubmitting
+                  ? 'text-foreground hover:text-primary'
+                  : 'text-muted-foreground cursor-not-allowed'
+              }`}
             >
-              게시
+              {isSubmitting ? '로딩...' : '게시'}
             </button>
           </div>
         </div>

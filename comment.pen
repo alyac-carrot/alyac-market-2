@@ -1,0 +1,1223 @@
+{
+  "version": "2.8",
+  "children": [
+    {
+      "type": "frame",
+      "id": "bi8Au",
+      "x": -458,
+      "y": -148,
+      "name": "Frame",
+      "clip": true,
+      "width": 1443,
+      "height": 1295,
+      "fill": "#FFFFFF",
+      "layout": "none",
+      "children": [
+        {
+          "type": "frame",
+          "id": "itiZd",
+          "x": 180,
+          "y": 193,
+          "name": "Post",
+          "clip": true,
+          "width": 390,
+          "height": 844,
+          "fill": "#ffffffff",
+          "stroke": {
+            "align": "inside",
+            "thickness": 1
+          },
+          "layout": "none",
+          "children": [
+            {
+              "type": "frame",
+              "id": "f0yOc",
+              "x": 16,
+              "y": 92,
+              "name": "home-post",
+              "width": 358,
+              "height": 434,
+              "fill": "#ffffffff",
+              "stroke": {
+                "align": "inside",
+                "thickness": 1
+              },
+              "layout": "none",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "Pc8fk",
+                  "x": 0,
+                  "y": 0,
+                  "name": "upload-image",
+                  "width": 42,
+                  "height": 42,
+                  "fill": "#dbdbdbff",
+                  "cornerRadius": 55,
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "#d4d4d4ff"
+                  },
+                  "layout": "vertical",
+                  "gap": 10,
+                  "padding": [
+                    5,
+                    12
+                  ],
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "path",
+                      "id": "br1pb",
+                      "name": "알약로고_gray",
+                      "geometry": "M0 0l40 0 0 69-40 0 0-69z",
+                      "fill": {
+                        "type": "image",
+                        "enabled": true,
+                        "url": "",
+                        "mode": "stretch"
+                      },
+                      "width": "fill_container",
+                      "height": "fill_container",
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "jP2d2",
+                  "x": 54,
+                  "y": 4,
+                  "name": "Frame 4",
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1
+                  },
+                  "layout": "vertical",
+                  "gap": 16,
+                  "children": [
+                    {
+                      "type": "group",
+                      "id": "wbEh4",
+                      "name": "user-name",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "J2tFu",
+                          "x": 0,
+                          "y": 0,
+                          "name": "이스트 시큐리티 알약",
+                          "fill": "#000000ff",
+                          "content": "이스트 시큐리티 알약",
+                          "textAlignVertical": "bottom",
+                          "fontFamily": "Noto Sans Lao",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "SCRtm",
+                          "x": 0,
+                          "y": 25,
+                          "name": "@ estSecurity_Alyac",
+                          "fill": "#767676ff",
+                          "content": "@ estSecurity_Alyac",
+                          "lineHeight": 1.1666666666666667,
+                          "textAlignVertical": "bottom",
+                          "fontFamily": "Noto Sans Lao",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "3tpiA",
+                      "name": "알려지지 않은 위협의 즉각적인 차단부터 식별, 대응까지. 10년이상의 백신 운영 노하우와 악성코드 분석 전문성을 담은 알약 EDR 솔루션은 위협 인텔리전스와의 결합으로 확장된 엔드포인트 위협 대응 체계를 제공합니다.",
+                      "fill": "#000000ff",
+                      "textGrowth": "fixed-width",
+                      "width": 304,
+                      "content": "알려지지 않은 위협의 즉각적인 차단부터 식별, 대응까지. 10년이상의 백신 운영 노하우와 악성코드 분석 전문성을 담은 알약 EDR 솔루션은 위협 인텔리전스와의 결합으로 확장된 엔드포인트 위협 대응 체계를 제공합니다.",
+                      "fontFamily": "Noto Sans Lao",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "group",
+                      "id": "KGZaC",
+                      "name": "img+icon",
+                      "children": [
+                        {
+                          "type": "group",
+                          "id": "FImgS",
+                          "x": 0,
+                          "y": 240,
+                          "name": "icon-group",
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "E3b9l",
+                              "x": 0,
+                              "y": 0,
+                              "name": "heart",
+                              "clip": true,
+                              "width": 20,
+                              "height": 20,
+                              "fill": {
+                                "type": "color",
+                                "color": "#ffffffff",
+                                "enabled": false
+                              },
+                              "stroke": {
+                                "align": "inside",
+                                "thickness": 1
+                              },
+                              "layout": "none",
+                              "children": [
+                                {
+                                  "type": "path",
+                                  "id": "apKQU",
+                                  "x": 1.818359375,
+                                  "y": 2.727294921875,
+                                  "name": "Vector",
+                                  "geometry": "M17.68368 1.47751c-0.46819-0.46841-1.02409-0.83999-1.63592-1.09351-0.61184-0.25352-1.26763-0.384-1.92991-0.384-0.66228 0-1.31807 0.13048-1.92991 0.384-0.61184 0.25352-1.16773 0.62509-1.63592 1.09351l-0.97167 0.97166-0.97167-0.97166c-0.94572-0.94572-2.22839-1.47702-3.56583-1.47702-1.33745 0-2.62012 0.5313-3.56583 1.47702-0.94572 0.94572-1.47702 2.22839-1.47702 3.56583 0 1.33745 0.5313 2.62012 1.47702 3.56583l0.97166 0.97167 7.13167 7.13166 7.13167-7.13166 0.97166-0.97167c0.46841-0.46819 0.83999-1.02409 1.09351-1.63592 0.25352-0.61184 0.384-1.26763 0.384-1.92991 0-0.66228-0.13049-1.31807-0.384-1.92991-0.25352-0.61184-0.62509-1.16773-1.09351-1.63592z",
+                                  "width": 16.363636016845703,
+                                  "height": 14.545455932617188,
+                                  "stroke": {
+                                    "align": "center",
+                                    "thickness": 1.5,
+                                    "join": "round",
+                                    "cap": "round",
+                                    "fill": "#767676ff"
+                                  }
+                                }
+                              ]
+                            },
+                            {
+                              "type": "text",
+                              "id": "xxD7u",
+                              "x": 26,
+                              "y": 4,
+                              "name": "58",
+                              "fill": "#767676ff",
+                              "content": "58",
+                              "lineHeight": 1,
+                              "textAlignVertical": "bottom",
+                              "fontFamily": "Noto Sans Lao",
+                              "fontSize": 12,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "text",
+                              "id": "Mm6cG",
+                              "x": 83,
+                              "y": 4,
+                              "name": "12",
+                              "fill": "#767676ff",
+                              "content": "12",
+                              "lineHeight": 1,
+                              "textAlignVertical": "bottom",
+                              "fontFamily": "Noto Sans Lao",
+                              "fontSize": 12,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "frame",
+                              "id": "F8tqI",
+                              "x": 57,
+                              "y": 0,
+                              "name": "message-circle",
+                              "clip": true,
+                              "width": 20,
+                              "height": 20,
+                              "fill": {
+                                "type": "color",
+                                "color": "#ffffffff",
+                                "enabled": false
+                              },
+                              "stroke": {
+                                "align": "inside",
+                                "thickness": 1
+                              },
+                              "layout": "none",
+                              "children": [
+                                {
+                                  "type": "path",
+                                  "id": "O5BAV",
+                                  "x": 2.5,
+                                  "y": 2.5,
+                                  "name": "Vector",
+                                  "geometry": "M18 8.50003c0.00344 1.31987-0.30493 2.62189-0.9 3.8-0.70557 1.41174-1.79025 2.59917-3.13255 3.42928-1.3423 0.83011-2.88921 1.27011-4.46745 1.27072-1.31987 0.00344-2.62188-0.30493-3.8-0.9l-5.7 1.9 1.9-5.7c-0.59507-1.17812-0.90344-2.48013-0.9-3.8 0.00061-1.57824 0.44061-3.12515 1.27072-4.46745 0.83011-1.3423 2.01754-2.42698 3.42928-3.13255 1.17812-0.59507 2.48013-0.90344 3.8-0.9l0.5 0c2.08435 0.11499 4.05304 0.99476 5.52914 2.47086 1.4761 1.4761 2.35587 3.44479 2.47086 5.52914l0 0.5z",
+                                  "width": 15.000022888183594,
+                                  "height": 15.000022888183594,
+                                  "stroke": {
+                                    "align": "center",
+                                    "thickness": 1.5,
+                                    "join": "round",
+                                    "cap": "round",
+                                    "fill": "#767676ff"
+                                  }
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "rectangle",
+                          "cornerRadius": 10,
+                          "id": "CVJSi",
+                          "x": 0,
+                          "y": 0,
+                          "name": "unsplash:FWtiv70Z_ZY",
+                          "fill": [
+                            "#c4c4c4ff",
+                            {
+                              "type": "image",
+                              "enabled": true,
+                              "url": "",
+                              "mode": "fill"
+                            }
+                          ],
+                          "width": 304,
+                          "height": 228,
+                          "stroke": {
+                            "align": "inside",
+                            "thickness": 0.5,
+                            "fill": "#dbdbdbff"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "0MiOe",
+                      "name": "2020년 10월 21일",
+                      "fill": "#767676ff",
+                      "textGrowth": "fixed-width-height",
+                      "width": 80,
+                      "height": 12,
+                      "content": "2020년 10월 21일",
+                      "lineHeight": 1.2,
+                      "textAlignVertical": "bottom",
+                      "fontFamily": "Noto Sans Lao",
+                      "fontSize": 10,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "BrGHp",
+                  "x": 340,
+                  "y": 4,
+                  "name": "s-icon-more-vertical",
+                  "clip": true,
+                  "width": 18,
+                  "height": 18,
+                  "fill": {
+                    "type": "color",
+                    "color": "#ffffffff",
+                    "enabled": false
+                  },
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1
+                  },
+                  "layout": "none",
+                  "children": [
+                    {
+                      "type": "path",
+                      "id": "t9quE",
+                      "x": 8.24998664855957,
+                      "y": 8.25001335144043,
+                      "name": "Vector",
+                      "geometry": "M2 1c0 0.55228-0.44772 1-1 1-0.55228 0-1-0.44772-1-1 0-0.55228 0.44772-1 1-1 0.55228 0 1 0.44772 1 1z",
+                      "fill": "#c4c4c4ff",
+                      "width": 1.4999990463256836,
+                      "height": 1.4999990463256836,
+                      "stroke": {
+                        "align": "center",
+                        "thickness": 1,
+                        "join": "round",
+                        "cap": "round",
+                        "fill": "#c4c4c4ff"
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "id": "Rlf2A",
+                      "x": 8.24998664855957,
+                      "y": 2.9999873638153076,
+                      "name": "Vector",
+                      "geometry": "M2 1c0 0.55228-0.44772 1-1 1-0.55228 0-1-0.44772-1-1 0-0.55228 0.44772-1 1-1 0.55228 0 1 0.44772 1 1z",
+                      "fill": "#c4c4c4ff",
+                      "width": 1.4999990463256836,
+                      "height": 1.499999761581421,
+                      "stroke": {
+                        "align": "center",
+                        "thickness": 1,
+                        "join": "round",
+                        "cap": "round",
+                        "fill": "#c4c4c4ff"
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "id": "kolt9",
+                      "x": 8.24998664855957,
+                      "y": 13.5,
+                      "name": "Vector",
+                      "geometry": "M2 1c0 0.55228-0.44772 1-1 1-0.55228 0-1-0.44772-1-1 0-0.55228 0.44772-1 1-1 0.55228 0 1 0.44772 1 1z",
+                      "fill": "#c4c4c4ff",
+                      "width": 1.4999990463256836,
+                      "height": 1.4999971389770508,
+                      "stroke": {
+                        "align": "center",
+                        "thickness": 1,
+                        "join": "round",
+                        "cap": "round",
+                        "fill": "#c4c4c4ff"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "uAJgj",
+              "x": 16,
+              "y": 567,
+              "name": "Group 5",
+              "width": 358,
+              "height": 58,
+              "stroke": {
+                "align": "inside",
+                "thickness": 1
+              },
+              "layout": "none",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "vcmnB",
+                  "x": 48,
+                  "y": 6,
+                  "name": "Frame 6",
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1
+                  },
+                  "gap": 6,
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "HGqQ5",
+                      "name": "이스트 소프트",
+                      "fill": "#000000ff",
+                      "content": "이스트 소프트",
+                      "textAlignVertical": "bottom",
+                      "fontFamily": "Noto Sans Lao",
+                      "fontSize": 14,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "text",
+                      "id": "wLH4m",
+                      "name": "· 5분 전",
+                      "fill": "#767676ff",
+                      "content": "· 5분 전",
+                      "textAlignVertical": "middle",
+                      "fontFamily": "Noto Sans Lao",
+                      "fontSize": 10,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "J59Pu",
+                  "x": 48,
+                  "y": 40,
+                  "name": "게시글 답글 ~~ !! 최고최고",
+                  "fill": "#333333ff",
+                  "textGrowth": "fixed-width",
+                  "width": 310,
+                  "content": "게시글 답글 ~~ !! 최고최고",
+                  "fontFamily": "Noto Sans Lao",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "ellipse",
+                  "id": "yuIzZ",
+                  "x": 0,
+                  "y": 0,
+                  "name": "Ellipse 4",
+                  "sweepAngle": -360.00001001791264,
+                  "fill": {
+                    "type": "image",
+                    "enabled": true,
+                    "url": "",
+                    "mode": "fill"
+                  },
+                  "width": 36,
+                  "height": 36,
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 0.5,
+                    "fill": "#dbdbdbff"
+                  }
+                },
+                {
+                  "type": "frame",
+                  "id": "6yM27",
+                  "x": 338,
+                  "y": 5,
+                  "name": "more-vertical",
+                  "clip": true,
+                  "width": 20,
+                  "height": 20,
+                  "fill": {
+                    "type": "color",
+                    "color": "#ffffffff",
+                    "enabled": false
+                  },
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1
+                  },
+                  "layout": "none",
+                  "children": [
+                    {
+                      "type": "path",
+                      "id": "y0vXQ",
+                      "x": 9.166712760925293,
+                      "y": 9.166682243347168,
+                      "name": "Vector",
+                      "geometry": "M2 1c0 0.55228-0.44772 1-1 1-0.55228 0-1-0.44772-1-1 0-0.55228 0.44772-1 1-1 0.55228 0 1 0.44772 1 1z",
+                      "fill": "#767676ff",
+                      "width": 1.666666030883789,
+                      "height": 1.666666030883789,
+                      "stroke": {
+                        "align": "center",
+                        "thickness": 1,
+                        "join": "round",
+                        "cap": "round",
+                        "fill": "#767676ff"
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "id": "QlvFY",
+                      "x": 9.166712760925293,
+                      "y": 3.3333187103271484,
+                      "name": "Vector",
+                      "geometry": "M2 1c0 0.55228-0.44772 1-1 1-0.55228 0-1-0.44772-1-1 0-0.55228 0.44772-1 1-1 0.55228 0 1 0.44772 1 1z",
+                      "fill": "#767676ff",
+                      "width": 1.666666030883789,
+                      "height": 1.666666030883789,
+                      "stroke": {
+                        "align": "center",
+                        "thickness": 1,
+                        "join": "round",
+                        "cap": "round",
+                        "fill": "#767676ff"
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "id": "hslIF",
+                      "x": 9.166712760925293,
+                      "y": 15,
+                      "name": "Vector",
+                      "geometry": "M2 1c0 0.55228-0.44772 1-1 1-0.55228 0-1-0.44772-1-1 0-0.55228 0.44772-1 1-1 0.55228 0 1 0.44772 1 1z",
+                      "fill": "#767676ff",
+                      "width": 1.666666030883789,
+                      "height": 1.6666641235351562,
+                      "stroke": {
+                        "align": "center",
+                        "thickness": 1,
+                        "join": "round",
+                        "cap": "round",
+                        "fill": "#767676ff"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "zGUeq",
+              "x": 16,
+              "y": 641,
+              "name": "Group 8",
+              "width": 358,
+              "height": 76,
+              "stroke": {
+                "align": "inside",
+                "thickness": 1
+              },
+              "layout": "none",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "QNnpB",
+                  "x": 48,
+                  "y": 6,
+                  "name": "Frame 6",
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1
+                  },
+                  "gap": 6,
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "nLYo8",
+                      "name": "이스트 소프트",
+                      "fill": "#000000ff",
+                      "content": "보안 백신 전문가",
+                      "textAlignVertical": "bottom",
+                      "fontFamily": "Noto Sans Lao",
+                      "fontSize": 14,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "text",
+                      "id": "dvAWv",
+                      "name": "· 5분 전",
+                      "fill": "#767676ff",
+                      "content": "· 15분 전",
+                      "textAlignVertical": "middle",
+                      "fontFamily": "Noto Sans Lao",
+                      "fontSize": 10,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "qFvQL",
+                  "x": 48,
+                  "y": 40,
+                  "name": "게시글 답글 ~~ !! 최고최고",
+                  "fill": "#333333ff",
+                  "textGrowth": "fixed-width",
+                  "width": 310,
+                  "content": "너무 기대됩니다. 블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라...",
+                  "fontFamily": "Noto Sans Lao",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "ellipse",
+                  "id": "IfqzZ",
+                  "x": 0,
+                  "y": 0,
+                  "name": "Ellipse 4",
+                  "sweepAngle": -360.00001001791264,
+                  "fill": {
+                    "type": "image",
+                    "enabled": true,
+                    "url": "",
+                    "mode": "fill"
+                  },
+                  "width": 36,
+                  "height": 36,
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 0.5,
+                    "fill": "#dbdbdbff"
+                  }
+                },
+                {
+                  "type": "frame",
+                  "id": "lwo07",
+                  "x": 338,
+                  "y": 5,
+                  "name": "more-vertical",
+                  "clip": true,
+                  "width": 20,
+                  "height": 20,
+                  "fill": {
+                    "type": "color",
+                    "color": "#ffffffff",
+                    "enabled": false
+                  },
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1
+                  },
+                  "layout": "none",
+                  "children": [
+                    {
+                      "type": "path",
+                      "id": "MOMaY",
+                      "x": 9.166712760925293,
+                      "y": 9.166682243347168,
+                      "name": "Vector",
+                      "geometry": "M2 1c0 0.55228-0.44772 1-1 1-0.55228 0-1-0.44772-1-1 0-0.55228 0.44772-1 1-1 0.55228 0 1 0.44772 1 1z",
+                      "fill": "#767676ff",
+                      "width": 1.666666030883789,
+                      "height": 1.666666030883789,
+                      "stroke": {
+                        "align": "center",
+                        "thickness": 1,
+                        "join": "round",
+                        "cap": "round",
+                        "fill": "#767676ff"
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "id": "3jUNI",
+                      "x": 9.166712760925293,
+                      "y": 3.3333187103271484,
+                      "name": "Vector",
+                      "geometry": "M2 1c0 0.55228-0.44772 1-1 1-0.55228 0-1-0.44772-1-1 0-0.55228 0.44772-1 1-1 0.55228 0 1 0.44772 1 1z",
+                      "fill": "#767676ff",
+                      "width": 1.666666030883789,
+                      "height": 1.666666030883789,
+                      "stroke": {
+                        "align": "center",
+                        "thickness": 1,
+                        "join": "round",
+                        "cap": "round",
+                        "fill": "#767676ff"
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "id": "rKGh0",
+                      "x": 9.166712760925293,
+                      "y": 15,
+                      "name": "Vector",
+                      "geometry": "M2 1c0 0.55228-0.44772 1-1 1-0.55228 0-1-0.44772-1-1 0-0.55228 0.44772-1 1-1 0.55228 0 1 0.44772 1 1z",
+                      "fill": "#767676ff",
+                      "width": 1.666666030883789,
+                      "height": 1.6666641235351562,
+                      "stroke": {
+                        "align": "center",
+                        "thickness": 1,
+                        "join": "round",
+                        "cap": "round",
+                        "fill": "#767676ff"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "rectangle",
+              "id": "AqSRI",
+              "x": 0,
+              "y": 546,
+              "name": "Rectangle 16",
+              "fill": "#dbdbdbff",
+              "width": 390,
+              "height": 1,
+              "stroke": {
+                "align": "inside",
+                "thickness": 1
+              }
+            },
+            {
+              "type": "group",
+              "id": "rL2uW",
+              "x": 207,
+              "y": 444,
+              "name": "Group 12",
+              "children": [
+                {
+                  "type": "ellipse",
+                  "id": "KtXmM",
+                  "x": 12,
+                  "y": 0,
+                  "name": "Ellipse 7",
+                  "sweepAngle": -360.00001001791264,
+                  "fill": "#ffffffff",
+                  "width": 6,
+                  "height": 6,
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1
+                  }
+                },
+                {
+                  "type": "ellipse",
+                  "id": "nSYBU",
+                  "x": 24,
+                  "y": 0,
+                  "name": "Ellipse 8",
+                  "sweepAngle": -360.00001001791264,
+                  "fill": "#ffffffff",
+                  "width": 6,
+                  "height": 6,
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1
+                  }
+                },
+                {
+                  "type": "path",
+                  "id": "k0Fb0",
+                  "x": 0,
+                  "y": 0,
+                  "name": "Ellipse 7",
+                  "geometry": "M6 3c0 1.65685-1.34315 3-3 3-1.65685 0-3-1.34315-3-3 0-1.65685 1.34315-3 3-3 1.65685 0 3 1.34315 3 3z",
+                  "fill": "#f26e22ff",
+                  "width": 6,
+                  "height": 6,
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1
+                  }
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "oS39m",
+              "x": 0,
+              "y": 773,
+              "name": "comment",
+              "clip": true,
+              "width": 390,
+              "height": 61,
+              "fill": "#ffffffff",
+              "stroke": {
+                "align": "inside",
+                "thickness": 1
+              },
+              "layout": "none",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "FpKd0",
+                  "x": 70,
+                  "y": 18,
+                  "name": "댓글 입력하기...",
+                  "fill": "#c4c4c4ff",
+                  "content": "댓글 입력하기...",
+                  "textAlignVertical": "bottom",
+                  "fontFamily": "Noto Sans Lao",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "rectangle",
+                  "id": "fMkru",
+                  "x": 0,
+                  "y": 0,
+                  "name": "Rectangle 17",
+                  "fill": "#dbdbdbff",
+                  "width": 390,
+                  "height": 0.5,
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1
+                  }
+                },
+                {
+                  "type": "text",
+                  "id": "iyMUg",
+                  "x": 348,
+                  "y": 18,
+                  "name": "게시",
+                  "fill": "#c4c4c4ff",
+                  "content": "게시",
+                  "textAlign": "right",
+                  "textAlignVertical": "bottom",
+                  "fontFamily": "Noto Sans Lao",
+                  "fontSize": 14,
+                  "fontWeight": "500"
+                },
+                {
+                  "type": "frame",
+                  "id": "ougp3",
+                  "x": 13,
+                  "y": 14,
+                  "name": "upload-image",
+                  "width": 36,
+                  "height": 36,
+                  "fill": "#dbdbdbff",
+                  "cornerRadius": 55,
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "#d4d4d4ff"
+                  },
+                  "layout": "vertical",
+                  "gap": 10,
+                  "padding": [
+                    6,
+                    11
+                  ],
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "path",
+                      "id": "n9yWf",
+                      "name": "알약로고_gray",
+                      "geometry": "M0 0l40 0 0 69-40 0 0-69z",
+                      "fill": {
+                        "type": "image",
+                        "enabled": true,
+                        "url": "",
+                        "mode": "stretch"
+                      },
+                      "width": "fill_container",
+                      "height": "fill_container",
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "gHMjQ",
+              "x": 0,
+              "y": 0,
+              "name": "status-bar",
+              "width": 390,
+              "height": 24,
+              "stroke": {
+                "align": "inside",
+                "thickness": 1
+              },
+              "layout": "none",
+              "children": [
+                {
+                  "type": "rectangle",
+                  "id": "0ZopQ",
+                  "x": 0,
+                  "y": 0,
+                  "name": "Rectangle 1",
+                  "fill": "#d4d4d4ff",
+                  "width": 390,
+                  "height": 24,
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1
+                  }
+                },
+                {
+                  "type": "path",
+                  "id": "5fkgP",
+                  "x": 0,
+                  "y": 0,
+                  "name": "Background",
+                  "geometry": "M0 0l0 20 375 0 0-20-375 0z",
+                  "fillRule": "evenodd",
+                  "fill": "#00000000",
+                  "width": 390,
+                  "height": 24,
+                  "effect": {
+                    "type": "blur",
+                    "radius": 11.89248263835907,
+                    "enabled": false
+                  }
+                },
+                {
+                  "type": "frame",
+                  "id": "x23cV",
+                  "x": 0,
+                  "y": 0,
+                  "name": "status_bar",
+                  "width": 390,
+                  "height": 24,
+                  "fill": {
+                    "type": "color",
+                    "color": "#ffffffff",
+                    "enabled": false
+                  },
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1
+                  },
+                  "layout": "none",
+                  "children": [
+                    {
+                      "type": "group",
+                      "id": "vFiDr",
+                      "x": 358,
+                      "y": 8,
+                      "name": "battery",
+                      "children": [
+                        {
+                          "type": "group",
+                          "id": "0CDQn",
+                          "x": 0,
+                          "y": 0,
+                          "name": "Battery",
+                          "children": [
+                            {
+                              "type": "path",
+                              "id": "OpD1K",
+                              "x": 0,
+                              "y": 0,
+                              "name": "Rectangle",
+                              "opacity": 0.4000000059604645,
+                              "geometry": "M0 0l22 0 0 10.5-3.53133 0-18.46867 0 0-10.5z",
+                              "fillRule": "evenodd",
+                              "fill": {
+                                "type": "color",
+                                "color": "#d8d8d8ff",
+                                "enabled": false
+                              },
+                              "width": 21.5510196685791,
+                              "height": 10,
+                              "stroke": {
+                                "align": "inside",
+                                "thickness": 1,
+                                "fill": "#ffffffff"
+                              }
+                            },
+                            {
+                              "type": "path",
+                              "id": "ljl1C",
+                              "x": 1.959197998046875,
+                              "y": 1.9047622680664062,
+                              "name": "Rectangle",
+                              "geometry": "M0 0l18 0 0 6.5-18 0 0-6.5z",
+                              "fillRule": "evenodd",
+                              "fill": "#ffffffff",
+                              "width": 17.632652282714844,
+                              "height": 6.190475940704346
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "FZ3v8",
+                      "x": 8,
+                      "y": 5,
+                      "name": "Time",
+                      "fill": "#ffffffff",
+                      "content": "9:41 AM",
+                      "textAlign": "center",
+                      "textAlignVertical": "bottom",
+                      "fontFamily": "Noto Sans Lao",
+                      "fontSize": 12,
+                      "fontWeight": "600"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "7P3HY",
+              "x": 0,
+              "y": 24,
+              "name": "top-basic-nav",
+              "clip": true,
+              "width": 390,
+              "height": 48,
+              "stroke": {
+                "align": "inside",
+                "thickness": 1
+              },
+              "layout": "none",
+              "children": [
+                {
+                  "type": "rectangle",
+                  "id": "epNwd",
+                  "x": 0,
+                  "y": 48,
+                  "name": "Rectangle 9",
+                  "rotation": 180,
+                  "flipX": true,
+                  "fill": "#ffffffff",
+                  "width": 390,
+                  "height": 48,
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 0.5
+                  }
+                },
+                {
+                  "type": "rectangle",
+                  "id": "A2QRN",
+                  "x": 0,
+                  "y": 47.5,
+                  "name": "Rectangle 81",
+                  "fill": "#dbdbdbff",
+                  "width": 390,
+                  "height": 0.5,
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1
+                  }
+                },
+                {
+                  "type": "frame",
+                  "id": "I69MK",
+                  "x": 354,
+                  "y": 12,
+                  "name": "icon- more-vertical",
+                  "clip": true,
+                  "width": 24,
+                  "height": 24,
+                  "fill": {
+                    "type": "color",
+                    "color": "#ffffffff",
+                    "enabled": false
+                  },
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1
+                  },
+                  "layout": "none",
+                  "children": [
+                    {
+                      "type": "path",
+                      "id": "iayXL",
+                      "x": 11,
+                      "y": 11,
+                      "name": "Vector",
+                      "geometry": "M2 1c0 0.55228-0.44772 1-1 1-0.55228 0-1-0.44772-1-1 0-0.55228 0.44772-1 1-1 0.55228 0 1 0.44772 1 1z",
+                      "fill": "#767676ff",
+                      "width": 2,
+                      "height": 2,
+                      "stroke": {
+                        "align": "center",
+                        "thickness": 1,
+                        "join": "round",
+                        "cap": "round",
+                        "fill": "#767676ff"
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "id": "K5Yip",
+                      "x": 11,
+                      "y": 4,
+                      "name": "Vector",
+                      "geometry": "M2 1c0 0.55228-0.44772 1-1 1-0.55228 0-1-0.44772-1-1 0-0.55228 0.44772-1 1-1 0.55228 0 1 0.44772 1 1z",
+                      "fill": "#767676ff",
+                      "width": 2,
+                      "height": 2,
+                      "stroke": {
+                        "align": "center",
+                        "thickness": 1,
+                        "join": "round",
+                        "cap": "round",
+                        "fill": "#767676ff"
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "id": "ZV59H",
+                      "x": 11,
+                      "y": 18,
+                      "name": "Vector",
+                      "geometry": "M2 1c0 0.55228-0.44772 1-1 1-0.55228 0-1-0.44772-1-1 0-0.55228 0.44772-1 1-1 0.55228 0 1 0.44772 1 1z",
+                      "fill": "#767676ff",
+                      "width": 2,
+                      "height": 2,
+                      "stroke": {
+                        "align": "center",
+                        "thickness": 1,
+                        "join": "round",
+                        "cap": "round",
+                        "fill": "#767676ff"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "rEt7V",
+                  "x": 16,
+                  "y": 13,
+                  "name": "icon-arrow-left",
+                  "clip": true,
+                  "width": 22,
+                  "height": 22,
+                  "fill": {
+                    "type": "color",
+                    "color": "#767676ff",
+                    "enabled": false
+                  },
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1
+                  },
+                  "layout": "none",
+                  "children": [
+                    {
+                      "type": "path",
+                      "id": "fkKGh",
+                      "x": 4.5833330154418945,
+                      "y": 11,
+                      "name": "Vector",
+                      "geometry": "M14 0l-14 0",
+                      "width": 12.833334922790527,
+                      "height": 0,
+                      "stroke": {
+                        "align": "center",
+                        "thickness": 2,
+                        "join": "round",
+                        "cap": "round",
+                        "fill": "#000000ff"
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "id": "9hUv9",
+                      "x": 4.5833330154418945,
+                      "y": 4.5833330154418945,
+                      "name": "Vector",
+                      "geometry": "M7 14l-7-7 7-7",
+                      "width": 6.4166669845581055,
+                      "height": 12.833334922790527,
+                      "stroke": {
+                        "align": "center",
+                        "thickness": 2,
+                        "join": "round",
+                        "cap": "round",
+                        "fill": "#000000ff"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "rectangle",
+          "id": "ymfyx",
+          "x": 180,
+          "y": 953,
+          "width": 390,
+          "height": 84,
+          "stroke": {
+            "align": "inside",
+            "thickness": 5,
+            "fill": "#fc0c0cff"
+          }
+        }
+      ]
+    }
+  ]
+}

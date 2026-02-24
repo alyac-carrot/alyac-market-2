@@ -1,9 +1,10 @@
 import { useRef, useState } from 'react';
+
 // import { useNavigate } from 'react-router-dom';
 import { Image as ImageIcon, X } from 'lucide-react';
-import { UploadHeader } from '@/widgets/header/ui/UploadHeader';
 
 import { Button } from '@/shared/ui/button';
+import { UploadHeader } from '@/widgets/header/ui/UploadHeader';
 
 export function UploadPage() {
   // const navigate = useNavigate();
@@ -59,7 +60,7 @@ export function UploadPage() {
           업로드
         </Button>
       </header> */}
-      
+
       <UploadHeader canUpload={hasContent} onUpload={() => alert('업로드됨')} isLoading={false} />
 
       {/* ─ main ─ */}
@@ -78,7 +79,7 @@ export function UploadPage() {
               value={text}
               onChange={(e) => setText(e.target.value)}
               placeholder="게시글 입력하기."
-              className="min-h-[500px] w-full resize-none border-0 text-base outline-none placeholder:text-gray-400 focus:ring-0"
+              className="min-h-125 w-full resize-none border-0 text-base outline-none placeholder:text-gray-400 focus:ring-0"
             />
 
             {/* image previews (2-column grid) */}
