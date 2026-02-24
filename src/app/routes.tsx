@@ -6,6 +6,7 @@ import { ChatRoomPage } from '@/pages/chat/room';
 import { HomePage } from '@/pages/home';
 import { SearchPage } from '@/pages/home/search';
 import { PostPage } from '@/pages/post';
+import { ProfilePage } from '@/pages/profile';
 import { UploadPage } from '@/pages/upload';
 
 export const router = createBrowserRouter([
@@ -21,6 +22,9 @@ export const router = createBrowserRouter([
       { path: 'chat/:roomId', element: <ChatRoomPage /> },
 
       { path: 'upload', element: <UploadPage /> },
+
+      { path: 'profile', element: <ProfilePage /> },
+      { path: 'profile/:userId', element: <ProfilePage /> },
     ],
   },
   {
