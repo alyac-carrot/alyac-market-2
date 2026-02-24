@@ -83,7 +83,7 @@ export function ChatRoomPage() {
                 <div
                   className={`overflow-hidden rounded-2xl ${m.from === 'me' ? '' : 'border bg-white'}`}
                 >
-                  <img src={m.imageUrl} alt="첨부" className="h-auto w-[260px]" />
+                  <img src={m.imageUrl} alt="첨부" className="h-auto w-65" />
                 </div>
               )}
 

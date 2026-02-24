@@ -16,3 +16,23 @@ export interface Post {
 export interface GetPostsResponse {
   posts: Post[];
 }
+
+export interface CreatePostRequest {
+  content: string;
+  image?: string;
+}
+
+export interface CreatePostResponse {
+  id: string;
+  content: string;
+  image?: string;
+  createdAt: string;
+  author: {
+    accountname: string;
+    username: string;
+    image: string;
+  };
+  commentCount: number;
+  heartCount: number;
+  hearted: boolean;
+}
