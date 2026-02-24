@@ -22,7 +22,6 @@ export const router = createBrowserRouter([
       { path: 'chat/:roomId', element: <ChatRoomPage /> },
 
       { path: 'upload', element: <UploadPage /> },
-
       { path: 'profile', element: <ProfilePage /> },
       { path: 'profile/:userId', element: <ProfilePage /> },
     ],
