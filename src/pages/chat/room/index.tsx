@@ -2,8 +2,6 @@ import { useMemo, useRef, useState } from 'react';
 
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { ArrowLeftIcon } from '@/shared/ui/icons';
-
 type Msg = {
   id: string;
   from: 'me' | 'them';
@@ -56,29 +54,7 @@ export function ChatRoomPage() {
   const grouped = useMemo(() => messages, [messages]);
 
   return (
-    <div className="flex min-h-[calc(100vh-56px-64px)] flex-col">
-      {/* 상단바 */}
-      <div className="flex items-center gap-2 border-b px-4 py-3">
-        <button
-          type="button"
-          onClick={() => nav(-1)}
-          className="grid h-10 w-10 place-items-center rounded-full text-zinc-700 active:scale-95"
-        >
-          <ArrowLeftIcon className="h-6 w-6" />
-        </button>
-
-        <p className="text-sm font-semibold text-zinc-900">{title}</p>
-
-        <button
-          type="button"
-          onClick={() => setOpenSheet(true)}
-          className="ml-auto text-xl leading-none text-zinc-500"
-          aria-label="더보기"
-        >
-          ⋮
-        </button>
-      </div>
-
+    <div className="flex min-h-screen flex-col">
       {/* 메시지 리스트 */}
       <div ref={listRef} className="flex-1 space-y-3 overflow-auto bg-zinc-50 px-4 py-4">
         {grouped.map((m) => (
