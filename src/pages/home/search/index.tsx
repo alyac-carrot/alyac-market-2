@@ -29,8 +29,7 @@ export function SearchPage() {
 
     return MOCK_USERS.filter((u) => {
       return (
-        u.name.toLowerCase().includes(keyword) ||
-        u.handle.toLowerCase().includes(keyword) ||
+        u.name.toLowerCase().includes(keyword) || //u.handle.toLowerCase().includes(keyword)
         u.tag.toLowerCase().includes(keyword)
       );
     });
