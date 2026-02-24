@@ -10,11 +10,7 @@ export function Header() {
     return <SearchHeader />;
   }
 
-  if (pathname.startsWith('/post')) { // 임시
-    return <AppHeader />;
-  }
-
-   if (pathname.startsWith('/upload')) {
+  if (pathname.startsWith('/chat')) { 
     return <AppHeader />;
   }
 

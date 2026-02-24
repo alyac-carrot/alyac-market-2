@@ -1,11 +1,12 @@
 import { useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { ArrowLeft, Image as ImageIcon, X } from 'lucide-react';
+// import { useNavigate } from 'react-router-dom';
+import { Image as ImageIcon, X } from 'lucide-react';
+import { UploadHeader } from '@/widgets/header/ui/UploadHeader';
 
 import { Button } from '@/shared/ui/button';
 
 export function UploadPage() {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [text, setText] = useState('');
   const [images, setImages] = useState<string[]>([]);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -39,7 +40,7 @@ export function UploadPage() {
   return (
     <div className="bg-background flex min-h-screen flex-col">
       {/* ─ sticky top nav ─ */}
-      <header className="border-border bg-background sticky top-0 z-10 flex items-center justify-between border-b px-4 py-3">
+      {/* <header className="border-border bg-background sticky top-0 z-10 flex items-center justify-between border-b px-4 py-3">
         <Button
           type="button"
           variant="ghost"
@@ -57,7 +58,9 @@ export function UploadPage() {
         >
           업로드
         </Button>
-      </header>
+      </header> */}
+      
+      <UploadHeader canUpload={hasContent} onUpload={() => alert('업로드됨')} isLoading={false} />
 
       {/* ─ main ─ */}
       <main className="flex-1 px-4 py-4">

@@ -1,4 +1,3 @@
-// src/widgets/header/ui/HeaderShell.tsx
 import type { ReactNode } from 'react';
 
 type HeaderShellProps = {
