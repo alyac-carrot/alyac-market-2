@@ -10,6 +10,7 @@ const HomePage = lazy(() => import('@/pages/home'));
 const ChatRoomPage = lazy(() => import('@/pages/chat/room'));
 const RootLayout = lazy(() => import('@/app/layouts/RootLayout'));
 const ChatListPage = lazy(() => import('@/pages/chat'));
+const NotFoundPage = lazy(() => import('@/pages/not-found/NotFoundPage'));
 
 export const router = createBrowserRouter([
   {
@@ -35,6 +36,8 @@ export const router = createBrowserRouter([
 
       { path: 'post-create', element: <PostPage /> },
       { path: 'post/:postId', element: <PostPage /> },
+
+      { path: '*', element: <NotFoundPage /> },
     ],
   },
 ]);
