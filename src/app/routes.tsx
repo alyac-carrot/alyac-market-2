@@ -2,6 +2,7 @@ import { Suspense, lazy } from 'react';
 
 import { createBrowserRouter } from 'react-router-dom';
 
+import { RootLayout } from '@/app/layouts';
 import { RequireAuth } from '@/entities/auth/lib/RequireAuth';
 
 const SignInPage = lazy(() => import('@/pages/auth/signin'));
@@ -11,7 +12,6 @@ const PostPage = lazy(() => import('@/pages/post/PostPage'));
 const SearchPage = lazy(() => import('@/pages/feed/search'));
 const FeedPage = lazy(() => import('@/pages/feed'));
 const ChatRoomPage = lazy(() => import('@/pages/chat/room'));
-const RootLayout = lazy(() => import('@/app/layouts/RootLayout'));
 const ChatListPage = lazy(() => import('@/pages/chat'));
 const NotFoundPage = lazy(() => import('@/pages/not-found/NotFoundPage'));
 

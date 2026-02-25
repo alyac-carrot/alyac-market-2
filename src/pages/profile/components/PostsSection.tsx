@@ -23,7 +23,7 @@ interface PostsSectionProps {
   onDeletePost: (postId: string) => void;
 }
 
-export function PostsSection({
+export default function PostsSection({
   profile,
   posts,
   viewMode,

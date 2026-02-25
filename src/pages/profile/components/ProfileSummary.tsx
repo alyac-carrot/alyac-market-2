@@ -14,7 +14,7 @@ interface ProfileSummaryProps {
   onCreateProduct: () => void;
 }
 
-export function ProfileSummary({
+export default function ProfileSummary({
   profile,
   isMe,
   isFollowing,

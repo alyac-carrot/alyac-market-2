@@ -5,7 +5,7 @@ import { FeedHeader } from './ui/FeedHeader';
 import { SearchHeader } from './ui/SearchHeader';
 
 export function Header() {
-  const isSearch = useMatch('/search');
+  const isSearch = useMatch('/search/*');
   const isChat = useMatch('/chat/*');
   const isProfile = useMatch('/profile/*');
 
