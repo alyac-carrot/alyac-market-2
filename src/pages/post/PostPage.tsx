@@ -75,7 +75,7 @@ function CommentItem({
 }
 
 /* ── main page ── */
-export function PostPage() {
+export default function PostPage() {
   const navigate = useNavigate();
   const { postId = '1' } = useParams();
   const [commentText, setCommentText] = useState('');

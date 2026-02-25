@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { Button } from '@/shared/ui';
 
-export function HomePage() {
+export default function HomePage() {
   const nav = useNavigate();
 
   return (

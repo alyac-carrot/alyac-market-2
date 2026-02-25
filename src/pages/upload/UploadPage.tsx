@@ -6,7 +6,7 @@ import { Image as ImageIcon, X } from 'lucide-react';
 import { Button } from '@/shared/ui/button';
 import { UploadHeader } from '@/widgets/header/ui/UploadHeader';
 
-export function UploadPage() {
+export default function UploadPage() {
   // const navigate = useNavigate();
   const [text, setText] = useState('');
   const [images, setImages] = useState<string[]>([]);

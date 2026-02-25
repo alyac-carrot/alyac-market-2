@@ -17,7 +17,7 @@ const MOCK_USERS: UserItem[] = [
   { id: '3', name: '보안 닥터스 알약', handle: '@security_alyac', tag: '알약' },
 ];
 
-export function SearchPage() {
+export default function SearchPage() {
   // const nav = useNavigate();
   const { value } = useSearchValue();
 
