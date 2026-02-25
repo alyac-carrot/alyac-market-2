@@ -5,8 +5,8 @@ import { createBrowserRouter } from 'react-router-dom';
 const UploadPage = lazy(() => import('@/pages/upload/UploadPage'));
 const ProfilePage = lazy(() => import('@/pages/profile/ProfilePage'));
 const PostPage = lazy(() => import('@/pages/post/PostPage'));
-const SearchPage = lazy(() => import('@/pages/home/search'));
-const HomePage = lazy(() => import('@/pages/home'));
+const SearchPage = lazy(() => import('@/pages/feed/search'));
+const FeedPage = lazy(() => import('@/pages/feed'));
 const ChatRoomPage = lazy(() => import('@/pages/chat/room'));
 const RootLayout = lazy(() => import('@/app/layouts/RootLayout'));
 const ChatListPage = lazy(() => import('@/pages/chat'));
@@ -24,7 +24,7 @@ export const router = createBrowserRouter([
       </Suspense>
     ),
     children: [
-      { index: true, element: <HomePage /> },
+      { index: true, element: <FeedPage /> },
 
       { path: 'search', element: <SearchPage /> },
 
