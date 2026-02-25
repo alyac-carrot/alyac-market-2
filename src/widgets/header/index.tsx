@@ -1,19 +1,15 @@
-import { useLocation } from 'react-router-dom';
+import { useMatch } from 'react-router-dom';
 
 import { AppHeader } from './ui/AppHeader';
 import { FeedHeader } from './ui/FeedHeader';
 import { SearchHeader } from './ui/SearchHeader';
 
 export function Header() {
-  const { pathname } = useLocation();
+  const isSearch = useMatch('/search');
+  const isChat = useMatch('/chat/*');
+  const isProfile = useMatch('/profile/*');
 
-  if (pathname.startsWith('/search')) {
-    return <SearchHeader />;
-  }
-
-  if (pathname.startsWith('/chat') || pathname.startsWith('/profile')) {
-    return <AppHeader />;
-  }
-
+  if (isSearch) return <SearchHeader />;
+  if (isChat || isProfile) return <AppHeader />;
   return <FeedHeader />;
 }

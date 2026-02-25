@@ -1,13 +1,57 @@
-import { useMatch } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
-import { FooterNav } from './ui/FooterNav';
+import {
+  ChatIcon,
+  ChatIconFill,
+  HomeIcon,
+  HomeIconFill,
+  PostCreateIcon,
+  ProfileIcon,
+  ProfileIconFill,
+} from '@/assets/icon';
 
 export function Footer() {
-  const isUpload = useMatch('/upload/*');
-  const isChatRoom = useMatch('/chat/:roomId');
+  return (
+    <footer className="bg-background fixed right-0 bottom-0 left-0 h-16 border-t">
+      <nav className="mx-auto flex h-full items-center justify-around">
+        <NavLink to="/" className="flex flex-col items-center">
+          {({ isActive }) => (
+            <>
+              {isActive ? <HomeIconFill className="h-6 w-6" /> : <HomeIcon className="h-6 w-6" />}
+              <span className="text-xs">홈</span>
+            </>
+          )}
+        </NavLink>
 
-  const hideFooter = Boolean(isUpload || isChatRoom);
+        <NavLink to="/chat" className="flex flex-col items-center">
+          {({ isActive }) => (
+            <>
+              {isActive ? <ChatIconFill className="h-6 w-6" /> : <ChatIcon className="h-6 w-6" />}
+              <span className="text-xs">채팅</span>
+            </>
+          )}
+        </NavLink>
 
-  if (hideFooter) return null;
-  return <FooterNav />;
+        <NavLink to="/upload" className="flex flex-col items-center">
+          <>
+            <PostCreateIcon className="h-6 w-6" />
+            <span className="text-xs">게시물 작성</span>
+          </>
+        </NavLink>
+
+        <NavLink to="/profile" className="flex flex-col items-center">
+          {({ isActive }) => (
+            <>
+              {isActive ? (
+                <ProfileIconFill className="h-6 w-6" />
+              ) : (
+                <ProfileIcon className="h-6 w-6" />
+              )}
+              <span className="text-xs">프로필</span>
+            </>
+          )}
+        </NavLink>
+      </nav>
+    </footer>
+  );
 }
