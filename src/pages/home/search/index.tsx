@@ -1,15 +1,9 @@
-import { useMemo } from 'react';
+import { useEffect, useState } from 'react';
 
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
+import { type UserItem, searchUsers } from '@/shared/api/users';
 import { useSearchValue } from '@/shared/lib/search/useSearchValue';
-
-type UserItem = {
-  id: string;
-  name: string;
-  handle: string;
-  tag: string;
-};
 
 const MOCK_USERS: UserItem[] = [
   { id: '1', name: '이스트 시큐리티', handle: '@es', tag: '알약' },
@@ -18,22 +12,51 @@ const MOCK_USERS: UserItem[] = [
 ];
 
 export default function SearchPage() {
-  // const nav = useNavigate();
+  const nav = useNavigate();
   const { value } = useSearchValue();
 
   const q = value.trim();
 
-  const results = useMemo(() => {
-    const keyword = q.toLowerCase();
-    if (!keyword) return [];
+  const [results, setResults] = useState<UserItem[]>([]);
+  const [loading, setLoading] = useState(false);
 
-    return MOCK_USERS.filter((u) => {
-      return (
-        u.name.toLowerCase().includes(keyword) ||
-        u.handle.toLowerCase().includes(keyword) ||
-        u.tag.toLowerCase().includes(keyword)
-      );
-    });
+  useEffect(() => {
+    let alive = true;
+
+    const fetchUsers = async () => {
+      if (!q) {
+        setResults([]);
+        return;
+      }
+
+      setLoading(true);
+
+      try {
+        const data = await searchUsers(q);
+        if (!alive) return;
+        setResults(data);
+      } catch {
+        if (!alive) return;
+
+        const keyword = q.toLowerCase();
+        const fallback = MOCK_USERS.filter((u) => {
+          return (
+            u.name.toLowerCase().includes(keyword) || //u.handle.toLowerCase().includes(keyword)
+            u.tag.toLowerCase().includes(keyword)
+          );
+        });
+
+        setResults(fallback);
+      } finally {
+        if (alive) setLoading(false);
+      }
+    };
+
+    fetchUsers();
+
+    return () => {
+      alive = false;
+    };
   }, [q]);
 
   return (
@@ -60,15 +83,17 @@ export default function SearchPage() {
       <div className="mt-4">
         {!q ? (
           <p className="text-sm text-zinc-400">검색어를 입력해보세요.</p>
+        ) : loading ? (
+          <p className="text-sm text-zinc-400">검색 중...</p>
         ) : results.length === 0 ? (
           <p className="text-sm text-zinc-400">검색 결과가 없어요.</p>
         ) : (
-          <ul className="space-y-3">
+          <ul className="space-y-1">
             {results.map((u) => (
               <li
                 key={u.id}
-                className="flex items-center gap-3"
-                // onClick={() => nav(`/profile/${u.id}`)}  // 나중에 프로필로 연결 가능
+                className="flex cursor-pointer items-center gap-3 rounded-xl px-2 py-2 active:bg-zinc-50"
+                onClick={() => nav(`/profile/${u.id}`)}
               >
                 {/* 프로필 이미지 자리(회색 원) */}
                 <div className="h-10 w-10 rounded-full bg-zinc-200" />
