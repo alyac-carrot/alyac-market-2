@@ -7,15 +7,17 @@ import { Header } from '@/widgets/header';
 export default function RootLayout() {
   const isUpload = useMatch('/upload/*');
   const isChatRoom = useMatch('/chat/:roomId');
+  const isSignIn = useMatch('/signin');
 
-  const hideFooter = Boolean(isUpload || isChatRoom);
+  const hideHeader = Boolean(isSignIn);
+  const hideFooter = Boolean(isUpload || isChatRoom || isSignIn);
 
   return (
     <SearchProvider>
       <div className="min-h-screen">
-        <Header />
+        {!hideHeader && <Header />}
 
-        <main className={`pt-16 ${hideFooter ? '' : 'pb-16'}`}>
+        <main className={`${hideHeader ? 'pt-0' : 'pt-16'} ${hideFooter ? '' : 'pb-16'}`}>
           <div className="mx-auto w-full px-4">
             <Outlet />
           </div>
