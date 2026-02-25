@@ -80,13 +80,19 @@ export default function SearchPage() {
         </div>
       </div> */}
       {/* 결과 영역 */}
-      <div className="mt-4">
+      <div className="mt-4 min-h-[calc(100vh-160px)]">
         {!q ? (
-          <p className="text-sm text-zinc-400">검색어를 입력해보세요.</p>
+          <div className="flex min-h-[calc(100vh-160px)] items-center justify-center">
+            <p className="text-sm text-zinc-400">검색어를 입력해보세요.</p>
+          </div>
         ) : loading ? (
-          <p className="text-sm text-zinc-400">검색 중...</p>
+          <div className="flex min-h-[calc(100vh-160px)] items-center justify-center">
+            <p className="text-sm text-zinc-400">검색 중...</p>
+          </div>
         ) : results.length === 0 ? (
-          <p className="text-sm text-zinc-400">검색 결과가 없어요.</p>
+          <div className="flex min-h-[calc(100vh-160px)] items-center justify-center">
+            <p className="text-sm text-zinc-400">검색 결과가 없어요.</p>
+          </div>
         ) : (
           <ul className="space-y-1">
             {results.map((u) => (
@@ -95,7 +101,6 @@ export default function SearchPage() {
                 className="flex cursor-pointer items-center gap-3 rounded-xl px-2 py-2 active:bg-zinc-50"
                 onClick={() => nav(`/profile/${u.id}`)}
               >
-                {/* 프로필 이미지 자리(회색 원) */}
                 <div className="h-10 w-10 rounded-full bg-zinc-200" />
                 <div className="min-w-0 flex-1">
                   <div className="flex items-center gap-2">

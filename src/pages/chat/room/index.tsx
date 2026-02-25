@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 
 import { useNavigate, useParams } from 'react-router-dom';
 
@@ -26,31 +26,42 @@ export default function ChatRoomPage() {
   const [openSheet, setOpenSheet] = useState(false);
   const [input, setInput] = useState('');
 
+  // 예시 프로필 이미지
+  const meAvatarUrl = '/mascot.png';
+  const themAvatarUrl = '/mascot.png';
+  // 예: '/assets/them.png'
+
   const [messages, setMessages] = useState<Msg[]>([
-    {
-      id: 'a',
-      from: 'them',
-      text: '테스트용 말',
-      time: '12:39',
-    },
+    { id: 'a', from: 'them', text: '테스트용 말', time: '12:39' },
     { id: 'b', from: 'them', text: '테스트 확인입니다', time: '12:44' },
     { id: 'c', from: 'me', text: '알겠습니다.', time: '12:50' },
     { id: 'e', from: 'them', text: '사진은 나중에', time: '12:55' },
+    // { id: 'img1', from: 'me', imageUrl: 'https://picsum.photos/300/200', time: '12:56' },
   ]);
 
   const listRef = useRef<HTMLDivElement | null>(null);
-
   const canSend = input.trim().length > 0;
+
+  const scrollToBottom = () => {
+    const el = listRef.current;
+    if (!el) return;
+    el.scrollTo({ top: el.scrollHeight, behavior: 'smooth' });
+  };
 
   const onSend = () => {
     if (!canSend) return;
+
     setMessages((prev) => [
       ...prev,
       { id: String(Date.now()), from: 'me', text: input.trim(), time: '지금' },
     ]);
     setInput('');
-    setTimeout(() => listRef.current?.scrollTo({ top: listRef.current.scrollHeight }), 0);
   };
+
+  // 메시지 추가되면 자동 스크롤
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages.length]);
 
   const grouped = useMemo(() => messages, [messages]);
 
@@ -61,10 +72,18 @@ export default function ChatRoomPage() {
         {grouped.map((m) => (
           <div
             key={m.id}
-            className={`flex ${m.from === 'me' ? 'justify-end' : 'justify-start'} gap-2`}
+            className={`flex items-end gap-2 ${m.from === 'me' ? 'justify-end' : 'justify-start'}`}
           >
-            {m.from === 'them' && <div className="h-9 w-9 rounded-full bg-zinc-200" />}
+            {/*  상대 프로필(왼쪽) */}
+            {m.from === 'them' && (
+              <div className="h-9 w-9 shrink-0 overflow-hidden rounded-full bg-zinc-200">
+                {themAvatarUrl ? (
+                  <img src={themAvatarUrl} alt="them" className="h-full w-full object-cover" />
+                ) : null}
+              </div>
+            )}
 
+            {/* 메시지 박스 */}
             <div className="max-w-[70%]">
               {/* 말풍선 */}
               {m.text && (
@@ -82,18 +101,31 @@ export default function ChatRoomPage() {
               {/* 이미지 메시지 */}
               {m.imageUrl && (
                 <div
-                  className={`overflow-hidden rounded-2xl ${m.from === 'me' ? '' : 'border bg-white'}`}
+                  className={`overflow-hidden rounded-2xl ${
+                    m.from === 'me' ? '' : 'border bg-white'
+                  }`}
                 >
-                  <img src={m.imageUrl} alt="첨부" className="h-auto w-65" />
+                  <img src={m.imageUrl} alt="첨부" className="h-auto w-64" />
                 </div>
               )}
 
               <p
-                className={`mt-1 text-[10px] text-zinc-400 ${m.from === 'me' ? 'text-right' : 'text-left'}`}
+                className={`mt-1 text-[10px] text-zinc-400 ${
+                  m.from === 'me' ? 'text-right' : 'text-left'
+                }`}
               >
                 {m.time}
               </p>
             </div>
+
+            {/* ✅ 내 프로필(오른쪽) */}
+            {m.from === 'me' && (
+              <div className="h-9 w-9 shrink-0 overflow-hidden rounded-full bg-zinc-200">
+                {meAvatarUrl ? (
+                  <img src={meAvatarUrl} alt="me" className="h-full w-full object-cover" />
+                ) : null}
+              </div>
+            )}
           </div>
         ))}
       </div>
@@ -101,6 +133,13 @@ export default function ChatRoomPage() {
       {/* 입력창 */}
       <div className="border-t bg-white px-4 py-3">
         <div className="flex items-center gap-2">
+          {/* ✅ 입력창 왼쪽 내 프로필 */}
+          <div className="h-9 w-9 shrink-0 overflow-hidden rounded-full bg-zinc-200">
+            {meAvatarUrl ? (
+              <img src={meAvatarUrl} alt="me" className="h-full w-full object-cover" />
+            ) : null}
+          </div>
+
           <input
             value={input}
             onChange={(e) => setInput(e.target.value)}
@@ -110,11 +149,16 @@ export default function ChatRoomPage() {
               if (e.key === 'Enter') onSend();
             }}
           />
+
           <button
             type="button"
             onClick={onSend}
             disabled={!canSend}
-            className={`text-sm font-semibold ${canSend ? 'text-green-600' : 'text-zinc-300'}`}
+            className={`text-sm font-semibold transition-transform duration-150 ${
+              canSend
+                ? 'cursor-pointer text-green-600 active:scale-90'
+                : 'cursor-not-allowed text-zinc-300'
+            } `}
           >
             전송
           </button>
