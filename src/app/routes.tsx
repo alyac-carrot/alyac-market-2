@@ -8,8 +8,8 @@ const SignInPage = lazy(() => import('@/pages/auth/signin'));
 const UploadPage = lazy(() => import('@/pages/upload/UploadPage'));
 const ProfilePage = lazy(() => import('@/pages/profile/ProfilePage'));
 const PostPage = lazy(() => import('@/pages/post/PostPage'));
-const SearchPage = lazy(() => import('@/pages/home/search'));
-const HomePage = lazy(() => import('@/pages/home'));
+const SearchPage = lazy(() => import('@/pages/feed/search'));
+const FeedPage = lazy(() => import('@/pages/feed'));
 const ChatRoomPage = lazy(() => import('@/pages/chat/room'));
 const RootLayout = lazy(() => import('@/app/layouts/RootLayout'));
 const ChatListPage = lazy(() => import('@/pages/chat'));
@@ -31,7 +31,7 @@ export const router = createBrowserRouter([
       {
         element: <RequireAuth />,
         children: [
-          { path: 'feed', element: <HomePage /> },
+          { path: 'feed', element: <FeedPage /> },
           { path: 'search', element: <SearchPage /> },
 
           { path: 'chat', element: <ChatListPage /> },
