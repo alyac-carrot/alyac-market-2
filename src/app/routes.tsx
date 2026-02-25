@@ -15,7 +15,9 @@ export const router = createBrowserRouter([
   {
     path: '/',
     element: (
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense
+        fallback={<div className="flex h-screen items-center justify-center">Loading...</div>}
+      >
         <RootLayout />
       </Suspense>
     ),
