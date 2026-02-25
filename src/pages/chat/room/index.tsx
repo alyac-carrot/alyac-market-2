@@ -16,10 +16,11 @@ const ROOM_TITLE: Record<string, string> = {
   '3': '보안 닥터스 알약',
 };
 
-export function ChatRoomPage() {
+export default function ChatRoomPage() {
   const nav = useNavigate();
   const { roomId = '1' } = useParams();
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const title = ROOM_TITLE[roomId] ?? '채팅방';
 
   const [openSheet, setOpenSheet] = useState(false);

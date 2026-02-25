@@ -20,7 +20,7 @@ const MOCK_CHATS: ChatItem[] = [
   { id: '3', name: '보안 닥터스 알약', lastMessage: '배고픔', date: '2020.10.25' },
 ];
 
-export function ChatListPage() {
+export default function ChatListPage() {
   const nav = useNavigate();
 
   return (

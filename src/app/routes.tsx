@@ -1,18 +1,24 @@
+import { Suspense, lazy } from 'react';
+
 import { createBrowserRouter } from 'react-router-dom';
 
-import { RootLayout } from '@/app/layouts/RootLayout';
-import { ChatListPage } from '@/pages/chat';
-import { ChatRoomPage } from '@/pages/chat/room';
-import { HomePage } from '@/pages/home';
-import { SearchPage } from '@/pages/home/search';
-import { PostPage } from '@/pages/post';
-import { ProfilePage } from '@/pages/profile';
-import { UploadPage } from '@/pages/upload';
+const UploadPage = lazy(() => import('@/pages/upload/UploadPage'));
+const ProfilePage = lazy(() => import('@/pages/profile/ProfilePage'));
+const PostPage = lazy(() => import('@/pages/post/PostPage'));
+const SearchPage = lazy(() => import('@/pages/home/search'));
+const HomePage = lazy(() => import('@/pages/home'));
+const ChatRoomPage = lazy(() => import('@/pages/chat/room'));
+const RootLayout = lazy(() => import('@/app/layouts/RootLayout'));
+const ChatListPage = lazy(() => import('@/pages/chat'));
 
 export const router = createBrowserRouter([
   {
     path: '/',
-    element: <RootLayout />,
+    element: (
+      <Suspense fallback={<div>Loading...</div>}>
+        <RootLayout />
+      </Suspense>
+    ),
     children: [
       { index: true, element: <HomePage /> },
 
@@ -24,14 +30,9 @@ export const router = createBrowserRouter([
       { path: 'upload', element: <UploadPage /> },
       { path: 'profile', element: <ProfilePage /> },
       { path: 'profile/:userId', element: <ProfilePage /> },
+
+      { path: 'post-create', element: <PostPage /> },
+      { path: 'post/:postId', element: <PostPage /> },
     ],
-  },
-  {
-    path: '/post-create',
-    element: <PostPage />,
-  },
-  {
-    path: '/post/:postId',
-    element: <PostPage />,
   },
 ]);
