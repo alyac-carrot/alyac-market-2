@@ -1,4 +1,4 @@
-import { Suspense, lazy } from 'react';
+import { lazy } from 'react';
 
 import { createBrowserRouter } from 'react-router-dom';
 
@@ -18,13 +18,7 @@ const NotFoundPage = lazy(() => import('@/pages/not-found/NotFoundPage'));
 export const router = createBrowserRouter([
   {
     path: '/',
-    element: (
-      <Suspense
-        fallback={<div className="flex h-screen items-center justify-center">Loading...</div>}
-      >
-        <RootLayout />
-      </Suspense>
-    ),
+    element: <RootLayout />,
     children: [
       { index: true, element: <SignInPage /> },
       //  { path: 'signin', element: <SignInPage /> },
