@@ -8,10 +8,9 @@ export default function RootLayout() {
   const isUpload = useMatch('/upload/*');
   const isChatRoom = useMatch('/chat/:roomId');
   const isSignIn = useMatch('/signin');
-  const isNotFound = useMatch('*');
 
-  const hideHeader = Boolean(isSignIn || isNotFound);
-  const hideFooter = Boolean(isUpload || isChatRoom || isSignIn || isNotFound);
+  const hideHeader = Boolean(isSignIn);
+  const hideFooter = Boolean(isUpload || isChatRoom || isSignIn);
 
   return (
     <SearchProvider>
