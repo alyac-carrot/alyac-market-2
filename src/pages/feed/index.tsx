@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { Button } from '@/shared/ui';
 
-export default function HomePage() {
+export default function FeedPage() {
   const nav = useNavigate();
 
   return (
