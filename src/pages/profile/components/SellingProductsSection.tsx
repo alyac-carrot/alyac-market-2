@@ -9,7 +9,10 @@ function formatKRW(n: number) {
   return new Intl.NumberFormat('ko-KR').format(n) + '원';
 }
 
-export function SellingProductsSection({ products, onProductClick }: SellingProductsSectionProps) {
+export default function SellingProductsSection({
+  products,
+  onProductClick,
+}: SellingProductsSectionProps) {
   return (
     <>
       <section className="mx-auto max-w-240 px-4 py-6">

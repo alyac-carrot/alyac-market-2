@@ -11,9 +11,7 @@ import {
   AlertDialogTitle,
 } from '@/shared/ui/alert-dialog';
 
-import { PostsSection } from './components/PostsSection';
-import { ProfileSummary } from './components/ProfileSummary';
-import { SellingProductsSection } from './components/SellingProductsSection';
+import { PostsSection, ProfileSummary, SellingProductsSection } from './components';
 import type { Post, PostViewMode, Product, Profile } from './model/types';
 
 export default function ProfilePage() {

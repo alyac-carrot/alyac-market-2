@@ -14,7 +14,7 @@ export function Footer() {
   return (
     <footer className="bg-background fixed right-0 bottom-0 left-0 h-16 border-t">
       <nav className="mx-auto flex h-full items-center justify-around">
-        <NavLink to="/" className="flex flex-col items-center">
+        <NavLink to="/feed" className="flex flex-col items-center">
           {({ isActive }) => (
             <>
               {isActive ? <HomeIconFill className="h-6 w-6" /> : <HomeIcon className="h-6 w-6" />}
