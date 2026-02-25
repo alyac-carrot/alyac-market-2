@@ -1,3 +1,5 @@
+import { Suspense } from 'react';
+
 import { Outlet, useMatch } from 'react-router-dom';
 
 import { SearchProvider } from '@/shared/lib/search/SearchProvider';
@@ -20,7 +22,11 @@ export default function RootLayout() {
 
       <main className={`${hideHeader ? 'pt-0' : 'pt-16'} ${hideFooter ? '' : 'pb-16'}`}>
         <div className="mx-auto w-full px-4">
-          <Outlet />
+          <Suspense
+            fallback={<div className="flex h-screen items-center justify-center">Loading...</div>}
+          >
+            <Outlet />
+          </Suspense>
         </div>
       </main>
 
