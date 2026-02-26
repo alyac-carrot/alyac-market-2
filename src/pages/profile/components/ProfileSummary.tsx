@@ -1,5 +1,4 @@
-import { Avatar } from '@/shared/ui/Avatar';
-import { Button } from '@/shared/ui/button';
+import { Avatar, Button } from '@/shared/ui';
 
 import type { Profile } from '../model/types';
 

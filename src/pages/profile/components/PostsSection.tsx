@@ -4,14 +4,14 @@ import { EllipsisVertical, Heart, MessageCircle } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { PostAlbumOff, PostAlbumOn, PostListOff, PostListOn } from '@/assets/icon';
-import { Avatar } from '@/shared/ui/Avatar';
-import { Button } from '@/shared/ui/button';
 import {
+  Avatar,
+  Button,
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@/shared/ui/dropdown-menu';
+} from '@/shared/ui';
 
 import type { Post, PostViewMode, Profile } from '../model/types';
 

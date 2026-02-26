@@ -5,26 +5,33 @@ export type SignInBody = {
   password: string;
 };
 
-export type SignUpBody = {
-  email: string;
-  password: string;
+export type User = {
+  _id: string;
   username: string;
+  email: string;
   accountname: string;
+  intro: string;
+  image: string;
+  following: string[];
+  follower: string[];
+  followerCount: number;
+  followingCount: number;
+};
+
+export type SignInResponse = {
+  user: User & {
+    accessToken: string;
+    refreshToken: string;
+  };
+};
+
+export type MyInfoResponse = {
+  user: User;
 };
 
 export const signIn = (body: SignInBody) =>
-  axiosInstance.post('/api/user/signin', {
+  axiosInstance.post<SignInResponse>('/api/user/signin', {
     user: body,
   });
 
-export const signUp = (body: SignUpBody) =>
-  axiosInstance.post('/api/user', {
-    user: body,
-  });
-
-export const getMyInfo = () => axiosInstance.get('/api/user/myinfo');
-
-export const checkEmail = (email: string) => axiosInstance.post('/api/user/emailvalid', { email });
-
-export const checkAccountName = (accountname: string) =>
-  axiosInstance.post('/api/user/accountnamevalid', { accountname });
+export const getMyInfo = () => axiosInstance.get<MyInfoResponse>('/api/user/myinfo');

@@ -9,7 +9,7 @@ import {
   AlertDialogContent,
   AlertDialogDescription,
   AlertDialogTitle,
-} from '@/shared/ui/alert-dialog';
+} from '@/shared/ui';
 
 import { PostsSection, ProfileSummary, SellingProductsSection } from './components';
 import type { Post, PostViewMode, Product, Profile } from './model/types';
