@@ -9,13 +9,10 @@ export function useLogout() {
   const queryClient = useQueryClient();
 
   const logout = () => {
-    // 1️⃣ 토큰 삭제
     removeToken();
 
-    // 2️⃣ me 캐시 제거
     queryClient.removeQueries({ queryKey: queryKeys.me });
 
-    // 3️⃣ 로그인 페이지 이동
     navigate('/', { replace: true });
   };
 
