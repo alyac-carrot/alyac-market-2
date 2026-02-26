@@ -3,7 +3,7 @@ import { lazy } from 'react';
 import { createBrowserRouter } from 'react-router-dom';
 
 import { RootLayout } from '@/app/layouts';
-import { RequireAuth } from '@/entities/auth/lib/RequireAuth';
+import { RequireAuth } from '@/entities/auth';
 
 const SignInPage = lazy(() => import('@/pages/auth/signin'));
 const UploadPage = lazy(() => import('@/pages/upload/UploadPage'));
