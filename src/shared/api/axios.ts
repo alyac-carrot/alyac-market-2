@@ -56,7 +56,7 @@ axiosInstance.interceptors.response.use(
       if (!refreshToken) {
         // Refresh token 없으면 로그아웃
         removeToken();
-        window.location.href = '/signin';
+        window.location.href = '/auth/signin';
         return Promise.reject(error);
       }
 
@@ -72,7 +72,7 @@ axiosInstance.interceptors.response.use(
           },
         );
 
-        const { token: newToken, refreshToken: newRefreshToken } = response.data;
+        const { accessToken: newToken, refreshToken: newRefreshToken } = response.data;
         saveToken(newToken, newRefreshToken);
 
         // 대기 중인 요청들에 새 토큰 전달
@@ -84,7 +84,7 @@ axiosInstance.interceptors.response.use(
       } catch (refreshError) {
         // Refresh 실패 시 로그아웃
         removeToken();
-        window.location.href = '/signin';
+        window.location.href = '/auth/signin';
         return Promise.reject(refreshError);
       } finally {
         isRefreshing = false;

@@ -2,11 +2,13 @@ import { Suspense } from 'react';
 
 import { Outlet, useMatch } from 'react-router-dom';
 
+import { useMeQuery } from '@/entities/user';
 import { SearchProvider } from '@/shared/lib/search/SearchProvider';
 import { Footer } from '@/widgets/footer';
 import { Header } from '@/widgets/header';
 
 export default function RootLayout() {
+  useMeQuery();
   const isUpload = useMatch('/upload/*');
   const isChatRoom = useMatch('/chat/:roomId');
   const isSignIn = useMatch('/');
