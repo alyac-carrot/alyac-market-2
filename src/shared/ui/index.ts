@@ -6,6 +6,8 @@ export { Button, buttonVariants } from './button';
 
 export * from './dropdown-menu';
 
+export * from './popover';
+
 export { Input } from './input';
 
 export { Skeleton } from './skeleton';
