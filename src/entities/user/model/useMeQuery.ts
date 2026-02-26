@@ -1,8 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { type MyInfoResponse, getMyInfo } from '@/entities/auth/api/authApi';
 import { getToken } from '@/entities/auth/lib/token';
 import { queryKeys } from '@/shared/lib';
+
+import { getMyInfo } from '../api/userApi';
+import type { MyInfoResponse } from './types';
 
 export function useMeQuery() {
   const hasToken = !!getToken();

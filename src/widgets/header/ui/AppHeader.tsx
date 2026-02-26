@@ -1,6 +1,7 @@
 import { ArrowLeft, Monitor, Moon, MoreVertical, Sun } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
+import { useLogout } from '@/entities/auth/model/useLogout';
 import { useTheme } from '@/shared/lib/';
 import { Button, Popover, PopoverContent, PopoverTrigger } from '@/shared/ui';
 
@@ -8,6 +9,7 @@ import { HeaderShell } from './HeaderShell';
 
 export function AppHeader() {
   const navigate = useNavigate();
+  const logout = useLogout();
 
   const { theme, label, toggleTheme } = useTheme();
 
@@ -56,7 +58,7 @@ export function AppHeader() {
 
               <button
                 type="button"
-                onClick={() => navigate('/', { replace: true })}
+                onClick={logout}
                 className="text-foreground inline-flex w-full px-4 py-3 text-sm"
               >
                 로그아웃
