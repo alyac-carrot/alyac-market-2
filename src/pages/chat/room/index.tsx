@@ -68,7 +68,7 @@ export default function ChatRoomPage() {
   return (
     <div className="flex min-h-screen flex-col">
       {/* 메시지 리스트 */}
-      <div ref={listRef} className="flex-1 space-y-3 overflow-auto bg-zinc-50 px-4 py-4">
+      <div ref={listRef} className="bg-background flex-1 space-y-3 overflow-auto px-4 py-4">
         {grouped.map((m) => (
           <div
             key={m.id}
@@ -76,7 +76,7 @@ export default function ChatRoomPage() {
           >
             {/*  상대 프로필(왼쪽) */}
             {m.from === 'them' && (
-              <div className="h-9 w-9 shrink-0 overflow-hidden rounded-full bg-zinc-200">
+              <div className="bg-muted h-9 w-9 shrink-0 overflow-hidden rounded-full">
                 {themAvatarUrl ? (
                   <img src={themAvatarUrl} alt="them" className="h-full w-full object-cover" />
                 ) : null}
@@ -91,7 +91,7 @@ export default function ChatRoomPage() {
                   className={`rounded-2xl px-3 py-2 text-sm ${
                     m.from === 'me'
                       ? 'rounded-br-md bg-green-500 text-white'
-                      : 'rounded-bl-md border bg-white text-zinc-900'
+                      : 'bg-muted text-foreground rounded-bl-md border'
                   }`}
                 >
                   {m.text}
@@ -120,7 +120,7 @@ export default function ChatRoomPage() {
 
             {/* ✅ 내 프로필(오른쪽) */}
             {m.from === 'me' && (
-              <div className="h-9 w-9 shrink-0 overflow-hidden rounded-full bg-zinc-200">
+              <div className="bg-muted h-9 w-9 shrink-0 overflow-hidden rounded-full">
                 {meAvatarUrl ? (
                   <img src={meAvatarUrl} alt="me" className="h-full w-full object-cover" />
                 ) : null}
@@ -131,10 +131,10 @@ export default function ChatRoomPage() {
       </div>
 
       {/* 입력창 */}
-      <div className="border-t bg-white px-4 py-3">
+      <div className="border-border bg-card border-t px-4 py-3">
         <div className="flex items-center gap-2">
           {/* ✅ 입력창 왼쪽 내 프로필 */}
-          <div className="h-9 w-9 shrink-0 overflow-hidden rounded-full bg-zinc-200">
+          <div className="bg-muted h-9 w-9 shrink-0 overflow-hidden rounded-full">
             {meAvatarUrl ? (
               <img src={meAvatarUrl} alt="me" className="h-full w-full object-cover" />
             ) : null}
@@ -144,7 +144,7 @@ export default function ChatRoomPage() {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="메시지 입력하기..."
-            className="h-11 flex-1 rounded-full bg-zinc-100 px-5 text-sm outline-none focus:bg-white focus:ring-2 focus:ring-blue-500"
+            className="bg-muted h-11 flex-1 rounded-full px-5 text-sm outline-none focus:ring-2 focus:ring-blue-500"
             onKeyDown={(e) => {
               if (e.key === 'Enter') onSend();
             }}
@@ -157,7 +157,7 @@ export default function ChatRoomPage() {
             className={`text-sm font-semibold transition-transform duration-150 ${
               canSend
                 ? 'cursor-pointer text-green-600 active:scale-90'
-                : 'cursor-not-allowed text-zinc-300'
+                : 'text-muted-foreground cursor-not-allowed'
             } `}
           >
             전송
@@ -173,10 +173,10 @@ export default function ChatRoomPage() {
             onClick={() => setOpenSheet(false)}
             aria-label="닫기"
           />
-          <div className="absolute right-0 bottom-0 left-0 rounded-t-2xl bg-white p-4">
-            <div className="mx-auto mb-3 h-1.5 w-12 rounded-full bg-zinc-200" />
+          <div className="bg-card absolute right-0 bottom-0 left-0 rounded-t-2xl p-4">
+            <div className="bg-muted mx-auto mb-3 h-1.5 w-12 rounded-full" />
             <button
-              className="w-full rounded-xl py-3 text-left text-sm font-semibold text-zinc-900"
+              className="text-foreground w-full rounded-xl py-3 text-left text-sm font-semibold"
               onClick={() => {
                 setOpenSheet(false);
                 nav('/chat');
