@@ -6,7 +6,7 @@ import { useGetUserPosts } from '@/entities/post/hooks/useGetUserPosts';
 import { useUserProductsQuery } from '@/entities/product';
 import { useFollowMutation, useProfileQuery } from '@/entities/profile';
 import { useMeQuery } from '@/entities/user';
-import { cn } from '@/shared/lib/';
+import { cn, pickFirstImage, toImageUrl } from '@/shared/lib/';
 import {
   AlertDialog,
   AlertDialogCancel,
@@ -15,23 +15,27 @@ import {
   AlertDialogTitle,
 } from '@/shared/ui';
 
-import { PostsSection, ProfileSummary, SellingProductsSection } from './components';
-import type { Post, PostViewMode, Product, Profile } from './model/types';
+import {
+  ProfilePostsWidget,
+  ProfileProductsWidget,
+  ProfileSummaryWidget,
+} from '../../widgets/profile';
+import type { Post, PostViewMode, Product, Profile } from '../../widgets/profile/model/types';
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+// const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
-function toImageUrl(path?: string) {
-  const trimmed = path?.trim();
-  if (!trimmed) return '';
-  if (trimmed.startsWith('http://') || trimmed.startsWith('https://')) return trimmed;
-  return `${API_BASE_URL}/${trimmed.replace(/^\//, '')}`;
-}
+// function toImageUrl(path?: string) {
+//   const trimmed = path?.trim();
+//   if (!trimmed) return '';
+//   if (trimmed.startsWith('http://') || trimmed.startsWith('https://')) return trimmed;
+//   return `${API_BASE_URL}/${trimmed.replace(/^\//, '')}`;
+// }
 
-function pickFirstImage(paths?: string) {
-  const trimmed = paths?.trim();
-  if (!trimmed) return '';
-  return trimmed.split(',')[0]?.trim() ?? '';
-}
+// function pickFirstImage(paths?: string) {
+//   const trimmed = paths?.trim();
+//   if (!trimmed) return '';
+//   return trimmed.split(',')[0]?.trim() ?? '';
+// }
 
 export default function ProfilePage() {
   const navigate = useNavigate();
@@ -129,7 +133,7 @@ export default function ProfilePage() {
 
   return (
     <div className="w-full">
-      <ProfileSummary
+      <ProfileSummaryWidget
         profile={profile}
         isMe={isMe}
         isFollowing={isFollowing}
@@ -143,9 +147,9 @@ export default function ProfilePage() {
         onCreateProduct={goCreateProduct}
       />
 
-      <SellingProductsSection products={sellingProducts} onProductClick={goProductDetail} />
+      <ProfileProductsWidget products={sellingProducts} onProductClick={goProductDetail} />
 
-      <PostsSection
+      <ProfilePostsWidget
         profile={profile}
         posts={posts}
         viewMode={postViewMode}
