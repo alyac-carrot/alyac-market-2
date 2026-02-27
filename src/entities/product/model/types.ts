@@ -1,4 +1,4 @@
-export interface ProductAuthor {
+export type ProductAuthor = {
   _id: string;
   username: string;
   email: string;
@@ -9,20 +9,20 @@ export interface ProductAuthor {
   follower: string[];
   followerCount: number;
   followingCount: number;
-}
+};
 
-export interface UserProduct {
+export type Product = {
   id: string;
   itemName: string;
   price: number;
   link: string;
-  itemImage: string; // "uploadFiles/xxx.png"
+  itemImage: string;
   authorId: string;
   createdAt: string;
   author: ProductAuthor;
-}
+};
 
-export interface GetUserProductsResponse {
+export type GetUserProductsResponse = {
   count: number;
-  product: UserProduct[];
-}
+  product: Product[];
+};

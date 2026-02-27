@@ -9,7 +9,7 @@ function formatKRW(n: number) {
   return new Intl.NumberFormat('ko-KR').format(n) + '원';
 }
 
-export default function SellingProductsSection({
+export default function ProfileProductsWidget({
   products,
   onProductClick,
 }: SellingProductsSectionProps) {

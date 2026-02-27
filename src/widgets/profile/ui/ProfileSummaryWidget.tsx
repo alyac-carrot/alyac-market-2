@@ -13,7 +13,7 @@ interface ProfileSummaryProps {
   onCreateProduct: () => void;
 }
 
-export default function ProfileSummary({
+export default function ProfileSummaryWidget({
   profile,
   isMe,
   isFollowing,
