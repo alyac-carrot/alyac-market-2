@@ -2,6 +2,10 @@ import { useMemo, useState } from 'react';
 
 import { useNavigate, useParams } from 'react-router-dom';
 
+import { useGetUserPosts } from '@/entities/post/hooks/useGetUserPosts';
+import { useUserProductsQuery } from '@/entities/product';
+import { useFollowMutation, useProfileQuery } from '@/entities/profile';
+import { useMeQuery } from '@/entities/user';
 import { cn } from '@/shared/lib/';
 import {
   AlertDialog,
@@ -14,67 +18,107 @@ import {
 import { PostsSection, ProfileSummary, SellingProductsSection } from './components';
 import type { Post, PostViewMode, Product, Profile } from './model/types';
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
+function toImageUrl(path?: string) {
+  const trimmed = path?.trim();
+  if (!trimmed) return '';
+  if (trimmed.startsWith('http://') || trimmed.startsWith('https://')) return trimmed;
+  return `${API_BASE_URL}/${trimmed.replace(/^\//, '')}`;
+}
+
+function pickFirstImage(paths?: string) {
+  const trimmed = paths?.trim();
+  if (!trimmed) return '';
+  return trimmed.split(',')[0]?.trim() ?? '';
+}
+
 export default function ProfilePage() {
   const navigate = useNavigate();
   const params = useParams<{ userId?: string }>();
 
-  const isMe = !params.userId;
+  const accountnameFromParam = params.userId;
+  const isMeByRoute = !accountnameFromParam;
 
-  const profile: Profile = useMemo(
-    () => ({
-      id: params.userId ?? 'me',
-      nickname: isMe ? '내프로필' : '타유저프로필',
-      handle: isMe ? '@myprofile' : '@userprofile',
-      bio: isMe ? '설명란' : '설명란',
-      avatarUrl: '',
-      followersCount: isMe ? 4 : 5,
-      followingsCount: isMe ? 1 : 2,
-    }),
-    [isMe, params.userId],
-  );
+  const meQuery = useMeQuery();
 
-  const [isFollowing, setIsFollowing] = useState(false);
+  const targetAccountname = accountnameFromParam ?? meQuery.data?.user.accountname;
+
+  const profileQuery = useProfileQuery(targetAccountname);
+  const followMutation = useFollowMutation(targetAccountname ?? '');
+
+  const productsQuery = useUserProductsQuery(targetAccountname);
+
+  const userPostsQuery = useGetUserPosts(targetAccountname);
+
   const [postViewMode, setPostViewMode] = useState<PostViewMode>('normal');
-
   const [deleteTargetPostId, setDeleteTargetPostId] = useState<string | null>(null);
 
-  const sellingProducts: Product[] = [
-    { id: 'p1', title: '테스트 상품', price: 200000, thumbnailUrl: '' },
-    { id: 'p2', title: '테스트 상품2', price: 12000, thumbnailUrl: '' },
-    { id: 'p3', title: '테스트 상품3', price: 45000, thumbnailUrl: '' },
-    { id: 'p4', title: '테스트 상품4', price: 9900, thumbnailUrl: '' },
-  ];
+  const profile: Profile | null = useMemo(() => {
+    const p = profileQuery.data;
+    if (!p) return null;
 
-  const posts: Post[] = [
-    {
-      id: 'post1',
-      content: '기능 확인용 게시글 등록 (이미지 있음)',
-      imageUrl: 'https://picsum.photos/seed/post1/600/600',
-      likeCount: 1,
-      commentCount: 1,
-    },
-    {
-      id: 'post2',
-      content: '테스트 입력2',
-      imageUrl: '',
-      likeCount: 0,
-      commentCount: 0,
-    },
-    {
-      id: 'post3',
-      content: '이미지 모드 테스트',
-      imageUrl: 'https://picsum.photos/seed/post3/600/600',
-      likeCount: 3,
-      commentCount: 2,
-    },
-  ];
+    return {
+      id: p.accountname,
+      nickname: p.username,
+      handle: `@${p.accountname}`,
+      bio: p.intro ?? '',
+      avatarUrl: p.image?.trim() ? p.image : '',
+      followersCount: p.followerCount ?? 0,
+      followingsCount: p.followingCount ?? 0,
+    };
+  }, [profileQuery.data]);
+
+  const isMe = useMemo(() => {
+    const meAccount = meQuery.data?.user.accountname;
+    if (!meAccount || !targetAccountname) return isMeByRoute;
+    return meAccount === targetAccountname;
+  }, [isMeByRoute, meQuery.data?.user.accountname, targetAccountname]);
+
+  const isFollowing = !!profileQuery.data?.isfollow;
+
+  const sellingProducts: Product[] = useMemo(() => {
+    const arr = productsQuery.data ?? [];
+    return arr.map((p) => ({
+      id: p.id,
+      title: p.itemName,
+      price: p.price,
+      thumbnailUrl: toImageUrl(p.itemImage),
+    }));
+  }, [productsQuery.data]);
+
+  const posts: Post[] = useMemo(() => {
+    const arr = userPostsQuery.data?.post ?? [];
+    return arr.map((p) => ({
+      id: p.id,
+      content: p.content,
+      imageUrl: toImageUrl(pickFirstImage(p.image)),
+      likeCount: p.heartCount ?? 0,
+      commentCount: p.commentCount ?? 0,
+    }));
+  }, [userPostsQuery.data]);
+
+  const isLoading =
+    meQuery.isLoading ||
+    profileQuery.isLoading ||
+    productsQuery.isLoading ||
+    userPostsQuery.isLoading;
+
+  if (isLoading) {
+    return <div className="flex h-screen items-center justify-center">Loading...</div>;
+  }
+
+  if (profileQuery.isError || !profile) {
+    return (
+      <div className="p-6 text-center text-sm text-gray-500">프로필을 불러오지 못했습니다.</div>
+    );
+  }
 
   const goFollowers = () => navigate(`/profile/${profile.id}/follows?tab=followers`);
   const goFollowings = () => navigate(`/profile/${profile.id}/follows?tab=followings`);
 
   const goEditProfile = () => navigate('/profile/edit');
   const goCreateProduct = () => navigate('/products/new');
-
   const goProductDetail = (id: string) => navigate(`/products/${id}`);
 
   const handleDeleteConfirm = () => {
@@ -89,7 +133,10 @@ export default function ProfilePage() {
         profile={profile}
         isMe={isMe}
         isFollowing={isFollowing}
-        onFollowingChange={setIsFollowing}
+        onFollowingChange={(next) => {
+          if (!targetAccountname) return;
+          followMutation.mutate(next);
+        }}
         onFollowersClick={goFollowers}
         onFollowingsClick={goFollowings}
         onEditProfile={goEditProfile}
