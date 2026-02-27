@@ -41,7 +41,7 @@ export default function ChatListPage() {
 
             <div className="min-w-0 flex-1">
               <div className="flex items-center gap-2">
-                <p className="truncate text-sm font-semibold text-zinc-900">{c.name}</p>
+                <p className="text-foreground truncate text-sm font-semibold">{c.name}</p>
                 <span className="ml-auto text-[11px] text-zinc-400">{c.date}</span>
               </div>
               <p className="truncate text-xs text-zinc-500">{c.lastMessage}</p>
