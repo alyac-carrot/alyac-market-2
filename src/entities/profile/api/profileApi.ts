@@ -8,16 +8,16 @@ import type {
 } from '../model/types';
 
 export const getProfile = (accountname: string) =>
-  axiosInstance.get<GetProfileResponse>(`/api/profile/${accountname}`);
+  axiosInstance.get<GetProfileResponse>(`/profile/${accountname}`);
 
 export const followUser = (accountname: string) =>
-  axiosInstance.post<FollowResponse>(`/api/profile/${accountname}/follow`);
+  axiosInstance.post<FollowResponse>(`/profile/${accountname}/follow`);
 
 export const unfollowUser = (accountname: string) =>
-  axiosInstance.delete<FollowResponse>(`/api/profile/${accountname}/unfollow`);
+  axiosInstance.delete<FollowResponse>(`/profile/${accountname}/unfollow`);
 
 export const getFollowingList = (accountname: string) =>
-  axiosInstance.get<FollowingListResponse>(`/api/profile/${accountname}/following`);
+  axiosInstance.get<FollowingListResponse>(`/profile/${accountname}/following`);
 
 export const getFollowerList = (accountname: string) =>
-  axiosInstance.get<FollowerListResponse>(`/api/profile/${accountname}/follower`);
+  axiosInstance.get<FollowerListResponse>(`/profile/${accountname}/follower`);

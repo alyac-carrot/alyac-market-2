@@ -8,8 +8,8 @@ export const useCreatePost = () => {
   return useMutation({
     mutationFn: createPost,
     onSuccess: () => {
-      // 캐시 무효화 (목록 새로고침)
-      queryClient.invalidateQueries({ queryKey: ['posts'] });
+      // 캐시 무효화 (모든 사용자 게시글 목록 새로고침)
+      queryClient.invalidateQueries({ queryKey: ['userPosts'] });
     },
   });
 };

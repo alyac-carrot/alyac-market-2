@@ -63,7 +63,7 @@ axiosInstance.interceptors.response.use(
       try {
         // Refresh token으로 새 토큰 요청
         const response = await axios.post(
-          `${import.meta.env.VITE_API_BASE_URL}/api/user/refresh`,
+          `${import.meta.env.VITE_API_BASE_URL}/user/refresh`,
           {},
           {
             headers: {
