@@ -5,6 +5,7 @@ import { createBrowserRouter } from 'react-router-dom';
 import { RootLayout } from '@/app/layouts';
 import { RequireAuth } from '@/entities/auth';
 
+const LandingPage = lazy(() => import('@/pages/auth/LandingPage'));
 const SignInPage = lazy(() => import('@/pages/auth/signin'));
 const UploadPage = lazy(() => import('@/pages/upload/UploadPage'));
 const ProfilePage = lazy(() => import('@/pages/profile/ProfilePage'));
@@ -20,8 +21,8 @@ export const router = createBrowserRouter([
     path: '/',
     element: <RootLayout />,
     children: [
-      { index: true, element: <SignInPage /> },
-      //  { path: 'auth/signin', element: <SignInPage /> },
+      { index: true, element: <LandingPage /> },
+      { path: 'auth/signin', element: <SignInPage /> },
       {
         element: <RequireAuth />,
         children: [
