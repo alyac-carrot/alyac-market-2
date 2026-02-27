@@ -11,12 +11,14 @@ export default function RootLayout() {
   useMeQuery();
   const isUpload = useMatch('/upload/*');
   const isChatRoom = useMatch('/chat/:roomId');
-  const isSignIn = useMatch('/');
+  const isLending = useMatch('/');
+  const isSignin = useMatch('/auth/signin');
+  const inSignup = useMatch('/auth/signup');
 
   const isSearch = useMatch('/search/*');
 
-  const hideHeader = Boolean(isSignIn);
-  const hideFooter = Boolean(isUpload || isChatRoom || isSignIn);
+  const hideHeader = Boolean(isLending || isSignin || inSignup);
+  const hideFooter = Boolean(isUpload || isChatRoom || isLending || isSignin || inSignup);
 
   const layout = (
     <div className="min-h-screen">

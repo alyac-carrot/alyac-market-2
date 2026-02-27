@@ -10,7 +10,7 @@ export default function FeedPage() {
       <div className="flex -translate-y-8 flex-col items-center gap-4">
         <img src="/mascot.png" alt="마스코트" className="h-auto w-[90px]" />
 
-        <p className="text-sm text-zinc-900">유저를 검색해 팔로우 해보세요!</p>
+        <p className="text-foreground text-sm">유저를 검색해 팔로우 해보세요!</p>
 
         <Button
           className="rounded-full px-10 py-6 text-base font-semibold"

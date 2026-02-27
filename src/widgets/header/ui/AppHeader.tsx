@@ -11,9 +11,16 @@ export function AppHeader() {
   const navigate = useNavigate();
   const logout = useLogout();
 
-  const { theme, label, toggleTheme } = useTheme();
+  const { theme, setTheme } = useTheme();
 
   const ThemeIcon = theme === 'system' ? Monitor : theme === 'light' ? Sun : Moon;
+
+  const cycleTheme = () => {
+    const themes: Array<'light' | 'dark' | 'system'> = ['light', 'dark', 'system'];
+    const currentIndex = themes.indexOf(theme);
+    const nextTheme = themes[(currentIndex + 1) % themes.length];
+    setTheme(nextTheme);
+  };
 
   return (
     <HeaderShell
@@ -48,8 +55,8 @@ export function AppHeader() {
 
                 <button
                   type="button"
-                  onClick={toggleTheme}
-                  title={`현재: ${label}`}
+                  onClick={cycleTheme}
+                  title={`현재: ${theme}`}
                   className="inline-flex w-10 items-center justify-center"
                 >
                   <ThemeIcon className="h-5 w-5" />

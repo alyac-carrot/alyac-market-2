@@ -91,7 +91,7 @@ export default function PostsSection({
       ) : (
         <div className="divide-y divide-gray-100">
           {posts.map((post) => (
-            <article key={post.id} className="w-full py-5 text-left hover:bg-gray-50">
+            <article key={post.id} className="hover:bg-accent w-full py-5 text-left">
               <div className="flex items-start gap-3">
                 <Avatar src={profile.avatarUrl} alt="프로필 이미지" size="sm" />
 
