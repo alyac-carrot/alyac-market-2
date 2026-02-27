@@ -1,15 +1,20 @@
 import { useRef, useState } from 'react';
 
-// import { useNavigate } from 'react-router-dom';
 import { Image as ImageIcon, X } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
+import { useCreatePost } from '@/entities/post/hooks/useCreatePost';
+import { useUploadFiles } from '@/entities/upload/hooks/useUploadFiles';
 import { Button } from '@/shared/ui/button';
 import { UploadHeader } from '@/widgets/header/ui/UploadHeader';
 
 export default function UploadPage() {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
+  const createPostMutation = useCreatePost();
+  const uploadFilesMutation = useUploadFiles();
   const [text, setText] = useState('');
   const [images, setImages] = useState<string[]>([]);
+  const [files, setFiles] = useState<File[]>([]);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleImageAdd = () => {
@@ -17,15 +22,16 @@ export default function UploadPage() {
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files;
-    if (!files) return;
+    const fileList = e.target.files;
+    if (!fileList) return;
 
-    Array.from(files).forEach((file) => {
+    Array.from(fileList).forEach((file) => {
       const reader = new FileReader();
       reader.onload = (ev) => {
         setImages((prev) => [...prev, ev.target?.result as string]);
       };
       reader.readAsDataURL(file);
+      setFiles((prev) => [...prev, file]);
     });
 
     // reset so same file can be picked again
@@ -34,9 +40,32 @@ export default function UploadPage() {
 
   const removeImage = (index: number) => {
     setImages((prev) => prev.filter((_, i) => i !== index));
+    setFiles((prev) => prev.filter((_, i) => i !== index));
   };
 
   const hasContent = text.trim().length > 0 || images.length > 0;
+
+  const handleUpload = async () => {
+    try {
+      let imageString: string | undefined;
+
+      // Upload files if there are any
+      if (files.length > 0) {
+        const uploadedFiles = await uploadFilesMutation.mutateAsync(files);
+        imageString = uploadedFiles.map((f) => f.filename).join(',');
+      }
+
+      // Create the post
+      await createPostMutation.mutateAsync({
+        content: text.trim(),
+        image: imageString,
+      });
+
+      navigate('/profile');
+    } catch (error) {
+      console.error('Post creation failed:', error);
+    }
+  };
 
   return (
     <div className="bg-background flex min-h-screen flex-col">
@@ -61,7 +90,11 @@ export default function UploadPage() {
         </Button>
       </header> */}
 
-      <UploadHeader canUpload={hasContent} onUpload={() => alert('업로드됨')} isLoading={false} />
+      <UploadHeader
+        canUpload={hasContent}
+        onUpload={handleUpload}
+        isLoading={createPostMutation.isPending || uploadFilesMutation.isPending}
+      />
 
       {/* ─ main ─ */}
       <main className="flex-1 px-4 py-4">

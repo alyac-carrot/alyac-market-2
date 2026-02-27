@@ -14,6 +14,6 @@ export type SignInResponse = {
 };
 
 export const signIn = (body: SignInBody) =>
-  axiosInstance.post<SignInResponse>('/api/user/signin', {
+  axiosInstance.post<SignInResponse>('/user/signin', {
     user: body,
   });
