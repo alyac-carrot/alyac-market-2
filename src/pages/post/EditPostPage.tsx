@@ -33,8 +33,7 @@ export default function EditPostPage() {
   // Load post data when fetched
   useEffect(() => {
     if (getPostQuery.data) {
-      const post = getPostQuery.data.post; // 👈 access the nested post
-
+      const post = getPostQuery.data.post;
       const imageString = String(post.image ?? '');
       const items: ImageItem[] = [];
 
@@ -49,7 +48,7 @@ export default function EditPostPage() {
         );
       }
 
-      setText(post.content ?? ''); // ✅ now correctly accesses content
+      setText(post.content ?? '');
       setImageItems(items);
     }
   }, [getPostQuery.data]);
@@ -91,6 +90,11 @@ export default function EditPostPage() {
   const hasContent = text.trim().length > 0 || imageItems.length > 0;
 
   const handleUpdate = async () => {
+    if (!postId) {
+      console.error('Post ID is missing');
+      return;
+    }
+
     try {
       let imageString = '';
       const oldFiles: string[] = [];
@@ -112,13 +116,19 @@ export default function EditPostPage() {
       // Combine old files and newly uploaded files
       imageString = [...oldFiles, ...uploadedNewFileNames].join(',');
 
+      console.log('Updating post:', {
+        postId,
+        content: text.trim(),
+        image: imageString,
+      });
+
       // Update the post
       await updatePostMutation.mutateAsync({
         content: text.trim(),
         image: imageString,
       });
 
-      navigate(`/posts/${postId}`);
+      navigate('/profile');
     } catch (error) {
       console.error('Post update failed:', error);
     }
