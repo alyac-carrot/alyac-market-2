@@ -5,6 +5,7 @@ import { createBrowserRouter } from 'react-router-dom';
 import { RootLayout } from '@/app/layouts';
 import { RequireAuth } from '@/entities/auth';
 
+const SplashPage = lazy(() => import('@/pages/auth/splash'));
 const LandingPage = lazy(() => import('@/pages/auth/LandingPage'));
 const SignInPage = lazy(() => import('@/pages/auth/signin'));
 const UploadPage = lazy(() => import('@/pages/upload/UploadPage'));
@@ -22,8 +23,9 @@ export const router = createBrowserRouter([
     path: '/',
     element: <RootLayout />,
     children: [
-      { index: true, element: <LandingPage /> },
-      { path: 'auth/signin', element: <SignInPage /> },
+      { index: true, element: <SplashPage /> }, // ✅ 첫 화면: 스플래시
+      { path: 'auth/landing', element: <LandingPage /> }, // ✅ 랜딩 페이지 경로
+      { path: 'auth/signin', element: <SignInPage /> }, // ✅ 로그인 (있으면)
       {
         element: <RequireAuth />,
         children: [
