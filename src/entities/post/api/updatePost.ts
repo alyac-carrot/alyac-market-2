@@ -1,11 +1,11 @@
 import axiosInstance from '@/shared/api/axios';
 
-import type { CreatePostRequest, CreatePostResponse } from '../model/types';
+import type { CreatePostRequest, GetPostResponse } from '../model/types';
 
 export const updatePost = async (
   postId: string,
   data: CreatePostRequest,
-): Promise<CreatePostResponse> => {
+): Promise<GetPostResponse> => {
   const response = await axiosInstance.put(`/post/${postId}`, {
     post: {
       content: data.content,
