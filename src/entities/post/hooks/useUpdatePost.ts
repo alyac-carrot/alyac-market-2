@@ -11,6 +11,7 @@ export const useUpdatePost = (postId: string) => {
       // 캐시 무효화
       queryClient.invalidateQueries({ queryKey: ['posts'] });
       queryClient.invalidateQueries({ queryKey: ['post', postId] });
+      queryClient.invalidateQueries({ queryKey: ['userPosts'] });
     },
   });
 };

@@ -13,8 +13,14 @@ export interface Post {
   hearted: boolean;
 }
 
-export interface GetPostsResponse {
-  posts: Post[];
+export interface GetPostResponse {
+  post: {
+    id: string;
+    content: string;
+    image: string;
+    createdAt: string;
+    updatedAt: string;
+  };
 }
 
 export interface CreatePostRequest {

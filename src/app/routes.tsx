@@ -11,6 +11,7 @@ const SignInPage = lazy(() => import('@/pages/auth/signin'));
 const UploadPage = lazy(() => import('@/pages/upload/UploadPage'));
 const ProfilePage = lazy(() => import('@/pages/profile/ProfilePage'));
 const PostPage = lazy(() => import('@/pages/post/PostPage'));
+const EditPostPage = lazy(() => import('@/pages/post/EditPostPage'));
 const SearchPage = lazy(() => import('@/pages/feed/search'));
 const FeedPage = lazy(() => import('@/pages/feed'));
 const ChatRoomPage = lazy(() => import('@/pages/chat/room'));
@@ -40,6 +41,7 @@ export const router = createBrowserRouter([
 
           { path: 'post-create', element: <PostPage /> },
           { path: 'post/:postId', element: <PostPage /> },
+          { path: 'posts/:postId/edit', element: <EditPostPage /> },
         ],
       },
     ],

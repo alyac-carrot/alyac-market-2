@@ -1,8 +1,8 @@
 import axiosInstance from '@/shared/api/axios';
 
-import type { CreatePostResponse } from '../model/types';
+import type { GetPostResponse } from '../model/types';
 
-export const getPost = async (postId: string): Promise<CreatePostResponse> => {
+export const getPostById = async (postId: string): Promise<GetPostResponse> => {
   const response = await axiosInstance.get(`/post/${postId}`);
   return response.data;
 };
