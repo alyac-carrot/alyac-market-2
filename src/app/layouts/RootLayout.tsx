@@ -14,11 +14,14 @@ export default function RootLayout() {
   const isLending = useMatch('/');
   const isSignin = useMatch('/auth/signin');
   const inSignup = useMatch('/auth/signup');
+  const isEditPost = useMatch('/posts/:postId/edit');
 
   const isSearch = useMatch('/search/*');
 
   const hideHeader = Boolean(isLending || isSignin || inSignup);
-  const hideFooter = Boolean(isUpload || isChatRoom || isLending || isSignin || inSignup);
+  const hideFooter = Boolean(
+    isUpload || isChatRoom || isLending || isSignin || inSignup || isEditPost,
+  );
 
   const layout = (
     <div className="min-h-screen">
