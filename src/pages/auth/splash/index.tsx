@@ -8,7 +8,7 @@ export default function SplashPage() {
   useEffect(() => {
     const t = window.setTimeout(() => {
       nav('/auth/landing', { replace: true }); // 뒤로가기로 스플래시 안 돌아오게
-    }, 5000); // 1.5초
+    }, 3000); // 3초
 
     return () => window.clearTimeout(t);
   }, [nav]);
@@ -19,7 +19,7 @@ export default function SplashPage() {
         {/* public/mascot.png */}
         <img src="/mascot.png" alt="알약마켓" className="h-28 w-28 animate-bounce" />
 
-        <p className="mt-4 text-2xl font-extrabold text-green-600">알약마켓</p>
+        <p className="mt-4 animate-bounce text-2xl font-extrabold text-green-600">알약마켓</p>
       </div>
     </div>
   );
