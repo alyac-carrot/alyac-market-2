@@ -1,51 +1,34 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { ArrowLeft, Heart, MessageCircle, MoreVertical } from 'lucide-react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { useGetPost } from '@/entities/post/hooks/useGetPost';
-import { useCreateComment, useGetComments } from '@/entities/post/hooks/useComments';
+import {
+  useCreateComment,
+  useDeleteComment,
+  useEditComment,
+  useGetComments,
+} from '@/entities/post/hooks/useComments';
 import { pickFirstImage, toImageUrl } from '@/shared/lib';
 import { Avatar } from '@/shared/ui/Avatar';
 
 import type { Comment } from '@/entities/post/model/comment';
 
-/* ── single comment ── */
-function CommentItem({
-  avatar,
-  userName,
-  time,
-  text,
-}: {
-  avatar: string;
-  userName: string;
-  time: string;
-  text: string;
-}) {
-  return (
-    <div className="flex gap-3 px-4 py-4">
-      <div className="bg-muted flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-full">
-        {avatar ? (
-          <img src={avatar} alt={userName} className="h-full w-full object-cover" />
-        ) : (
-          <Avatar size="sm" />
-        )}
-      </div>
+/* ── format relative time ── */
+function formatRelativeTime(dateString: string) {
+  const now = new Date();
+  const date = new Date(dateString);
+  const diffMs = now.getTime() - date.getTime();
+  const diffMin = Math.floor(diffMs / 60000);
+  const diffHour = Math.floor(diffMin / 60);
+  const diffDay = Math.floor(diffHour / 24);
 
-      <div className="flex-1">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <span className="text-foreground font-semibold">{userName}</span>
-            <span className="text-muted-foreground text-xs">· {time}</span>
-          </div>
-          <button type="button" className="h-6 w-6">
-            <MoreVertical className="text-muted-foreground h-4 w-4" />
-          </button>
-        </div>
-        <p className="text-foreground text-left text-sm leading-relaxed">{text}</p>
-      </div>
-    </div>
-  );
+  if (diffMin < 1) return '방금 전';
+  if (diffMin < 60) return `${diffMin}분 전`;
+  if (diffHour < 24) return `${diffHour}시간 전`;
+  if (diffDay < 7) return `${diffDay}일 전`;
+  return date.toLocaleDateString('ko-KR');
 }
 
 /* ── format date ── */
@@ -58,11 +41,116 @@ function formatDate(dateString: string) {
   });
 }
 
+/* ── single comment ── */
+function CommentItem({
+  comment,
+  onKebabClick,
+}: {
+  comment: Comment;
+  onKebabClick: (commentId: string) => void;
+}) {
+  const authorImage = comment.author?.image ? toImageUrl(comment.author.image) : '';
+
+  return (
+    <div className="flex gap-3 px-4 py-4">
+      <div className="bg-muted flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-full">
+        {authorImage ? (
+          <img
+            src={authorImage}
+            alt={comment.author?.username}
+            className="h-full w-full object-cover"
+          />
+        ) : (
+          <Avatar size="sm" />
+        )}
+      </div>
+
+      <div className="flex-1">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <span className="text-foreground font-semibold">
+              {comment.author?.username ?? '알 수 없음'}
+            </span>
+            <span className="text-muted-foreground text-xs">
+              · {formatRelativeTime(comment.createdAt)}
+            </span>
+          </div>
+          <button
+            type="button"
+            className="h-6 w-6"
+            onClick={() => onKebabClick(comment.id)}
+          >
+            <MoreVertical className="text-muted-foreground h-4 w-4" />
+          </button>
+        </div>
+        <p className="text-foreground text-left text-sm leading-relaxed">{comment.content}</p>
+      </div>
+    </div>
+  );
+}
+
+/* ── bottom sheet modal ── */
+function BottomSheetModal({
+  isOpen,
+  onClose,
+  onEdit,
+  onDelete,
+  isDeleting,
+}: {
+  isOpen: boolean;
+  onClose: () => void;
+  onEdit: () => void;
+  onDelete: () => void;
+  isDeleting: boolean;
+}) {
+  if (!isOpen) return null;
+
+  return (
+    <>
+      {/* backdrop */}
+      <div
+        className="fixed inset-0 z-40 bg-black/40 transition-opacity"
+        onClick={onClose}
+      />
+
+      {/* sheet */}
+      <div className="bg-popover border-border fixed right-0 bottom-0 left-0 z-50 rounded-t-2xl border-t shadow-lg animate-in slide-in-from-bottom duration-200">
+        {/* handle */}
+        <div className="flex justify-center pt-3 pb-1">
+          <div className="bg-muted-foreground/30 h-1 w-10 rounded-full" />
+        </div>
+
+        {/* actions */}
+        <div className="px-2 pb-6 pt-1">
+          <button
+            type="button"
+            onClick={onEdit}
+            className="text-foreground hover:bg-accent w-full rounded-lg px-5 py-4 text-left text-base transition-colors"
+          >
+            수정
+          </button>
+          <button
+            type="button"
+            onClick={onDelete}
+            disabled={isDeleting}
+            className="text-foreground hover:bg-accent w-full rounded-lg px-5 py-4 text-left text-base transition-colors disabled:opacity-50"
+          >
+            {isDeleting ? '삭제 중...' : '삭제'}
+          </button>
+        </div>
+      </div>
+    </>
+  );
+}
+
 /* ── main page ── */
 export default function PostPage() {
   const navigate = useNavigate();
   const { postId = '' } = useParams();
   const [commentText, setCommentText] = useState('');
+  const [selectedCommentId, setSelectedCommentId] = useState<string | null>(null);
+  const [editingCommentId, setEditingCommentId] = useState<string | null>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   // Fetch post data
   const { data: postData, isLoading: isLoadingPost, isError } = useGetPost(postId);
@@ -70,20 +158,70 @@ export default function PostPage() {
   // Fetch comments for this post
   const { data: commentsData, isLoading: isLoadingComments } = useGetComments(postId);
   const { mutate: submitComment, isPending: isSubmitting } = useCreateComment(postId);
+  const { mutate: deleteCommentMutate, isPending: isDeleting } = useDeleteComment(postId);
+  const { mutate: editCommentMutate, isPending: isEditing } = useEditComment(postId);
 
-  const comments: Comment[] = commentsData?.comments ?? [];
+  const comments: Comment[] = commentsData?.comment ?? [];
+
+  // Focus input when entering edit mode
+  useEffect(() => {
+    if (editingCommentId && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [editingCommentId]);
 
   const handleSubmitComment = () => {
     if (!commentText.trim()) return;
 
-    submitComment(
-      { content: commentText, postId },
-      {
-        onSuccess: () => {
-          setCommentText('');
+    if (editingCommentId) {
+      // Edit mode
+      editCommentMutate(
+        { commentId: editingCommentId, content: commentText },
+        {
+          onSuccess: () => {
+            setCommentText('');
+            setEditingCommentId(null);
+          },
         },
+      );
+    } else {
+      // Create mode
+      submitComment(
+        { content: commentText, postId },
+        {
+          onSuccess: () => {
+            setCommentText('');
+          },
+        },
+      );
+    }
+  };
+
+  const handleDeleteComment = () => {
+    if (!selectedCommentId) return;
+
+    deleteCommentMutate(selectedCommentId, {
+      onSuccess: () => {
+        setSelectedCommentId(null);
       },
-    );
+    });
+  };
+
+  const handleEditComment = () => {
+    if (!selectedCommentId) return;
+
+    // Find the comment to get its current text
+    const commentToEdit = comments.find((c) => c.id === selectedCommentId);
+    if (commentToEdit) {
+      setEditingCommentId(selectedCommentId);
+      setCommentText(commentToEdit.content);
+    }
+    setSelectedCommentId(null); // Close the bottom sheet
+  };
+
+  const handleCancelEdit = () => {
+    setEditingCommentId(null);
+    setCommentText('');
   };
 
   if (isLoadingPost) {
@@ -101,9 +239,11 @@ export default function PostPage() {
   const post = postData.post;
   const authorAvatar = post.author?.image ? toImageUrl(post.author.image) : '';
   const postImage = toImageUrl(pickFirstImage(post.image));
+  const hasText = commentText.trim().length > 0;
+  const isBusy = isSubmitting || isEditing;
 
   return (
-    <div className="bg-background flex min-h-screen flex-col pb-24 text-left">
+    <div className="bg-background flex min-h-screen flex-col pb-16 text-left">
       {/* ─ sticky top nav ─ */}
       <header className="border-border bg-background sticky top-0 z-10 flex items-center justify-between border-b px-4 py-3">
         <button
@@ -188,10 +328,8 @@ export default function PostPage() {
             comments.map((c) => (
               <CommentItem
                 key={c.id}
-                avatar={c.avatar}
-                userName={c.userName}
-                time={c.time}
-                text={c.text}
+                comment={c}
+                onKebabClick={(id) => setSelectedCommentId(id)}
               />
             ))
           )}
@@ -199,37 +337,61 @@ export default function PostPage() {
       </main>
 
       {/* ─ fixed comment input bar ─ */}
-      <div className="border-muted bg-background fixed right-0 bottom-0 left-0 w-full border-t px-4 py-3">
+      <div className="border-border bg-background fixed right-0 bottom-0 left-0 z-10 w-full border-t px-4 py-2">
+        {/* edit mode indicator */}
+        {editingCommentId && (
+          <div className="mb-2 flex items-center justify-between">
+            <span className="text-muted-foreground text-xs">댓글 수정 중...</span>
+            <button
+              type="button"
+              onClick={handleCancelEdit}
+              className="text-muted-foreground hover:text-foreground text-xs"
+            >
+              취소
+            </button>
+          </div>
+        )}
         <div className="flex items-center gap-3">
-          <div className="bg-muted flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-full">
+          <div className="shrink-0">
             <Avatar size="sm" />
           </div>
           <div className="relative flex-1">
             <input
+              ref={inputRef}
               type="text"
               value={commentText}
               onChange={(e) => setCommentText(e.target.value)}
-              placeholder="댓글 입력하기..."
-              className="border-muted bg-muted placeholder:text-muted-foreground focus:border-muted focus:bg-background h-10 w-full rounded-full border px-4 py-2 text-sm outline-none focus:ring-0"
+              placeholder={editingCommentId ? '댓글을 수정하세요...' : '댓글 입력하기...'}
+              className="border-border bg-muted placeholder:text-muted-foreground h-10 w-full rounded-full border px-4 pr-14 text-sm outline-none focus:ring-0"
               onKeyDown={(e) => {
-                if (e.key === 'Enter' && !isSubmitting) handleSubmitComment();
+                if (e.key === 'Enter' && !isBusy) handleSubmitComment();
+                if (e.key === 'Escape' && editingCommentId) handleCancelEdit();
               }}
             />
             <button
               type="button"
               onClick={handleSubmitComment}
-              disabled={!commentText.trim() || isSubmitting}
-              className={`absolute top-1/2 right-3 -translate-y-1/2 text-sm font-medium transition-colors ${
-                commentText.trim() && !isSubmitting
-                  ? 'text-foreground hover:text-primary'
+              disabled={!hasText || isBusy}
+              className={`absolute top-1/2 right-3 -translate-y-1/2 text-sm font-semibold transition-colors ${
+                hasText && !isBusy
+                  ? 'text-green-500 hover:text-green-600'
                   : 'text-muted-foreground cursor-not-allowed'
               }`}
             >
-              {isSubmitting ? '로딩...' : '게시'}
+              {isBusy ? '로딩...' : editingCommentId ? '수정' : '게시'}
             </button>
           </div>
         </div>
       </div>
+
+      {/* ─ comment action bottom sheet ─ */}
+      <BottomSheetModal
+        isOpen={selectedCommentId !== null}
+        onClose={() => setSelectedCommentId(null)}
+        onEdit={handleEditComment}
+        onDelete={handleDeleteComment}
+        isDeleting={isDeleting}
+      />
     </div>
   );
 }
