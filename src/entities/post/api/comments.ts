@@ -30,17 +30,3 @@ export const deleteComment = async ({
 }): Promise<void> => {
   await axiosInstance.delete(`/post/${postId}/comments/${commentId}`);
 };
-
-export const editComment = async ({
-  postId,
-  commentId,
-  content,
-}: {
-  postId: string;
-  commentId: string;
-  content: string;
-}): Promise<void> => {
-  await axiosInstance.put(`/post/${postId}/comments/${commentId}`, {
-    comment: { content },
-  });
-};
