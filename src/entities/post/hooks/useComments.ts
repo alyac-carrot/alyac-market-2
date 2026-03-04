@@ -18,6 +18,7 @@ export const useCreateComment = (postId: string) => {
       // 캐시 업데이트 (해당 포스트의 댓글 목록 새로고침)
       queryClient.invalidateQueries({ queryKey: ['comments', postId] });
       queryClient.invalidateQueries({ queryKey: ['post', postId] });
+      queryClient.invalidateQueries({ queryKey: ['userPosts'] });
     },
   });
 };
@@ -30,6 +31,7 @@ export const useDeleteComment = (postId: string) => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['comments', postId] });
       queryClient.invalidateQueries({ queryKey: ['post', postId] });
+      queryClient.invalidateQueries({ queryKey: ['userPosts'] });
     },
   });
 };
