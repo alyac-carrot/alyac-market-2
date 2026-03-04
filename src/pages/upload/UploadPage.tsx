@@ -52,7 +52,7 @@ export default function UploadPage() {
       // Upload files if there are any
       if (files.length > 0) {
         const uploadedFiles = await uploadFilesMutation.mutateAsync(files);
-        imageString = uploadedFiles.map((f) => f.filename).join(',');
+        imageString = uploadedFiles.map((f) => `uploadFiles/${f.filename}`).join(',');
       }
 
       // Create the post
@@ -115,15 +115,15 @@ export default function UploadPage() {
               className="min-h-125 w-full resize-none border-0 text-base outline-none placeholder:text-gray-400 focus:ring-0"
             />
 
-            {/* image previews (2-column grid) */}
+            {/* image previews (full-size stacked) */}
             {images.length > 0 && (
-              <div className="mt-4 grid grid-cols-2 gap-2">
+              <div className="mt-4 flex flex-col gap-3">
                 {images.map((src, i) => (
                   <div key={i} className="relative overflow-hidden rounded-lg">
                     <img
                       src={src}
                       alt={`업로드된 이미지 ${i + 1}`}
-                      className="h-40 w-full object-cover"
+                      className="w-full rounded-lg"
                     />
                     <Button
                       type="button"
