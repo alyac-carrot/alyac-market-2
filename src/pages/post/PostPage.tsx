@@ -3,38 +3,12 @@ import { useState } from 'react';
 import { ArrowLeft, Heart, MessageCircle, MoreVertical } from 'lucide-react';
 import { useNavigate, useParams } from 'react-router-dom';
 
+import { useGetPost } from '@/entities/post/hooks/useGetPost';
 import { useCreateComment, useGetComments } from '@/entities/post/hooks/useComments';
+import { pickFirstImage, toImageUrl } from '@/shared/lib';
 import { Avatar } from '@/shared/ui/Avatar';
 
-/* ── sample data (replace with real API later) ── */
-const POST = {
-  avatar: '',
-  userName: '이스트 시큐리티 알약',
-  handle: '@ estSecurity_Alyac',
-  content:
-    '알려지지 않은 위협의 즉각적인 차단부터 식별, 대응까지. 10년이상의 백신 운영 노하우와 악성코드 분석 전문성을 담은 알약 EDR 솔루션은 위협 인텔리전스와의 결합으로 확장된 엔드포인트 위협 대응 체계를 제공합니다.',
-  image: '',
-  likes: 58,
-  comments: 12,
-  date: '2020년 10월 21일',
-};
-
-const COMMENTS = [
-  {
-    id: 1,
-    avatar: '',
-    userName: '이스트 소프트',
-    time: '5분 전',
-    text: '게시글 답글 ~~ !! 최고최고',
-  },
-  {
-    id: 2,
-    avatar: '',
-    userName: '보안 백신 전문가',
-    time: '15분 전',
-    text: '너무 기대됩니다. 블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라...',
-  },
-];
+import type { Comment } from '@/entities/post/model/comment';
 
 /* ── single comment ── */
 function CommentItem({
@@ -74,17 +48,30 @@ function CommentItem({
   );
 }
 
+/* ── format date ── */
+function formatDate(dateString: string) {
+  const date = new Date(dateString);
+  return date.toLocaleDateString('ko-KR', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+}
+
 /* ── main page ── */
 export default function PostPage() {
   const navigate = useNavigate();
-  const { postId = '1' } = useParams();
+  const { postId = '' } = useParams();
   const [commentText, setCommentText] = useState('');
+
+  // Fetch post data
+  const { data: postData, isLoading: isLoadingPost, isError } = useGetPost(postId);
 
   // Fetch comments for this post
   const { data: commentsData, isLoading: isLoadingComments } = useGetComments(postId);
   const { mutate: submitComment, isPending: isSubmitting } = useCreateComment(postId);
 
-  const comments = commentsData?.comments || COMMENTS; // Use mock data as fallback
+  const comments: Comment[] = commentsData?.comments ?? [];
 
   const handleSubmitComment = () => {
     if (!commentText.trim()) return;
@@ -98,6 +85,22 @@ export default function PostPage() {
       },
     );
   };
+
+  if (isLoadingPost) {
+    return <div className="flex h-screen items-center justify-center">Loading...</div>;
+  }
+
+  if (isError || !postData?.post) {
+    return (
+      <div className="flex h-screen items-center justify-center">
+        <p className="text-sm text-gray-500">게시글을 불러오지 못했습니다.</p>
+      </div>
+    );
+  }
+
+  const post = postData.post;
+  const authorAvatar = post.author?.image ? toImageUrl(post.author.image) : '';
+  const postImage = toImageUrl(pickFirstImage(post.image));
 
   return (
     <div className="bg-background flex min-h-screen flex-col pb-24 text-left">
@@ -121,34 +124,34 @@ export default function PostPage() {
         <article className="border-border border-b pb-4">
           {/* post header */}
           <div className="flex items-center gap-3 px-4 py-4">
-            <Avatar src={POST.avatar || undefined} size="md" />
+            <Avatar src={authorAvatar || undefined} size="md" />
             <div className="flex flex-col text-left">
-              <span className="text-foreground text-sm font-normal">{POST.userName}</span>
-              <span className="text-muted-foreground text-xs">{POST.handle}</span>
+              <span className="text-foreground text-sm font-normal">
+                {post.author?.username ?? '알 수 없음'}
+              </span>
+              <span className="text-muted-foreground text-xs">
+                @ {post.author?.accountname ?? ''}
+              </span>
             </div>
           </div>
 
           {/* post text */}
-          <div className="px-4 pb-4">
-            <p className="text-foreground text-left text-base leading-relaxed whitespace-pre-wrap">
-              {POST.content}
-            </p>
-          </div>
+          {post.content?.trim() && (
+            <div className="px-4 pb-4">
+              <p className="text-foreground text-left text-base leading-relaxed whitespace-pre-wrap">
+                {post.content}
+              </p>
+            </div>
+          )}
 
           {/* post image */}
-          {POST.image ? (
+          {postImage && (
             <div className="mb-4 space-y-2 px-4">
               <img
-                src={POST.image}
-                alt="Post image"
+                src={postImage}
+                alt="게시글 이미지"
                 className="h-auto w-full rounded-xl object-cover"
               />
-            </div>
-          ) : (
-            <div className="mb-4 space-y-2 px-4">
-              <div className="bg-muted text-muted-foreground flex h-64 w-full items-center justify-center rounded-xl p-4 text-sm">
-                이미지
-              </div>
             </div>
           )}
 
@@ -156,16 +159,18 @@ export default function PostPage() {
           <div className="flex items-center gap-4 px-4">
             <button type="button" className="flex items-center gap-1.5">
               <Heart className="text-muted-foreground h-5 w-5" strokeWidth={1.5} />
-              <span className="text-muted-foreground text-xs">{POST.likes}</span>
+              <span className="text-muted-foreground text-xs">{post.heartCount ?? 0}</span>
             </button>
             <button type="button" className="flex items-center gap-1.5">
               <MessageCircle className="text-muted-foreground h-5 w-5" strokeWidth={1.5} />
-              <span className="text-muted-foreground text-xs">{POST.comments}</span>
+              <span className="text-muted-foreground text-xs">{post.commentCount ?? 0}</span>
             </button>
           </div>
 
           {/* date */}
-          <p className="text-muted-foreground mt-3 px-4 text-left text-xs">{POST.date}</p>
+          <p className="text-muted-foreground mt-3 px-4 text-left text-xs">
+            {formatDate(post.createdAt)}
+          </p>
         </article>
 
         {/* divider */}
