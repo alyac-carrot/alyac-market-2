@@ -7,6 +7,6 @@ export const getMyInfo = () => axiosInstance.get<MyInfoResponse>('/user/myinfo')
 
 // 검색
 export const searchUsers = (keyword: string) =>
-  axiosInstance.get<unknown>('/user/search', {
+  axiosInstance.get('/user/search', {
     params: { keyword },
   });
