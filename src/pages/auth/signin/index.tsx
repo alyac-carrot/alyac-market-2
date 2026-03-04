@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 
-import { getSignInErrorMessage, useSignInMutation } from '@/entities/auth/model/useSignInMutation';
+import { getSignInErrorMessage, useSignInMutation } from '@/entities/auth';
 import { Button, Input } from '@/shared/ui';
 
 type SignInFormValues = {

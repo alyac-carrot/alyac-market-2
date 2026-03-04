@@ -1,7 +1,7 @@
 import { ArrowLeft, Monitor, Moon, MoreVertical, Sun } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
-import { useLogout } from '@/entities/auth/model/useLogout';
+import { useLogout } from '@/entities/auth';
 import { useTheme } from '@/shared/lib/';
 import { Button, Popover, PopoverContent, PopoverTrigger } from '@/shared/ui';
 

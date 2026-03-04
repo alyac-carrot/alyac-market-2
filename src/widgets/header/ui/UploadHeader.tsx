@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import { Button } from '@/shared/ui/button';
-import { HeaderShell } from '@/widgets/header/ui/HeaderShell';
+import { HeaderShell } from './HeaderShell';
 
 type UploadProps = {
   canUpload: boolean;

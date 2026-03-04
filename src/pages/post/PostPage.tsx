@@ -3,16 +3,16 @@ import { useState } from 'react';
 import { ArrowLeft, Heart, MessageCircle, MoreVertical } from 'lucide-react';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { useGetPost } from '@/entities/post/hooks/useGetPost';
 import {
+  useGetPost,
   useCreateComment,
   useDeleteComment,
   useGetComments,
-} from '@/entities/post/hooks/useComments';
+} from '@/entities/post';
 import { pickFirstImage, toImageUrl } from '@/shared/lib';
 import { Avatar } from '@/shared/ui/Avatar';
 
-import type { Comment } from '@/entities/post/model/comment';
+import type { Comment } from '@/entities/post';
 
 /* ── format relative time ── */
 function formatRelativeTime(dateString: string) {

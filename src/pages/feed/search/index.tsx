@@ -3,7 +3,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
-import { type UserItem, searchUsers } from '@/entities/api/users';
+import { type UserItem, searchUsers } from '@/entities/user';
 import { useSearchValue } from '@/shared/lib/search/useSearchValue';
 
 // 🔧 개발용 MOCK 데이터 (API 장애/테스트 대비 - 현재 미사용)
