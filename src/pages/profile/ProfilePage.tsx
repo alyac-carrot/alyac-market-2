@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react';
 
 import { useNavigate, useParams } from 'react-router-dom';
 
+import { useDeletePost } from '@/entities/post/hooks/useDeletePost';
 import { useGetUserPosts } from '@/entities/post/hooks/useGetUserPosts';
 import { useUserProductsQuery } from '@/entities/product';
 import { useFollowMutation, useProfileQuery } from '@/entities/profile';
@@ -54,6 +55,7 @@ export default function ProfilePage() {
   const productsQuery = useUserProductsQuery(targetAccountname);
 
   const userPostsQuery = useGetUserPosts(targetAccountname);
+  const deletePostMutation = useDeletePost();
 
   const [postViewMode, setPostViewMode] = useState<PostViewMode>('normal');
   const [deleteTargetPostId, setDeleteTargetPostId] = useState<string | null>(null);
@@ -127,7 +129,7 @@ export default function ProfilePage() {
 
   const handleDeleteConfirm = () => {
     if (!deleteTargetPostId) return;
-    console.log('delete:', deleteTargetPostId);
+    deletePostMutation.mutate(deleteTargetPostId);
     setDeleteTargetPostId(null);
   };
 
