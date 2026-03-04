@@ -15,7 +15,7 @@ export default function RootLayout() {
   const ishome = useMatch('/auth/landing');
   const isSignin = useMatch('/auth/signin');
   const inSignup = useMatch('/auth/signup');
-  const isEditPost = useMatch('/posts/:postId/edit');
+  const isEditPost = useMatch('/post/:postId/edit');
   const isPostDetail = useMatch('/post/:postId');
 
   const isSearch = useMatch('/search/*');

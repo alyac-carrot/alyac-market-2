@@ -125,11 +125,11 @@ export default function ProfilePostsWidget({
                   <DropdownMenuContent
                     align="end"
                     sideOffset={8}
-                    className="w-44 rounded-xl border border-gray-200 bg-white shadow-lg"
+                    className="w-44 rounded-xl border border-border bg-popover shadow-lg"
                     onCloseAutoFocus={(e) => e.preventDefault()}
                   >
                     <div className="flex justify-center pt-2">
-                      <div className="h-1 w-10 rounded-full bg-gray-300" />
+                      <div className="h-1 w-10 rounded-full bg-muted-foreground/30" />
                     </div>
 
                     <div className="py-2">
