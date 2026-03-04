@@ -12,15 +12,16 @@ export default function RootLayout() {
   const isUpload = useMatch('/upload/*');
   const isChatRoom = useMatch('/chat/:roomId');
   const isLending = useMatch('/');
+  const ishome = useMatch('/auth/landing');
   const isSignin = useMatch('/auth/signin');
   const inSignup = useMatch('/auth/signup');
   const isEditPost = useMatch('/posts/:postId/edit');
 
   const isSearch = useMatch('/search/*');
 
-  const hideHeader = Boolean(isLending || isSignin || inSignup);
+  const hideHeader = Boolean(isLending || isSignin || inSignup || ishome);
   const hideFooter = Boolean(
-    isUpload || isChatRoom || isLending || isSignin || inSignup || isEditPost,
+    isUpload || isChatRoom || isLending || isSignin || inSignup || isEditPost || ishome,
   );
 
   const layout = (
