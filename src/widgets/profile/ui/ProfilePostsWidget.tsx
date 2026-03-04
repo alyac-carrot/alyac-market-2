@@ -159,7 +159,7 @@ export default function ProfilePostsWidget({
 
               {post.imageUrl?.trim() && (
                 <Link
-                  to={`/posts/${post.id}`}
+                  to={`/post/${post.id}`}
                   className="mt-3 block aspect-video max-h-64 overflow-hidden rounded-lg bg-gray-100"
                 >
                   <img src={post.imageUrl} alt="" className="h-full w-full object-cover" />
