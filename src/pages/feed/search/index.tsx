@@ -17,32 +17,6 @@ type FormValues = {
   keyword: string;
 };
 
-function isRecord(v: unknown): v is Record<string, unknown> {
-  return typeof v === 'object' && v !== null;
-}
-
-// searchUsers가 어떤 형태를 반환해도(UserItem[] / AxiosResponse / {users:[]}) UserItem[]로 맞춰주는 함수
-function normalizeToUserItems(out: unknown): UserItem[] {
-  // 1) 이미 배열이면 그대로
-  if (Array.isArray(out)) return out as UserItem[];
-
-  // 2) { users: [...] } 형태
-  if (isRecord(out) && Array.isArray(out.users)) return out.users as UserItem[];
-
-  // 3) AxiosResponse처럼 { data: ... } 형태
-  if (isRecord(out) && 'data' in out) {
-    const data = out.data;
-
-    // 3-1) data가 배열
-    if (Array.isArray(data)) return data as UserItem[];
-
-    // 3-2) data.users가 배열
-    if (isRecord(data) && Array.isArray(data.users)) return data.users as UserItem[];
-  }
-
-  return [];
-}
-
 export default function SearchPage() {
   const nav = useNavigate();
 
@@ -83,15 +57,13 @@ export default function SearchPage() {
       setLoading(true);
 
       try {
-        const out = await searchUsers(q);
+        const data = await searchUsers(q); // ✅ users.ts에서 이미 UserItem[]로 변환해서 내려줌
         if (!alive) return;
 
-        const list = normalizeToUserItems(out);
-        setResults(list);
+        setResults(data); // ✅ 그대로 넣기
       } catch {
         if (!alive) return;
 
-        // 서버 연결 후: 목업 대신 빈 결과 처리
         // setResults(MOCK_USERS); // 필요 시 주석 해제해서 사용
         setResults([]);
       } finally {
@@ -144,13 +116,16 @@ export default function SearchPage() {
                 onClick={() => nav(`/profile/${u.id}`)}
               >
                 <div className="h-10 w-10 rounded-full bg-zinc-200" />
+
                 <div className="min-w-0 flex-1">
                   <div className="flex items-center gap-2">
                     <p className="truncate text-sm font-semibold text-zinc-900">{u.name}</p>
+
                     <span className="rounded-full bg-green-50 px-2 py-0.5 text-[11px] font-semibold text-green-600">
                       {u.tag}
                     </span>
                   </div>
+
                   <p className="truncate text-xs text-zinc-500">{u.handle}</p>
                 </div>
               </li>

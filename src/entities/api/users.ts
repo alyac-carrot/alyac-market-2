@@ -7,10 +7,25 @@ export type UserItem = {
   tag: string;
 };
 
-export async function searchUsers(q: string) {
-  const res = await axiosInstance.get<UserItem[]>('/users/search', {
-    params: { q },
+type ApiUser = {
+  _id: string;
+  username: string;
+  accountname: string;
+  image?: string;
+};
+
+export async function searchUsers(keyword: string): Promise<UserItem[]> {
+  const q = keyword.trim();
+  if (!q) return [];
+
+  const res = await axiosInstance.get<ApiUser[]>('/user/searchuser', {
+    params: { keyword: q },
   });
 
-  return res.data;
+  return res.data.map((u) => ({
+    id: u._id,
+    name: u.username,
+    handle: `@${u.accountname}`,
+    tag: '알약',
+  }));
 }
