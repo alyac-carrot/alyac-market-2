@@ -1,9 +1,17 @@
+export interface CommentAuthor {
+  _id: string;
+  username: string;
+  accountname: string;
+  intro: string;
+  image: string;
+  isfollow: boolean;
+}
+
 export interface Comment {
-  id: string | number;
-  avatar: string;
-  userName: string;
-  time: string;
-  text: string;
+  id: string;
+  content: string;
+  createdAt: string;
+  author: CommentAuthor;
 }
 
 export interface CreateCommentRequest {
@@ -12,11 +20,7 @@ export interface CreateCommentRequest {
 }
 
 export interface CreateCommentResponse {
-  id: string | number;
-  avatar: string;
-  userName: string;
-  time: string;
-  text: string;
+  comment: Comment;
 }
 
 export interface GetCommentsRequest {
@@ -24,5 +28,5 @@ export interface GetCommentsRequest {
 }
 
 export interface GetCommentsResponse {
-  comments: Comment[];
+  comment: Comment[];
 }

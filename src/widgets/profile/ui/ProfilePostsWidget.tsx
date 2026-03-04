@@ -81,7 +81,7 @@ export default function ProfilePostsWidget({
           {mediaPosts.map((p) => (
             <Link
               key={p.id}
-              to={`/posts/${p.id}`}
+              to={`/post/${p.id}`}
               className="aspect-square overflow-hidden bg-gray-100 transition hover:opacity-80"
             >
               <img src={p.imageUrl!} alt="" className="h-full w-full object-cover" />
@@ -99,7 +99,7 @@ export default function ProfilePostsWidget({
                   <div className="font-semibold">{profile.nickname}</div>
                   <div className="text-sm text-gray-500">{profile.handle}</div>
 
-                  <Link to={`/posts/${post.id}`} className="block">
+                  <Link to={`/post/${post.id}`} className="block">
                     <div className="mt-2 text-sm">{post.content}</div>
                   </Link>
                 </div>
@@ -125,11 +125,11 @@ export default function ProfilePostsWidget({
                   <DropdownMenuContent
                     align="end"
                     sideOffset={8}
-                    className="w-44 rounded-xl border border-gray-200 bg-white shadow-lg"
+                    className="w-44 rounded-xl border border-border bg-popover shadow-lg"
                     onCloseAutoFocus={(e) => e.preventDefault()}
                   >
                     <div className="flex justify-center pt-2">
-                      <div className="h-1 w-10 rounded-full bg-gray-300" />
+                      <div className="h-1 w-10 rounded-full bg-muted-foreground/30" />
                     </div>
 
                     <div className="py-2">
@@ -137,7 +137,7 @@ export default function ProfilePostsWidget({
                         className="cursor-pointer px-5 py-3 text-lg"
                         onClick={() => {
                           setOpenMenuPostId(null);
-                          navigate(`/posts/${post.id}/edit`);
+                          navigate(`/post/${post.id}/edit`);
                         }}
                       >
                         수정
@@ -159,7 +159,7 @@ export default function ProfilePostsWidget({
 
               {post.imageUrl?.trim() && (
                 <Link
-                  to={`/posts/${post.id}`}
+                  to={`/post/${post.id}`}
                   className="mt-3 block aspect-video max-h-64 overflow-hidden rounded-lg bg-gray-100"
                 >
                   <img src={post.imageUrl} alt="" className="h-full w-full object-cover" />
