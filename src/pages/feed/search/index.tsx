@@ -113,7 +113,7 @@ export default function SearchPage() {
               <li
                 key={u.id}
                 className="flex cursor-pointer items-center gap-3 rounded-xl px-2 py-2 active:bg-zinc-50"
-                onClick={() => nav(`/profile/${u.id}`)}
+                onClick={() => nav(`/profile/${u.handle.slice(1)}`)}
               >
                 <div className="h-10 w-10 rounded-full bg-zinc-200" />
 
