@@ -1,10 +1,12 @@
-const IMAGE_BASE_URL = import.meta.env.VITE_IMAGE_BASE_URL || import.meta.env.VITE_API_BASE_URL;
+const RAW = import.meta.env.VITE_IMAGE_BASE_URL;
+const IMAGE_BASE_URL = RAW.replace(/\/+$/, '');
 
 export function toImageUrl(path?: string) {
   const trimmed = path?.trim();
   if (!trimmed) return '';
-  if (trimmed.startsWith('http://') || trimmed.startsWith('https://')) return trimmed;
-  return `${IMAGE_BASE_URL}/${trimmed.replace(/^\//, '')}`;
+  if (/^https?:\/\//.test(trimmed)) return trimmed;
+  const normalized = trimmed.replace(/^\/+/, '');
+  return `${IMAGE_BASE_URL}/${normalized}`;
 }
 
 export function pickFirstImage(paths?: string) {
