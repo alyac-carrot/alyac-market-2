@@ -81,7 +81,7 @@ export default function ProfilePostsWidget({
           {mediaPosts.map((p) => (
             <Link
               key={p.id}
-              to={`/posts/${p.id}`}
+              to={`/post/${p.id}`}
               className="aspect-square overflow-hidden bg-gray-100 transition hover:opacity-80"
             >
               <img src={p.imageUrl!} alt="" className="h-full w-full object-cover" />
@@ -99,7 +99,7 @@ export default function ProfilePostsWidget({
                   <div className="font-semibold">{profile.nickname}</div>
                   <div className="text-sm text-gray-500">{profile.handle}</div>
 
-                  <Link to={`/posts/${post.id}`} className="block">
+                  <Link to={`/post/${post.id}`} className="block">
                     <div className="mt-2 text-sm">{post.content}</div>
                   </Link>
                 </div>

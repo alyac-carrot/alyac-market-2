@@ -16,10 +16,11 @@ export default function RootLayout() {
   const isSignin = useMatch('/auth/signin');
   const inSignup = useMatch('/auth/signup');
   const isEditPost = useMatch('/posts/:postId/edit');
+  const isPostDetail = useMatch('/post/:postId');
 
   const isSearch = useMatch('/search/*');
 
-  const hideHeader = Boolean(isLending || isSignin || inSignup || ishome);
+  const hideHeader = Boolean(isLending || isSignin || inSignup || ishome || isPostDetail);
   const hideFooter = Boolean(
     isUpload || isChatRoom || isLending || isSignin || inSignup || isEditPost || ishome,
   );
