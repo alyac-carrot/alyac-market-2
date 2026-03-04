@@ -15,13 +15,15 @@ import {
   AlertDialogDescription,
   AlertDialogTitle,
 } from '@/shared/ui';
-
 import {
+  type Post,
+  type PostViewMode,
+  type Product,
+  type Profile,
   ProfilePostsWidget,
   ProfileProductsWidget,
   ProfileSummaryWidget,
-} from '../../widgets/profile';
-import type { Post, PostViewMode, Product, Profile } from '../../widgets/profile/model/types';
+} from '@/widgets/profile';
 
 export default function ProfilePage() {
   const navigate = useNavigate();
@@ -54,7 +56,7 @@ export default function ProfilePage() {
       nickname: p.username,
       handle: `@${p.accountname}`,
       bio: p.intro ?? '',
-      avatarUrl: p.image?.trim() ? p.image : '',
+      avatarUrl: p.image?.trim() ? toImageUrl(p.image) : '',
       followersCount: p.followerCount ?? 0,
       followingsCount: p.followingCount ?? 0,
     };
