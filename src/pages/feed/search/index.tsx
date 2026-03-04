@@ -16,10 +16,35 @@ type FormValues = {
   keyword: string;
 };
 
+function isRecord(v: unknown): v is Record<string, unknown> {
+  return typeof v === 'object' && v !== null;
+}
+
+function normalizeToUserItems(out: unknown): UserItem[] {
+  // 1) 이미 배열이면 그대로
+  if (Array.isArray(out)) return out as UserItem[];
+
+  // 2) { users: [...] } 형태
+  if (isRecord(out) && Array.isArray(out.users)) return out.users as UserItem[];
+
+  // 3) AxiosResponse처럼 { data: ... } 형태
+  if (isRecord(out) && 'data' in out) {
+    const data = out.data;
+
+    // 3-1) data가 배열
+    if (Array.isArray(data)) return data as UserItem[];
+
+    // 3-2) data.users가 배열
+    if (isRecord(data) && Array.isArray(data.users)) return data.users as UserItem[];
+  }
+
+  return [];
+}
+
 export default function SearchPage() {
   const nav = useNavigate();
 
-  // ✅ 기존 검색어 소스(예: 상단 공용 검색바 상태)
+  //  기존 검색어 소스(예: 상단 공용 검색바 상태)
   const { value } = useSearchValue();
   const initial = value ?? '';
 
@@ -28,7 +53,7 @@ export default function SearchPage() {
     mode: 'onChange',
   });
 
-  // ✅ useSearchValue 값이 바뀌면(상단 검색바에서 변경 등) 폼에도 반영
+  // useSearchValue 값이 바뀌면(상단 검색바에서 변경 등) 폼에도 반영
   useEffect(() => {
     setValue('keyword', value ?? '', {
       shouldDirty: false,
@@ -37,7 +62,7 @@ export default function SearchPage() {
     });
   }, [value, setValue]);
 
-  // ✅ 입력값은 watch로 구독
+  // 입력값은 watch로 구독
   const keyword = watch('keyword') ?? '';
   const q = keyword.trim();
 
@@ -56,9 +81,11 @@ export default function SearchPage() {
       setLoading(true);
 
       try {
-        const data = await searchUsers(q);
+        const out = await searchUsers(q);
         if (!alive) return;
-        setResults(data);
+
+        const list = normalizeToUserItems(out);
+        setResults(list);
       } catch {
         if (!alive) return;
 
