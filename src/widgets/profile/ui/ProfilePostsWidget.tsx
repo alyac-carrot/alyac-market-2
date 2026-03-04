@@ -137,7 +137,7 @@ export default function ProfilePostsWidget({
                         className="cursor-pointer px-5 py-3 text-lg"
                         onClick={() => {
                           setOpenMenuPostId(null);
-                          navigate(`/posts/${post.id}/edit`);
+                          navigate(`/post/${post.id}/edit`);
                         }}
                       >
                         수정
