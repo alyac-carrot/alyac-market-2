@@ -41,7 +41,7 @@ export const router = createBrowserRouter([
 
           { path: 'post-create', element: <PostPage /> },
           { path: 'post/:postId', element: <PostPage /> },
-          { path: 'posts/:postId/edit', element: <EditPostPage /> },
+          { path: 'post/:postId/edit', element: <EditPostPage /> },
         ],
       },
     ],
