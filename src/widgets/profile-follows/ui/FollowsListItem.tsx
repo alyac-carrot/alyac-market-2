@@ -3,7 +3,7 @@ import { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { useFollowMutation } from '@/entities/profile';
-import type { FollowUser } from '@/entities/profile/api/followsApi';
+import type { FollowUser } from '@/entities/profile';
 import { toImageUrl } from '@/shared/lib/image/Url';
 import { Avatar } from '@/shared/ui';
 import { Button } from '@/shared/ui';

@@ -2,8 +2,8 @@ import { useMemo } from 'react';
 
 import { useParams } from 'react-router-dom';
 
-import { useFollowersQuery } from '@/entities/profile/model/useFollowersQuery';
-import { FollowsListItem } from '@/widgets/profile-follows/ui/FollowsListItem';
+import { useFollowersQuery } from '@/entities/profile';
+import { FollowsListItem } from '@/widgets/profile-follows';
 
 export default function FollowersPage() {
   const { accountname } = useParams<{ accountname: string }>();

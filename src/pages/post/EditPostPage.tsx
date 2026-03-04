@@ -3,12 +3,11 @@ import { useRef, useState } from 'react';
 import { Image as ImageIcon, X } from 'lucide-react';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { useGetPost } from '@/entities/post/hooks/useGetPost';
-import { useUpdatePost } from '@/entities/post/hooks/useUpdatePost';
-import { useUploadFiles } from '@/entities/upload/hooks/useUploadFiles';
+import { useGetPost, useUpdatePost } from '@/entities/post';
+import { useUploadFiles } from '@/entities/upload';
 import { toImageUrl } from '@/shared/lib';
 import { Button } from '@/shared/ui/button';
-import { UploadHeader } from '@/widgets/header/ui/UploadHeader';
+import { UploadHeader } from '@/widgets/header';
 
 interface ImageItem {
   src: string;

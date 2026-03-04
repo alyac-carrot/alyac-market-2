@@ -53,3 +53,6 @@ export interface CreatePostResponse {
   heartCount: number;
   hearted: boolean;
 }
+export interface GetPostsResponse {
+  post: Post[];
+}
