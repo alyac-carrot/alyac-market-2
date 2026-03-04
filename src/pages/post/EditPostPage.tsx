@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 
 import { Image as ImageIcon, X } from 'lucide-react';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -21,37 +21,61 @@ export default function EditPostPage() {
   const { postId = '' } = useParams<{ postId: string }>();
 
   const getPostQuery = useGetPost(postId);
+
+  if (getPostQuery.isLoading) {
+    return <div className="flex h-screen items-center justify-center">Loading...</div>;
+  }
+
+  if (getPostQuery.isError || !getPostQuery.data || !getPostQuery.data.post) {
+    return (
+      <div className="flex h-screen items-center justify-center">
+        <div className="text-center">
+          <p className="mb-4 text-sm text-gray-500">게시글을 불러오지 못했습니다.</p>
+          <Button onClick={() => navigate(-1)}>뒤로가기</Button>
+        </div>
+      </div>
+    );
+  }
+
+  return <EditPostForm key={postId} postId={postId} post={getPostQuery.data.post} />;
+}
+
+interface Post {
+  content?: string;
+  image?: string;
+}
+
+interface EditPostFormProps {
+  postId: string;
+  post: Post;
+}
+
+function EditPostForm({ postId, post }: EditPostFormProps) {
+  const navigate = useNavigate();
+
   const updatePostMutation = useUpdatePost(postId);
   const uploadFilesMutation = useUploadFiles();
 
-  const [text, setText] = useState('');
-  const [imageItems, setImageItems] = useState<ImageItem[]>([]);
+  // ✅ Initialize state directly from props — no useEffect needed
+  const [text, setText] = useState(() => post.content ?? '');
+
+  const [imageItems, setImageItems] = useState<ImageItem[]>(() => {
+    const imageString = String(post.image ?? '');
+    if (!imageString.trim()) return [];
+
+    return imageString
+      .split(',')
+      .map((path) => path?.trim() ?? '')
+      .filter(Boolean)
+      .map((path) => ({
+        src: toImageUrl(path),
+        isNew: false,
+        originalPath: path,
+      }));
+  });
+
   const [newFiles, setNewFiles] = useState<File[]>([]);
-
   const fileInputRef = useRef<HTMLInputElement>(null);
-
-  // Load post data when fetched
-  useEffect(() => {
-    if (getPostQuery.data) {
-      const post = getPostQuery.data.post;
-      const imageString = String(post.image ?? '');
-      const items: ImageItem[] = [];
-
-      if (imageString.trim()) {
-        const imagePaths = imageString.split(',').map((path) => path?.trim() ?? '');
-        items.push(
-          ...imagePaths.filter(Boolean).map((path) => ({
-            src: toImageUrl(path),
-            isNew: false,
-            originalPath: path,
-          })),
-        );
-      }
-
-      setText(post.content ?? '');
-      setImageItems(items);
-    }
-  }, [getPostQuery.data]);
 
   const handleImageAdd = () => {
     fileInputRef.current?.click();
@@ -133,21 +157,6 @@ export default function EditPostPage() {
       console.error('Post update failed:', error);
     }
   };
-
-  if (getPostQuery.isLoading) {
-    return <div className="flex h-screen items-center justify-center">Loading...</div>;
-  }
-
-  if (getPostQuery.isError || !getPostQuery.data) {
-    return (
-      <div className="flex h-screen items-center justify-center">
-        <div className="text-center">
-          <p className="mb-4 text-sm text-gray-500">게시글을 불러오지 못했습니다.</p>
-          <Button onClick={() => navigate(-1)}>뒤로가기</Button>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="bg-background flex min-h-screen flex-col">
