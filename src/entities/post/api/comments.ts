@@ -20,3 +20,13 @@ export const getComments = async (data: GetCommentsRequest): Promise<GetComments
   const response = await axiosInstance.get(`/post/${data.postId}/comments`);
   return response.data;
 };
+
+export const deleteComment = async ({
+  postId,
+  commentId,
+}: {
+  postId: string;
+  commentId: string;
+}): Promise<void> => {
+  await axiosInstance.delete(`/post/${postId}/comments/${commentId}`);
+};
