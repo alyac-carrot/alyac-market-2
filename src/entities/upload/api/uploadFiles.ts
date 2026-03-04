@@ -16,5 +16,18 @@ export const uploadFiles = async (files: File[]): Promise<UploadResponse[]> => {
     },
   });
 
-  return response.data;
+  // Normalize response: API may return a single object or an array
+  const data = response.data;
+  if (Array.isArray(data)) {
+    return data.map((item: { filename?: string }) => ({
+      filename: item.filename ?? '',
+    }));
+  }
+
+  // Single file response (e.g. { filename: "..." })
+  if (data?.filename) {
+    return [{ filename: data.filename }];
+  }
+
+  return [];
 };

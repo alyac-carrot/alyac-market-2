@@ -134,7 +134,7 @@ function EditPostForm({ postId, post }: EditPostFormProps) {
       // Upload new files if there are any
       if (newFiles.length > 0) {
         const uploadedFiles = await uploadFilesMutation.mutateAsync(newFiles);
-        uploadedNewFileNames.push(...uploadedFiles.map((f) => f.filename));
+        uploadedNewFileNames.push(...uploadedFiles.map((f) => `uploadFiles/${f.filename}`));
       }
 
       // Combine old files and newly uploaded files
@@ -185,15 +185,15 @@ function EditPostForm({ postId, post }: EditPostFormProps) {
               className="min-h-125 w-full resize-none border-0 text-base outline-none placeholder:text-gray-400 focus:ring-0"
             />
 
-            {/* image previews (2-column grid) */}
+            {/* image previews (full-size stacked) */}
             {imageItems.length > 0 && (
-              <div className="mt-4 grid grid-cols-2 gap-2">
+              <div className="mt-4 flex flex-col gap-3">
                 {imageItems.map((item, i) => (
                   <div key={i} className="relative overflow-hidden rounded-lg">
                     <img
                       src={item.src}
                       alt={`수정된 이미지 ${i + 1}`}
-                      className="h-40 w-full object-cover"
+                      className="w-full rounded-lg"
                     />
                     <Button
                       type="button"
