@@ -22,7 +22,7 @@ export default function RootLayout() {
 
   const hideHeader = Boolean(isLending || isSignin || inSignup || ishome || isPostDetail);
   const hideFooter = Boolean(
-    isUpload || isChatRoom || isLending || isSignin || inSignup || isEditPost || ishome,
+    isUpload || isChatRoom || isLending || isSignin || inSignup || isEditPost || ishome || isPostDetail,
   );
 
   const layout = (

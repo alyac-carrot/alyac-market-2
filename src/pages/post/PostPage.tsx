@@ -10,42 +10,20 @@ import { Avatar } from '@/shared/ui/Avatar';
 
 import type { Comment } from '@/entities/post/model/comment';
 
-/* ── single comment ── */
-function CommentItem({
-  avatar,
-  userName,
-  time,
-  text,
-}: {
-  avatar: string;
-  userName: string;
-  time: string;
-  text: string;
-}) {
-  return (
-    <div className="flex gap-3 px-4 py-4">
-      <div className="bg-muted flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-full">
-        {avatar ? (
-          <img src={avatar} alt={userName} className="h-full w-full object-cover" />
-        ) : (
-          <Avatar size="sm" />
-        )}
-      </div>
+/* ── format relative time ── */
+function formatRelativeTime(dateString: string) {
+  const now = new Date();
+  const date = new Date(dateString);
+  const diffMs = now.getTime() - date.getTime();
+  const diffMin = Math.floor(diffMs / 60000);
+  const diffHour = Math.floor(diffMin / 60);
+  const diffDay = Math.floor(diffHour / 24);
 
-      <div className="flex-1">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <span className="text-foreground font-semibold">{userName}</span>
-            <span className="text-muted-foreground text-xs">· {time}</span>
-          </div>
-          <button type="button" className="h-6 w-6">
-            <MoreVertical className="text-muted-foreground h-4 w-4" />
-          </button>
-        </div>
-        <p className="text-foreground text-left text-sm leading-relaxed">{text}</p>
-      </div>
-    </div>
-  );
+  if (diffMin < 1) return '방금 전';
+  if (diffMin < 60) return `${diffMin}분 전`;
+  if (diffHour < 24) return `${diffHour}시간 전`;
+  if (diffDay < 7) return `${diffDay}일 전`;
+  return date.toLocaleDateString('ko-KR');
 }
 
 /* ── format date ── */
@@ -56,6 +34,44 @@ function formatDate(dateString: string) {
     month: 'long',
     day: 'numeric',
   });
+}
+
+/* ── single comment ── */
+function CommentItem({ comment }: { comment: Comment }) {
+  const authorImage = comment.author?.image ? toImageUrl(comment.author.image) : '';
+
+  return (
+    <div className="flex gap-3 px-4 py-4">
+      <div className="bg-muted flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-full">
+        {authorImage ? (
+          <img
+            src={authorImage}
+            alt={comment.author?.username}
+            className="h-full w-full object-cover"
+          />
+        ) : (
+          <Avatar size="sm" />
+        )}
+      </div>
+
+      <div className="flex-1">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <span className="text-foreground font-semibold">
+              {comment.author?.username ?? '알 수 없음'}
+            </span>
+            <span className="text-muted-foreground text-xs">
+              · {formatRelativeTime(comment.createdAt)}
+            </span>
+          </div>
+          <button type="button" className="h-6 w-6">
+            <MoreVertical className="text-muted-foreground h-4 w-4" />
+          </button>
+        </div>
+        <p className="text-foreground text-left text-sm leading-relaxed">{comment.content}</p>
+      </div>
+    </div>
+  );
 }
 
 /* ── main page ── */
@@ -71,7 +87,7 @@ export default function PostPage() {
   const { data: commentsData, isLoading: isLoadingComments } = useGetComments(postId);
   const { mutate: submitComment, isPending: isSubmitting } = useCreateComment(postId);
 
-  const comments: Comment[] = commentsData?.comments ?? [];
+  const comments: Comment[] = commentsData?.comment ?? [];
 
   const handleSubmitComment = () => {
     if (!commentText.trim()) return;
@@ -101,9 +117,10 @@ export default function PostPage() {
   const post = postData.post;
   const authorAvatar = post.author?.image ? toImageUrl(post.author.image) : '';
   const postImage = toImageUrl(pickFirstImage(post.image));
+  const hasText = commentText.trim().length > 0;
 
   return (
-    <div className="bg-background flex min-h-screen flex-col pb-24 text-left">
+    <div className="bg-background flex min-h-screen flex-col pb-16 text-left">
       {/* ─ sticky top nav ─ */}
       <header className="border-border bg-background sticky top-0 z-10 flex items-center justify-between border-b px-4 py-3">
         <button
@@ -185,23 +202,15 @@ export default function PostPage() {
               댓글이 없습니다.
             </div>
           ) : (
-            comments.map((c) => (
-              <CommentItem
-                key={c.id}
-                avatar={c.avatar}
-                userName={c.userName}
-                time={c.time}
-                text={c.text}
-              />
-            ))
+            comments.map((c) => <CommentItem key={c.id} comment={c} />)
           )}
         </div>
       </main>
 
       {/* ─ fixed comment input bar ─ */}
-      <div className="border-muted bg-background fixed right-0 bottom-0 left-0 w-full border-t px-4 py-3">
+      <div className="border-border bg-background fixed right-0 bottom-0 left-0 z-10 w-full border-t px-4 py-2">
         <div className="flex items-center gap-3">
-          <div className="bg-muted flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-full">
+          <div className="shrink-0">
             <Avatar size="sm" />
           </div>
           <div className="relative flex-1">
@@ -210,7 +219,7 @@ export default function PostPage() {
               value={commentText}
               onChange={(e) => setCommentText(e.target.value)}
               placeholder="댓글 입력하기..."
-              className="border-muted bg-muted placeholder:text-muted-foreground focus:border-muted focus:bg-background h-10 w-full rounded-full border px-4 py-2 text-sm outline-none focus:ring-0"
+              className="border-border bg-muted placeholder:text-muted-foreground h-10 w-full rounded-full border px-4 pr-14 text-sm outline-none focus:ring-0"
               onKeyDown={(e) => {
                 if (e.key === 'Enter' && !isSubmitting) handleSubmitComment();
               }}
@@ -218,10 +227,10 @@ export default function PostPage() {
             <button
               type="button"
               onClick={handleSubmitComment}
-              disabled={!commentText.trim() || isSubmitting}
-              className={`absolute top-1/2 right-3 -translate-y-1/2 text-sm font-medium transition-colors ${
-                commentText.trim() && !isSubmitting
-                  ? 'text-foreground hover:text-primary'
+              disabled={!hasText || isSubmitting}
+              className={`absolute top-1/2 right-3 -translate-y-1/2 text-sm font-semibold transition-colors ${
+                hasText && !isSubmitting
+                  ? 'text-green-500 hover:text-green-600'
                   : 'text-muted-foreground cursor-not-allowed'
               }`}
             >
