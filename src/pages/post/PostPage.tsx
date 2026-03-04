@@ -4,7 +4,11 @@ import { ArrowLeft, Heart, MessageCircle, MoreVertical } from 'lucide-react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { useGetPost } from '@/entities/post/hooks/useGetPost';
-import { useCreateComment, useGetComments } from '@/entities/post/hooks/useComments';
+import {
+  useCreateComment,
+  useDeleteComment,
+  useGetComments,
+} from '@/entities/post/hooks/useComments';
 import { pickFirstImage, toImageUrl } from '@/shared/lib';
 import { Avatar } from '@/shared/ui/Avatar';
 
@@ -37,7 +41,13 @@ function formatDate(dateString: string) {
 }
 
 /* ── single comment ── */
-function CommentItem({ comment }: { comment: Comment }) {
+function CommentItem({
+  comment,
+  onKebabClick,
+}: {
+  comment: Comment;
+  onKebabClick: (commentId: string) => void;
+}) {
   const authorImage = comment.author?.image ? toImageUrl(comment.author.image) : '';
 
   return (
@@ -64,7 +74,11 @@ function CommentItem({ comment }: { comment: Comment }) {
               · {formatRelativeTime(comment.createdAt)}
             </span>
           </div>
-          <button type="button" className="h-6 w-6">
+          <button
+            type="button"
+            className="h-6 w-6"
+            onClick={() => onKebabClick(comment.id)}
+          >
             <MoreVertical className="text-muted-foreground h-4 w-4" />
           </button>
         </div>
@@ -74,11 +88,57 @@ function CommentItem({ comment }: { comment: Comment }) {
   );
 }
 
+/* ── bottom sheet modal ── */
+function BottomSheetModal({
+  isOpen,
+  onClose,
+  onDelete,
+  isDeleting,
+}: {
+  isOpen: boolean;
+  onClose: () => void;
+  onDelete: () => void;
+  isDeleting: boolean;
+}) {
+  if (!isOpen) return null;
+
+  return (
+    <>
+      {/* backdrop */}
+      <div
+        className="fixed inset-0 z-40 bg-black/40 transition-opacity"
+        onClick={onClose}
+      />
+
+      {/* sheet */}
+      <div className="bg-popover border-border fixed right-0 bottom-0 left-0 z-50 rounded-t-2xl border-t shadow-lg animate-in slide-in-from-bottom duration-200">
+        {/* handle */}
+        <div className="flex justify-center pt-3 pb-1">
+          <div className="bg-muted-foreground/30 h-1 w-10 rounded-full" />
+        </div>
+
+        {/* actions */}
+        <div className="px-2 pb-6 pt-1">
+          <button
+            type="button"
+            onClick={onDelete}
+            disabled={isDeleting}
+            className="text-foreground hover:bg-accent w-full rounded-lg px-5 py-4 text-left text-base transition-colors disabled:opacity-50"
+          >
+            {isDeleting ? '삭제 중...' : '삭제'}
+          </button>
+        </div>
+      </div>
+    </>
+  );
+}
+
 /* ── main page ── */
 export default function PostPage() {
   const navigate = useNavigate();
   const { postId = '' } = useParams();
   const [commentText, setCommentText] = useState('');
+  const [selectedCommentId, setSelectedCommentId] = useState<string | null>(null);
 
   // Fetch post data
   const { data: postData, isLoading: isLoadingPost, isError } = useGetPost(postId);
@@ -86,6 +146,7 @@ export default function PostPage() {
   // Fetch comments for this post
   const { data: commentsData, isLoading: isLoadingComments } = useGetComments(postId);
   const { mutate: submitComment, isPending: isSubmitting } = useCreateComment(postId);
+  const { mutate: deleteCommentMutate, isPending: isDeleting } = useDeleteComment(postId);
 
   const comments: Comment[] = commentsData?.comment ?? [];
 
@@ -100,6 +161,16 @@ export default function PostPage() {
         },
       },
     );
+  };
+
+  const handleDeleteComment = () => {
+    if (!selectedCommentId) return;
+
+    deleteCommentMutate(selectedCommentId, {
+      onSuccess: () => {
+        setSelectedCommentId(null);
+      },
+    });
   };
 
   if (isLoadingPost) {
@@ -202,7 +273,13 @@ export default function PostPage() {
               댓글이 없습니다.
             </div>
           ) : (
-            comments.map((c) => <CommentItem key={c.id} comment={c} />)
+            comments.map((c) => (
+              <CommentItem
+                key={c.id}
+                comment={c}
+                onKebabClick={(id) => setSelectedCommentId(id)}
+              />
+            ))
           )}
         </div>
       </main>
@@ -239,6 +316,14 @@ export default function PostPage() {
           </div>
         </div>
       </div>
+
+      {/* ─ delete comment bottom sheet ─ */}
+      <BottomSheetModal
+        isOpen={selectedCommentId !== null}
+        onClose={() => setSelectedCommentId(null)}
+        onDelete={handleDeleteComment}
+        isDeleting={isDeleting}
+      />
     </div>
   );
 }
