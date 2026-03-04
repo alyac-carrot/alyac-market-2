@@ -17,6 +17,8 @@ const FeedPage = lazy(() => import('@/pages/feed'));
 const ChatRoomPage = lazy(() => import('@/pages/chat/room'));
 const ChatListPage = lazy(() => import('@/pages/chat'));
 const NotFoundPage = lazy(() => import('@/pages/not-found/NotFoundPage'));
+const FollowersPage = lazy(() => import('@/pages/profile/followers'));
+const FollowingsPage = lazy(() => import('@/pages/profile/followings'));
 
 export const router = createBrowserRouter([
   {
@@ -38,6 +40,8 @@ export const router = createBrowserRouter([
           { path: 'upload', element: <UploadPage /> },
           { path: 'profile', element: <ProfilePage /> },
           { path: 'profile/:userId', element: <ProfilePage /> },
+          { path: 'followers/:accountname', element: <FollowersPage /> },
+          { path: 'followings/:accountname', element: <FollowingsPage /> },
 
           { path: 'post-create', element: <PostPage /> },
           { path: 'post/:postId', element: <PostPage /> },

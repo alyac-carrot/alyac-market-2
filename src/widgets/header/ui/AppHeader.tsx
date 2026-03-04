@@ -7,10 +7,13 @@ import { Button, Popover, PopoverContent, PopoverTrigger } from '@/shared/ui';
 
 import { HeaderShell } from './HeaderShell';
 
-export function AppHeader() {
+interface AppHeaderProps {
+  title?: string;
+}
+
+export function AppHeader({ title }: AppHeaderProps) {
   const navigate = useNavigate();
   const logout = useLogout();
-
   const { theme, setTheme } = useTheme();
 
   const ThemeIcon = theme === 'system' ? Monitor : theme === 'light' ? Sun : Moon;
@@ -29,7 +32,7 @@ export function AppHeader() {
           <ArrowLeft className="h-6 w-6" />
         </Button>
       }
-      center={null}
+      center={title ? <div className="text-base font-semibold">{title}</div> : null}
       right={
         <Popover>
           <PopoverTrigger asChild>
