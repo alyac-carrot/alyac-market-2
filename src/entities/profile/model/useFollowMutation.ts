@@ -1,7 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { followUser, unfollowUser } from '../api/profileApi';
-import { profileQueryKeys } from './queries';
 
 export function useFollowMutation(accountname: string) {
   const queryClient = useQueryClient();
@@ -16,7 +15,9 @@ export function useFollowMutation(accountname: string) {
       return false;
     },
     onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: profileQueryKeys.profile(accountname) });
+      await queryClient.invalidateQueries({ queryKey: ['profile'] });
+      await queryClient.invalidateQueries({ queryKey: ['followings'] });
+      await queryClient.invalidateQueries({ queryKey: ['followers'] });
     },
   });
 }
