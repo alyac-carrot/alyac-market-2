@@ -1,4 +1,4 @@
-export type { Profile } from './model/types';
+export type { Profile, UIProfile, Product, Post, PostViewMode } from './model/types';
 export { useProfileQuery } from './model/useProfileQuery';
 export { useFollowMutation } from './model/useFollowMutation';
 export { useFollowersQuery } from './model/useFollowersQuery';

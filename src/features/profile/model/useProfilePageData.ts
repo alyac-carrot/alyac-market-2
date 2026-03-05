@@ -2,10 +2,16 @@ import { useMemo, useState } from 'react';
 
 import { useDeletePost, useGetUserPosts } from '@/entities/post';
 import { useUserProductsQuery } from '@/entities/product';
-import { useFollowMutation, useProfileQuery } from '@/entities/profile';
+import {
+  type Post,
+  type PostViewMode,
+  type Product,
+  type UIProfile,
+  useFollowMutation,
+  useProfileQuery,
+} from '@/entities/profile';
 import { useMeQuery } from '@/entities/user';
 import { pickFirstImage, toImageUrl } from '@/shared/lib/';
-import { type Post, type PostViewMode, type Product, type Profile } from '@/widgets/profile';
 
 interface UseProfilePageDataProps {
   targetAccountname?: string;
@@ -26,7 +32,7 @@ export function useProfilePageData({ targetAccountname, isMeByRoute }: UseProfil
   const [postViewMode, setPostViewMode] = useState<PostViewMode>('normal');
   const [deleteTargetPostId, setDeleteTargetPostId] = useState<string | null>(null);
 
-  const profile: Profile | null = useMemo(() => {
+  const profile: UIProfile | null = useMemo(() => {
     const p = profileQuery.data;
     if (!p) return null;
 
