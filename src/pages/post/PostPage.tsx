@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { ArrowLeft, Heart, MessageCircle, MoreVertical } from 'lucide-react';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -8,6 +8,7 @@ import {
   useCreateComment,
   useDeleteComment,
   useGetComments,
+  useLikePost,
 } from '@/entities/post';
 import { pickFirstImage, toImageUrl } from '@/shared/lib';
 import { Avatar } from '@/shared/ui/Avatar';
@@ -146,9 +147,29 @@ export default function PostPage() {
   // Fetch comments for this post
   const { data: commentsData, isLoading: isLoadingComments } = useGetComments(postId);
   const { mutate: submitComment, isPending: isSubmitting } = useCreateComment(postId);
+  const { mutate: toggleLike, isPending: isLikePending } = useLikePost(postId);
   const { mutate: deleteCommentMutate, isPending: isDeleting } = useDeleteComment(postId);
 
   const comments: Comment[] = commentsData?.comment ?? [];
+
+  // Optimistic heart state — synced from server data once loaded
+  const [isHearted, setIsHearted] = useState(false);
+  const [heartCount, setHeartCount] = useState(0);
+
+  useEffect(() => {
+    if (postData?.post) {
+      setIsHearted(postData.post.hearted);
+      setHeartCount(postData.post.heartCount ?? 0);
+    }
+  }, [postData]);
+
+  const handleLikeClick = () => {
+    if (isLikePending) return;
+    // Optimistic update
+    setIsHearted((prev) => !prev);
+    setHeartCount((prev) => (isHearted ? prev - 1 : prev + 1));
+    toggleLike();
+  };
 
   const handleSubmitComment = () => {
     if (!commentText.trim()) return;
@@ -245,9 +266,25 @@ export default function PostPage() {
 
           {/* actions */}
           <div className="flex items-center gap-4 px-4">
-            <button type="button" className="flex items-center gap-1.5">
-              <Heart className="text-muted-foreground h-5 w-5" strokeWidth={1.5} />
-              <span className="text-muted-foreground text-xs">{post.heartCount ?? 0}</span>
+            <button
+              type="button"
+              onClick={handleLikeClick}
+              disabled={isLikePending}
+              className="flex items-center gap-1.5 transition-transform active:scale-90 disabled:opacity-70"
+            >
+              <Heart
+                className="h-5 w-5 transition-colors"
+                strokeWidth={1.5}
+                fill={isHearted ? '#ef4444' : 'none'}
+                stroke={isHearted ? '#ef4444' : 'currentColor'}
+                style={isHearted ? {} : { color: 'var(--muted-foreground)' }}
+              />
+              <span
+                className="text-xs transition-colors"
+                style={{ color: isHearted ? '#ef4444' : 'var(--muted-foreground)' }}
+              >
+                {heartCount}
+              </span>
             </button>
             <button type="button" className="flex items-center gap-1.5">
               <MessageCircle className="text-muted-foreground h-5 w-5" strokeWidth={1.5} />

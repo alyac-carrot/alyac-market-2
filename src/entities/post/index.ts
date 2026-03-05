@@ -5,7 +5,10 @@ export { getUserPosts } from './api/getUserPosts';
 export { createPost } from './api/createPost';
 export { updatePost } from './api/updatePost';
 export { deletePost } from './api/deletePost';
-export { getComments, createComment, deleteComment } from './api/comments';
+export { getComments } from './api/getComments';
+export { createComment } from './api/createComment';
+export { deleteComment } from './api/deleteComment';
+export { likePost } from './api/likePost';
 
 // model – hooks
 export { useGetPost } from './model/useGetPost';
@@ -14,7 +17,10 @@ export { useGetUserPosts } from './model/useGetUserPosts';
 export { useCreatePost } from './model/useCreatePost';
 export { useUpdatePost } from './model/useUpdatePost';
 export { useDeletePost } from './model/useDeletePost';
-export { useGetComments, useCreateComment, useDeleteComment } from './model/useComments';
+export { useGetComments } from './model/useGetComments';
+export { useCreateComment } from './model/useCreateComment';
+export { useDeleteComment } from './model/useDeleteComment';
+export { useLikePost } from './model/useLikePost';
 
 // model – types
 export type { Post, GetPostResponse, GetPostsResponse, CreatePostRequest, CreatePostResponse } from './model/types';
