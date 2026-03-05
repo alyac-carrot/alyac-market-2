@@ -18,8 +18,8 @@ const FeedPage = lazy(() => import('@/pages/feed'));
 const ChatRoomPage = lazy(() => import('@/pages/chat/room'));
 const ChatListPage = lazy(() => import('@/pages/chat'));
 const NotFoundPage = lazy(() => import('@/pages/not-found/NotFoundPage'));
-const FollowersPage = lazy(() => import('@/pages/profile/FollowersPage'));
-const FollowingsPage = lazy(() => import('@/pages/profile/FollowingsPage'));
+const FollowersPage = lazy(() => import('@/pages/followers/FollowersPage'));
+const FollowingsPage = lazy(() => import('@/pages/followings/FollowingsPage'));
 
 export const router = createBrowserRouter([
   {
