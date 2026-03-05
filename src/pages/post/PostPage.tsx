@@ -1,19 +1,18 @@
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 
 import { ArrowLeft, Heart, MessageCircle, MoreVertical } from 'lucide-react';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { useGetPost } from '@/entities/post/hooks/useGetPost';
 import {
+  useGetPost,
   useCreateComment,
   useDeleteComment,
-  useEditComment,
   useGetComments,
-} from '@/entities/post/hooks/useComments';
+} from '@/entities/post';
 import { pickFirstImage, toImageUrl } from '@/shared/lib';
 import { Avatar } from '@/shared/ui/Avatar';
 
-import type { Comment } from '@/entities/post/model/comment';
+import type { Comment } from '@/entities/post';
 
 /* ── format relative time ── */
 function formatRelativeTime(dateString: string) {
@@ -93,13 +92,11 @@ function CommentItem({
 function BottomSheetModal({
   isOpen,
   onClose,
-  onEdit,
   onDelete,
   isDeleting,
 }: {
   isOpen: boolean;
   onClose: () => void;
-  onEdit: () => void;
   onDelete: () => void;
   isDeleting: boolean;
 }) {
@@ -124,13 +121,6 @@ function BottomSheetModal({
         <div className="px-2 pb-6 pt-1">
           <button
             type="button"
-            onClick={onEdit}
-            className="text-foreground hover:bg-accent w-full rounded-lg px-5 py-4 text-left text-base transition-colors"
-          >
-            수정
-          </button>
-          <button
-            type="button"
             onClick={onDelete}
             disabled={isDeleting}
             className="text-foreground hover:bg-accent w-full rounded-lg px-5 py-4 text-left text-base transition-colors disabled:opacity-50"
@@ -149,8 +139,6 @@ export default function PostPage() {
   const { postId = '' } = useParams();
   const [commentText, setCommentText] = useState('');
   const [selectedCommentId, setSelectedCommentId] = useState<string | null>(null);
-  const [editingCommentId, setEditingCommentId] = useState<string | null>(null);
-  const inputRef = useRef<HTMLInputElement>(null);
 
   // Fetch post data
   const { data: postData, isLoading: isLoadingPost, isError } = useGetPost(postId);
@@ -159,42 +147,20 @@ export default function PostPage() {
   const { data: commentsData, isLoading: isLoadingComments } = useGetComments(postId);
   const { mutate: submitComment, isPending: isSubmitting } = useCreateComment(postId);
   const { mutate: deleteCommentMutate, isPending: isDeleting } = useDeleteComment(postId);
-  const { mutate: editCommentMutate, isPending: isEditing } = useEditComment(postId);
 
   const comments: Comment[] = commentsData?.comment ?? [];
-
-  // Focus input when entering edit mode
-  useEffect(() => {
-    if (editingCommentId && inputRef.current) {
-      inputRef.current.focus();
-    }
-  }, [editingCommentId]);
 
   const handleSubmitComment = () => {
     if (!commentText.trim()) return;
 
-    if (editingCommentId) {
-      // Edit mode
-      editCommentMutate(
-        { commentId: editingCommentId, content: commentText },
-        {
-          onSuccess: () => {
-            setCommentText('');
-            setEditingCommentId(null);
-          },
+    submitComment(
+      { content: commentText, postId },
+      {
+        onSuccess: () => {
+          setCommentText('');
         },
-      );
-    } else {
-      // Create mode
-      submitComment(
-        { content: commentText, postId },
-        {
-          onSuccess: () => {
-            setCommentText('');
-          },
-        },
-      );
-    }
+      },
+    );
   };
 
   const handleDeleteComment = () => {
@@ -205,23 +171,6 @@ export default function PostPage() {
         setSelectedCommentId(null);
       },
     });
-  };
-
-  const handleEditComment = () => {
-    if (!selectedCommentId) return;
-
-    // Find the comment to get its current text
-    const commentToEdit = comments.find((c) => c.id === selectedCommentId);
-    if (commentToEdit) {
-      setEditingCommentId(selectedCommentId);
-      setCommentText(commentToEdit.content);
-    }
-    setSelectedCommentId(null); // Close the bottom sheet
-  };
-
-  const handleCancelEdit = () => {
-    setEditingCommentId(null);
-    setCommentText('');
   };
 
   if (isLoadingPost) {
@@ -240,7 +189,6 @@ export default function PostPage() {
   const authorAvatar = post.author?.image ? toImageUrl(post.author.image) : '';
   const postImage = toImageUrl(pickFirstImage(post.image));
   const hasText = commentText.trim().length > 0;
-  const isBusy = isSubmitting || isEditing;
 
   return (
     <div className="bg-background flex min-h-screen flex-col pb-16 text-left">
@@ -338,57 +286,41 @@ export default function PostPage() {
 
       {/* ─ fixed comment input bar ─ */}
       <div className="border-border bg-background fixed right-0 bottom-0 left-0 z-10 w-full border-t px-4 py-2">
-        {/* edit mode indicator */}
-        {editingCommentId && (
-          <div className="mb-2 flex items-center justify-between">
-            <span className="text-muted-foreground text-xs">댓글 수정 중...</span>
-            <button
-              type="button"
-              onClick={handleCancelEdit}
-              className="text-muted-foreground hover:text-foreground text-xs"
-            >
-              취소
-            </button>
-          </div>
-        )}
         <div className="flex items-center gap-3">
           <div className="shrink-0">
             <Avatar size="sm" />
           </div>
           <div className="relative flex-1">
             <input
-              ref={inputRef}
               type="text"
               value={commentText}
               onChange={(e) => setCommentText(e.target.value)}
-              placeholder={editingCommentId ? '댓글을 수정하세요...' : '댓글 입력하기...'}
+              placeholder="댓글 입력하기..."
               className="border-border bg-muted placeholder:text-muted-foreground h-10 w-full rounded-full border px-4 pr-14 text-sm outline-none focus:ring-0"
               onKeyDown={(e) => {
-                if (e.key === 'Enter' && !isBusy) handleSubmitComment();
-                if (e.key === 'Escape' && editingCommentId) handleCancelEdit();
+                if (e.key === 'Enter' && !isSubmitting) handleSubmitComment();
               }}
             />
             <button
               type="button"
               onClick={handleSubmitComment}
-              disabled={!hasText || isBusy}
+              disabled={!hasText || isSubmitting}
               className={`absolute top-1/2 right-3 -translate-y-1/2 text-sm font-semibold transition-colors ${
-                hasText && !isBusy
+                hasText && !isSubmitting
                   ? 'text-green-500 hover:text-green-600'
                   : 'text-muted-foreground cursor-not-allowed'
               }`}
             >
-              {isBusy ? '로딩...' : editingCommentId ? '수정' : '게시'}
+              {isSubmitting ? '로딩...' : '게시'}
             </button>
           </div>
         </div>
       </div>
 
-      {/* ─ comment action bottom sheet ─ */}
+      {/* ─ delete comment bottom sheet ─ */}
       <BottomSheetModal
         isOpen={selectedCommentId !== null}
         onClose={() => setSelectedCommentId(null)}
-        onEdit={handleEditComment}
         onDelete={handleDeleteComment}
         isDeleting={isDeleting}
       />

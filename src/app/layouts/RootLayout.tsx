@@ -22,7 +22,14 @@ export default function RootLayout() {
 
   const hideHeader = Boolean(isLending || isSignin || inSignup || ishome || isPostDetail);
   const hideFooter = Boolean(
-    isUpload || isChatRoom || isLending || isSignin || inSignup || isEditPost || ishome || isPostDetail,
+    isUpload ||
+    isChatRoom ||
+    isLending ||
+    isSignin ||
+    inSignup ||
+    isEditPost ||
+    ishome ||
+    isPostDetail,
   );
 
   const layout = (
@@ -30,7 +37,7 @@ export default function RootLayout() {
       {!hideHeader && <Header />}
 
       <main className={`${hideHeader ? 'pt-0' : 'pt-16'} ${hideFooter ? '' : 'pb-16'}`}>
-        <div className="mx-auto w-full px-4">
+        <div className="mx-auto w-full">
           <Suspense
             fallback={<div className="flex h-screen items-center justify-center">Loading...</div>}
           >

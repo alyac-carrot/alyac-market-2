@@ -1,2 +1,2 @@
-export { useUploadFiles } from './hooks/useUploadFiles';
+export { useUploadFiles } from './model/useUploadFiles';
 export type { UploadResponse } from './api/uploadFiles';

@@ -3,10 +3,10 @@ import { useRef, useState } from 'react';
 import { Image as ImageIcon, X } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
-import { useCreatePost } from '@/entities/post/hooks/useCreatePost';
-import { useUploadFiles } from '@/entities/upload/hooks/useUploadFiles';
+import { useCreatePost } from '@/entities/post';
+import { useUploadFiles } from '@/entities/upload';
 import { Button } from '@/shared/ui/button';
-import { UploadHeader } from '@/widgets/header/ui/UploadHeader';
+import { UploadHeader } from '@/widgets/header';
 
 export default function UploadPage() {
   const navigate = useNavigate();

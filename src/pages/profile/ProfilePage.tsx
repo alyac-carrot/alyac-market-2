@@ -2,8 +2,7 @@ import { useMemo, useState } from 'react';
 
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { useDeletePost } from '@/entities/post/hooks/useDeletePost';
-import { useGetUserPosts } from '@/entities/post/hooks/useGetUserPosts';
+import { useDeletePost, useGetUserPosts } from '@/entities/post';
 import { useUserProductsQuery } from '@/entities/product';
 import { useFollowMutation, useProfileQuery } from '@/entities/profile';
 import { useMeQuery } from '@/entities/user';

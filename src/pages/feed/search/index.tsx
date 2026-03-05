@@ -3,7 +3,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
-import { type UserItem, searchUsers } from '@/entities/api/users';
+import { type UserItem, searchUsers } from '@/entities/user';
 import { useSearchValue } from '@/shared/lib/search/useSearchValue';
 
 // 🔧 개발용 MOCK 데이터 (API 장애/테스트 대비 - 현재 미사용)
@@ -16,32 +16,6 @@ import { useSearchValue } from '@/shared/lib/search/useSearchValue';
 type FormValues = {
   keyword: string;
 };
-
-function isRecord(v: unknown): v is Record<string, unknown> {
-  return typeof v === 'object' && v !== null;
-}
-
-// searchUsers가 어떤 형태를 반환해도(UserItem[] / AxiosResponse / {users:[]}) UserItem[]로 맞춰주는 함수
-function normalizeToUserItems(out: unknown): UserItem[] {
-  // 1) 이미 배열이면 그대로
-  if (Array.isArray(out)) return out as UserItem[];
-
-  // 2) { users: [...] } 형태
-  if (isRecord(out) && Array.isArray(out.users)) return out.users as UserItem[];
-
-  // 3) AxiosResponse처럼 { data: ... } 형태
-  if (isRecord(out) && 'data' in out) {
-    const data = out.data;
-
-    // 3-1) data가 배열
-    if (Array.isArray(data)) return data as UserItem[];
-
-    // 3-2) data.users가 배열
-    if (isRecord(data) && Array.isArray(data.users)) return data.users as UserItem[];
-  }
-
-  return [];
-}
 
 export default function SearchPage() {
   const nav = useNavigate();
@@ -83,15 +57,13 @@ export default function SearchPage() {
       setLoading(true);
 
       try {
-        const out = await searchUsers(q);
+        const data = await searchUsers(q); // ✅ users.ts에서 이미 UserItem[]로 변환해서 내려줌
         if (!alive) return;
 
-        const list = normalizeToUserItems(out);
-        setResults(list);
+        setResults(data); // ✅ 그대로 넣기
       } catch {
         if (!alive) return;
 
-        // 서버 연결 후: 목업 대신 빈 결과 처리
         // setResults(MOCK_USERS); // 필요 시 주석 해제해서 사용
         setResults([]);
       } finally {
@@ -141,16 +113,19 @@ export default function SearchPage() {
               <li
                 key={u.id}
                 className="flex cursor-pointer items-center gap-3 rounded-xl px-2 py-2 active:bg-zinc-50"
-                onClick={() => nav(`/profile/${u.id}`)}
+                onClick={() => nav(`/profile/${u.handle.slice(1)}`)}
               >
                 <div className="h-10 w-10 rounded-full bg-zinc-200" />
+
                 <div className="min-w-0 flex-1">
                   <div className="flex items-center gap-2">
                     <p className="truncate text-sm font-semibold text-zinc-900">{u.name}</p>
+
                     <span className="rounded-full bg-green-50 px-2 py-0.5 text-[11px] font-semibold text-green-600">
                       {u.tag}
                     </span>
                   </div>
+
                   <p className="truncate text-xs text-zinc-500">{u.handle}</p>
                 </div>
               </li>
