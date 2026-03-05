@@ -4,6 +4,7 @@ import { EllipsisVertical, Heart, MessageCircle } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { PostAlbumOff, PostAlbumOn, PostListOff, PostListOn } from '@/assets/icon';
+import type { Post, PostViewMode, UIProfile as Profile } from '@/entities/profile';
 import {
   Avatar,
   Button,
@@ -12,8 +13,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/shared/ui';
-
-import type { Post, PostViewMode, Profile } from '../model/types';
 
 interface PostsSectionProps {
   profile: Profile;
@@ -125,11 +124,11 @@ export default function ProfilePostsWidget({
                   <DropdownMenuContent
                     align="end"
                     sideOffset={8}
-                    className="w-44 rounded-xl border border-border bg-popover shadow-lg"
+                    className="border-border bg-popover w-44 rounded-xl border shadow-lg"
                     onCloseAutoFocus={(e) => e.preventDefault()}
                   >
                     <div className="flex justify-center pt-2">
-                      <div className="h-1 w-10 rounded-full bg-muted-foreground/30" />
+                      <div className="bg-muted-foreground/30 h-1 w-10 rounded-full" />
                     </div>
 
                     <div className="py-2">

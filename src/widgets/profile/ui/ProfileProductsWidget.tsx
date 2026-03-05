@@ -1,4 +1,4 @@
-import type { Product } from '../model/types';
+import type { Product } from '@/entities/profile';
 
 interface SellingProductsSectionProps {
   products: Product[];

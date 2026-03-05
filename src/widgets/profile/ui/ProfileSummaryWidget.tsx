@@ -1,6 +1,5 @@
+import type { UIProfile as Profile } from '@/entities/profile';
 import { Avatar, Button } from '@/shared/ui';
-
-import type { Profile } from '../model/types';
 
 interface ProfileSummaryProps {
   profile: Profile;
