@@ -5,7 +5,7 @@ import { getPostsList } from '@/entities/post/api/getPostsList';
 import type { Post } from '@/entities/post/model/types';
 import { Button } from '@/shared/ui';
 
-// ✅ 서버가 업로드 파일을 제공하는 주소 (네가 말한 2번이 뜨는 케이스)
+// ✅ 서버가 업로드 파일을 제공하는 주소
 const FILE_BASE_URL = 'http://localhost:3000';
 
 // ✅ 실제 서버 응답 형태 (Network Response 기준: { posts: [...] })
