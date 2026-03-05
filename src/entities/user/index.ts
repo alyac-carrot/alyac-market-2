@@ -1,5 +1,6 @@
 export { useMeQuery } from './model/useMeQuery';
-export type { User, MyInfoResponse } from './model/types';
+export type { User, MyInfoResponse, UpdateProfileBody, UpdateProfileResponse } from './model/types';
+export { useUpdateMyProfileMutation } from './hooks/useUpdateMyProfileMutation';
 
 export { searchUsers } from './api/users';
 export type { UserItem } from './api/users';

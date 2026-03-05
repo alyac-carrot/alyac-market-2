@@ -14,3 +14,14 @@ export type User = {
 export type MyInfoResponse = {
   user: User;
 };
+
+export type UpdateProfileBody = {
+  username: string;
+  accountname: string;
+  intro: string;
+  image: string;
+};
+
+export type UpdateProfileResponse = {
+  user: User;
+};

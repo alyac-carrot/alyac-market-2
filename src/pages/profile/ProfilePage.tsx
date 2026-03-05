@@ -109,7 +109,7 @@ export default function ProfilePage() {
   const goFollowers = () => navigate(`/followers/${profile.id}`);
   const goFollowings = () => navigate(`/followings/${profile.id}`);
 
-  const goEditProfile = () => navigate('/profile/edit');
+  const goEditProfile = () => navigate('/profile-update');
   const goCreateProduct = () => navigate('/products/new');
   const goProductDetail = (id: string) => navigate(`/products/${id}`);
 
