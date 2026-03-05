@@ -16,13 +16,20 @@ export function useUpdateMyProfileMutation() {
     },
 
     onSuccess: async (data) => {
-      const accountname = data.user.accountname;
+      const updatedUser = data.user;
+      const accountname = updatedUser.accountname;
+
+      qc.setQueryData(queryKeys.me, { user: updatedUser });
+
+      qc.setQueryData(profileQueryKeys.profile(accountname), (prev: unknown) => {
+        return {
+          ...updatedUser,
+          ...(typeof prev === 'object' && prev !== null ? prev : {}),
+        };
+      });
 
       await qc.invalidateQueries({ queryKey: queryKeys.me });
-
-      await qc.invalidateQueries({
-        queryKey: profileQueryKeys.profile(accountname),
-      });
+      await qc.invalidateQueries({ queryKey: profileQueryKeys.profile(accountname) });
     },
   });
 }
