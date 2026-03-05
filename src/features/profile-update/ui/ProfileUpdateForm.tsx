@@ -71,14 +71,12 @@ export function ProfileUpdateForm({ initial }: ProfileUpdateFormProps) {
     const file = e.target.files?.[0];
     if (!file) return;
 
-    // 1) 즉시 미리보기
     const url = URL.createObjectURL(file);
     setPreviewUrl((prev) => {
       if (prev) URL.revokeObjectURL(prev);
       return url;
     });
 
-    // 2) 서버 업로드
     uploadMutation.mutate([file], {
       onSuccess: (data) => {
         const filename = data?.[0]?.filename ?? '';
