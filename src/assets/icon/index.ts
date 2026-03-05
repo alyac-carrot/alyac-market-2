@@ -12,3 +12,4 @@ export { default as ChatIconFill } from './icon-message-circle-fill.svg?react';
 export { default as ProfileIconFill } from './icon-user-fill.svg?react';
 export { default as PostAlbumOff } from './icon-post-album-off.svg?react';
 export { default as PostListOff } from './icon-post-list-off.svg?react';
+export { default as ProfileImageEditIcon } from './icon-image.svg?react';

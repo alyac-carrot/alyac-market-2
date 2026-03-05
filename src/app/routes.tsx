@@ -10,6 +10,7 @@ const LandingPage = lazy(() => import('@/pages/auth/LandingPage'));
 const SignInPage = lazy(() => import('@/pages/auth/signin'));
 const UploadPage = lazy(() => import('@/pages/upload/UploadPage'));
 const ProfilePage = lazy(() => import('@/pages/profile/ProfilePage'));
+const ProfileUpdatePage = lazy(() => import('@/pages/profile-update/ProfileUpdatePage'));
 const PostPage = lazy(() => import('@/pages/post/PostPage'));
 const EditPostPage = lazy(() => import('@/pages/post/EditPostPage'));
 const SearchPage = lazy(() => import('@/pages/feed/search'));
@@ -40,7 +41,7 @@ export const router = createBrowserRouter([
           { path: 'upload', element: <UploadPage /> },
           { path: 'profile', element: <ProfilePage /> },
           { path: 'profile/:userId', element: <ProfilePage /> },
-          // { path: 'profile/edit', element: <ProfileEditPage /> },
+          { path: 'profile-update', element: <ProfileUpdatePage /> },
           { path: 'followers/:accountname', element: <FollowersPage /> },
           { path: 'followings/:accountname', element: <FollowingsPage /> },
 
