@@ -1,13 +1,13 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 
-import type { AxiosError } from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 import { ProfileImageEditIcon } from '@/assets/icon';
+import { useProfileQuery } from '@/entities/profile';
 import { useUploadFiles } from '@/entities/upload';
-import { type User, useMeQuery, useUpdateMyProfileMutation } from '@/entities/user';
+import { useMeQuery, useUpdateMyProfileMutation } from '@/entities/user';
 import { toImageUrl } from '@/shared/lib';
-import { Avatar } from '@/shared/ui';
+import { Avatar, Input } from '@/shared/ui';
 import { ProfileUpdateHeader } from '@/widgets/header/ui/ProfileUpdateHeader';
 
 type FormState = {
@@ -25,22 +25,17 @@ function normalizeUploadPath(filename: string) {
   return `uploadFiles/${trimmed.replace(/^\/+/, '')}`;
 }
 
-const sampleInputClass =
-  'border-input bg-background ring-offset-background file:text-foreground placeholder:text-muted-foreground ' +
-  'focus-visible:ring-ring flex w-full rounded-md border px-3 py-2 text-base file:border-0 file:bg-transparent ' +
-  'file:text-sm file:font-medium focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm ' +
-  'h-12 border-t-0 border-r-0 border-b-2 border-l-0 pl-0 focus:outline-none focus-visible:ring-0 focus-visible:outline-none';
-
-const sampleDisabledClass = sampleInputClass.replace('disabled:opacity-50', 'disabled:opacity-60');
-
 export default function ProfileUpdatePage() {
   const meQuery = useMeQuery();
+  const myAccountname = meQuery.data?.user.accountname;
 
-  if (meQuery.isLoading) {
+  const myProfileQuery = useProfileQuery(myAccountname);
+
+  if (meQuery.isLoading || myProfileQuery.isLoading) {
     return <div className="flex h-screen items-center justify-center">Loading...</div>;
   }
 
-  if (meQuery.isError || !meQuery.data?.user) {
+  if (meQuery.isError || !myAccountname || myProfileQuery.isError || !myProfileQuery.data) {
     return (
       <div className="text-muted-foreground p-6 text-center text-sm">
         내 정보를 불러오지 못했습니다.
@@ -48,12 +43,22 @@ export default function ProfileUpdatePage() {
     );
   }
 
-  const me = meQuery.data.user;
+  const profile = myProfileQuery.data;
 
-  return <ProfileUpdateForm key={me._id} me={me} />;
+  return <ProfileUpdateForm key={profile._id} initial={profile} />;
 }
 
-function ProfileUpdateForm({ me }: { me: User }) {
+function ProfileUpdateForm({
+  initial,
+}: {
+  initial: {
+    _id: string;
+    username: string;
+    accountname: string;
+    intro: string;
+    image: string;
+  };
+}) {
   const navigate = useNavigate();
 
   const updateMutation = useUpdateMyProfileMutation();
@@ -62,23 +67,16 @@ function ProfileUpdateForm({ me }: { me: User }) {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   const [form, setForm] = useState<FormState>(() => ({
-    username: me.username ?? '',
-    accountname: me.accountname ?? '',
-    intro: me.intro ?? '',
-    image: me.image ?? '',
+    username: initial.username ?? '',
+    accountname: initial.accountname ?? '',
+    intro: initial.intro ?? '',
+    image: initial.image ?? '',
   }));
 
-  const [previewUrl, setPreviewUrl] = useState('');
-
-  useEffect(() => {
-    return () => {
-      if (previewUrl) URL.revokeObjectURL(previewUrl);
-    };
-  }, [previewUrl]);
+  const [previewUrl, setPreviewUrl] = useState<string>('');
 
   const avatarSrc = useMemo(() => {
     if (previewUrl) return previewUrl;
-    if (!form.image?.trim()) return '';
     return toImageUrl(form.image);
   }, [previewUrl, form.image]);
 
@@ -95,29 +93,28 @@ function ProfileUpdateForm({ me }: { me: User }) {
     const file = e.target.files?.[0];
     if (!file) return;
 
+    // 1) 즉시 미리보기
     const url = URL.createObjectURL(file);
-    setPreviewUrl(url);
+    setPreviewUrl((prev) => {
+      if (prev) URL.revokeObjectURL(prev);
+      return url;
+    });
 
+    // 2) 서버 업로드
     uploadMutation.mutate([file], {
       onSuccess: (data) => {
         const filename = data?.[0]?.filename ?? '';
         const normalized = normalizeUploadPath(filename);
-
-        setForm((prev) => ({
-          ...prev,
-          image: normalized,
-        }));
+        setForm((prev) => ({ ...prev, image: normalized }));
       },
       onError: (err: unknown) => {
-        const axiosErr = err as AxiosError<{ message?: string }>;
+        const message = err instanceof Error ? err.message : '업로드에 실패했습니다.';
+        alert(message);
 
-        const message =
-          axiosErr?.response?.data?.message ??
-          (axiosErr instanceof Error ? axiosErr.message : 'unknown');
-
-        alert('업로드 실패: ' + message);
-
-        setPreviewUrl('');
+        setPreviewUrl((prev) => {
+          if (prev) URL.revokeObjectURL(prev);
+          return '';
+        });
       },
     });
   };
@@ -134,7 +131,7 @@ function ProfileUpdateForm({ me }: { me: User }) {
       },
       {
         onSuccess: () => {
-          navigate('/profile');
+          navigate('/profile', { replace: true });
         },
       },
     );
@@ -154,8 +151,10 @@ function ProfileUpdateForm({ me }: { me: User }) {
                 type="button"
                 onClick={onPickImage}
                 className="absolute -right-1 -bottom-1 flex h-10 w-10 items-center justify-center rounded-full bg-green-500 shadow-lg"
+                aria-label="프로필 이미지 변경"
+                title="프로필 이미지 변경"
               >
-                <ProfileImageEditIcon className="h-6 w-6 text-white" />
+                <ProfileImageEditIcon className="h-6 w-6" />
               </button>
 
               <input
@@ -168,50 +167,50 @@ function ProfileUpdateForm({ me }: { me: User }) {
             </div>
           </div>
 
-          <form className="space-y-6 px-4 py-8">
+          {/* ✅ 디자인 건드리지 말라고 해서: 네가 쓰던 underline 스타일 그대로 */}
+          <form className="space-y-6 px-4 py-8" onSubmit={(e) => e.preventDefault()}>
             <div className="space-y-2">
-              <label className="text-sm font-medium">사용자 이름</label>
+              <label htmlFor="username" className="text-foreground block text-sm font-medium">
+                사용자 이름
+              </label>
 
-              <input
+              <Input
+                id="username"
                 value={form.username}
-                onChange={(e) =>
-                  setForm((prev) => ({
-                    ...prev,
-                    username: e.target.value,
-                  }))
-                }
-                className={sampleInputClass}
+                onChange={(e) => setForm((prev) => ({ ...prev, username: e.target.value }))}
                 placeholder="이름을 입력하세요."
+                className="h-12 border-t-0 border-r-0 border-b-2 border-l-0 pl-0 focus:outline-none focus-visible:ring-0"
               />
             </div>
 
             <div className="space-y-2">
-              <label className="text-sm font-medium">계정 ID</label>
+              <label htmlFor="accountId" className="text-foreground block text-sm font-medium">
+                계정 ID
+              </label>
 
-              <input
+              <Input
+                id="accountId"
                 value={form.accountname}
                 disabled
-                className={sampleDisabledClass}
-                placeholder="계정 아이디"
+                placeholder="계정 아이디를 입력하세요."
+                className="h-12 border-t-0 border-r-0 border-b-2 border-l-0 pl-0 focus:outline-none focus-visible:ring-0 disabled:opacity-60"
               />
 
               <p className="text-muted-foreground text-xs">계정 ID는 변경할 수 없습니다.</p>
             </div>
 
             <div className="space-y-2">
-              <label className="text-sm font-medium">소개</label>
+              <label htmlFor="bio" className="text-foreground block text-sm font-medium">
+                소개
+              </label>
 
-              <input
+              <Input
+                id="bio"
                 value={form.intro}
-                onChange={(e) =>
-                  setForm((prev) => ({
-                    ...prev,
-                    intro: e.target.value,
-                  }))
-                }
-                className={sampleInputClass}
+                onChange={(e) => setForm((prev) => ({ ...prev, intro: e.target.value }))}
                 placeholder="간단한 자기 소개를 입력하세요."
                 maxLength={60}
+                className="h-12 border-t-0 border-r-0 border-b-2 border-l-0 pl-0 focus:outline-none focus-visible:ring-0"
               />
 
               <p className="text-muted-foreground text-xs">최대 60자</p>
