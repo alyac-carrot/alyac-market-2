@@ -1,10 +1,10 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { profileQueryKeys } from '@/entities/profile/model/queries';
+import { profileQueryKeys } from '@/entities/profile/model/queries/queries';
 import { queryKeys } from '@/shared/lib';
 
 import { updateMyProfile } from '../api/userApi';
-import type { UpdateProfileBody, UpdateProfileResponse } from '../model/types';
+import type { UpdateProfileBody, UpdateProfileResponse } from '../model/types/types';
 
 export function useUpdateMyProfileMutation() {
   const qc = useQueryClient();

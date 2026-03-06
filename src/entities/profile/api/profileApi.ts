@@ -5,7 +5,7 @@ import type {
   FollowerListResponse,
   FollowingListResponse,
   GetProfileResponse,
-} from '../model/types';
+} from '../model/types/types';
 
 export const getProfile = (accountname: string) =>
   axiosInstance.get<GetProfileResponse>(`/profile/${accountname}`);
