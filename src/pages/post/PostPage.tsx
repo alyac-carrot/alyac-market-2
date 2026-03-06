@@ -62,13 +62,15 @@ function CommentItem({
 function BottomSheetModal({
   isOpen,
   onClose,
-  onDelete,
-  isDeleting,
+  onAction,
+  isLoading,
+  actionLabel,
 }: {
   isOpen: boolean;
   onClose: () => void;
-  onDelete: () => void;
-  isDeleting: boolean;
+  onAction: () => void;
+  isLoading: boolean;
+  actionLabel: string;
 }) {
   if (!isOpen) return null;
 
@@ -91,11 +93,11 @@ function BottomSheetModal({
         <div className="px-2 pb-6 pt-1">
           <button
             type="button"
-            onClick={onDelete}
-            disabled={isDeleting}
+            onClick={onAction}
+            disabled={isLoading}
             className="text-foreground hover:bg-accent w-full rounded-lg px-5 py-4 text-left text-base transition-colors disabled:opacity-50"
           >
-            {isDeleting ? '삭제 중...' : '삭제'}
+            {isLoading ? '처리 중...' : actionLabel}
           </button>
         </div>
       </div>
@@ -157,14 +159,28 @@ export default function PostPage() {
     );
   };
 
-  const handleDeleteComment = () => {
+  const handleActionComment = () => {
     if (!selectedCommentId) return;
 
-    deleteCommentMutate(selectedCommentId, {
-      onSuccess: () => {
-        setSelectedCommentId(null);
-      },
-    });
+    const targetComment = comments.find((c) => c.id === selectedCommentId);
+    if (!targetComment) return;
+
+    const isMyComment = targetComment.author?.accountname === currentUser?.accountname;
+
+    if (isMyComment) {
+      deleteCommentMutate(selectedCommentId, {
+        onSuccess: () => {
+          setSelectedCommentId(null);
+        },
+      });
+    } else {
+      setSelectedCommentId(null);
+      setTimeout(() => {
+        if (window.confirm('해당 댓글을 신고하시겠습니까?')) {
+          alert('해당 댓글이 신고되었습니다');
+        }
+      }, 0);
+    }
   };
 
   if (isLoadingPost) {
@@ -327,12 +343,18 @@ export default function PostPage() {
         </div>
       </div>
 
-      {/* ─ delete comment bottom sheet ─ */}
+      {/* ─ comment action bottom sheet ─ */}
       <BottomSheetModal
         isOpen={selectedCommentId !== null}
         onClose={() => setSelectedCommentId(null)}
-        onDelete={handleDeleteComment}
-        isDeleting={isDeleting}
+        onAction={handleActionComment}
+        isLoading={isDeleting}
+        actionLabel={
+          comments.find((c) => c.id === selectedCommentId)?.author?.accountname ===
+          currentUser?.accountname
+            ? '삭제'
+            : '신고하기'
+        }
       />
     </div>
   );
