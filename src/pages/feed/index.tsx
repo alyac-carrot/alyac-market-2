@@ -5,8 +5,8 @@ import { getPostsList } from '@/entities/post/api/getPostsList';
 import type { Post } from '@/entities/post/model/types';
 import { Button } from '@/shared/ui';
 
-// 서버 파일 주소
-const FILE_BASE_URL = 'http://localhost:3000';
+//  env에서 서버 주소
+const FILE_BASE_URL = (import.meta.env.VITE_BASE_URL as string)?.replace(/\/$/, '');
 
 // 서버 실제 응답 형태
 type GetPostsResponseFromServer = {
