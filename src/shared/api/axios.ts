@@ -2,8 +2,11 @@ import axios from 'axios';
 
 import { getRefreshToken, getToken, removeToken, saveToken } from '@/entities/auth/lib/token';
 
+const VITE_BASE_URL = import.meta.env.VITE_BASE_URL;
+const API_URL = `${VITE_BASE_URL}/api`;
+
 const axiosInstance = axios.create({
-  baseURL: `${import.meta.env.VITE_BASE_URL}/api`,
+  baseURL: API_URL,
   timeout: 10000,
 });
 
@@ -21,14 +24,22 @@ axiosInstance.interceptors.request.use(
 
 // 응답 인터셉터: 401 처리 및 토큰 갱신
 let isRefreshing = false;
-let refreshSubscribers: ((token: string) => void)[] = [];
+let refreshSubscribers: { 
+  resolve: (token: string) => void; 
+  reject: (err: any) => void; 
+}[] = [];
 
-const subscribeTokenRefresh = (cb: (token: string) => void) => {
-  refreshSubscribers.push(cb);
+const subscribeTokenRefresh = (resolve: (token: string) => void, reject: (err: any) => void) => {
+  refreshSubscribers.push({ resolve, reject });
 };
 
 const onTokenRefreshed = (token: string) => {
-  refreshSubscribers.forEach((cb) => cb(token));
+  refreshSubscribers.forEach((sub) => sub.resolve(token));
+  refreshSubscribers = [];
+};
+
+const onTokenRefreshFailed = (error: any) => {
+  refreshSubscribers.forEach((sub) => sub.reject(error));
   refreshSubscribers = [];
 };
 
@@ -41,11 +52,16 @@ axiosInstance.interceptors.response.use(
     if (error.response?.status === 401 && !originalRequest._retry) {
       if (isRefreshing) {
         // 이미 갱신 중이면 대기
-        return new Promise((resolve) => {
-          subscribeTokenRefresh((token) => {
-            originalRequest.headers.Authorization = `Bearer ${token}`;
-            resolve(axiosInstance(originalRequest));
-          });
+        return new Promise((resolve, reject) => {
+          subscribeTokenRefresh(
+            (token) => {
+              originalRequest.headers.Authorization = `Bearer ${token}`;
+              resolve(axiosInstance(originalRequest));
+            },
+            (err) => {
+              reject(err);
+            },
+          );
         });
       }
 
@@ -63,7 +79,7 @@ axiosInstance.interceptors.response.use(
       try {
         // Refresh token으로 새 토큰 요청
         const response = await axios.post(
-          `${import.meta.env.VITE_BASE_URL}/api/user/refresh`,
+          `${API_URL}/user/refresh`,
           {},
           {
             headers: {
@@ -82,7 +98,8 @@ axiosInstance.interceptors.response.use(
         originalRequest.headers.Authorization = `Bearer ${newToken}`;
         return axiosInstance(originalRequest);
       } catch (refreshError) {
-        // Refresh 실패 시 로그아웃
+        // Refresh 실패 시 로그아웃 및 대기 중인 요청들 취소
+        onTokenRefreshFailed(refreshError);
         removeToken();
         window.location.href = '/auth/signin';
         return Promise.reject(refreshError);

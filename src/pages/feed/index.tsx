@@ -1,33 +1,13 @@
-import { useQuery } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
+import { useGetPosts } from '@/entities/post';
+import { toImageUrl } from '@/shared/lib';
+import { Avatar, Button } from '@/shared/ui';
 
-import { getPostsList } from '@/entities/post/api/getPostsList';
-import type { Post } from '@/entities/post/model/types';
-import { Button } from '@/shared/ui';
-
-// 서버 파일 주소
-const FILE_BASE_URL = 'http://localhost:3000';
-
-// 서버 실제 응답 형태
-type GetPostsResponseFromServer = {
-  posts: Post[];
-};
-
-// 이미지 경로 변환
-const getImageSrc = (path: string) => {
-  if (!path) return '';
-  if (path.startsWith('http')) return path;
-  return `${FILE_BASE_URL}/${path.replace(/^\//, '')}`;
-};
 
 export default function FeedPage() {
   const nav = useNavigate();
 
-  const { data, isLoading, isError } = useQuery<GetPostsResponseFromServer>({
-    queryKey: ['posts', 'list', 10],
-    queryFn: () => getPostsList(10) as unknown as Promise<GetPostsResponseFromServer>,
-    staleTime: 3000,
-  });
+  const { data, isLoading, isError } = useGetPosts(10);
 
   const posts = data?.posts ?? [];
 
@@ -73,15 +53,11 @@ export default function FeedPage() {
           <li key={p.id} className="rounded-2xl bg-white shadow-sm">
             {/* 작성자 */}
             <div className="flex items-center gap-3 px-3 pt-3">
-              <div className="h-10 w-10 overflow-hidden rounded-full bg-zinc-200">
-                {p.author.image ? (
-                  <img
-                    src={getImageSrc(p.author.image)}
-                    alt=""
-                    className="h-full w-full object-cover"
-                  />
-                ) : null}
-              </div>
+              <Avatar
+                src={toImageUrl(p.author.image)}
+                alt={p.author.username}
+                className="h-10 w-10"
+              />
 
               <div className="min-w-0">
                 <div className="text-sm font-semibold text-zinc-900">{p.author.username}</div>
@@ -99,7 +75,7 @@ export default function FeedPage() {
               <div className="mt-3 px-3">
                 <div className="aspect-square overflow-hidden rounded-2xl bg-zinc-100">
                   <img
-                    src={getImageSrc(p.image)}
+                    src={toImageUrl(p.image)}
                     alt=""
                     className="h-full w-full object-cover"
                     loading="lazy"

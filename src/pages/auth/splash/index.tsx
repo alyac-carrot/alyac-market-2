@@ -1,13 +1,20 @@
 import { useEffect } from 'react';
 
 import { useNavigate } from 'react-router-dom';
+import { getToken } from '@/entities/auth';
 
 export default function SplashPage() {
   const nav = useNavigate();
 
   useEffect(() => {
+    const hasToken = !!getToken();
+
     const t = window.setTimeout(() => {
-      nav('/auth/landing', { replace: true }); // 뒤로가기로 스플래시 안 돌아오게
+      if (hasToken) {
+        nav('/feed', { replace: true });
+      } else {
+        nav('/auth/landing', { replace: true });
+      }
     }, 3000); // 3초
 
     return () => window.clearTimeout(t);

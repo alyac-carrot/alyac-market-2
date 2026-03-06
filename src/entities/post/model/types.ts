@@ -54,5 +54,5 @@ export interface CreatePostResponse {
   hearted: boolean;
 }
 export interface GetPostsResponse {
-  post: Post[];
+  posts: Post[];
 }
