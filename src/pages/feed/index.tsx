@@ -1,8 +1,8 @@
 import { useNavigate } from 'react-router-dom';
+
 import { useGetPosts } from '@/entities/post';
 import { toImageUrl } from '@/shared/lib';
 import { Avatar, Button } from '@/shared/ui';
-
 
 export default function FeedPage() {
   const nav = useNavigate();
