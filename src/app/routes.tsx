@@ -9,7 +9,7 @@ const SplashPage = lazy(() => import('@/pages/auth/splash'));
 const LandingPage = lazy(() => import('@/pages/auth/LandingPage'));
 const SignInPage = lazy(() => import('@/pages/auth/signin'));
 const SignUpPage = lazy(() => import('@/pages/auth/signup'));
-const UploadPage = lazy(() => import('@/pages/upload/UploadPage'));
+const CreatePostPage = lazy(() => import('@/pages/post/CreatePostPage'));
 const ProfilePage = lazy(() => import('@/pages/profile/ProfilePage'));
 const ProfileUpdatePage = lazy(() => import('@/pages/profile-update/ProfileUpdatePage'));
 const PostPage = lazy(() => import('@/pages/post/PostPage'));
@@ -40,14 +40,13 @@ export const router = createBrowserRouter([
           { path: 'chat', element: <ChatListPage /> },
           { path: 'chat/:roomId', element: <ChatRoomPage /> },
 
-          { path: 'upload', element: <UploadPage /> },
+          { path: 'post-create', element: <CreatePostPage /> },
           { path: 'profile', element: <ProfilePage /> },
           { path: 'profile/:userId', element: <ProfilePage /> },
           { path: 'profile-update', element: <ProfileUpdatePage /> },
           { path: 'followers/:accountname', element: <FollowersPage /> },
           { path: 'followings/:accountname', element: <FollowingsPage /> },
 
-          { path: 'post-create', element: <PostPage /> },
           { path: 'post/:postId', element: <PostPage /> },
           { path: 'post/:postId/edit', element: <EditPostPage /> },
         ],

@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { getUserProducts } from '../api/productApi';
-import { productQueryKeys } from './queries';
+import { getUserProducts } from '../../api/productApi';
+import { productQueryKeys } from '../queries/queries';
 
 export function useUserProductsQuery(accountname?: string) {
   return useQuery({

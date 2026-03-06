@@ -1,11 +1,11 @@
-import { useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 
-import { Image as ImageIcon, X } from 'lucide-react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { useGetPost, useUpdatePost } from '@/entities/post';
 import { useUploadFiles } from '@/entities/upload';
 import { useMeQuery } from '@/entities/user';
+import { PostImagePicker } from '@/features/upload';
 import { toImageUrl } from '@/shared/lib';
 import { Avatar, Button } from '@/shared/ui';
 import { UploadHeader } from '@/widgets/header';
@@ -19,6 +19,10 @@ interface ImageItem {
 export default function EditPostPage() {
   const navigate = useNavigate();
   const { postId = '' } = useParams<{ postId: string }>();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const getPostQuery = useGetPost(postId);
 
@@ -58,8 +62,6 @@ function EditPostForm({ postId, post }: EditPostFormProps) {
   const meQuery = useMeQuery();
   const user = meQuery.data?.user;
 
-
-  // ✅ Initialize state directly from props — no useEffect needed
   const [text, setText] = useState(() => post.content ?? '');
 
   const [imageItems, setImageItems] = useState<ImageItem[]>(() => {
@@ -78,28 +80,11 @@ function EditPostForm({ postId, post }: EditPostFormProps) {
   });
 
   const [newFiles, setNewFiles] = useState<File[]>([]);
-  const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const handleImageAdd = () => {
-    fileInputRef.current?.click();
-  };
-
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const fileList = e.target.files;
-    if (!fileList) return;
-
-    Array.from(fileList).forEach((file) => {
-      const reader = new FileReader();
-      reader.onload = (ev) => {
-        const src = ev.target?.result as string;
-        setImageItems((prev) => [...prev, { src, isNew: true }]);
-      };
-      reader.readAsDataURL(file);
-      setNewFiles((prev) => [...prev, file]);
-    });
-
-    // reset so same file can be picked again
-    e.target.value = '';
+  const handleFilesSelect = (selectedFiles: File[], selectedPreviews: string[]) => {
+    setNewFiles((prev) => [...prev, ...selectedFiles]);
+    const newItems = selectedPreviews.map((src) => ({ src, isNew: true }));
+    setImageItems((prev) => [...prev, ...newItems]);
   };
 
   const removeImage = (index: number) => {
@@ -174,11 +159,7 @@ function EditPostForm({ postId, post }: EditPostFormProps) {
         <div className="flex gap-3">
           {/* avatar */}
           <div className="shrink-0">
-            <Avatar
-              src={toImageUrl(user?.image)}
-              alt={user?.username}
-              className="h-10 w-10"
-            />
+            <Avatar src={toImageUrl(user?.image)} alt={user?.username} className="h-10 w-10" />
           </div>
 
           {/* textarea + images */}
@@ -190,52 +171,14 @@ function EditPostForm({ postId, post }: EditPostFormProps) {
               className="min-h-125 w-full resize-none border-0 text-base outline-none placeholder:text-gray-400 focus:ring-0"
             />
 
-            {/* image previews (full-size stacked) */}
-            {imageItems.length > 0 && (
-              <div className="mt-4 flex flex-col gap-3">
-                {imageItems.map((item, i) => (
-                  <div key={i} className="relative overflow-hidden rounded-lg">
-                    <img
-                      src={item.src}
-                      alt={`수정된 이미지 ${i + 1}`}
-                      className="w-full rounded-lg"
-                    />
-                    <Button
-                      type="button"
-                      size="icon"
-                      variant="ghost"
-                      onClick={() => removeImage(i)}
-                      className="absolute top-2 right-2 h-6 w-6 rounded-full bg-black/50 text-white transition-colors hover:bg-black/70"
-                      aria-label="이미지 삭제"
-                    >
-                      <X className="h-4 w-4" />
-                    </Button>
-                  </div>
-                ))}
-              </div>
-            )}
+            <PostImagePicker
+              imageUrls={imageItems.map((item) => item.src)}
+              onFilesSelect={handleFilesSelect}
+              onRemoveImage={removeImage}
+            />
           </div>
         </div>
       </main>
-
-      {/* hidden file input */}
-      <input
-        ref={fileInputRef}
-        type="file"
-        accept="image/*"
-        multiple
-        className="hidden"
-        onChange={handleFileChange}
-      />
-
-      {/* ─ FAB ─ */}
-      <button
-        type="button"
-        onClick={handleImageAdd}
-        className="fixed right-6 bottom-6 flex h-14 w-14 items-center justify-center rounded-full bg-[#6FCA3C] text-white shadow-lg transition-colors hover:bg-[#5CB32A]"
-      >
-        <ImageIcon className="h-8 w-8" />
-      </button>
     </div>
   );
 }

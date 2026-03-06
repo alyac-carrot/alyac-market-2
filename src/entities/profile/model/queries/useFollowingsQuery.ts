@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 
 import { queryKeys } from '@/shared/lib';
 
-import { getFollowings } from '../api/followsApi';
+import { getFollowings } from '../../api/followsApi';
 
 export function useFollowingsQuery(accountname?: string, limit = 10, skip = 0) {
   return useQuery({

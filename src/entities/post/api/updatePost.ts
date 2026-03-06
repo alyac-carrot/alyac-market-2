@@ -1,6 +1,6 @@
 import axiosInstance from '@/shared/api/axios';
 
-import type { CreatePostRequest, GetPostResponse } from '../model/types';
+import type { CreatePostRequest, GetPostResponse } from '../model/types/types';
 
 export const updatePost = async (
   postId: string,

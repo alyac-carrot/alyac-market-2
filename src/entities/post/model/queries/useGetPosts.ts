@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { queryKeys } from '@/shared/lib';
-import { getPostsList } from '../api/getPostsList';
+import { getPostsList } from '../../api/getPostsList';
 
 export const useGetPosts = (limit?: number) => {
   return useQuery({

@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { getUserPosts } from '../api/getUserPosts';
+import { getUserPosts } from '../../api/getUserPosts';
 
 export const useGetUserPosts = (accountname?: string) => {
   return useQuery({

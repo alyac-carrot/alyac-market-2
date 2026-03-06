@@ -32,7 +32,7 @@ export function Footer() {
           )}
         </NavLink>
 
-        <NavLink to="/upload" className="flex flex-col items-center">
+        <NavLink to="/post-create" className="flex flex-col items-center">
           <>
             <PostCreateIcon className="h-6 w-6" />
             <span className="text-xs">게시물 작성</span>

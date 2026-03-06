@@ -1,109 +1,21 @@
 import { useEffect, useState } from 'react';
+
 import { ArrowLeft, Heart, MessageCircle, MoreVertical } from 'lucide-react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import {
-  useGetPost,
   useCreateComment,
   useDeleteComment,
   useGetComments,
+  useGetPost,
   useLikePost,
 } from '@/entities/post';
-import { pickFirstImage, toImageUrl, formatRelativeTime, formatDate } from '@/shared/lib';
-import { useMeQuery } from '@/entities/user';
-import { Avatar } from '@/shared/ui/Avatar';
-
 import type { Comment } from '@/entities/post';
-
-
-/* ── single comment ── */
-function CommentItem({
-  comment,
-  onKebabClick,
-}: {
-  comment: Comment;
-  onKebabClick: (commentId: string) => void;
-}) {
-  const authorImage = comment.author?.image ? toImageUrl(comment.author.image) : '';
-
-  return (
-    <div className="flex gap-3 px-4 py-4">
-      <Avatar 
-        src={authorImage} 
-        alt={comment.author?.username} 
-        className="h-10 w-10" 
-      />
-
-      <div className="flex-1">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <span className="text-foreground font-semibold">
-              {comment.author?.username ?? '알 수 없음'}
-            </span>
-            <span className="text-muted-foreground text-xs">
-              · {formatRelativeTime(comment.createdAt)}
-            </span>
-          </div>
-          <button
-            type="button"
-            className="h-6 w-6"
-            onClick={() => onKebabClick(comment.id)}
-          >
-            <MoreVertical className="text-muted-foreground h-4 w-4" />
-          </button>
-        </div>
-        <p className="text-foreground text-left text-sm leading-relaxed">{comment.content}</p>
-      </div>
-    </div>
-  );
-}
-
-/* ── bottom sheet modal ── */
-function BottomSheetModal({
-  isOpen,
-  onClose,
-  onAction,
-  isLoading,
-  actionLabel,
-}: {
-  isOpen: boolean;
-  onClose: () => void;
-  onAction: () => void;
-  isLoading: boolean;
-  actionLabel: string;
-}) {
-  if (!isOpen) return null;
-
-  return (
-    <>
-      {/* backdrop */}
-      <div
-        className="fixed inset-0 z-40 bg-black/40 transition-opacity"
-        onClick={onClose}
-      />
-
-      {/* sheet */}
-      <div className="bg-popover border-border fixed right-0 bottom-0 left-0 z-50 rounded-t-2xl border-t shadow-lg animate-in slide-in-from-bottom duration-200">
-        {/* handle */}
-        <div className="flex justify-center pt-3 pb-1">
-          <div className="bg-muted-foreground/30 h-1 w-10 rounded-full" />
-        </div>
-
-        {/* actions */}
-        <div className="px-2 pb-6 pt-1">
-          <button
-            type="button"
-            onClick={onAction}
-            disabled={isLoading}
-            className="text-foreground hover:bg-accent w-full rounded-lg px-5 py-4 text-left text-base transition-colors disabled:opacity-50"
-          >
-            {isLoading ? '처리 중...' : actionLabel}
-          </button>
-        </div>
-      </div>
-    </>
-  );
-}
+import { useMeQuery } from '@/entities/user';
+import { CommentItem } from '@/features/post';
+import { formatDate, pickFirstImage, toImageUrl } from '@/shared/lib';
+import { BottomSheetModal } from '@/shared/ui';
+import { Avatar } from '@/shared/ui/Avatar';
 
 /* ── main page ── */
 export default function PostPage() {
@@ -114,7 +26,6 @@ export default function PostPage() {
 
   const meQuery = useMeQuery();
   const currentUser = meQuery.data?.user;
-
 
   // Fetch post data
   const { data: postData, isLoading: isLoadingPost, isError } = useGetPost(postId);
@@ -300,11 +211,7 @@ export default function PostPage() {
             </div>
           ) : (
             comments.map((c) => (
-              <CommentItem
-                key={c.id}
-                comment={c}
-                onKebabClick={(id) => setSelectedCommentId(id)}
-              />
+              <CommentItem key={c.id} comment={c} onKebabClick={(id) => setSelectedCommentId(id)} />
             ))
           )}
         </div>

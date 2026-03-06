@@ -1,5 +1,5 @@
 // import axiosInstance from '@/shared/api/axios';
-// import type { MyInfoResponse, UpdateProfileBody, UpdateProfileResponse } from '../model/types';
+// import type { MyInfoResponse, UpdateProfileBody, UpdateProfileResponse } from '../model/types/types';
 // // 내 정보
 // export const getMyInfo = () => axiosInstance.get<MyInfoResponse>('/user/myinfo');
 // // 검색
@@ -9,7 +9,7 @@
 //     user: body,
 //   });
 // import axiosInstance from '@/shared/api/axios';
-// import type { MyInfoResponse, UpdateProfileBody, UpdateProfileResponse } from '../model/types';
+// import type { MyInfoResponse, UpdateProfileBody, UpdateProfileResponse } from '../model/types/types';
 // // 내 정보
 // export const getMyInfo = () => axiosInstance.get<MyInfoResponse>('/user/myinfo');
 // // 프로필 수정
@@ -19,7 +19,7 @@
 //   });
 import axiosInstance from '@/shared/api/axios';
 
-import type { MyInfoResponse, UpdateProfileBody, UpdateProfileResponse } from '../model/types';
+import type { MyInfoResponse, UpdateProfileBody, UpdateProfileResponse } from '../model/types/types';
 
 // 내 정보
 export const getMyInfo = () => axiosInstance.get<MyInfoResponse>('/user/myinfo');

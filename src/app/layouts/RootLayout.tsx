@@ -9,12 +9,12 @@ import { Header } from '@/widgets/header';
 
 export default function RootLayout() {
   useMeQuery();
-  const isUpload = useMatch('/upload/*');
   const isChatRoom = useMatch('/chat/:roomId');
   const isLending = useMatch('/');
   const ishome = useMatch('/auth/landing');
   const isSignin = useMatch('/auth/signin');
   const inSignup = useMatch('/auth/signup');
+  const isPostCreate = useMatch('/post-create');
   const isEditPost = useMatch('/post/:postId/edit');
   const isPostDetail = useMatch('/post/:postId');
   const isProfileUpdate = useMatch('/profile-update');
@@ -22,7 +22,7 @@ export default function RootLayout() {
 
   const hideHeader = Boolean(isLending || isSignin || inSignup || ishome || isPostDetail);
   const hideFooter = Boolean(
-    isUpload ||
+    isPostCreate ||
     isChatRoom ||
     isLending ||
     isSignin ||
