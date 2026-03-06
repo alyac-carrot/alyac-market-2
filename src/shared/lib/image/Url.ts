@@ -14,3 +14,11 @@ export function pickFirstImage(paths?: string) {
   if (!trimmed) return '';
   return trimmed.split(',')[0]?.trim() ?? '';
 }
+
+export function normalizeUploadPath(filename: string) {
+  const trimmed = filename?.trim();
+  if (!trimmed) return '';
+  if (trimmed.startsWith('uploadFiles/')) return trimmed;
+  if (trimmed.startsWith('/uploadFiles/')) return trimmed.replace(/^\/+/, '');
+  return `uploadFiles/${trimmed.replace(/^\/+/, '')}`;
+}

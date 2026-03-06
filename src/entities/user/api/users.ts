@@ -5,6 +5,7 @@ export type UserItem = {
   name: string;
   handle: string;
   tag: string;
+  image?: string;
 };
 
 type ApiUser = {
@@ -27,5 +28,6 @@ export async function searchUsers(keyword: string): Promise<UserItem[]> {
     name: u.username,
     handle: `@${u.accountname}`,
     tag: '알약',
+    image: u.image,
   }));
 }

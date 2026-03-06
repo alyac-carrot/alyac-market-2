@@ -4,7 +4,7 @@ import axios from 'axios';
 import { useForm } from 'react-hook-form';
 
 import { checkAccountname, checkEmail, useSignUpMutation } from '@/entities/auth';
-import { toImageUrl } from '@/shared/lib';
+import { toImageUrl, normalizeUploadPath } from '@/shared/lib';
 import uploadApi from '@/shared/api/uploadApi';
 import { Avatar } from '@/shared/ui/Avatar';
 
@@ -165,8 +165,8 @@ function Step2({
       const res = await uploadApi.post<{ filename: string }>('/image/uploadfile', formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
-      // Store only filename; the server expects this relative value
-      setImageFilename(res.data.filename);
+      // Store the relative path expected by the server
+      setImageFilename(normalizeUploadPath(res.data.filename));
     } catch {
       setUploadError('이미지 업로드에 실패했습니다.');
     } finally {
@@ -195,7 +195,7 @@ function Step2({
       username: values.username.trim(),
       accountname: values.accountname.trim(),
       intro: values.intro.trim(),
-      image: imageFilename ? `${import.meta.env.VITE_BASE_URL}/${imageFilename}` : '',
+      image: imageFilename || '',
     }, {
       onError: (err) => {
         if (axios.isAxiosError(err)) {
@@ -220,7 +220,7 @@ function Step2({
       </button>
 
       <h1 className="mt-6 text-center text-2xl font-medium text-black">프로필 설정</h1>
-      <p className="mt-2 text-center text-sm text-zinc-400">나중에 언제든지 변경할 수 있습니다.</p>
+      <p className="mt-2 text-center text-sm text-zinc-400">계정 ID는 변경할 수 없습니다.</p>
 
       {/* profile image picker */}
       <div className="relative mx-auto mt-8">
@@ -303,7 +303,7 @@ function Step2({
             type="text"
             placeholder="자신과 판매할 상품에 대해 소개해 주세요!"
             {...register('intro', {
-              maxLength: { value: 50, message: '*50자 이하로 입력해 주세요.' },
+              maxLength: { value: 60, message: '*60자 이하로 입력해 주세요.' },
             })}
           />
         </FieldGroup>

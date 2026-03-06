@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { useUploadFiles } from '@/entities/upload';
 import { useUpdateMyProfileMutation } from '@/entities/user';
-import { toImageUrl } from '@/shared/lib';
+import { toImageUrl, normalizeUploadPath } from '@/shared/lib';
 import {
   ProfileImageUploadSection,
   ProfileInfoSection,
@@ -18,13 +18,6 @@ type FormState = {
   image: string;
 };
 
-function normalizeUploadPath(filename: string) {
-  const trimmed = filename?.trim();
-  if (!trimmed) return '';
-  if (trimmed.startsWith('uploadFiles/')) return trimmed;
-  if (trimmed.startsWith('/uploadFiles/')) return trimmed.replace(/^\/+/, '');
-  return `uploadFiles/${trimmed.replace(/^\/+/, '')}`;
-}
 
 interface ProfileUpdateFormProps {
   initial: {
