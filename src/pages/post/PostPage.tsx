@@ -11,6 +11,7 @@ import {
   useLikePost,
 } from '@/entities/post';
 import { pickFirstImage, toImageUrl } from '@/shared/lib';
+import { useMeQuery } from '@/entities/user';
 import { Avatar } from '@/shared/ui/Avatar';
 
 import type { Comment } from '@/entities/post';
@@ -53,17 +54,11 @@ function CommentItem({
 
   return (
     <div className="flex gap-3 px-4 py-4">
-      <div className="bg-muted flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-full">
-        {authorImage ? (
-          <img
-            src={authorImage}
-            alt={comment.author?.username}
-            className="h-full w-full object-cover"
-          />
-        ) : (
-          <Avatar size="sm" />
-        )}
-      </div>
+      <Avatar 
+        src={authorImage} 
+        alt={comment.author?.username} 
+        className="h-10 w-10" 
+      />
 
       <div className="flex-1">
         <div className="flex items-center justify-between">
@@ -140,6 +135,10 @@ export default function PostPage() {
   const { postId = '' } = useParams();
   const [commentText, setCommentText] = useState('');
   const [selectedCommentId, setSelectedCommentId] = useState<string | null>(null);
+
+  const meQuery = useMeQuery();
+  const currentUser = meQuery.data?.user;
+
 
   // Fetch post data
   const { data: postData, isLoading: isLoadingPost, isError } = useGetPost(postId);
@@ -325,7 +324,7 @@ export default function PostPage() {
       <div className="border-border bg-background fixed right-0 bottom-0 left-0 z-10 w-full border-t px-4 py-2">
         <div className="flex items-center gap-3">
           <div className="shrink-0">
-            <Avatar size="sm" />
+            <Avatar src={toImageUrl(currentUser?.image)} size="sm" />
           </div>
           <div className="relative flex-1">
             <input

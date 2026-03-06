@@ -5,8 +5,9 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import { useGetPost, useUpdatePost } from '@/entities/post';
 import { useUploadFiles } from '@/entities/upload';
+import { useMeQuery } from '@/entities/user';
 import { toImageUrl } from '@/shared/lib';
-import { Button } from '@/shared/ui/button';
+import { Avatar, Button } from '@/shared/ui';
 import { UploadHeader } from '@/widgets/header';
 
 interface ImageItem {
@@ -54,6 +55,9 @@ function EditPostForm({ postId, post }: EditPostFormProps) {
 
   const updatePostMutation = useUpdatePost(postId);
   const uploadFilesMutation = useUploadFiles();
+  const meQuery = useMeQuery();
+  const user = meQuery.data?.user;
+
 
   // ✅ Initialize state directly from props — no useEffect needed
   const [text, setText] = useState(() => post.content ?? '');
@@ -170,9 +174,11 @@ function EditPostForm({ postId, post }: EditPostFormProps) {
         <div className="flex gap-3">
           {/* avatar */}
           <div className="shrink-0">
-            <div className="bg-muted flex h-10 w-10 items-center justify-center overflow-hidden rounded-full">
-              <span className="text-muted-foreground text-xs">A</span>
-            </div>
+            <Avatar
+              src={toImageUrl(user?.image)}
+              alt={user?.username}
+              className="h-10 w-10"
+            />
           </div>
 
           {/* textarea + images */}
