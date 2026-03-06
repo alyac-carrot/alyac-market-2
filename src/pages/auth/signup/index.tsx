@@ -161,7 +161,7 @@ function Step2({
     try {
       const formData = new FormData();
       formData.append('image', file);
-      // Use the dedicated uploadApi (VITE_UPLOAD_BASE_URL) — not the general axiosInstance
+      // Use the dedicated uploadApi (VITE_BASE_URL) — not the general axiosInstance
       const res = await uploadApi.post<{ filename: string }>('/image/uploadfile', formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
@@ -195,7 +195,7 @@ function Step2({
       username: values.username.trim(),
       accountname: values.accountname.trim(),
       intro: values.intro.trim(),
-      image: imageFilename ? `uploadFiles/${imageFilename}` : '',
+      image: imageFilename ? `${import.meta.env.VITE_BASE_URL}/${imageFilename}` : '',
     }, {
       onError: (err) => {
         if (axios.isAxiosError(err)) {
@@ -231,7 +231,7 @@ function Step2({
           aria-label="프로필 사진 변경"
         >
           <Avatar
-            src={imageFilename ? toImageUrl(`uploadFiles/${imageFilename}`) : undefined}
+            src={imageFilename ? toImageUrl(imageFilename) : undefined}
             alt="프로필"
             size="md"
             className="h-28 w-28"

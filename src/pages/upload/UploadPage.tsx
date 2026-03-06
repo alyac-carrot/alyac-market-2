@@ -5,13 +5,18 @@ import { useNavigate } from 'react-router-dom';
 
 import { useCreatePost } from '@/entities/post';
 import { useUploadFiles } from '@/entities/upload';
-import { Button } from '@/shared/ui/button';
+import { useMeQuery } from '@/entities/user';
+import { toImageUrl } from '@/shared/lib';
+import { Avatar, Button } from '@/shared/ui';
 import { UploadHeader } from '@/widgets/header';
 
 export default function UploadPage() {
   const navigate = useNavigate();
   const createPostMutation = useCreatePost();
   const uploadFilesMutation = useUploadFiles();
+  const meQuery = useMeQuery();
+  const user = meQuery.data?.user;
+
   const [text, setText] = useState('');
   const [images, setImages] = useState<string[]>([]);
   const [files, setFiles] = useState<File[]>([]);
@@ -101,9 +106,11 @@ export default function UploadPage() {
         <div className="flex gap-3">
           {/* avatar */}
           <div className="shrink-0">
-            <div className="bg-muted flex h-10 w-10 items-center justify-center overflow-hidden rounded-full">
-              <span className="text-muted-foreground text-xs">A</span>
-            </div>
+            <Avatar
+              src={toImageUrl(user?.image)}
+              alt={user?.username}
+              className="h-10 w-10"
+            />
           </div>
 
           {/* textarea + images */}
