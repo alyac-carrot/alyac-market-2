@@ -20,6 +20,7 @@ export default function RootLayout() {
   const isProfileUpdate = useMatch('/profile-update');
   const isSearch = useMatch('/search/*');
   const isProductCreate = useMatch('/products/create');
+  const isproductUpdate = useMatch('/product-update/:productId');
 
   const hideHeader = Boolean(isLending || isSignin || inSignup || ishome || isPostDetail);
   const hideFooter = Boolean(
@@ -32,7 +33,8 @@ export default function RootLayout() {
     ishome ||
     isPostDetail ||
     isProfileUpdate ||
-    isProductCreate,
+    isProductCreate ||
+    isproductUpdate,
   );
 
   const layout = (
