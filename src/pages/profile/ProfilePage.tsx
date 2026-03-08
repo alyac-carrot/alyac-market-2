@@ -45,7 +45,7 @@ export default function ProfilePage() {
   };
 
   const goEditProfile = () => navigate('/profile-update');
-  const goCreateProduct = () => navigate('/products/new');
+  const goCreateProduct = () => navigate('/products/create');
   const goProductDetail = (id: string) => navigate(`/products/${id}`);
 
   const handleDeleteConfirm = () => {
