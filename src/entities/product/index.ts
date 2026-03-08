@@ -1,5 +1,11 @@
-export { useUserProductsQuery } from './model/queries/useuserProductsQuery';
+export { useUserProductsQuery } from './hooks/useUserProductsQuery';
 export { productQueryKeys } from './model/queries/queries';
-export { getUserProducts } from './api/productApi';
+export { getUserProducts, createProduct } from './api/productApi';
+export { useCreateProduct } from './hooks/useCreateProduct';
 
-export type { Product, GetUserProductsResponse } from './model/types/types';
+export type {
+  Product,
+  GetUserProductsResponse,
+  CreateProductRequest,
+  CreateProductResponse,
+} from './model/types';

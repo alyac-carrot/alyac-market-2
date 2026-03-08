@@ -1,6 +1,8 @@
-import { useNavigate } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+
 import { Button } from '@/shared/ui/button';
+
 import { HeaderShell } from './HeaderShell';
 
 type UploadProps = {

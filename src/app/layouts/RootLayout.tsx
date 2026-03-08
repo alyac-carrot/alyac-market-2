@@ -19,6 +19,7 @@ export default function RootLayout() {
   const isPostDetail = useMatch('/post/:postId');
   const isProfileUpdate = useMatch('/profile-update');
   const isSearch = useMatch('/search/*');
+  const isProductCreate = useMatch('/products/create');
 
   const hideHeader = Boolean(isLending || isSignin || inSignup || ishome || isPostDetail);
   const hideFooter = Boolean(
@@ -30,7 +31,8 @@ export default function RootLayout() {
     isEditPost ||
     ishome ||
     isPostDetail ||
-    isProfileUpdate,
+    isProfileUpdate ||
+    isProductCreate,
   );
 
   const layout = (
