@@ -38,3 +38,13 @@ export type CreateProductResponse = {
   product: Product;
 };
 
+export type GetProductDetailResponse = {
+  product: Product;
+};
+
+export type UpdateProductRequest = CreateProductRequest;
+
+export type UpdateProductResponse = {
+  product: Product;
+};
+
