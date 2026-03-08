@@ -46,7 +46,7 @@ export default function ProfilePage() {
 
   const goEditProfile = () => navigate('/profile-update');
   const goCreateProduct = () => navigate('/products/create');
-  const goProductDetail = (id: string) => navigate(`/products/${id}`);
+  const goProductUpdate = (id: string) => navigate(`/product-update/${id}`);
 
   const handleDeleteConfirm = () => {
     if (!deleteTargetPostId) return;
@@ -80,7 +80,7 @@ export default function ProfilePage() {
         onCreateProduct={goCreateProduct}
       />
 
-      <ProfileProductsWidget products={sellingProducts} onProductClick={goProductDetail} />
+      <ProfileProductsWidget products={sellingProducts} onProductClick={goProductUpdate} />
 
       <ProfilePostsWidget
         profile={profile}

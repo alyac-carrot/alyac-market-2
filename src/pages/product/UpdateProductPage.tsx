@@ -1,9 +1,12 @@
 ﻿import { useEffect } from 'react';
 
-import { useCreateProductForm } from '@/features/product-create';
+import { useParams } from 'react-router-dom';
+
+import { useUpdateProductForm } from '@/features/product-update';
 import { ProductEditorForm } from '@/widgets/product-create';
 
-export default function CreateProductPage() {
+export default function UpdateProductPage() {
+  const params = useParams<{ productId: string }>();
   const {
     fileInputRef,
     itemName,
@@ -12,13 +15,14 @@ export default function CreateProductPage() {
     imagePreviewUrl,
     errorText,
     canUpload,
+    isLoading,
     isSubmitting,
     setItemName,
     setLink,
     handlePriceChange,
     handleImagePick,
     handleSubmit,
-  } = useCreateProductForm();
+  } = useUpdateProductForm(params.productId);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -26,7 +30,7 @@ export default function CreateProductPage() {
 
   return (
     <ProductEditorForm
-      formId="product-form"
+      formId="product-update-form"
       fileInputRef={fileInputRef}
       itemName={itemName}
       price={price}
@@ -34,6 +38,7 @@ export default function CreateProductPage() {
       imagePreviewUrl={imagePreviewUrl}
       errorText={errorText}
       canSubmit={canUpload}
+      isLoading={isLoading}
       isSubmitting={isSubmitting}
       onItemNameChange={setItemName}
       onPriceChange={handlePriceChange}

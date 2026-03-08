@@ -1,4 +1,4 @@
-import { Image as ImageIcon } from 'lucide-react';
+﻿import { Image as ImageIcon } from 'lucide-react';
 
 type ProductImageSectionProps = {
   fileInputRef: React.RefObject<HTMLInputElement | null>;
