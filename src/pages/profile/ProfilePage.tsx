@@ -1,8 +1,9 @@
 import { useNavigate, useParams } from 'react-router-dom';
 
+import { useDeleteProductAction } from '@/features/product-delete';
 import { useProfilePageData } from '@/features/profile';
+import { ConfirmDialog } from '@/shared/ui';
 import {
-  ProfileDeleteDialog,
   ProfilePostsWidget,
   ProfileProductsWidget,
   ProfileSummaryWidget,
@@ -14,6 +15,14 @@ export default function ProfilePage() {
 
   const accountnameFromParam = params.userId;
   const isMeByRoute = !accountnameFromParam;
+  const {
+    deleteTargetProductId,
+    deletingProductId,
+    isDeleting,
+    requestDeleteProduct,
+    closeDeleteDialog,
+    confirmDeleteProduct,
+  } = useDeleteProductAction();
 
   const {
     profile,
@@ -45,8 +54,8 @@ export default function ProfilePage() {
   };
 
   const goEditProfile = () => navigate('/profile-update');
-  const goCreateProduct = () => navigate('/products/create');
-  const goProductUpdate = (id: string) => navigate(`/product-update/${id}`);
+  const goCreateProduct = () => navigate('/product/create');
+  const goProductUpdate = (id: string) => navigate(`/product/${id}/edit`);
 
   const handleDeleteConfirm = () => {
     if (!deleteTargetPostId) return;
@@ -80,7 +89,13 @@ export default function ProfilePage() {
         onCreateProduct={goCreateProduct}
       />
 
-      <ProfileProductsWidget products={sellingProducts} onProductClick={goProductUpdate} />
+      <ProfileProductsWidget
+        products={sellingProducts}
+        canDelete={isMe}
+        deletingProductId={deletingProductId}
+        onProductClick={goProductUpdate}
+        onDeleteProduct={requestDeleteProduct}
+      />
 
       <ProfilePostsWidget
         profile={profile}
@@ -90,13 +105,28 @@ export default function ProfilePage() {
         onDeletePost={setDeleteTargetPostId}
       />
 
-      <ProfileDeleteDialog
+      <ConfirmDialog
         open={deleteTargetPostId !== null}
         onOpenChange={(open) => {
           if (!open) setDeleteTargetPostId(null);
         }}
+        title="게시글을 삭제할까요?"
+        confirmText="삭제"
+        confirmLoadingText="삭제 중..."
         onConfirm={handleDeleteConfirm}
         isLoading={deletePostMutation.isPending}
+      />
+
+      <ConfirmDialog
+        open={deleteTargetProductId !== null}
+        onOpenChange={(open) => {
+          if (!open) closeDeleteDialog();
+        }}
+        title="상품을 삭제할까요?"
+        confirmText="삭제"
+        confirmLoadingText="삭제 중..."
+        onConfirm={confirmDeleteProduct}
+        isLoading={isDeleting || deletingProductId !== null}
       />
     </div>
   );

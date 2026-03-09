@@ -18,14 +18,18 @@ export default function ProductImageSection({
         <button
           type="button"
           onClick={() => fileInputRef.current?.click()}
-          className="bg-muted hover:bg-muted/80 relative flex h-64 w-full items-center justify-center overflow-hidden rounded-2xl p-0 transition-colors"
+          className="bg-muted hover:bg-muted/60 ring-offset-background relative flex h-64 w-full items-center justify-center overflow-hidden rounded-2xl p-0 transition-colors duration-200 hover:ring-2 hover:ring-green-300/60"
         >
           {imagePreviewUrl ? (
-            <img src={imagePreviewUrl} alt="상품 이미지 미리보기" className="h-full w-full object-cover" />
+            <img
+              src={imagePreviewUrl}
+              alt="상품 이미지 미리보기"
+              className="h-full w-full object-cover"
+            />
           ) : (
-            <div className="flex flex-col items-center gap-2 text-gray-400">
-              <ImageIcon className="h-8 w-8" />
-              <span className="text-sm">이미지를 등록해 주세요</span>
+            <div className="flex flex-col items-center gap-2 text-gray-400 transition-colors duration-200 group-hover:text-gray-600">
+              <ImageIcon className="h-8 w-8 transition-transform duration-200 group-hover:scale-105" />
+              <span className="text-sm transition-colors duration-200">이미지를 등록해 주세요</span>
             </div>
           )}
         </button>
@@ -33,7 +37,7 @@ export default function ProductImageSection({
         <button
           type="button"
           onClick={() => fileInputRef.current?.click()}
-          className="absolute right-3 bottom-3 flex h-12 w-12 items-center justify-center rounded-full bg-white/90 text-gray-600 shadow-md hover:bg-white"
+          className="absolute right-3 bottom-3 flex h-12 w-12 items-center justify-center rounded-full bg-white/90 text-gray-600 shadow-md hover:scale-115 hover:bg-gray-200"
           aria-label="이미지 선택"
         >
           <ImageIcon className="h-6 w-6" />
