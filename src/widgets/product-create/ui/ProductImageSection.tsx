@@ -21,7 +21,11 @@ export default function ProductImageSection({
           className="bg-muted hover:bg-muted/80 relative flex h-64 w-full items-center justify-center overflow-hidden rounded-2xl p-0 transition-colors"
         >
           {imagePreviewUrl ? (
-            <img src={imagePreviewUrl} alt="상품 이미지 미리보기" className="h-full w-full object-cover" />
+            <img
+              src={imagePreviewUrl}
+              alt="상품 이미지 미리보기"
+              className="h-full w-full object-cover"
+            />
           ) : (
             <div className="flex flex-col items-center gap-2 text-gray-400">
               <ImageIcon className="h-8 w-8" />
@@ -33,7 +37,7 @@ export default function ProductImageSection({
         <button
           type="button"
           onClick={() => fileInputRef.current?.click()}
-          className="absolute right-3 bottom-3 flex h-12 w-12 items-center justify-center rounded-full bg-white/90 text-gray-600 shadow-md hover:bg-white"
+          className="absolute right-3 bottom-3 flex h-12 w-12 items-center justify-center rounded-full bg-white/90 text-gray-600 shadow-md hover:bg-white dark:bg-zinc-800/90 dark:text-gray-300 dark:hover:bg-zinc-700"
           aria-label="이미지 선택"
         >
           <ImageIcon className="h-6 w-6" />

@@ -34,8 +34,8 @@ export function SignUpStep1({ onNext }: { onNext: (data: Step1Values) => void })
   const canSubmit = isValid && !isSubmitting;
 
   return (
-    <div className="flex min-h-screen flex-col bg-white px-8">
-      <h1 className="mt-14 text-2xl font-medium text-black">이메일로 회원가입</h1>
+    <div className="flex min-h-screen flex-col bg-white px-8 dark:bg-zinc-950">
+      <h1 className="mt-14 text-2xl font-medium text-black dark:text-white">이메일로 회원가입</h1>
 
       <form className="mt-12 flex flex-col gap-8" onSubmit={handleSubmit(onSubmit)} noValidate>
         <FieldGroup label="이메일" error={errors.email?.message}>
