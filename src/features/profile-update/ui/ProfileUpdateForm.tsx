@@ -1,24 +1,22 @@
 import { useMemo, useRef, useState } from 'react';
 
+import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
 import { useUploadFiles } from '@/entities/upload';
 import { useUpdateMyProfileMutation } from '@/entities/user';
-import { toImageUrl, normalizeUploadPath } from '@/shared/lib';
+import { normalizeUploadPath, toImageUrl } from '@/shared/lib';
 import {
   ProfileImageUploadSection,
   ProfileInfoSection,
   ProfileUpdateActions,
 } from '@/widgets/profile-update';
 
-type FormState = {
+type ProfileFormValues = {
   username: string;
   accountname: string;
   intro: string;
-  image: string;
 };
-
-
 interface ProfileUpdateFormProps {
   initial: {
     _id: string;
@@ -37,26 +35,31 @@ export function ProfileUpdateForm({ initial }: ProfileUpdateFormProps) {
 
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
-  const [form, setForm] = useState<FormState>(() => ({
-    username: initial.username ?? '',
-    accountname: initial.accountname ?? '',
-    intro: initial.intro ?? '',
-    image: initial.image ?? '',
-  }));
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isValid },
+  } = useForm<ProfileFormValues>({
+    mode: 'onChange',
+    defaultValues: {
+      username: initial.username ?? '',
+      accountname: initial.accountname ?? '',
+      intro: initial.intro ?? '',
+    },
+  });
 
+  const [imageFilename, setImageFilename] = useState<string>(initial.image ?? '');
   const [previewUrl, setPreviewUrl] = useState<string>('');
 
   const avatarSrc = useMemo(() => {
     if (previewUrl) return previewUrl;
-    return toImageUrl(form.image);
-  }, [previewUrl, form.image]);
+    return toImageUrl(imageFilename);
+  }, [previewUrl, imageFilename]);
 
   const canSave = useMemo(() => {
     if (updateMutation.isPending || uploadMutation.isPending) return false;
-    if (!form.username.trim()) return false;
-    if (!form.accountname.trim()) return false;
-    return true;
-  }, [form.username, form.accountname, updateMutation.isPending, uploadMutation.isPending]);
+    return isValid;
+  }, [isValid, updateMutation.isPending, uploadMutation.isPending]);
 
   const onPickImage = () => fileInputRef.current?.click();
 
@@ -74,7 +77,7 @@ export function ProfileUpdateForm({ initial }: ProfileUpdateFormProps) {
       onSuccess: (data) => {
         const filename = data?.[0]?.filename ?? '';
         const normalized = normalizeUploadPath(filename);
-        setForm((prev) => ({ ...prev, image: normalized }));
+        setImageFilename(normalized);
       },
       onError: (err: unknown) => {
         const message = err instanceof Error ? err.message : '업로드에 실패했습니다.';
@@ -88,15 +91,15 @@ export function ProfileUpdateForm({ initial }: ProfileUpdateFormProps) {
     });
   };
 
-  const onSave = () => {
+  const onSave = (values: ProfileFormValues) => {
     if (!canSave) return;
 
     updateMutation.mutate(
       {
-        username: form.username.trim(),
-        accountname: form.accountname.trim(),
-        intro: form.intro,
-        image: normalizeUploadPath(form.image),
+        username: values.username.trim(),
+        accountname: values.accountname.trim(),
+        intro: values.intro,
+        image: normalizeUploadPath(imageFilename),
       },
       {
         onSuccess: () => {
@@ -116,11 +119,11 @@ export function ProfileUpdateForm({ initial }: ProfileUpdateFormProps) {
           onChangeFile={onChangeFile}
         />
 
-        <ProfileInfoSection form={form} setForm={setForm} />
+        <ProfileInfoSection register={register} errors={errors} />
 
         <ProfileUpdateActions
           canSave={canSave}
-          onSave={onSave}
+          onSave={handleSubmit(onSave)}
           isLoading={updateMutation.isPending}
         />
       </div>

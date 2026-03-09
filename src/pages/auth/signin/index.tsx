@@ -2,14 +2,13 @@ import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 
 import { getSignInErrorMessage, useSignInMutation } from '@/entities/auth';
+import { emailRule } from '@/shared/lib';
 import { Button, Input } from '@/shared/ui';
 
 type SignInFormValues = {
   email: string;
   password: string;
 };
-
-const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export default function SignInPage() {
   const signInMutation = useSignInMutation();
@@ -59,13 +58,7 @@ export default function SignInPage() {
               className="h-12"
               disabled={loading}
               autoComplete="email"
-              {...register('email', {
-                required: '이메일을 입력해주세요',
-                pattern: {
-                  value: emailPattern,
-                  message: '올바른 이메일 형식을 입력해주세요',
-                },
-              })}
+              {...register('email', emailRule)}
             />
 
             {errors.email?.message && (
@@ -85,9 +78,7 @@ export default function SignInPage() {
               className="h-12"
               disabled={loading}
               autoComplete="current-password"
-              {...register('password', {
-                required: '비밀번호를 입력해주세요',
-              })}
+              {...register('password', { required: '비밀번호를 입력해주세요' })}
             />
 
             {errors.password?.message && (
