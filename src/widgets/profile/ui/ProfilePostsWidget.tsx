@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+﻿import { useMemo, useState } from 'react';
 
 import { EllipsisVertical, Heart, MessageCircle } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
@@ -18,6 +18,7 @@ interface PostsSectionProps {
   profile: Profile;
   posts: Post[];
   viewMode: PostViewMode;
+  canManagePosts?: boolean;
   onViewModeChange: (mode: PostViewMode) => void;
   onDeletePost: (postId: string) => void;
 }
@@ -26,6 +27,7 @@ export default function ProfilePostsWidget({
   profile,
   posts,
   viewMode,
+  canManagePosts = false,
   onViewModeChange,
   onDeletePost,
 }: PostsSectionProps) {
@@ -105,16 +107,17 @@ export default function ProfilePostsWidget({
 
                 <DropdownMenu
                   modal={true}
-                  open={openMenuPostId === post.id}
-                  onOpenChange={(open) => setOpenMenuPostId(open ? post.id : null)}
+                  open={canManagePosts && openMenuPostId === post.id}
+                  onOpenChange={(open) => setOpenMenuPostId(open && canManagePosts ? post.id : null)}
                 >
                   <DropdownMenuTrigger asChild>
                     <Button
                       type="button"
                       variant="ghost"
                       size="icon"
-                      className="h-8 w-8 text-gray-400 hover:text-gray-600"
+                      className="h-8 w-8 text-gray-400 hover:text-gray-600 disabled:cursor-not-allowed disabled:opacity-40"
                       aria-label="게시글 메뉴"
+                      disabled={!canManagePosts}
                       onClick={(e) => e.stopPropagation()}
                     >
                       <EllipsisVertical className="h-4 w-4" />

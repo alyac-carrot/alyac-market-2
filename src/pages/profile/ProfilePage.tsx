@@ -101,6 +101,7 @@ export default function ProfilePage() {
         profile={profile}
         posts={posts}
         viewMode={postViewMode}
+        canManagePosts={isMe}
         onViewModeChange={setPostViewMode}
         onDeletePost={setDeleteTargetPostId}
       />
