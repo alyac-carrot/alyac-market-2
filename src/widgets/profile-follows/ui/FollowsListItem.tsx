@@ -45,8 +45,8 @@ export function FollowsListItem({ user, defaultFollowing }: Props) {
         variant={isFollowing ? 'outline' : 'default'}
         className={
           isFollowing
-            ? 'rounded-full px-6'
-            : 'rounded-full bg-[#6BCB26] px-6 text-white hover:bg-[#5CB020]'
+            ? 'cursor-pointer rounded-full px-6'
+            : 'cursor-pointer rounded-full bg-[#6BCB26] px-6 text-white hover:bg-[#5CB020]'
         }
         disabled={followMutation.isPending}
         onClick={() => {

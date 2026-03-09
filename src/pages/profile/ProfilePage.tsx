@@ -35,6 +35,7 @@ export default function ProfilePage() {
     isLoading,
     isError,
     deletePostMutation,
+    togglePostLike,
     followMutation,
     setPostViewMode,
     setDeleteTargetPostId,
@@ -101,7 +102,9 @@ export default function ProfilePage() {
         profile={profile}
         posts={posts}
         viewMode={postViewMode}
+        canManagePosts={isMe}
         onViewModeChange={setPostViewMode}
+        onToggleLikePost={togglePostLike}
         onDeletePost={setDeleteTargetPostId}
       />
 
