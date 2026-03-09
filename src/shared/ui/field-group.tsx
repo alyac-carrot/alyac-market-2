@@ -13,10 +13,10 @@ export function FieldGroup({
 }) {
   return (
     <div className="space-y-1">
-      <label className="block text-xs font-medium text-zinc-500">{label}</label>
+      <label className="block text-xs font-medium text-zinc-500 dark:text-zinc-400">{label}</label>
       {children}
       {error && <p className="text-xs text-green-500">{error}</p>}
-      {!error && hint && <p className="text-xs text-zinc-400">{hint}</p>}
+      {!error && hint && <p className="text-xs text-zinc-400 dark:text-zinc-500">{hint}</p>}
     </div>
   );
 }

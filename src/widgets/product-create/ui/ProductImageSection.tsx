@@ -37,7 +37,7 @@ export default function ProductImageSection({
         <button
           type="button"
           onClick={() => fileInputRef.current?.click()}
-          className="absolute right-3 bottom-3 flex h-12 w-12 items-center justify-center rounded-full bg-white/90 text-gray-600 shadow-md hover:scale-115 hover:bg-gray-200"
+          className="absolute right-3 bottom-3 flex h-12 w-12 items-center justify-center rounded-full bg-white/90 text-gray-600 shadow-md hover:bg-white dark:bg-zinc-800/90 dark:text-gray-300 dark:hover:bg-zinc-700"
           aria-label="이미지 선택"
         >
           <ImageIcon className="h-6 w-6" />

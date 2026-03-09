@@ -108,11 +108,9 @@ function EditPostForm({ postId, post }: EditPostFormProps) {
     }
 
     try {
-      let imageString = '';
       const oldFiles: string[] = [];
-      const uploadedNewFileNames: string[] = [];
 
-      // Separate old and new files
+      // Separate old files
       for (const item of imageItems) {
         if (!item.isNew && item.originalPath) {
           oldFiles.push(item.originalPath);
@@ -120,13 +118,12 @@ function EditPostForm({ postId, post }: EditPostFormProps) {
       }
 
       // Upload new files if there are any
-      if (newFiles.length > 0) {
-        const uploadedFiles = await uploadFilesMutation.mutateAsync(newFiles);
-        uploadedNewFileNames.push(...uploadedFiles.map((f) => `uploadFiles/${f.filename}`));
-      }
+      const uploadedFiles =
+        newFiles.length > 0 ? await uploadFilesMutation.mutateAsync(newFiles) : [];
+      const uploadedNewFileNames = uploadedFiles.map((f) => `uploadFiles/${f.filename}`);
 
       // Combine old files and newly uploaded files
-      imageString = [...oldFiles, ...uploadedNewFileNames].join(',');
+      const imageString = [...oldFiles, ...uploadedNewFileNames].join(',');
 
       console.log('Updating post:', {
         postId,
@@ -167,8 +164,8 @@ function EditPostForm({ postId, post }: EditPostFormProps) {
             <textarea
               value={text}
               onChange={(e) => setText(e.target.value)}
-              placeholder="게시글 입력하기."
-              className="min-h-125 w-full resize-none border-0 text-base outline-none placeholder:text-gray-400 focus:ring-0"
+              placeholder="게시글 입력하기"
+              className="min-h-125 w-full resize-none border-0 bg-transparent text-base text-zinc-900 outline-none placeholder:text-gray-400 focus:ring-0 dark:text-zinc-100 dark:placeholder:text-zinc-500"
             />
 
             <PostImagePicker

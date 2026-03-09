@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 
 import { useNavigate } from 'react-router-dom';
+
 import { getToken } from '@/entities/auth';
 
 export default function SplashPage() {
@@ -21,7 +22,7 @@ export default function SplashPage() {
   }, [nav]);
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-white">
+    <div className="flex min-h-screen items-center justify-center bg-white dark:bg-zinc-950">
       <div className="flex flex-col items-center">
         {/* public/mascot.png */}
         <img src="/mascot.png" alt="알약마켓" className="h-28 w-28 animate-bounce" />

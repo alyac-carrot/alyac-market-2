@@ -15,25 +15,25 @@ export default function LandingPage() {
       </div>
 
       {/* 하단 카드 */}
-      <div className="rounded-t-3xl bg-white px-6 pt-8 pb-10">
+      <div className="rounded-t-3xl bg-white px-6 pt-8 pb-10 dark:bg-zinc-950">
         <div className="mx-auto w-full max-w-sm space-y-3">
           <SocialLoginButtons />
 
           {/* 하단 링크 */}
-          <div className="mt-4 flex items-center justify-center gap-4 text-sm text-zinc-500">
+          <div className="mt-4 flex items-center justify-center gap-4 text-sm text-zinc-500 dark:text-zinc-400">
             <button
               type="button"
-              className="cursor-pointer hover:text-zinc-800"
+              className="cursor-pointer hover:text-zinc-800 dark:hover:text-zinc-200"
               onClick={() => nav('/auth/signin')}
             >
               이메일로 로그인
             </button>
 
-            <span className="text-zinc-300">|</span>
+            <span className="text-zinc-300 dark:text-zinc-600">|</span>
 
             <button
               type="button"
-              className="cursor-pointer hover:text-zinc-800"
+              className="cursor-pointer hover:text-zinc-800 dark:hover:text-zinc-200"
               onClick={() => nav('/auth/signup')}
             >
               회원가입
