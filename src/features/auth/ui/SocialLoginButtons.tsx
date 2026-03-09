@@ -18,7 +18,7 @@ export function SocialLoginButtons() {
 
       <button
         type="button"
-        className="flex h-12 w-full items-center justify-start rounded-full border border-zinc-300 bg-white px-5 text-sm font-medium text-zinc-700 transition-colors hover:bg-zinc-50 active:scale-95 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-200 dark:hover:bg-zinc-800"
+        className="flex h-12 w-full items-center justify-start rounded-full border border-zinc-300 bg-white px-5 text-sm font-medium text-zinc-700 transition-colors hover:bg-zinc-100 active:scale-95 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-200 dark:hover:bg-zinc-800"
         onClick={() => comingSoon('구글')}
       >
         <GoogleIcon className="mr-3 h-6 w-6" />

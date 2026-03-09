@@ -22,7 +22,7 @@ export default function RootLayout() {
   const isProductCreate = useMatch('/product/create');
   const isProductUpdate = useMatch('/product/:productId/edit');
 
-  const hideHeader = Boolean(isLending || isSignin || inSignup || ishome || isPostDetail);
+  const hideHeader = Boolean(isLending || isSignin || inSignup || ishome);
   const hideFooter = Boolean(
     isPostCreate ||
     isChatRoom ||

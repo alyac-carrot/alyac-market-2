@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
-import { ArrowLeft, Heart, MessageCircle, MoreVertical } from 'lucide-react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Heart, MessageCircle } from 'lucide-react';
+import { useParams } from 'react-router-dom';
 
 import {
   useCreateComment,
@@ -19,10 +19,13 @@ import { Avatar } from '@/shared/ui/Avatar';
 
 /* ── main page ── */
 export default function PostPage() {
-  const navigate = useNavigate();
   const { postId = '' } = useParams();
   const [commentText, setCommentText] = useState('');
   const [selectedCommentId, setSelectedCommentId] = useState<string | null>(null);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const meQuery = useMeQuery();
   const currentUser = meQuery.data?.user;
@@ -113,20 +116,6 @@ export default function PostPage() {
 
   return (
     <div className="bg-background flex min-h-screen flex-col pb-16 text-left">
-      {/* ─ sticky top nav ─ */}
-      <header className="border-border bg-background sticky top-0 z-10 flex items-center justify-between border-b px-4 py-3">
-        <button
-          type="button"
-          onClick={() => navigate(-1)}
-          className="text-foreground hover:text-foreground/80"
-        >
-          <ArrowLeft className="h-6 w-6" />
-        </button>
-        <button type="button">
-          <MoreVertical className="text-muted-foreground h-6 w-6" />
-        </button>
-      </header>
-
       {/* ─ scrollable main ─ */}
       <main className="flex-1 overflow-y-auto">
         {/* post article */}
