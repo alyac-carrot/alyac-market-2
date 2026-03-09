@@ -20,6 +20,7 @@ interface PostsSectionProps {
   viewMode: PostViewMode;
   canManagePosts?: boolean;
   onViewModeChange: (mode: PostViewMode) => void;
+  onToggleLikePost: (postId: string) => void;
   onDeletePost: (postId: string) => void;
 }
 
@@ -29,6 +30,7 @@ export default function ProfilePostsWidget({
   viewMode,
   canManagePosts = false,
   onViewModeChange,
+  onToggleLikePost,
   onDeletePost,
 }: PostsSectionProps) {
   const navigate = useNavigate();
@@ -169,10 +171,20 @@ export default function ProfilePostsWidget({
               )}
 
               <div className="mt-4 flex items-center gap-4 px-2 text-sm text-gray-500">
-                <div className="flex items-center gap-1">
-                  <Heart className="h-4 w-4" />
+                <button
+                  type="button"
+                  className="flex cursor-pointer items-center gap-1 transition-transform duration-150 active:scale-90"
+                  onClick={() => onToggleLikePost(post.id)}
+                  aria-label={post.liked ? '좋아요 취소' : '좋아요'}
+                >
+                  <Heart
+                    className={[
+                      'h-4 w-4 transition-colors',
+                      post.liked ? 'fill-red-500 text-red-500' : 'text-gray-500',
+                    ].join(' ')}
+                  />
                   <span>{post.likeCount}</span>
-                </div>
+                </button>
 
                 <div className="flex items-center gap-1">
                   <MessageCircle className="h-4 w-4" />

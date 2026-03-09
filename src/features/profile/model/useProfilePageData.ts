@@ -34,6 +34,7 @@ export function useProfilePageData({ targetAccountname, isMeByRoute }: UseProfil
     isError: identity.profileQuery.isError,
     // Mutations
     deletePostMutation: postData.deletePostMutation,
+    togglePostLike: postData.togglePostLike,
     followMutation: identity.followMutation,
     // Setters
     setPostViewMode: viewState.setPostViewMode,

@@ -51,6 +51,7 @@ export type Post = {
   content: string;
   imageUrl?: string;
   likeCount: number;
+  liked: boolean;
   commentCount: number;
 };
 
