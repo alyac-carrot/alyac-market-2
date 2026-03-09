@@ -5,7 +5,6 @@ import { Outlet, useMatch } from 'react-router-dom';
 import { useMeQuery } from '@/entities/user';
 import { SearchProvider } from '@/shared/lib/search/SearchProvider';
 import { Footer } from '@/widgets/footer';
-import { Header } from '@/widgets/header';
 
 export default function RootLayout() {
   useMeQuery();
@@ -22,7 +21,6 @@ export default function RootLayout() {
   const isProductCreate = useMatch('/product/create');
   const isProductUpdate = useMatch('/product/:productId/edit');
 
-  const hideHeader = Boolean(isLending || isSignin || inSignup || ishome || isPostDetail);
   const hideFooter = Boolean(
     isPostCreate ||
     isChatRoom ||
@@ -39,9 +37,7 @@ export default function RootLayout() {
 
   const layout = (
     <div className="min-h-screen">
-      {!hideHeader && <Header />}
-
-      <main className={`${hideHeader ? 'pt-0' : 'pt-16'} ${hideFooter ? '' : 'pb-16'}`}>
+      <main className={`${hideFooter ? '' : 'pb-16'}`}>
         <div className="mx-auto w-full">
           <Suspense
             fallback={<div className="flex h-screen items-center justify-center">Loading...</div>}

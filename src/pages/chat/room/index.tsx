@@ -1,37 +1,25 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+﻿import { useEffect, useMemo, useRef, useState } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 
 import type { Msg } from '@/entities/chat';
 import { ChatMessage } from '@/features/chat';
-
-// const ROOM_TITLE: Record<string, string> = {
-//   '1': '이스트 시큐리티',
-//   '2': '알약 클라우드 이스트 시큐리티',
-//   '3': '보안 닥터스 알약',
-// };
+import { Header, PageWithHeader } from '@/widgets/header';
 
 export default function ChatRoomPage() {
   const nav = useNavigate();
-  // const { roomId = '1' } = useParams();
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  // const title = ROOM_TITLE[roomId] ?? '채팅방';
 
   const [openSheet, setOpenSheet] = useState(false);
   const [input, setInput] = useState('');
 
-  // 예시 프로필 이미지
   const meAvatarUrl = '/mascot.png';
   const themAvatarUrl = '/mascot.png';
-  // 예: '/assets/them.png'
 
   const [messages, setMessages] = useState<Msg[]>([
     { id: 'a', from: 'them', text: '테스트용 말', time: '12:39' },
     { id: 'b', from: 'them', text: '테스트 확인입니다', time: '12:44' },
-    { id: 'c', from: 'me', text: '알겠습니다.', time: '12:50' },
-    { id: 'e', from: 'them', text: '사진은 나중에', time: '12:55' },
-    // { id: 'img1', from: 'me', imageUrl: 'https://picsum.photos/300/200', time: '12:56' },
+    { id: 'c', from: 'me', text: '알겠습니다', time: '12:50' },
+    { id: 'e', from: 'them', text: '사진도 부탁요', time: '12:55' },
   ]);
 
   const listRef = useRef<HTMLDivElement | null>(null);
@@ -53,7 +41,6 @@ export default function ChatRoomPage() {
     setInput('');
   };
 
-  // 메시지 추가되면 자동 스크롤
   useEffect(() => {
     scrollToBottom();
   }, [messages.length]);
@@ -61,8 +48,11 @@ export default function ChatRoomPage() {
   const grouped = useMemo(() => messages, [messages]);
 
   return (
-    <div className="flex min-h-screen flex-col">
-      {/* 메시지 리스트 */}
+    <PageWithHeader
+      className="flex min-h-screen flex-col"
+      header={<Header title="채팅방" showBackButton />}
+      contentClassName="flex flex-1 flex-col"
+    >
       <div ref={listRef} className="bg-background flex-1 space-y-3 overflow-auto px-4 py-4">
         {grouped.map((m) => (
           <ChatMessage
@@ -74,10 +64,8 @@ export default function ChatRoomPage() {
         ))}
       </div>
 
-      {/* 입력창 */}
       <div className="border-border bg-card border-t px-4 py-3">
         <div className="flex items-center gap-2">
-          {/* ✅ 입력창 왼쪽 내 프로필 */}
           <div className="bg-muted h-9 w-9 shrink-0 overflow-hidden rounded-full">
             {meAvatarUrl ? (
               <img src={meAvatarUrl} alt="me" className="h-full w-full object-cover" />
@@ -109,7 +97,6 @@ export default function ChatRoomPage() {
         </div>
       </div>
 
-      {/* 바텀시트(나가기) */}
       {openSheet && (
         <div className="fixed inset-0 z-50">
           <button
@@ -131,6 +118,6 @@ export default function ChatRoomPage() {
           </div>
         </div>
       )}
-    </div>
+    </PageWithHeader>
   );
 }

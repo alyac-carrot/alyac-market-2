@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useDeleteProductAction } from '@/features/product-delete';
 import { useProfilePageData } from '@/features/profile';
 import { ConfirmDialog } from '@/shared/ui';
+import { Header, PageWithHeader } from '@/widgets/header';
 import {
   ProfilePostsWidget,
   ProfileProductsWidget,
@@ -75,7 +76,7 @@ export default function ProfilePage() {
   }
 
   return (
-    <div className="w-full">
+    <PageWithHeader className="w-full" header={<Header showBackButton showMenu />}>
       <ProfileSummaryWidget
         profile={profile}
         isMe={isMe}
@@ -131,6 +132,6 @@ export default function ProfilePage() {
         onConfirm={confirmDeleteProduct}
         isLoading={isDeleting || deletingProductId !== null}
       />
-    </div>
+    </PageWithHeader>
   );
 }
