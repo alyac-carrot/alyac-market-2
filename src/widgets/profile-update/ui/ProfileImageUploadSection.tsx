@@ -22,7 +22,7 @@ export function ProfileImageUploadSection({
         <button
           type="button"
           onClick={onPickImage}
-          className="absolute -right-1 -bottom-1 flex h-10 w-10 items-center justify-center rounded-full bg-green-500 shadow-lg"
+          className="absolute -right-1 -bottom-1 flex h-10 w-10 items-center justify-center rounded-full bg-green-500 shadow-lg hover:scale-110 hover:bg-green-600"
           aria-label="프로필 이미지 변경"
           title="프로필 이미지 변경"
         >

@@ -48,3 +48,7 @@ export type UpdateProductResponse = {
   product: Product;
 };
 
+export type DeleteProductResponse = {
+  message?: string;
+};
+
