@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+﻿import { useEffect, useState } from 'react';
 
 import { useNavigate, useParams } from 'react-router-dom';
 
@@ -7,8 +7,8 @@ import { useUploadFiles } from '@/entities/upload';
 import { useMeQuery } from '@/entities/user';
 import { PostImagePicker } from '@/features/upload';
 import { toImageUrl } from '@/shared/lib';
-import { Avatar, Button } from '@/shared/ui';
-import { UploadHeader } from '@/widgets/header';
+import { Avatar, Button, SubmitActionButton } from '@/shared/ui';
+import { Header, PageWithHeader } from '@/widgets/header';
 
 interface ImageItem {
   src: string;
@@ -91,7 +91,6 @@ function EditPostForm({ postId, post }: EditPostFormProps) {
     setImageItems((prev) => {
       const item = prev[index];
       if (item?.isNew) {
-        // Remove corresponding from newFiles
         const newFileIndex = imageItems.slice(0, index).filter((i) => i.isNew).length;
         setNewFiles((prevFiles) => prevFiles.filter((_, i) => i !== newFileIndex));
       }
@@ -110,28 +109,18 @@ function EditPostForm({ postId, post }: EditPostFormProps) {
     try {
       const oldFiles: string[] = [];
 
-      // Separate old files
       for (const item of imageItems) {
         if (!item.isNew && item.originalPath) {
           oldFiles.push(item.originalPath);
         }
       }
 
-      // Upload new files if there are any
       const uploadedFiles =
         newFiles.length > 0 ? await uploadFilesMutation.mutateAsync(newFiles) : [];
       const uploadedNewFileNames = uploadedFiles.map((f) => `uploadFiles/${f.filename}`);
 
-      // Combine old files and newly uploaded files
       const imageString = [...oldFiles, ...uploadedNewFileNames].join(',');
 
-      console.log('Updating post:', {
-        postId,
-        content: text.trim(),
-        image: imageString,
-      });
-
-      // Update the post
       await updatePostMutation.mutateAsync({
         content: text.trim(),
         image: imageString,
@@ -143,23 +132,33 @@ function EditPostForm({ postId, post }: EditPostFormProps) {
     }
   };
 
-  return (
-    <div className="bg-background flex min-h-screen flex-col">
-      <UploadHeader
-        canUpload={hasContent}
-        onUpload={handleUpdate}
-        isLoading={updatePostMutation.isPending || uploadFilesMutation.isPending}
-      />
+  const isSubmitting = updatePostMutation.isPending || uploadFilesMutation.isPending;
 
-      {/* ─ main ─ */}
-      <main className="flex-1 px-4 py-4">
+  return (
+    <PageWithHeader
+      className="bg-background flex min-h-screen flex-col"
+      header={
+        <Header
+          showBackButton
+          right={
+            <SubmitActionButton
+              canSubmit={hasContent}
+              isSubmitting={isSubmitting}
+              onClick={handleUpdate}
+              idleText="업로드"
+              loadingText="업로드 중..."
+            />
+          }
+        />
+      }
+      contentClassName="flex-1"
+    >
+      <main className="px-4 py-4">
         <div className="flex gap-3">
-          {/* avatar */}
           <div className="shrink-0">
             <Avatar src={toImageUrl(user?.image)} alt={user?.username} className="h-10 w-10" />
           </div>
 
-          {/* textarea + images */}
           <div className="flex-1">
             <textarea
               value={text}
@@ -176,6 +175,6 @@ function EditPostForm({ postId, post }: EditPostFormProps) {
           </div>
         </div>
       </main>
-    </div>
+    </PageWithHeader>
   );
 }

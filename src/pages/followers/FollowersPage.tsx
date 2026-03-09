@@ -1,6 +1,8 @@
 import { useParams } from 'react-router-dom';
 
 import { type Profile, useFollowsPageData } from '@/features/follows';
+import { PageWithFooter } from '@/widgets/footer';
+import { Header, PageWithHeader } from '@/widgets/header';
 import { FollowsListItem } from '@/widgets/profile-follows';
 
 export default function FollowersPage() {
@@ -12,20 +14,20 @@ export default function FollowersPage() {
   });
 
   return (
-    <div>
-      {isLoading && <div className="text-muted-foreground p-6 text-sm">Loading...</div>}
+    <PageWithFooter>
+      <PageWithHeader header={<Header title="Followers" showBackButton />}>
+        {isLoading && <div className="text-muted-foreground p-6 text-sm">Loading...</div>}
 
-      {isError && (
-        <div className="text-muted-foreground p-6 text-sm">팔로워 목록을 불러오지 못했습니다.</div>
-      )}
+        {isError && <div className="text-muted-foreground p-6 text-sm">팔로워 목록을 불러오지 못했습니다.</div>}
 
-      {!isLoading && !isError && list.length === 0 && (
-        <div className="text-muted-foreground p-6 text-sm">팔로워가 없습니다.</div>
-      )}
+        {!isLoading && !isError && list.length === 0 && (
+          <div className="text-muted-foreground p-6 text-sm">팔로워가 없습니다.</div>
+        )}
 
-      {list.map((u: Profile) => (
-        <FollowsListItem key={u._id} user={u} />
-      ))}
-    </div>
+        {list.map((u: Profile) => (
+          <FollowsListItem key={u._id} user={u} />
+        ))}
+      </PageWithHeader>
+    </PageWithFooter>
   );
 }

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+﻿import { useEffect, useState } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -7,8 +7,8 @@ import { useUploadFiles } from '@/entities/upload';
 import { useMeQuery } from '@/entities/user';
 import { PostImagePicker } from '@/features/upload';
 import { toImageUrl } from '@/shared/lib';
-import { Avatar } from '@/shared/ui';
-import { UploadHeader } from '@/widgets/header';
+import { Avatar, SubmitActionButton } from '@/shared/ui';
+import { Header, PageWithHeader } from '@/widgets/header';
 
 export default function CreatePostPage() {
   const navigate = useNavigate();
@@ -55,22 +55,30 @@ export default function CreatePostPage() {
   };
 
   return (
-    <div className="bg-background flex min-h-screen flex-col">
-      <UploadHeader
-        canUpload={hasContent}
-        onUpload={handleUpload}
-        isLoading={createPostMutation.isPending || uploadFilesMutation.isPending}
-      />
-
-      {/* ─ main ─ */}
-      <main className="flex-1 px-4 py-4">
+    <PageWithHeader
+      className="bg-background flex min-h-screen flex-col"
+      header={
+        <Header
+          showBackButton
+          right={
+            <SubmitActionButton
+              canSubmit={hasContent}
+              isSubmitting={createPostMutation.isPending || uploadFilesMutation.isPending}
+              onClick={handleUpload}
+              idleText="업로드"
+              loadingText="업로드 중..."
+            />
+          }
+        />
+      }
+      contentClassName="flex-1"
+    >
+      <main className="px-4 py-4">
         <div className="flex gap-3">
-          {/* avatar */}
           <div className="shrink-0">
             <Avatar src={toImageUrl(user?.image)} alt={user?.username} className="h-10 w-10" />
           </div>
 
-          {/* textarea + images */}
           <div className="flex-1">
             <textarea
               value={text}
@@ -87,6 +95,6 @@ export default function CreatePostPage() {
           </div>
         </div>
       </main>
-    </div>
+    </PageWithHeader>
   );
 }

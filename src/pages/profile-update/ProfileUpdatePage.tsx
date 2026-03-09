@@ -1,7 +1,8 @@
 ﻿import { useProfileQuery } from '@/entities/profile';
 import { useMeQuery } from '@/entities/user';
 import { useProfileUpdateForm } from '@/features/profile-update';
-import { ProfileUpdateHeader } from '@/widgets/header';
+import { Button } from '@/shared/ui';
+import { Header, PageWithHeader } from '@/widgets/header';
 import { ProfileImageUploadSection, ProfileInfoSection } from '@/widgets/profile-update';
 
 type ProfileUpdateInitial = {
@@ -17,9 +18,24 @@ function ProfileUpdateContent({ profile }: { profile: ProfileUpdateInitial }) {
     useProfileUpdateForm({ initial: profile });
 
   return (
-    <div className="min-h-screen w-full pb-10 pt-4">
-      <ProfileUpdateHeader canSave={canSave} onSave={submit} isLoading={isSaving} />
-
+    <PageWithHeader
+      className="min-h-screen w-full pb-10"
+      header={
+        <Header
+          showBackButton
+          right={
+            <Button
+              type="button"
+              onClick={submit}
+              disabled={!canSave || isSaving}
+              className="rounded-full bg-green-500 px-5 text-white hover:bg-green-600"
+            >
+              {isSaving ? '저장 중...' : '저장'}
+            </Button>
+          }
+        />
+      }
+    >
       <div className="mx-auto px-4 pt-6">
         <ProfileImageUploadSection
           avatarSrc={avatarSrc}
@@ -30,7 +46,7 @@ function ProfileUpdateContent({ profile }: { profile: ProfileUpdateInitial }) {
 
         <ProfileInfoSection register={register} errors={errors} />
       </div>
-    </div>
+    </PageWithHeader>
   );
 }
 
