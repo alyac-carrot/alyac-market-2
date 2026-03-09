@@ -1,4 +1,4 @@
-import { UploadHeader } from '@/widgets/header';
+import type { ReactNode } from 'react';
 
 import ProductFormSection from './ProductFormSection';
 import ProductImageSection from './ProductImageSection';
@@ -11,14 +11,12 @@ type ProductEditorFormProps = {
   link: string;
   imagePreviewUrl: string;
   errorText: string;
-  canSubmit: boolean;
-  isSubmitting: boolean;
+  header?: ReactNode;
   isLoading?: boolean;
   onItemNameChange: (value: string) => void;
   onPriceChange: (value: string) => void;
   onLinkChange: (value: string) => void;
   onImagePick: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onSubmit: () => void;
 };
 
 export default function ProductEditorForm({
@@ -29,14 +27,12 @@ export default function ProductEditorForm({
   link,
   imagePreviewUrl,
   errorText,
-  canSubmit,
-  isSubmitting,
+  header,
   isLoading = false,
   onItemNameChange,
   onPriceChange,
   onLinkChange,
   onImagePick,
-  onSubmit,
 }: ProductEditorFormProps) {
   if (isLoading) {
     return <div className="flex h-screen items-center justify-center">Loading...</div>;
@@ -44,7 +40,7 @@ export default function ProductEditorForm({
 
   return (
     <div className="bg-background flex flex-col">
-      <UploadHeader canUpload={canSubmit} onUpload={onSubmit} isLoading={isSubmitting} />
+      {header}
 
       <main className="mx-auto mt-6 w-full flex-1 px-4">
         <form id={formId} className="space-y-6" onSubmit={(e) => e.preventDefault()}>

@@ -1,1 +1,1 @@
-export { ProfileUpdateForm } from './ui/ProfileUpdateForm';
+export { useProfileUpdateForm } from './model/useProfileUpdateForm';
