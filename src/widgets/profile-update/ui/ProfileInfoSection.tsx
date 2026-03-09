@@ -1,66 +1,62 @@
-import { Input } from '@/shared/ui';
+import type { FieldErrors, UseFormRegister } from 'react-hook-form';
 
-type FormState = {
+import { accountnameRule, introRule, usernameRule } from '@/shared/lib';
+import { FieldGroup, UnderlineInput } from '@/shared/ui';
+
+type ProfileFormValues = {
   username: string;
   accountname: string;
   intro: string;
-  image: string;
 };
 
 interface ProfileInfoSectionProps {
-  form: FormState;
-  setForm: React.Dispatch<React.SetStateAction<FormState>>;
+  register: UseFormRegister<ProfileFormValues>;
+  errors: FieldErrors<ProfileFormValues>;
 }
 
-export function ProfileInfoSection({ form, setForm }: ProfileInfoSectionProps) {
+export function ProfileInfoSection({ register, errors }: ProfileInfoSectionProps) {
   return (
-    <form className="space-y-6 px-4 py-8" onSubmit={(e) => e.preventDefault()}>
-      <div className="space-y-2">
-        <label htmlFor="username" className="text-foreground block text-sm font-medium">
-          사용자 이름
-        </label>
-
-        <Input
-          id="username"
-          value={form.username}
-          onChange={(e) => setForm((prev) => ({ ...prev, username: e.target.value }))}
+    <div className="space-y-8 px-4 py-8">
+      <FieldGroup
+        label="사용자 이름"
+        error={errors.username?.message}
+        hint="2~10자 이내여야 합니다."
+      >
+        <UnderlineInput
+          id="profile-username"
+          type="text"
           placeholder="이름을 입력하세요."
-          className="h-12 border-t-0 border-r-0 border-b-2 border-l-0 pl-0 focus:outline-none focus-visible:ring-0"
+          {...register('username', usernameRule)}
         />
-      </div>
+      </FieldGroup>
 
-      <div className="space-y-2">
-        <label htmlFor="accountId" className="text-foreground block text-sm font-medium">
-          계정 ID
-        </label>
-
-        <Input
-          id="accountId"
-          value={form.accountname}
+      <FieldGroup
+        label="계정 ID"
+        error={errors.accountname?.message}
+        hint="계정 ID는 변경할 수 없습니다."
+      >
+        <UnderlineInput
+          id="profile-accountname"
+          type="text"
           disabled
+          className="opacity-60"
           placeholder="계정 아이디를 입력하세요."
-          className="h-12 border-t-0 border-r-0 border-b-2 border-l-0 pl-0 focus:outline-none focus-visible:ring-0 disabled:opacity-60"
+          {...register('accountname', accountnameRule)}
         />
+      </FieldGroup>
 
-        <p className="text-muted-foreground text-xs">계정 ID는 변경할 수 없습니다.</p>
-      </div>
-
-      <div className="space-y-2">
-        <label htmlFor="bio" className="text-foreground block text-sm font-medium">
-          소개
-        </label>
-
-        <Input
-          id="bio"
-          value={form.intro}
-          onChange={(e) => setForm((prev) => ({ ...prev, intro: e.target.value }))}
+      <FieldGroup
+        label="소개"
+        error={errors.intro?.message}
+        hint="최대 60자 이내로 소개를 작성해주세요."
+      >
+        <UnderlineInput
+          id="profile-intro"
+          type="text"
           placeholder="간단한 자기 소개를 입력하세요."
-          maxLength={60}
-          className="h-12 border-t-0 border-r-0 border-b-2 border-l-0 pl-0 focus:outline-none focus-visible:ring-0"
+          {...register('intro', introRule)}
         />
-
-        <p className="text-muted-foreground text-xs">최대 60자</p>
-      </div>
-    </form>
+      </FieldGroup>
+    </div>
   );
 }

@@ -2,11 +2,10 @@ import axios from 'axios';
 import { useForm } from 'react-hook-form';
 
 import { checkEmail } from '@/entities/auth';
+import { emailRule, passwordRule } from '@/shared/lib';
 import { FieldGroup, UnderlineInput } from '@/shared/ui';
 
 export type Step1Values = { email: string; password: string };
-
-const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export function SignUpStep1({ onNext }: { onNext: (data: Step1Values) => void }) {
   const {
@@ -45,10 +44,7 @@ export function SignUpStep1({ onNext }: { onNext: (data: Step1Values) => void })
             type="email"
             placeholder="이메일 주소를 입력해 주세요."
             autoComplete="email"
-            {...register('email', {
-              required: '*이메일을 입력해 주세요.',
-              pattern: { value: emailPattern, message: '*올바른 이메일 형식을 입력해 주세요.' },
-            })}
+            {...register('email', emailRule)}
           />
         </FieldGroup>
 
@@ -58,10 +54,7 @@ export function SignUpStep1({ onNext }: { onNext: (data: Step1Values) => void })
             type="password"
             placeholder="비밀번호를 설정해 주세요."
             autoComplete="new-password"
-            {...register('password', {
-              required: '*비밀번호를 입력해 주세요.',
-              minLength: { value: 6, message: '*비밀번호는 6자 이상이어야 합니다.' },
-            })}
+            {...register('password', passwordRule)}
           />
         </FieldGroup>
 
