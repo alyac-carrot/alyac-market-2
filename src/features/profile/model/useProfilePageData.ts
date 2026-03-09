@@ -1,17 +1,7 @@
-import { useMemo, useState } from 'react';
-
-import { useDeletePost, useGetUserPosts } from '@/entities/post';
-import { useUserProductsQuery } from '@/entities/product';
-import {
-  type Post,
-  type PostViewMode,
-  type Product,
-  type UIProfile,
-  useFollowMutation,
-  useProfileQuery,
-} from '@/entities/profile';
-import { useMeQuery } from '@/entities/user';
-import { pickFirstImage, toImageUrl } from '@/shared/lib/';
+import { useProfileIdentity } from './useProfileIdentity';
+import { useProfilePosts } from './useProfilePosts';
+import { useProfileProducts } from './useProfileProducts';
+import { useProfileViewState } from './useProfileViewState';
 
 interface UseProfilePageDataProps {
   targetAccountname?: string;
@@ -19,86 +9,34 @@ interface UseProfilePageDataProps {
 }
 
 export function useProfilePageData({ targetAccountname, isMeByRoute }: UseProfilePageDataProps) {
-  const meQuery = useMeQuery();
-
-  const actualAccountname = targetAccountname ?? meQuery.data?.user.accountname;
-
-  const profileQuery = useProfileQuery(actualAccountname);
-  const followMutation = useFollowMutation(actualAccountname ?? '');
-  const productsQuery = useUserProductsQuery(actualAccountname);
-  const userPostsQuery = useGetUserPosts(actualAccountname);
-  const deletePostMutation = useDeletePost();
-
-  const [postViewMode, setPostViewMode] = useState<PostViewMode>('normal');
-  const [deleteTargetPostId, setDeleteTargetPostId] = useState<string | null>(null);
-
-  const profile: UIProfile | null = useMemo(() => {
-    const p = profileQuery.data;
-    if (!p) return null;
-
-    return {
-      id: p.accountname,
-      nickname: p.username,
-      handle: `@${p.accountname}`,
-      bio: p.intro ?? '',
-      avatarUrl: p.image?.trim() ? toImageUrl(p.image) : '',
-      followersCount: p.followerCount ?? 0,
-      followingsCount: p.followingCount ?? 0,
-    };
-  }, [profileQuery.data]);
-
-  const isMe = useMemo(() => {
-    const meAccount = meQuery.data?.user.accountname;
-    if (!meAccount || !targetAccountname) return isMeByRoute;
-    return meAccount === targetAccountname;
-  }, [isMeByRoute, meQuery.data?.user.accountname, targetAccountname]);
-
-  const isFollowing = !!profileQuery.data?.isfollow;
-
-  const sellingProducts: Product[] = useMemo(() => {
-    const arr = productsQuery.data ?? [];
-    return arr.map((p) => ({
-      id: p.id,
-      title: p.itemName,
-      price: p.price,
-      thumbnailUrl: toImageUrl(p.itemImage),
-    }));
-  }, [productsQuery.data]);
-
-  const posts: Post[] = useMemo(() => {
-    const arr = userPostsQuery.data?.post ?? [];
-    return arr.map((p) => ({
-      id: p.id,
-      content: p.content,
-      imageUrl: toImageUrl(pickFirstImage(p.image)),
-      likeCount: p.heartCount ?? 0,
-      commentCount: p.commentCount ?? 0,
-    }));
-  }, [userPostsQuery.data]);
+  const identity = useProfileIdentity({ targetAccountname, isMeByRoute });
+  const products = useProfileProducts(identity.actualAccountname);
+  const postData = useProfilePosts(identity.actualAccountname);
+  const viewState = useProfileViewState();
 
   const isLoading =
-    meQuery.isLoading ||
-    profileQuery.isLoading ||
-    productsQuery.isLoading ||
-    userPostsQuery.isLoading;
+    identity.meQuery.isLoading ||
+    identity.profileQuery.isLoading ||
+    products.productsQuery.isLoading ||
+    postData.userPostsQuery.isLoading;
 
   return {
     // Data
-    profile,
-    sellingProducts,
-    posts,
-    postViewMode,
-    deleteTargetPostId,
+    profile: identity.profile,
+    sellingProducts: products.sellingProducts,
+    posts: postData.posts,
+    postViewMode: viewState.postViewMode,
+    deleteTargetPostId: viewState.deleteTargetPostId,
     // Flags
-    isMe,
-    isFollowing,
+    isMe: identity.isMe,
+    isFollowing: identity.isFollowing,
     isLoading,
-    isError: profileQuery.isError,
+    isError: identity.profileQuery.isError,
     // Mutations
-    deletePostMutation,
-    followMutation,
+    deletePostMutation: postData.deletePostMutation,
+    followMutation: identity.followMutation,
     // Setters
-    setPostViewMode,
-    setDeleteTargetPostId,
+    setPostViewMode: viewState.setPostViewMode,
+    setDeleteTargetPostId: viewState.setDeleteTargetPostId,
   };
 }

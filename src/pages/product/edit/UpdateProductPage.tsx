@@ -3,6 +3,7 @@
 import { useParams } from 'react-router-dom';
 
 import { useUpdateProductForm } from '@/features/product-update';
+import { UploadHeader } from '@/widgets/header';
 import { ProductEditorForm } from '@/widgets/product-create';
 
 export default function UpdateProductPage() {
@@ -37,14 +38,12 @@ export default function UpdateProductPage() {
       link={link}
       imagePreviewUrl={imagePreviewUrl}
       errorText={errorText}
-      canSubmit={canUpload}
+      header={<UploadHeader canUpload={canUpload} onUpload={handleSubmit} isLoading={isSubmitting} />}
       isLoading={isLoading}
-      isSubmitting={isSubmitting}
       onItemNameChange={setItemName}
       onPriceChange={handlePriceChange}
       onLinkChange={setLink}
       onImagePick={handleImagePick}
-      onSubmit={handleSubmit}
     />
   );
 }

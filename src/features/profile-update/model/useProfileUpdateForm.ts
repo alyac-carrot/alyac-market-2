@@ -6,18 +6,14 @@ import { useNavigate } from 'react-router-dom';
 import { useUploadFiles } from '@/entities/upload';
 import { useUpdateMyProfileMutation } from '@/entities/user';
 import { normalizeUploadPath, toImageUrl } from '@/shared/lib';
-import {
-  ProfileImageUploadSection,
-  ProfileInfoSection,
-  ProfileUpdateActions,
-} from '@/widgets/profile-update';
 
 type ProfileFormValues = {
   username: string;
   accountname: string;
   intro: string;
 };
-interface ProfileUpdateFormProps {
+
+interface UseProfileUpdateFormProps {
   initial: {
     _id: string;
     username: string;
@@ -27,12 +23,10 @@ interface ProfileUpdateFormProps {
   };
 }
 
-export function ProfileUpdateForm({ initial }: ProfileUpdateFormProps) {
+export function useProfileUpdateForm({ initial }: UseProfileUpdateFormProps) {
   const navigate = useNavigate();
-
   const updateMutation = useUpdateMyProfileMutation();
   const uploadMutation = useUploadFiles();
-
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   const {
@@ -80,7 +74,7 @@ export function ProfileUpdateForm({ initial }: ProfileUpdateFormProps) {
         setImageFilename(normalized);
       },
       onError: (err: unknown) => {
-        const message = err instanceof Error ? err.message : '업로드에 실패했습니다.';
+        const message = err instanceof Error ? err.message : '이미지 업로드에 실패했습니다.';
         alert(message);
 
         setPreviewUrl((prev) => {
@@ -109,24 +103,15 @@ export function ProfileUpdateForm({ initial }: ProfileUpdateFormProps) {
     );
   };
 
-  return (
-    <div className="min-h-screen w-full pt-4 pb-10">
-      <div className="mx-auto px-4 pt-6">
-        <ProfileImageUploadSection
-          avatarSrc={avatarSrc}
-          onPickImage={onPickImage}
-          fileInputRef={fileInputRef}
-          onChangeFile={onChangeFile}
-        />
-
-        <ProfileInfoSection register={register} errors={errors} />
-
-        <ProfileUpdateActions
-          canSave={canSave}
-          onSave={handleSubmit(onSave)}
-          isLoading={updateMutation.isPending}
-        />
-      </div>
-    </div>
-  );
+  return {
+    register,
+    errors,
+    fileInputRef,
+    avatarSrc,
+    canSave,
+    isSaving: updateMutation.isPending,
+    onPickImage,
+    onChangeFile,
+    submit: handleSubmit(onSave),
+  };
 }
