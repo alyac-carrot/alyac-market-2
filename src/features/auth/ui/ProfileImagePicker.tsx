@@ -61,7 +61,9 @@ export function ProfileImagePicker({
         className="hidden"
         onChange={onImageChange}
       />
-      {isUploading && <p className="mt-2 text-center text-xs text-zinc-400">업로드 중...</p>}
+      {isUploading && (
+        <p className="mt-2 text-center text-xs text-zinc-400 dark:text-zinc-500">업로드 중...</p>
+      )}
       {uploadError && <p className="mt-2 text-center text-xs text-red-400">{uploadError}</p>}
     </div>
   );

@@ -10,9 +10,13 @@ const LandingPage = lazy(() => import('@/pages/auth/LandingPage'));
 const SignInPage = lazy(() => import('@/pages/auth/signin'));
 const SignUpPage = lazy(() => import('@/pages/auth/signup'));
 const CreatePostPage = lazy(() => import('@/pages/post/CreatePostPage'));
-const CreateProductPage = lazy(() => import('@/pages/product/CreateProductPage'));
-const UpdateProductPage = lazy(() => import('@/pages/product/UpdateProductPage'));
-const ProfilePage = lazy(() => import('@/pages/profile/ProfilePage'));
+const CreateProductPage = lazy(() =>
+  import('@/pages/product').then((m) => ({ default: m.CreateProductPage })),
+);
+const UpdateProductPage = lazy(() =>
+  import('@/pages/product').then((m) => ({ default: m.UpdateProductPage })),
+);
+const ProfilePage = lazy(() => import('@/pages/profile').then((m) => ({ default: m.ProfilePage })));
 const ProfileUpdatePage = lazy(() => import('@/pages/profile-update/ProfileUpdatePage'));
 const PostPage = lazy(() => import('@/pages/post/PostPage'));
 const EditPostPage = lazy(() => import('@/pages/post/EditPostPage'));
@@ -21,8 +25,12 @@ const FeedPage = lazy(() => import('@/pages/feed'));
 const ChatRoomPage = lazy(() => import('@/pages/chat/room'));
 const ChatListPage = lazy(() => import('@/pages/chat'));
 const NotFoundPage = lazy(() => import('@/pages/not-found/NotFoundPage'));
-const FollowersPage = lazy(() => import('@/pages/followers/FollowersPage'));
-const FollowingsPage = lazy(() => import('@/pages/followings/FollowingsPage'));
+const FollowersPage = lazy(() =>
+  import('@/pages/followers').then((m) => ({ default: m.FollowersPage })),
+);
+const FollowingsPage = lazy(() =>
+  import('@/pages/followings').then((m) => ({ default: m.FollowingsPage })),
+);
 
 export const router = createBrowserRouter([
   {
@@ -43,8 +51,8 @@ export const router = createBrowserRouter([
           { path: 'chat/:roomId', element: <ChatRoomPage /> },
 
           { path: 'post-create', element: <CreatePostPage /> },
-          { path: 'products/create', element: <CreateProductPage /> },
-          { path: 'product-update/:productId', element: <UpdateProductPage /> },
+          { path: 'product/create', element: <CreateProductPage /> },
+          { path: 'product/:productId/edit', element: <UpdateProductPage /> },
           { path: 'profile', element: <ProfilePage /> },
           { path: 'profile/:userId', element: <ProfilePage /> },
           { path: 'profile-update', element: <ProfileUpdatePage /> },

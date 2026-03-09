@@ -3,6 +3,7 @@ import axiosInstance from '@/shared/api/axios';
 import type {
   CreateProductRequest,
   CreateProductResponse,
+  DeleteProductResponse,
   GetProductDetailResponse,
   GetUserProductsResponse,
   UpdateProductRequest,
@@ -44,5 +45,10 @@ export const updateProduct = async (
   };
 
   const response = await axiosInstance.put<UpdateProductResponse>(`/product/${productId}`, payload);
+  return response.data;
+};
+
+export const deleteProduct = async (productId: string): Promise<DeleteProductResponse> => {
+  const response = await axiosInstance.delete<DeleteProductResponse>(`/product/${productId}`);
   return response.data;
 };

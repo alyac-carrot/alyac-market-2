@@ -39,15 +39,10 @@ export default function CreatePostPage() {
 
   const handleUpload = async () => {
     try {
-      let imageString: string | undefined;
+      const uploadedFiles = files.length > 0 ? await uploadFilesMutation.mutateAsync(files) : [];
+      const imageString =
+        uploadedFiles.map((f) => `uploadFiles/${f.filename}`).join(',') || undefined;
 
-      // Upload files if there are any
-      if (files.length > 0) {
-        const uploadedFiles = await uploadFilesMutation.mutateAsync(files);
-        imageString = uploadedFiles.map((f) => `uploadFiles/${f.filename}`).join(',');
-      }
-
-      // Create the post
       await createPostMutation.mutateAsync({
         content: text.trim(),
         image: imageString,
@@ -80,8 +75,8 @@ export default function CreatePostPage() {
             <textarea
               value={text}
               onChange={(e) => setText(e.target.value)}
-              placeholder="게시글 입력하기."
-              className="min-h-125 w-full resize-none border-0 text-base outline-none placeholder:text-gray-400 focus:ring-0"
+              placeholder="게시글 입력하기"
+              className="min-h-125 w-full resize-none border-0 bg-transparent text-base text-zinc-900 outline-none placeholder:text-gray-400 focus:ring-0 dark:text-zinc-100 dark:placeholder:text-zinc-500"
             />
 
             <PostImagePicker

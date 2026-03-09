@@ -38,7 +38,7 @@ export function ChatMessage({
         {/* 이미지 메시지 */}
         {m.imageUrl && (
           <div
-            className={`overflow-hidden rounded-2xl ${m.from === 'me' ? '' : 'border bg-white'}`}
+            className={`overflow-hidden rounded-2xl ${m.from === 'me' ? '' : 'border bg-white dark:border-zinc-800 dark:bg-zinc-900'}`}
           >
             <img src={m.imageUrl} alt="첨부" className="h-auto w-64" />
           </div>

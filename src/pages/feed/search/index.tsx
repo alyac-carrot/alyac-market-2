@@ -82,15 +82,15 @@ export default function SearchPage() {
       <div className="mt-4 min-h-[calc(100vh-160px)]">
         {!q ? (
           <div className={centered}>
-            <p className="text-sm text-zinc-400">검색어를 입력해보세요.</p>
+            <p className="text-sm text-zinc-400 dark:text-zinc-500">검색어를 입력해보세요.</p>
           </div>
         ) : loading ? (
           <div className={centered}>
-            <p className="text-sm text-zinc-400">검색 중...</p>
+            <p className="text-sm text-zinc-400 dark:text-zinc-500">검색 중...</p>
           </div>
         ) : results.length === 0 ? (
           <div className={centered}>
-            <p className="text-sm text-zinc-400">검색 결과가 없어요.</p>
+            <p className="text-sm text-zinc-400 dark:text-zinc-500">검색 결과가 없어요.</p>
           </div>
         ) : (
           <ul className="space-y-1">

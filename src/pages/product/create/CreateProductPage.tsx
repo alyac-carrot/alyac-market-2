@@ -1,6 +1,7 @@
 ﻿import { useEffect } from 'react';
 
 import { useCreateProductForm } from '@/features/product-create';
+import { UploadHeader } from '@/widgets/header';
 import { ProductEditorForm } from '@/widgets/product-create';
 
 export default function CreateProductPage() {
@@ -33,13 +34,11 @@ export default function CreateProductPage() {
       link={link}
       imagePreviewUrl={imagePreviewUrl}
       errorText={errorText}
-      canSubmit={canUpload}
-      isSubmitting={isSubmitting}
+      header={<UploadHeader canUpload={canUpload} onUpload={handleSubmit} isLoading={isSubmitting} />}
       onItemNameChange={setItemName}
       onPriceChange={handlePriceChange}
       onLinkChange={setLink}
       onImagePick={handleImagePick}
-      onSubmit={handleSubmit}
     />
   );
 }
