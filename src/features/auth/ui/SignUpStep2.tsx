@@ -92,17 +92,19 @@ export function SignUpStep2({ step1Data, onBack }: { step1Data: Step1Values; onB
   const canSubmit = isValid && !signUpMutation.isPending;
 
   return (
-    <div className="flex min-h-screen flex-col bg-white px-8">
+    <div className="flex min-h-screen flex-col bg-white px-8 dark:bg-zinc-950">
       {/* back button */}
       <button
         type="button"
         onClick={onBack}
-        className="mt-6 self-start text-sm text-zinc-400 hover:text-zinc-700"
+        className="mt-6 self-start text-sm text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200"
       >
         ← 이전
       </button>
 
-      <h1 className="mt-6 text-center text-2xl font-medium text-black">프로필 설정</h1>
+      <h1 className="mt-6 text-center text-2xl font-medium text-black dark:text-white">
+        프로필 설정
+      </h1>
       <p className="mt-2 text-center text-sm text-zinc-400">계정 ID는 변경할 수 없습니다.</p>
 
       {/* profile image picker */}
