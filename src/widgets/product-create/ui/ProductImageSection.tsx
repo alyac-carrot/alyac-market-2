@@ -18,7 +18,7 @@ export default function ProductImageSection({
         <button
           type="button"
           onClick={() => fileInputRef.current?.click()}
-          className="bg-muted hover:bg-muted/60 ring-offset-background relative flex h-64 w-full items-center justify-center overflow-hidden rounded-2xl p-0 transition-colors duration-200 hover:ring-2 hover:ring-green-300/60"
+          className="bg-muted hover:bg-muted/60 ring-offset-background relative flex h-64 w-full cursor-pointer items-center justify-center overflow-hidden rounded-2xl p-0 transition-colors duration-200 hover:ring-2 hover:ring-green-300/60"
         >
           {imagePreviewUrl ? (
             <img
@@ -37,7 +37,7 @@ export default function ProductImageSection({
         <button
           type="button"
           onClick={() => fileInputRef.current?.click()}
-          className="absolute right-3 bottom-3 flex h-12 w-12 items-center justify-center rounded-full bg-white/90 text-gray-600 shadow-md hover:bg-white dark:bg-zinc-800/90 dark:text-gray-300 dark:hover:bg-zinc-700"
+          className="absolute right-3 bottom-3 flex h-12 w-12 cursor-pointer items-center justify-center rounded-full bg-white/90 text-gray-600 shadow-md hover:bg-white dark:bg-zinc-800/90 dark:text-gray-300 dark:hover:bg-zinc-700"
           aria-label="이미지 선택"
         >
           <ImageIcon className="h-6 w-6" />

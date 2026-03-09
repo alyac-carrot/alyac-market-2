@@ -47,7 +47,7 @@ export default function ProfilePostsWidget({
             type="button"
             variant={viewMode === 'normal' ? 'secondary' : 'ghost'}
             size="icon"
-            className="h-8 w-8"
+            className="h-8 w-8 cursor-pointer"
             onClick={() => onViewModeChange('normal')}
             aria-label="일반 보기"
             title="일반 보기"
@@ -63,7 +63,7 @@ export default function ProfilePostsWidget({
             type="button"
             variant={viewMode === 'media' ? 'secondary' : 'ghost'}
             size="icon"
-            className="h-8 w-8"
+            className="h-8 w-8 cursor-pointer"
             onClick={() => onViewModeChange('media')}
             aria-label="이미지 보기"
             title="이미지 보기"
@@ -83,7 +83,7 @@ export default function ProfilePostsWidget({
             <Link
               key={p.id}
               to={`/post/${p.id}`}
-              className="aspect-square overflow-hidden bg-gray-100 transition hover:opacity-80"
+              className="aspect-square cursor-pointer overflow-hidden bg-gray-100 transition hover:opacity-80"
             >
               <img src={p.imageUrl!} alt="" className="h-full w-full object-cover" />
             </Link>
@@ -100,7 +100,7 @@ export default function ProfilePostsWidget({
                   <div className="font-semibold">{profile.nickname}</div>
                   <div className="text-sm text-gray-500">{profile.handle}</div>
 
-                  <Link to={`/post/${post.id}`} className="block">
+                  <Link to={`/post/${post.id}`} className="block cursor-pointer">
                     <div className="mt-2 text-sm">{post.content}</div>
                   </Link>
                 </div>
@@ -115,7 +115,7 @@ export default function ProfilePostsWidget({
                       type="button"
                       variant="ghost"
                       size="icon"
-                      className="h-8 w-8 text-gray-400 hover:text-gray-600 disabled:cursor-not-allowed disabled:opacity-40"
+                      className="h-8 w-8 cursor-pointer text-gray-400 hover:text-gray-600 disabled:cursor-not-allowed disabled:opacity-40"
                       aria-label="게시글 메뉴"
                       disabled={!canManagePosts}
                       onClick={(e) => e.stopPropagation()}
@@ -162,7 +162,7 @@ export default function ProfilePostsWidget({
               {post.imageUrl?.trim() && (
                 <Link
                   to={`/post/${post.id}`}
-                  className="mt-3 block aspect-video max-h-64 overflow-hidden rounded-lg bg-gray-100"
+                  className="mt-3 block aspect-video max-h-64 cursor-pointer overflow-hidden rounded-lg bg-gray-100"
                 >
                   <img src={post.imageUrl} alt="" className="h-full w-full object-cover" />
                 </Link>
