@@ -10,6 +10,8 @@ const LandingPage = lazy(() => import('@/pages/auth/LandingPage'));
 const SignInPage = lazy(() => import('@/pages/auth/signin'));
 const SignUpPage = lazy(() => import('@/pages/auth/signup'));
 const CreatePostPage = lazy(() => import('@/pages/post/CreatePostPage'));
+const CreateProductPage = lazy(() => import('@/pages/product/CreateProductPage'));
+const UpdateProductPage = lazy(() => import('@/pages/product/UpdateProductPage'));
 const ProfilePage = lazy(() => import('@/pages/profile/ProfilePage'));
 const ProfileUpdatePage = lazy(() => import('@/pages/profile-update/ProfileUpdatePage'));
 const PostPage = lazy(() => import('@/pages/post/PostPage'));
@@ -41,6 +43,8 @@ export const router = createBrowserRouter([
           { path: 'chat/:roomId', element: <ChatRoomPage /> },
 
           { path: 'post-create', element: <CreatePostPage /> },
+          { path: 'products/create', element: <CreateProductPage /> },
+          { path: 'product-update/:productId', element: <UpdateProductPage /> },
           { path: 'profile', element: <ProfilePage /> },
           { path: 'profile/:userId', element: <ProfilePage /> },
           { path: 'profile-update', element: <ProfileUpdatePage /> },

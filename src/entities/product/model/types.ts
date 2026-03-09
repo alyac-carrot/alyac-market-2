@@ -26,3 +26,25 @@ export type GetUserProductsResponse = {
   count: number;
   product: Product[];
 };
+
+export type CreateProductRequest = {
+  itemName: string;
+  price: number;
+  link: string;
+  itemImage: string;
+};
+
+export type CreateProductResponse = {
+  product: Product;
+};
+
+export type GetProductDetailResponse = {
+  product: Product;
+};
+
+export type UpdateProductRequest = CreateProductRequest;
+
+export type UpdateProductResponse = {
+  product: Product;
+};
+
