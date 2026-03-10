@@ -1,11 +1,9 @@
+import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 
 import { getSignInErrorMessage, useSignInMutation } from '@/entities/auth';
 
-type SignInFormValues = {
-  email: string;
-  password: string;
-};
+import { signInSchema, type SignInFormValues } from './schemas';
 
 export function useSignInForm() {
   const signInMutation = useSignInMutation();
@@ -15,6 +13,7 @@ export function useSignInForm() {
     handleSubmit,
     formState: { errors, isValid },
   } = useForm<SignInFormValues>({
+    resolver: zodResolver(signInSchema),
     mode: 'onChange',
     defaultValues: { email: '', password: '' },
   });
