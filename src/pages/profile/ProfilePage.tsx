@@ -3,6 +3,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useDeleteProductAction } from '@/features/product-delete';
 import { useProfilePageData } from '@/features/profile';
 import { ConfirmDialog } from '@/shared/ui';
+import { PageWithFooter } from '@/widgets/footer';
+import { Header, PageWithHeader } from '@/widgets/header';
 import {
   ProfilePostsWidget,
   ProfileProductsWidget,
@@ -35,6 +37,7 @@ export default function ProfilePage() {
     isLoading,
     isError,
     deletePostMutation,
+    togglePostLike,
     followMutation,
     setPostViewMode,
     setDeleteTargetPostId,
@@ -64,70 +67,80 @@ export default function ProfilePage() {
   };
 
   if (isLoading) {
-    return <div className="flex h-screen items-center justify-center">Loading...</div>;
+    return (
+      <PageWithFooter>
+        <div className="flex h-screen items-center justify-center">Loading...</div>
+      </PageWithFooter>
+    );
   }
 
   if (isError || !profile) {
     return (
-      <div className="p-6 text-center text-sm text-gray-500">프로필을 불러오지 못했습니다.</div>
+      <PageWithFooter>
+        <div className="p-6 text-center text-sm text-gray-500">프로필을 불러오지 못했습니다.</div>
+      </PageWithFooter>
     );
   }
 
   return (
-    <div className="w-full">
-      <ProfileSummaryWidget
-        profile={profile}
-        isMe={isMe}
-        isFollowing={isFollowing}
-        onFollowingChange={(next) => {
-          if (!accountnameFromParam) return;
-          followMutation.mutate(next);
-        }}
-        onFollowersClick={goFollowers}
-        onFollowingsClick={goFollowings}
-        onEditProfile={goEditProfile}
-        onCreateProduct={goCreateProduct}
-      />
+    <PageWithFooter>
+      <PageWithHeader className="w-full" header={<Header showBackButton showMenu />}>
+        <ProfileSummaryWidget
+          profile={profile}
+          isMe={isMe}
+          isFollowing={isFollowing}
+          onFollowingChange={(next) => {
+            if (!accountnameFromParam) return;
+            followMutation.mutate(next);
+          }}
+          onFollowersClick={goFollowers}
+          onFollowingsClick={goFollowings}
+          onEditProfile={goEditProfile}
+          onCreateProduct={goCreateProduct}
+        />
 
-      <ProfileProductsWidget
-        products={sellingProducts}
-        canDelete={isMe}
-        deletingProductId={deletingProductId}
-        onProductClick={goProductUpdate}
-        onDeleteProduct={requestDeleteProduct}
-      />
+        <ProfileProductsWidget
+          products={sellingProducts}
+          canDelete={isMe}
+          deletingProductId={deletingProductId}
+          onProductClick={goProductUpdate}
+          onDeleteProduct={requestDeleteProduct}
+        />
 
-      <ProfilePostsWidget
-        profile={profile}
-        posts={posts}
-        viewMode={postViewMode}
-        onViewModeChange={setPostViewMode}
-        onDeletePost={setDeleteTargetPostId}
-      />
+        <ProfilePostsWidget
+          profile={profile}
+          posts={posts}
+          viewMode={postViewMode}
+          canManagePosts={isMe}
+          onViewModeChange={setPostViewMode}
+          onToggleLikePost={togglePostLike}
+          onDeletePost={setDeleteTargetPostId}
+        />
 
-      <ConfirmDialog
-        open={deleteTargetPostId !== null}
-        onOpenChange={(open) => {
-          if (!open) setDeleteTargetPostId(null);
-        }}
-        title="게시글을 삭제할까요?"
-        confirmText="삭제"
-        confirmLoadingText="삭제 중..."
-        onConfirm={handleDeleteConfirm}
-        isLoading={deletePostMutation.isPending}
-      />
+        <ConfirmDialog
+          open={deleteTargetPostId !== null}
+          onOpenChange={(open) => {
+            if (!open) setDeleteTargetPostId(null);
+          }}
+          title="게시글을 삭제할까요?"
+          confirmText="삭제"
+          confirmLoadingText="삭제 중..."
+          onConfirm={handleDeleteConfirm}
+          isLoading={deletePostMutation.isPending}
+        />
 
-      <ConfirmDialog
-        open={deleteTargetProductId !== null}
-        onOpenChange={(open) => {
-          if (!open) closeDeleteDialog();
-        }}
-        title="상품을 삭제할까요?"
-        confirmText="삭제"
-        confirmLoadingText="삭제 중..."
-        onConfirm={confirmDeleteProduct}
-        isLoading={isDeleting || deletingProductId !== null}
-      />
-    </div>
+        <ConfirmDialog
+          open={deleteTargetProductId !== null}
+          onOpenChange={(open) => {
+            if (!open) closeDeleteDialog();
+          }}
+          title="상품을 삭제할까요?"
+          confirmText="삭제"
+          confirmLoadingText="삭제 중..."
+          onConfirm={confirmDeleteProduct}
+          isLoading={isDeleting || deletingProductId !== null}
+        />
+      </PageWithHeader>
+    </PageWithFooter>
   );
 }

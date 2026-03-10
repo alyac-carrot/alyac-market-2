@@ -1,7 +1,8 @@
-﻿import { useEffect } from 'react';
+import { useEffect } from 'react';
 
 import { useCreateProductForm } from '@/features/product-create';
-import { UploadHeader } from '@/widgets/header';
+import { SubmitActionButton } from '@/shared/ui';
+import { Header, PageWithHeader } from '@/widgets/header';
 import { ProductEditorForm } from '@/widgets/product-create';
 
 export default function CreateProductPage() {
@@ -26,19 +27,35 @@ export default function CreateProductPage() {
   }, []);
 
   return (
-    <ProductEditorForm
-      formId="product-form"
-      fileInputRef={fileInputRef}
-      itemName={itemName}
-      price={price}
-      link={link}
-      imagePreviewUrl={imagePreviewUrl}
-      errorText={errorText}
-      header={<UploadHeader canUpload={canUpload} onUpload={handleSubmit} isLoading={isSubmitting} />}
-      onItemNameChange={setItemName}
-      onPriceChange={handlePriceChange}
-      onLinkChange={setLink}
-      onImagePick={handleImagePick}
-    />
+    <PageWithHeader
+      header={
+        <Header
+          showBackButton
+          right={
+            <SubmitActionButton
+              canSubmit={canUpload}
+              isSubmitting={isSubmitting}
+              onClick={handleSubmit}
+              idleText="업로드"
+              loadingText="업로드 중..."
+            />
+          }
+        />
+      }
+    >
+      <ProductEditorForm
+        formId="product-form"
+        fileInputRef={fileInputRef}
+        itemName={itemName}
+        price={price}
+        link={link}
+        imagePreviewUrl={imagePreviewUrl}
+        errorText={errorText}
+        onItemNameChange={setItemName}
+        onPriceChange={handlePriceChange}
+        onLinkChange={setLink}
+        onImagePick={handleImagePick}
+      />
+    </PageWithHeader>
   );
 }

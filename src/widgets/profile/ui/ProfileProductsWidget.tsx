@@ -34,10 +34,18 @@ export default function ProfileProductsWidget({
 
             return (
               <div key={p.id} className="group relative">
-                <button type="button" onClick={() => onProductClick(p.id)} className="w-full text-left">
+                <button
+                  type="button"
+                  onClick={() => onProductClick(p.id)}
+                  className="w-full cursor-pointer text-left"
+                >
                   <div className="aspect-square w-full overflow-hidden rounded-lg bg-gray-100">
                     {p.thumbnailUrl?.trim() ? (
-                      <img src={p.thumbnailUrl} alt={p.title} className="h-full w-full object-cover" />
+                      <img
+                        src={p.thumbnailUrl}
+                        alt={p.title}
+                        className="h-full w-full object-cover"
+                      />
                     ) : (
                       <div className="flex h-full w-full items-center justify-center text-gray-400">
                         이미지
@@ -56,7 +64,7 @@ export default function ProfileProductsWidget({
                       onDeleteProduct(p.id);
                     }}
                     disabled={isDeleting}
-                    className="absolute right-1 top-1 inline-flex h-8 w-8 items-center justify-center rounded-full bg-black/55 text-white opacity-0 transition hover:bg-black/70 group-hover:opacity-100 group-focus-within:opacity-100 disabled:cursor-not-allowed disabled:opacity-70"
+                    className="absolute top-1 right-1 inline-flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-black/55 text-white opacity-0 transition group-focus-within:opacity-100 group-hover:opacity-100 hover:bg-black/70 disabled:cursor-not-allowed disabled:opacity-70"
                     aria-label="상품 삭제"
                   >
                     <X className="h-5 w-5" />

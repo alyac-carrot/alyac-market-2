@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { useFollowMutation } from '@/entities/profile';
 import type { FollowUser } from '@/entities/profile';
+import { useMeQuery } from '@/entities/user';
 import { toImageUrl } from '@/shared/lib/image/Url';
 import { Avatar } from '@/shared/ui';
 import { Button } from '@/shared/ui';
@@ -15,6 +16,7 @@ type Props = {
 
 export function FollowsListItem({ user, defaultFollowing }: Props) {
   const navigate = useNavigate();
+  const meQuery = useMeQuery();
 
   const initial = useMemo(() => {
     if (typeof user.isfollow === 'boolean') return user.isfollow;
@@ -24,6 +26,8 @@ export function FollowsListItem({ user, defaultFollowing }: Props) {
   const [isFollowing, setIsFollowing] = useState(initial);
 
   const followMutation = useFollowMutation(user.accountname);
+  const isSelf = meQuery.data?.user.accountname === user.accountname;
+  const isButtonDisabled = followMutation.isPending || isSelf;
 
   return (
     <div className="flex items-center justify-between gap-3 border-b px-4 py-4">
@@ -45,11 +49,13 @@ export function FollowsListItem({ user, defaultFollowing }: Props) {
         variant={isFollowing ? 'outline' : 'default'}
         className={
           isFollowing
-            ? 'rounded-full px-6'
-            : 'rounded-full bg-[#6BCB26] px-6 text-white hover:bg-[#5CB020]'
+            ? 'cursor-pointer rounded-full px-6'
+            : 'cursor-pointer rounded-full bg-[#6BCB26] px-6 text-white hover:bg-[#5CB020]'
         }
-        disabled={followMutation.isPending}
+        disabled={isButtonDisabled}
         onClick={() => {
+          if (isSelf) return;
+
           const next = !isFollowing;
           setIsFollowing(next);
 
@@ -58,7 +64,7 @@ export function FollowsListItem({ user, defaultFollowing }: Props) {
           });
         }}
       >
-        {followMutation.isPending ? '...' : isFollowing ? '취소' : '팔로우'}
+        {isSelf ? '본인' : followMutation.isPending ? '...' : isFollowing ? '취소' : '팔로우'}
       </Button>
     </div>
   );

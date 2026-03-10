@@ -21,6 +21,7 @@ export { useGetComments } from './model/queries/useGetComments';
 export { useCreateComment } from './model/mutations/useCreateComment';
 export { useDeleteComment } from './model/mutations/useDeleteComment';
 export { useLikePost } from './model/mutations/useLikePost';
+export { useLikePostMutation } from './model/mutations/useLikePostMutation';
 
 // model – types
 export type { Post, GetPostResponse, GetPostsResponse, CreatePostRequest, CreatePostResponse } from './model/types/types';

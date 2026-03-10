@@ -1,9 +1,10 @@
-﻿import { useEffect } from 'react';
+import { useEffect } from 'react';
 
 import { useParams } from 'react-router-dom';
 
 import { useUpdateProductForm } from '@/features/product-update';
-import { UploadHeader } from '@/widgets/header';
+import { SubmitActionButton } from '@/shared/ui';
+import { Header, PageWithHeader } from '@/widgets/header';
 import { ProductEditorForm } from '@/widgets/product-create';
 
 export default function UpdateProductPage() {
@@ -30,20 +31,37 @@ export default function UpdateProductPage() {
   }, []);
 
   return (
-    <ProductEditorForm
-      formId="product-update-form"
-      fileInputRef={fileInputRef}
-      itemName={itemName}
-      price={price}
-      link={link}
-      imagePreviewUrl={imagePreviewUrl}
-      errorText={errorText}
-      header={<UploadHeader canUpload={canUpload} onUpload={handleSubmit} isLoading={isSubmitting} />}
-      isLoading={isLoading}
-      onItemNameChange={setItemName}
-      onPriceChange={handlePriceChange}
-      onLinkChange={setLink}
-      onImagePick={handleImagePick}
-    />
+    <PageWithHeader
+      header={
+        <Header
+          showBackButton
+          right={
+            <SubmitActionButton
+              canSubmit={canUpload}
+              isSubmitting={isSubmitting}
+              onClick={handleSubmit}
+              idleText="저장"
+              loadingText="저장 중..."
+              className="px-5"
+            />
+          }
+        />
+      }
+    >
+      <ProductEditorForm
+        formId="product-update-form"
+        fileInputRef={fileInputRef}
+        itemName={itemName}
+        price={price}
+        link={link}
+        imagePreviewUrl={imagePreviewUrl}
+        errorText={errorText}
+        isLoading={isLoading}
+        onItemNameChange={setItemName}
+        onPriceChange={handlePriceChange}
+        onLinkChange={setLink}
+        onImagePick={handleImagePick}
+      />
+    </PageWithHeader>
   );
 }

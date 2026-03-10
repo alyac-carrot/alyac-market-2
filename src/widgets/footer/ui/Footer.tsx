@@ -18,7 +18,7 @@ export function Footer() {
           {({ isActive }) => (
             <>
               {isActive ? <HomeIconFill className="h-6 w-6" /> : <HomeIcon className="h-6 w-6" />}
-              <span className="text-xs">홈</span>
+              <span className={isActive ? 'text-xs text-green-500' : 'text-xs text-zinc-500'}>홈</span>
             </>
           )}
         </NavLink>
@@ -27,16 +27,20 @@ export function Footer() {
           {({ isActive }) => (
             <>
               {isActive ? <ChatIconFill className="h-6 w-6" /> : <ChatIcon className="h-6 w-6" />}
-              <span className="text-xs">채팅</span>
+              <span className={isActive ? 'text-xs text-green-500' : 'text-xs text-zinc-500'}>채팅</span>
             </>
           )}
         </NavLink>
 
         <NavLink to="/post-create" className="flex flex-col items-center">
-          <>
-            <PostCreateIcon className="h-6 w-6" />
-            <span className="text-xs">게시물 작성</span>
-          </>
+          {({ isActive }) => (
+            <>
+              <PostCreateIcon className="h-6 w-6" />
+              <span className={isActive ? 'text-xs text-green-500' : 'text-xs text-zinc-500'}>
+                게시물작성
+              </span>
+            </>
+          )}
         </NavLink>
 
         <NavLink to="/profile" className="flex flex-col items-center">
@@ -47,7 +51,9 @@ export function Footer() {
               ) : (
                 <ProfileIcon className="h-6 w-6" />
               )}
-              <span className="text-xs">프로필</span>
+              <span className={isActive ? 'text-xs text-green-500' : 'text-xs text-zinc-500'}>
+                프로필
+              </span>
             </>
           )}
         </NavLink>
