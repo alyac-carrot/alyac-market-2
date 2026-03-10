@@ -1,26 +1,9 @@
-import axios, { InternalAxiosRequestConfig } from 'axios';
+import axios from 'axios';
 
-import { getRefreshToken, getToken, removeToken, saveToken } from '@/shared/lib';
+import { getRefreshToken, getToken, removeToken, saveToken } from '@/entities/auth/lib/token';
 
 const VITE_BASE_URL = import.meta.env.VITE_BASE_URL;
 const API_URL = `${VITE_BASE_URL}/api`;
-
-// Discriminated union for API Response States
-export type ApiResponseState<T> =
-  | { status: 'idle' }
-  | { status: 'loading' }
-  | { status: 'success'; data: T }
-  | { status: 'error'; error: ApiErrorState };
-
-export type ApiErrorState =
-  | { type: 'network'; message: string }
-  | { type: 'auth'; status: 401 | 403; message: string }
-  | { type: 'server'; status: number; message: string }
-  | { type: 'unknown'; message: string };
-
-export interface CustomAxiosRequestConfig extends InternalAxiosRequestConfig {
-  _retry?: boolean;
-}
 
 const axiosInstance = axios.create({
   baseURL: API_URL,
@@ -41,15 +24,12 @@ axiosInstance.interceptors.request.use(
 
 // 응답 인터셉터: 401 처리 및 토큰 갱신
 let isRefreshing = false;
-let refreshSubscribers: {
-  resolve: (token: string) => void;
-  reject: (err: unknown) => void;
+let refreshSubscribers: { 
+  resolve: (token: string) => void; 
+  reject: (err: any) => void; 
 }[] = [];
 
-const subscribeTokenRefresh = (
-  resolve: (token: string) => void,
-  reject: (err: unknown) => void,
-) => {
+const subscribeTokenRefresh = (resolve: (token: string) => void, reject: (err: any) => void) => {
   refreshSubscribers.push({ resolve, reject });
 };
 
@@ -58,30 +38,24 @@ const onTokenRefreshed = (token: string) => {
   refreshSubscribers = [];
 };
 
-const onTokenRefreshFailed = (error: unknown) => {
+const onTokenRefreshFailed = (error: any) => {
   refreshSubscribers.forEach((sub) => sub.reject(error));
   refreshSubscribers = [];
 };
 
 axiosInstance.interceptors.response.use(
   (response) => response,
-  async (error: unknown) => {
-    if (!axios.isAxiosError(error)) {
-      return Promise.reject(error);
-    }
-
-    const originalRequest = error.config as CustomAxiosRequestConfig | undefined;
+  async (error) => {
+    const originalRequest = error.config;
 
     // 401 에러 && 재시도 안한 요청
-    if (originalRequest && error.response?.status === 401 && !originalRequest._retry) {
+    if (error.response?.status === 401 && !originalRequest._retry) {
       if (isRefreshing) {
         // 이미 갱신 중이면 대기
         return new Promise((resolve, reject) => {
           subscribeTokenRefresh(
             (token) => {
-              if (originalRequest.headers) {
-                originalRequest.headers.Authorization = `Bearer ${token}`;
-              }
+              originalRequest.headers.Authorization = `Bearer ${token}`;
               resolve(axiosInstance(originalRequest));
             },
             (err) => {
@@ -121,11 +95,9 @@ axiosInstance.interceptors.response.use(
         onTokenRefreshed(newToken);
 
         // 원래 요청 재시도
-        if (originalRequest.headers) {
-          originalRequest.headers.Authorization = `Bearer ${newToken}`;
-        }
+        originalRequest.headers.Authorization = `Bearer ${newToken}`;
         return axiosInstance(originalRequest);
-      } catch (refreshError: unknown) {
+      } catch (refreshError) {
         // Refresh 실패 시 로그아웃 및 대기 중인 요청들 취소
         onTokenRefreshFailed(refreshError);
         removeToken();

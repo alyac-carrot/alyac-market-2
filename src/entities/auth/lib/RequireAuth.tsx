@@ -1,7 +1,7 @@
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
 
+import { getToken } from '@/entities/auth/lib/token';
 import { useMeQuery } from '@/entities/user';
-import { getToken } from '@/shared/lib';
 
 export function RequireAuth() {
   const location = useLocation();
