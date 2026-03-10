@@ -1,7 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { getToken } from '@/entities/auth/lib/token';
-import { queryKeys } from '@/shared/lib';
+import { getToken, queryKeys } from '@/shared/lib';
 
 import { getMyInfo } from '../../api/userApi';
 import type { MyInfoResponse } from '../types/types';

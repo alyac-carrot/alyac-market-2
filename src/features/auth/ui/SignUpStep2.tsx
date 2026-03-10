@@ -1,12 +1,13 @@
 import { useState } from 'react';
 
-import axios from 'axios';
+import { ArrowLeft } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 
 import { checkAccountname, useSignUpMutation } from '@/entities/auth';
 import uploadApi from '@/shared/api/uploadApi';
-import { accountnameRule, introRule, normalizeUploadPath, usernameRule } from '@/shared/lib';
-import { FieldGroup, UnderlineInput } from '@/shared/ui';
+import { accountnameRule, cn, introRule, normalizeUploadPath, usernameRule } from '@/shared/lib';
+import { classifyError } from '@/shared/lib/error-handling/globalErrorHandler';
+import { Button, FieldGroup, UnderlineInput } from '@/shared/ui';
 
 import { ProfileImagePicker } from './ProfileImagePicker';
 import type { Step1Values } from './SignUpStep1';
@@ -61,12 +62,11 @@ export function SignUpStep2({ step1Data, onBack }: { step1Data: Step1Values; onB
         return;
       }
     } catch (e) {
-      if (axios.isAxiosError(e)) {
-        setError('accountname', {
-          message: `*${e.response?.data?.message ?? '계정 ID 확인 실패'}`,
-        });
-        return;
-      }
+      const errorState = classifyError(e);
+      setError('accountname', {
+        message: `*${errorState.message ?? '계정 ID 확인 실패'}`,
+      });
+      return;
     }
 
     signUpMutation.mutate(
@@ -80,10 +80,8 @@ export function SignUpStep2({ step1Data, onBack }: { step1Data: Step1Values; onB
       },
       {
         onError: (err) => {
-          if (axios.isAxiosError(err)) {
-            const msg = err.response?.data?.message ?? '회원가입에 실패했습니다.';
-            setError('username', { message: `*${msg}` });
-          }
+          const errorState = classifyError(err);
+          setError('username', { message: `*${errorState.message ?? '회원가입에 실패했습니다.'}` });
         },
       },
     );
@@ -94,13 +92,17 @@ export function SignUpStep2({ step1Data, onBack }: { step1Data: Step1Values; onB
   return (
     <div className="flex min-h-screen flex-col bg-white px-8 dark:bg-zinc-950">
       {/* back button */}
-      <button
+      <Button
+        variant="ghost"
+        size="sm"
         type="button"
         onClick={onBack}
-        className="mt-6 self-start text-sm text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200"
+        aria-label="이전 단계로 돌아가기"
+        className="mt-6 self-start text-zinc-400 hover:bg-transparent hover:text-zinc-700 focus-visible:ring-2 dark:hover:text-zinc-200"
       >
-        ← 이전
-      </button>
+        <ArrowLeft className="mr-2 h-4 w-4" aria-hidden="true" />
+        이전
+      </Button>
 
       <h1 className="mt-6 text-center text-2xl font-medium text-black dark:text-white">
         프로필 설정
@@ -151,17 +153,18 @@ export function SignUpStep2({ step1Data, onBack }: { step1Data: Step1Values; onB
           />
         </FieldGroup>
 
-        <button
+        <Button
           type="submit"
           disabled={!canSubmit}
-          className={`mt-4 h-11 w-full rounded-full text-sm font-medium text-white transition-colors ${
+          className={cn(
+            'mt-4 h-11 w-full rounded-full text-sm font-medium text-white transition-colors disabled:opacity-100',
             canSubmit
               ? 'bg-green-400 hover:bg-green-500 active:scale-95'
-              : 'cursor-not-allowed bg-green-200'
-          }`}
+              : 'cursor-not-allowed bg-green-200',
+          )}
         >
           {signUpMutation.isPending ? '가입 중...' : '알약마켓 시작하기'}
-        </button>
+        </Button>
       </form>
     </div>
   );

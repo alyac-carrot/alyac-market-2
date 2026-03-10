@@ -3,23 +3,15 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 import { type SignInBody, signIn } from '@/entities/auth/api/authApi';
-import { saveToken } from '@/entities/auth/lib/token';
-import { queryKeys } from '@/shared/lib';
-
-const isObject = (v: unknown): v is Record<string, unknown> => typeof v === 'object' && v !== null;
-
-const getErrorMessage = (data: unknown): string | undefined => {
-  if (!isObject(data)) return undefined;
-  const msg = data.message;
-  return typeof msg === 'string' ? msg : undefined;
-};
+import { queryKeys, saveToken } from '@/shared/lib';
+import { classifyError } from '@/shared/lib/error-handling/globalErrorHandler';
 
 export function getSignInErrorMessage(err: unknown) {
-  if (axios.isAxiosError(err)) {
-    if (err.response?.status === 422) return '이메일 또는 비밀번호가 일치하지 않습니다.';
-    return getErrorMessage(err.response?.data) ?? '로그인에 실패했습니다.';
+  if (axios.isAxiosError(err) && err.response?.status === 422) {
+    return '이메일 또는 비밀번호가 일치하지 않습니다.';
   }
-  return '로그인에 실패했습니다.';
+  const errorObj = classifyError(err);
+  return errorObj.message || '로그인에 실패했습니다.';
 }
 
 export function useSignInMutation() {
@@ -29,8 +21,8 @@ export function useSignInMutation() {
   return useMutation({
     mutationFn: (body: SignInBody) => signIn(body),
     retry: false,
-    onSuccess: (res) => {
-      const user = res.data.user;
+    onSuccess: (response) => {
+      const user = response.user;
 
       saveToken(user.accessToken, user.refreshToken);
 

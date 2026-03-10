@@ -45,6 +45,9 @@ export default function ProfileProductsWidget({
                         src={p.thumbnailUrl}
                         alt={p.title}
                         className="h-full w-full object-cover"
+                        loading="lazy"
+                        decoding="async"
+                        fetchPriority="low"
                       />
                     ) : (
                       <div className="flex h-full w-full items-center justify-center text-gray-400">

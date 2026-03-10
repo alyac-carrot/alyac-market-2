@@ -87,7 +87,14 @@ export default function ProfilePostsWidget({
               to={`/post/${p.id}`}
               className="aspect-square cursor-pointer overflow-hidden bg-gray-100 transition hover:opacity-80"
             >
-              <img src={p.imageUrl!} alt="" className="h-full w-full object-cover" />
+              <img
+                src={p.imageUrl!}
+                alt=""
+                className="h-full w-full object-cover"
+                loading="lazy"
+                decoding="async"
+                fetchPriority="low"
+              />
             </Link>
           ))}
         </div>
@@ -110,7 +117,9 @@ export default function ProfilePostsWidget({
                 <DropdownMenu
                   modal={true}
                   open={canManagePosts && openMenuPostId === post.id}
-                  onOpenChange={(open) => setOpenMenuPostId(open && canManagePosts ? post.id : null)}
+                  onOpenChange={(open) =>
+                    setOpenMenuPostId(open && canManagePosts ? post.id : null)
+                  }
                 >
                   <DropdownMenuTrigger asChild>
                     <Button
@@ -166,7 +175,14 @@ export default function ProfilePostsWidget({
                   to={`/post/${post.id}`}
                   className="mt-3 block aspect-video max-h-64 cursor-pointer overflow-hidden rounded-lg bg-gray-100"
                 >
-                  <img src={post.imageUrl} alt="" className="h-full w-full object-cover" />
+                  <img
+                    src={post.imageUrl}
+                    alt=""
+                    className="h-full w-full object-cover"
+                    loading="lazy"
+                    decoding="async"
+                    fetchPriority="low"
+                  />
                 </Link>
               )}
 

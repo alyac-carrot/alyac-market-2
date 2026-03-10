@@ -1,3 +1,5 @@
+import { useCallback } from 'react';
+
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { useDeleteProductAction } from '@/features/product-delete';
@@ -5,11 +7,7 @@ import { useProfilePageData } from '@/features/profile';
 import { ConfirmDialog } from '@/shared/ui';
 import { PageWithFooter } from '@/widgets/footer';
 import { Header, PageWithHeader } from '@/widgets/header';
-import {
-  ProfilePostsWidget,
-  ProfileProductsWidget,
-  ProfileSummaryWidget,
-} from '@/widgets/profile';
+import { ProfilePostsWidget, ProfileProductsWidget, ProfileSummaryWidget } from '@/widgets/profile';
 
 export default function ProfilePage() {
   const navigate = useNavigate();
@@ -46,25 +44,25 @@ export default function ProfilePage() {
     isMeByRoute,
   });
 
-  const goFollowers = () => {
+  const goFollowers = useCallback(() => {
     if (!profile?.id) return;
     navigate(`/followers/${profile.id}`);
-  };
+  }, [profile?.id, navigate]);
 
-  const goFollowings = () => {
+  const goFollowings = useCallback(() => {
     if (!profile?.id) return;
     navigate(`/followings/${profile.id}`);
-  };
+  }, [profile?.id, navigate]);
 
-  const goEditProfile = () => navigate('/profile-update');
-  const goCreateProduct = () => navigate('/product/create');
-  const goProductUpdate = (id: string) => navigate(`/product/${id}/edit`);
+  const goEditProfile = useCallback(() => navigate('/profile-update'), [navigate]);
+  const goCreateProduct = useCallback(() => navigate('/product/create'), [navigate]);
+  const goProductUpdate = useCallback((id: string) => navigate(`/product/${id}/edit`), [navigate]);
 
-  const handleDeleteConfirm = () => {
+  const handleDeleteConfirm = useCallback(() => {
     if (!deleteTargetPostId) return;
     deletePostMutation.mutate(deleteTargetPostId);
     setDeleteTargetPostId(null);
-  };
+  }, [deleteTargetPostId, deletePostMutation, setDeleteTargetPostId]);
 
   if (isLoading) {
     return (

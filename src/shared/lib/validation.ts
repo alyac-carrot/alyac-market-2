@@ -1,3 +1,5 @@
+import { type ZodType, z } from 'zod';
+
 export const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 export const accountnamePattern = /^[a-zA-Z0-9_.]+$/;
 
@@ -37,7 +39,7 @@ export const accountnameRule = {
   },
   pattern: {
     value: accountnamePattern,
-    message: '*영문, 숫자, 밑줄 및 마침표만 사용할 수 있습니다.',
+    message: '*영문, 숫자, 밑줄(_), 마침표(.)만 사용할 수 있습니다.',
   },
 };
 
@@ -47,3 +49,68 @@ export const introRule = {
     message: '*60자 이하로 입력해 주세요.',
   },
 };
+
+export const zodEmailSchema = z.email({
+  message: '올바른 이메일 형식을 입력해 주세요.',
+});
+
+export const zodUsernameSchema = z
+  .string()
+  .trim()
+  .min(1, {
+    message: '사용자 이름을 입력해 주세요.',
+  })
+  .min(2, {
+    message: '2자 이상 입력해 주세요.',
+  })
+  .max(10, {
+    message: '10자 이하로 입력해 주세요.',
+  });
+
+export const zodAccountnameSchema = z
+  .string()
+  .trim()
+  .min(1, {
+    message: '계정 ID를 입력해 주세요.',
+  })
+  .max(20, {
+    message: '20자 이하로 입력해 주세요.',
+  })
+  .regex(accountnamePattern, {
+    message: '영문, 숫자, 밑줄(_), 마침표(.)만 사용할 수 있습니다.',
+  });
+
+export const zodPasswordSchema = z
+  .string()
+  .trim()
+  .min(1, {
+    message: '비밀번호를 입력해 주세요.',
+  })
+  .min(6, {
+    message: '비밀번호는 6자 이상이어야 합니다.',
+  });
+
+export const zodIntroSchema = z.string().trim().max(60, {
+  message: '60자 이하로 입력해 주세요.',
+});
+
+export const zodImageUrlSchema = z.union([
+  z.url({
+    message: '올바른 URL 형식을 입력해 주세요.',
+  }),
+  z.string().regex(/^\/?uploadFiles\/.+$/, {
+    message: '올바른 이미지 경로를 입력해 주세요.',
+  }),
+  z.string().length(0),
+]);
+
+export function parseWithSchema<T>(schema: ZodType<T>, data: unknown, label: string): T {
+  const result = schema.safeParse(data);
+
+  if (!result.success) {
+    console.error(`[zod:${label}]`, result.error.flatten());
+    throw new Error('응답 데이터 형식이 올바르지 않습니다.');
+  }
+
+  return result.data;
+}
