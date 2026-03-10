@@ -14,17 +14,23 @@ export { likePost } from './api/likePost';
 export { useGetPost } from './model/queries/useGetPost';
 export { useGetPosts } from './model/queries/useGetPosts';
 export { useGetUserPosts } from './model/queries/useGetUserPosts';
-export { useCreatePost } from './model/mutations/useCreatePost';
-export { useUpdatePost } from './model/mutations/useUpdatePost';
-export { useDeletePost } from './model/mutations/useDeletePost';
+export { useCreatePost } from './hooks/mutations/useCreatePost';
+export { useUpdatePost } from './hooks/mutations/useUpdatePost';
+export { useDeletePost } from './hooks/mutations/useDeletePost';
 export { useGetComments } from './model/queries/useGetComments';
-export { useCreateComment } from './model/mutations/useCreateComment';
-export { useDeleteComment } from './model/mutations/useDeleteComment';
-export { useLikePost } from './model/mutations/useLikePost';
-export { useLikePostMutation } from './model/mutations/useLikePostMutation';
+export { useCreateComment } from './hooks/mutations/useCreateComment';
+export { useDeleteComment } from './hooks/mutations/useDeleteComment';
+export { useLikePost } from './hooks/mutations/useLikePost';
+export { useLikePostMutation } from './hooks/mutations/useLikePostMutation';
 
 // model – types
-export type { Post, GetPostResponse, GetPostsResponse, CreatePostRequest, CreatePostResponse } from './model/types/types';
+export type {
+  Post,
+  GetPostResponse,
+  GetPostsResponse,
+  CreatePostRequest,
+  CreatePostResponse,
+} from './model/types/types';
 export type { PostAuthor, UserPost, GetUserPostsResponse } from './model/types/userPosts';
 export type {
   Comment,
