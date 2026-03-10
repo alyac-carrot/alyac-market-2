@@ -94,11 +94,15 @@ export const zodIntroSchema = z.string().trim().max(60, {
   message: '60자 이하로 입력해 주세요.',
 });
 
-export const zodImageUrlSchema = z
-  .url({
+export const zodImageUrlSchema = z.union([
+  z.url({
     message: '올바른 URL 형식을 입력해 주세요.',
-  })
-  .or(z.string().length(0));
+  }),
+  z.string().regex(/^\/?uploadFiles\/.+$/, {
+    message: '올바른 이미지 경로를 입력해 주세요.',
+  }),
+  z.string().length(0),
+]);
 
 export function parseWithSchema<T>(schema: ZodType<T>, data: unknown, label: string): T {
   const result = schema.safeParse(data);
