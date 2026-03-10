@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react';
 
-import { EllipsisVertical, Heart, MessageCircle } from 'lucide-react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Heart, MessageCircle } from 'lucide-react';
+import { useParams } from 'react-router-dom';
 
 import {
   useCreateComment,
   useDeleteComment,
-  useDeletePost,
   useGetComments,
   useGetPost,
   useLikePost,
@@ -15,26 +14,14 @@ import type { Comment } from '@/entities/post';
 import { useMeQuery } from '@/entities/user';
 import { CommentItem } from '@/features/post';
 import { formatDate, pickFirstImage, toImageUrl } from '@/shared/lib';
-import {
-  BottomSheetModal,
-  Button,
-  ConfirmDialog,
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@/shared/ui';
+import { BottomSheetModal } from '@/shared/ui';
 import { Avatar } from '@/shared/ui/Avatar';
-import { Header, PageWithHeader } from '@/widgets/header';
 
 /* ── main page ── */
 export default function PostPage() {
   const { postId = '' } = useParams();
-  const navigate = useNavigate();
   const [commentText, setCommentText] = useState('');
   const [selectedCommentId, setSelectedCommentId] = useState<string | null>(null);
-  const [openPostMenu, setOpenPostMenu] = useState(false);
-  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -51,18 +38,8 @@ export default function PostPage() {
   const { mutate: submitComment, isPending: isSubmitting } = useCreateComment(postId);
   const { mutate: toggleLike, isPending: isLikePending } = useLikePost(postId);
   const { mutate: deleteCommentMutate, isPending: isDeleting } = useDeleteComment(postId);
-  const { mutate: deletePostMutate, isPending: isDeletingPost } = useDeletePost();
 
   const comments: Comment[] = commentsData?.comment ?? [];
-
-  const handlePostDelete = () => {
-    deletePostMutate(postId, {
-      onSuccess: () => {
-        setIsDeleteDialogOpen(false);
-        navigate(-1);
-      },
-    });
-  };
 
   // Optimistic heart state — synced from server data once loaded
   const [isHearted, setIsHearted] = useState(false);
@@ -138,10 +115,7 @@ export default function PostPage() {
   const hasText = commentText.trim().length > 0;
 
   return (
-    <PageWithHeader
-      className="bg-background flex min-h-screen flex-col pb-16 text-left"
-      header={<Header showBackButton showMenu />}
-    >
+    <div className="bg-background flex min-h-screen flex-col pb-16 text-left">
       {/* ─ scrollable main ─ */}
       <main className="flex-1 overflow-y-auto">
         {/* post article */}
@@ -149,74 +123,14 @@ export default function PostPage() {
           {/* post header */}
           <div className="flex items-center gap-3 px-4 py-4">
             <Avatar src={authorAvatar || undefined} size="md" />
-            <div className="flex min-w-0 flex-1 flex-col text-left">
-              <span className="text-foreground truncate text-sm font-normal">
+            <div className="flex flex-col text-left">
+              <span className="text-foreground text-sm font-normal">
                 {post.author?.username ?? '알 수 없음'}
               </span>
-              <span className="text-muted-foreground truncate text-xs">
+              <span className="text-muted-foreground text-xs">
                 @ {post.author?.accountname ?? ''}
               </span>
             </div>
-
-            <DropdownMenu modal={true} open={openPostMenu} onOpenChange={setOpenPostMenu}>
-              <DropdownMenuTrigger asChild>
-                <Button
-                  type="button"
-                  variant="ghost"
-                  size="icon"
-                  className="text-muted-foreground hover:text-foreground h-8 w-8"
-                >
-                  <EllipsisVertical className="h-4 w-4" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent
-                align="end"
-                sideOffset={8}
-                className="border-border bg-popover w-44 rounded-xl border shadow-lg"
-              >
-                <div className="flex justify-center pt-2">
-                  <div className="bg-muted-foreground/30 h-1 w-10 rounded-full" />
-                </div>
-                <div className="py-2">
-                  {post.author?.accountname === currentUser?.accountname ? (
-                    <>
-                      <DropdownMenuItem
-                        className="cursor-pointer px-5 py-3 text-lg"
-                        onClick={() => {
-                          setOpenPostMenu(false);
-                          navigate(`/post/${postId}/edit`);
-                        }}
-                      >
-                        수정
-                      </DropdownMenuItem>
-                      <DropdownMenuItem
-                        className="cursor-pointer px-5 py-3 text-lg"
-                        onClick={() => {
-                          setOpenPostMenu(false);
-                          setIsDeleteDialogOpen(true);
-                        }}
-                      >
-                        삭제
-                      </DropdownMenuItem>
-                    </>
-                  ) : (
-                    <DropdownMenuItem
-                      className="cursor-pointer px-5 py-3 text-lg"
-                      onClick={() => {
-                        setOpenPostMenu(false);
-                        setTimeout(() => {
-                          if (window.confirm('해당 게시글을 신고하시겠습니까?')) {
-                            alert('해당 게시글이 신고되었습니다');
-                          }
-                        }, 0);
-                      }}
-                    >
-                      신고
-                    </DropdownMenuItem>
-                  )}
-                </div>
-              </DropdownMenuContent>
-            </DropdownMenu>
           </div>
 
           {/* post text */}
@@ -338,16 +252,6 @@ export default function PostPage() {
             : '신고하기'
         }
       />
-
-      <ConfirmDialog
-        open={isDeleteDialogOpen}
-        onOpenChange={setIsDeleteDialogOpen}
-        title="게시글을 삭제할까요?"
-        confirmText="삭제"
-        confirmLoadingText="삭제 중..."
-        onConfirm={handlePostDelete}
-        isLoading={isDeletingPost}
-      />
-    </PageWithHeader>
+    </div>
   );
 }
