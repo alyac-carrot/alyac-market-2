@@ -1,8 +1,6 @@
 import { useMemo } from 'react';
 
 import {
-  type FollowerListResponse,
-  type FollowingListResponse,
   type Profile,
   useFollowersQuery,
   useFollowingsQuery,
@@ -30,11 +28,9 @@ export function useFollowsPageData({
 
   const list: Profile[] = useMemo(() => {
     if (type === 'followers') {
-      const response = followersQuery.data as FollowerListResponse | undefined;
-      return response?.follower ?? [];
+      return followersQuery.data?.follower ?? [];
     }
-    const response = followingsQuery.data as FollowingListResponse | undefined;
-    return response?.following ?? [];
+    return followingsQuery.data?.following ?? [];
   }, [followersQuery.data, followingsQuery.data, type]);
 
   return {
