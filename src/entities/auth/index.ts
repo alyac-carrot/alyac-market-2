@@ -9,5 +9,3 @@ export type { AuthUser, SignInResponse } from './model/schemas';
 
 export { signUp, checkEmail, checkAccountname } from './api/signUpApi';
 export type { SignUpBody, SignUpResponse } from './api/signUpApi';
-
-export { getToken, removeToken, saveToken } from './lib/token';

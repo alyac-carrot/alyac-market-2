@@ -1,8 +1,7 @@
 import { useQueryClient } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 
-import { removeToken } from '@/entities/auth/lib/token';
-import { queryKeys } from '@/shared/lib';
+import { queryKeys, removeToken } from '@/shared/lib';
 
 export function useLogout() {
   const navigate = useNavigate();
