@@ -3,8 +3,6 @@ import { Link } from 'react-router-dom';
 import { useSignInForm } from '@/features/auth';
 import { Button, Input } from '@/shared/ui';
 
-const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
 export function SignInForm() {
   const { register, handleSubmit, errors, loading, canSubmit, bannerError, onSubmit } =
     useSignInForm();
@@ -28,17 +26,11 @@ export function SignInForm() {
           <Input
             id="email"
             type="email"
-            placeholder="이메일을 입력하세요."
+            placeholder="이메일을 입력하세요"
             className="h-12"
             disabled={loading}
             autoComplete="email"
-            {...register('email', {
-              required: '이메일을 입력해주세요',
-              pattern: {
-                value: emailPattern,
-                message: '올바른 이메일 형식을 입력해주세요',
-              },
-            })}
+            {...register('email')}
           />
 
           {errors.email?.message && <p className="text-sm text-red-500">{errors.email.message}</p>}
@@ -52,13 +44,11 @@ export function SignInForm() {
           <Input
             id="password"
             type="password"
-            placeholder="비밀번호를 입력하세요."
+            placeholder="비밀번호를 입력하세요"
             className="h-12"
             disabled={loading}
             autoComplete="current-password"
-            {...register('password', {
-              required: '비밀번호를 입력해주세요',
-            })}
+            {...register('password')}
           />
 
           {errors.password?.message && (

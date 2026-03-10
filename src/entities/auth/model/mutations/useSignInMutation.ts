@@ -21,8 +21,8 @@ export function useSignInMutation() {
   return useMutation({
     mutationFn: (body: SignInBody) => signIn(body),
     retry: false,
-    onSuccess: (res) => {
-      const user = res.data.user;
+    onSuccess: (response) => {
+      const user = response.user;
 
       saveToken(user.accessToken, user.refreshToken);
 
