@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 
-import { getToken } from '@/entities/auth';
+import { getToken } from '@/shared/lib';
 
 export default function SplashPage() {
   const nav = useNavigate();

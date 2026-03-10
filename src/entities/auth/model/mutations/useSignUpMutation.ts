@@ -3,14 +3,14 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 import { type SignUpBody, signUp } from '@/entities/auth/api/signUpApi';
+import { classifyError } from '@/shared/lib/error-handling/globalErrorHandler';
 
 const getErrorMessage = (err: unknown): string => {
-  if (axios.isAxiosError(err)) {
-    const msg = err.response?.data?.message;
-    if (typeof msg === 'string') return msg;
-    if (err.response?.status === 400) return '입력값을 확인해 주세요.';
+  if (axios.isAxiosError(err) && err.response?.status === 400) {
+    return '입력값을 확인해 주세요.';
   }
-  return '회원가입에 실패했습니다.';
+  const errorObj = classifyError(err);
+  return errorObj.message || '회원가입에 실패했습니다.';
 };
 
 export function useSignUpMutation() {

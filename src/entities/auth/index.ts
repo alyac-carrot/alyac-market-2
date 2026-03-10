@@ -8,5 +8,3 @@ export type { SignInBody, SignInResponse } from './api/authApi';
 
 export { signUp, checkEmail, checkAccountname } from './api/signUpApi';
 export type { SignUpBody, SignUpResponse } from './api/signUpApi';
-
-export { getToken, removeToken, saveToken } from './lib/token';

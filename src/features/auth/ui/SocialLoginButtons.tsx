@@ -1,3 +1,5 @@
+import { cn } from '@/shared/lib';
+import { Button } from '@/shared/ui';
 import { FacebookIcon, GoogleIcon, KakaoIcon } from '@/shared/ui/icons';
 
 const comingSoon = (provider: string) => {
@@ -7,32 +9,41 @@ const comingSoon = (provider: string) => {
 export function SocialLoginButtons() {
   return (
     <>
-      <button
-        type="button"
-        className="flex h-12 w-full items-center justify-start rounded-full border border-yellow-400 bg-white px-5 text-sm font-medium text-zinc-700 transition-colors hover:bg-yellow-100 active:scale-95 dark:border-yellow-600 dark:bg-zinc-900 dark:text-zinc-200 dark:hover:bg-yellow-900/40"
+      <Button
+        variant="outline"
         onClick={() => comingSoon('카카오톡')}
+        className={cn(
+          'h-12 w-full justify-start rounded-full px-5 text-sm font-medium',
+          'border-yellow-400 text-zinc-700 hover:bg-yellow-100 dark:border-yellow-600 dark:text-zinc-200 dark:hover:bg-yellow-900/40',
+        )}
       >
-        <KakaoIcon className="mr-3 h-6 w-6" />
+        <KakaoIcon className="mr-3 h-6 w-6" aria-hidden="true" />
         카카오톡 계정으로 로그인
-      </button>
+      </Button>
 
-      <button
-        type="button"
-        className="flex h-12 w-full items-center justify-start rounded-full border border-zinc-300 bg-white px-5 text-sm font-medium text-zinc-700 transition-colors hover:bg-zinc-100 active:scale-95 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-200 dark:hover:bg-zinc-800"
+      <Button
+        variant="outline"
         onClick={() => comingSoon('구글')}
+        className={cn(
+          'h-12 w-full justify-start rounded-full border-zinc-300 px-5 text-sm font-medium',
+          'text-zinc-700 hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-200 dark:hover:bg-zinc-800',
+        )}
       >
-        <GoogleIcon className="mr-3 h-6 w-6" />
+        <GoogleIcon className="mr-3 h-6 w-6" aria-hidden="true" />
         구글 계정으로 로그인
-      </button>
+      </Button>
 
-      <button
-        type="button"
-        className="flex h-12 w-full items-center justify-start rounded-full border border-blue-500 bg-white px-5 text-sm font-medium text-zinc-700 transition-colors hover:bg-blue-100 active:scale-95 dark:border-blue-700 dark:bg-zinc-900 dark:text-zinc-200 dark:hover:bg-blue-900/40"
+      <Button
+        variant="outline"
         onClick={() => comingSoon('페이스북')}
+        className={cn(
+          'h-12 w-full justify-start rounded-full px-5 text-sm font-medium',
+          'border-blue-500 text-zinc-700 hover:bg-blue-100 dark:border-blue-700 dark:text-zinc-200 dark:hover:bg-blue-900/40',
+        )}
       >
-        <FacebookIcon className="mr-3 h-6 w-6" />
+        <FacebookIcon className="mr-3 h-6 w-6" aria-hidden="true" />
         페이스북 계정으로 로그인
-      </button>
+      </Button>
     </>
   );
 }
