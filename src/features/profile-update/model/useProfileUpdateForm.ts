@@ -1,5 +1,6 @@
 import { useMemo, useRef, useState } from 'react';
 
+import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
@@ -7,11 +8,7 @@ import { useUploadFiles } from '@/entities/upload';
 import { useUpdateMyProfileMutation } from '@/entities/user';
 import { normalizeUploadPath, toImageUrl } from '@/shared/lib';
 
-type ProfileFormValues = {
-  username: string;
-  accountname: string;
-  intro: string;
-};
+import { profileUpdateSchema, type ProfileUpdateFormValues } from './schemas';
 
 interface UseProfileUpdateFormProps {
   initial: {
@@ -33,7 +30,8 @@ export function useProfileUpdateForm({ initial }: UseProfileUpdateFormProps) {
     register,
     handleSubmit,
     formState: { errors, isValid },
-  } = useForm<ProfileFormValues>({
+  } = useForm<ProfileUpdateFormValues>({
+    resolver: zodResolver(profileUpdateSchema),
     mode: 'onChange',
     defaultValues: {
       username: initial.username ?? '',
@@ -85,7 +83,7 @@ export function useProfileUpdateForm({ initial }: UseProfileUpdateFormProps) {
     });
   };
 
-  const onSave = (values: ProfileFormValues) => {
+  const onSave = (values: ProfileUpdateFormValues) => {
     if (!canSave) return;
 
     updateMutation.mutate(
