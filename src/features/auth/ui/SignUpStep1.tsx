@@ -1,9 +1,9 @@
+import axios from 'axios';
 import { useForm } from 'react-hook-form';
 
 import { checkEmail } from '@/entities/auth';
-import { cn, emailRule, passwordRule } from '@/shared/lib';
-import { classifyError } from '@/shared/lib/error-handling/globalErrorHandler';
-import { Button, FieldGroup, UnderlineInput } from '@/shared/ui';
+import { emailRule, passwordRule } from '@/shared/lib';
+import { FieldGroup, UnderlineInput } from '@/shared/ui';
 
 export type Step1Values = { email: string; password: string };
 
@@ -23,9 +23,10 @@ export function SignUpStep1({ onNext }: { onNext: (data: Step1Values) => void })
         return;
       }
     } catch (e) {
-      const errorState = classifyError(e);
-      setError('email', { message: `*${errorState.message ?? '이메일 확인 실패'}` });
-      return;
+      if (axios.isAxiosError(e)) {
+        setError('email', { message: `*${e.response?.data?.message ?? '이메일 확인 실패'}` });
+        return;
+      }
     }
     onNext({ email: values.email.trim(), password: values.password });
   };
@@ -57,18 +58,17 @@ export function SignUpStep1({ onNext }: { onNext: (data: Step1Values) => void })
           />
         </FieldGroup>
 
-        <Button
+        <button
           type="submit"
           disabled={!canSubmit}
-          className={cn(
-            'mt-4 h-11 w-full rounded-full text-sm font-medium text-white transition-colors disabled:opacity-100',
+          className={`mt-4 h-11 w-full rounded-full text-sm font-medium text-white transition-colors ${
             canSubmit
               ? 'bg-green-400 hover:bg-green-500 active:scale-95'
-              : 'cursor-not-allowed bg-green-200',
-          )}
+              : 'cursor-not-allowed bg-green-200'
+          }`}
         >
           {isSubmitting ? '확인 중...' : '다음'}
-        </Button>
+        </button>
       </form>
     </div>
   );
