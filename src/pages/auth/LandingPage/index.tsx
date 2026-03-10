@@ -8,7 +8,7 @@ export default function LandingPage() {
   const nav = useNavigate();
 
   return (
-    <div className="flex min-h-screen flex-col bg-green-500">
+    <div className="bottom-sheet flex min-h-screen flex-col bg-green-500">
       {/* 상단 로고 영역 */}
       <div className="flex flex-1 items-center justify-center">
         <img src="/mascot.png" alt="mascot" className="h-28 w-28 object-contain" />
