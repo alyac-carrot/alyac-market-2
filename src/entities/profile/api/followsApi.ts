@@ -1,27 +1,36 @@
 import axiosInstance from '@/shared/api/axios';
+import { parseWithSchema } from '@/shared/lib';
 
-import type { Profile } from '../model/types/types';
+import {
+  followerListResponseSchema,
+  followingListResponseSchema,
+  type FollowerListResponse,
+  type FollowingListResponse,
+  type Profile,
+} from '../model/schemas';
 
 export type FollowUser = Profile;
 
-export type FollowersResponse = {
-  follower: FollowUser[];
-};
-
-export type FollowingsResponse = {
-  following: FollowUser[];
-};
-
-export const getFollowers = async (accountname: string, limit = 10, skip = 0) => {
-  const res = await axiosInstance.get<FollowersResponse>(`/profile/${accountname}/follower`, {
+export const getFollowers = async (
+  accountname: string,
+  limit = 10,
+  skip = 0,
+): Promise<FollowerListResponse> => {
+  const response = await axiosInstance.get(`/profile/${accountname}/follower`, {
     params: { limit, skip },
   });
-  return res.data;
+
+  return parseWithSchema(followerListResponseSchema, response.data, 'getFollowers');
 };
 
-export const getFollowings = async (accountname: string, limit = 10, skip = 0) => {
-  const res = await axiosInstance.get<FollowingsResponse>(`/profile/${accountname}/following`, {
+export const getFollowings = async (
+  accountname: string,
+  limit = 10,
+  skip = 0,
+): Promise<FollowingListResponse> => {
+  const response = await axiosInstance.get(`/profile/${accountname}/following`, {
     params: { limit, skip },
   });
-  return res.data;
+
+  return parseWithSchema(followingListResponseSchema, response.data, 'getFollowings');
 };
