@@ -1,4 +1,5 @@
 import axiosInstance from '@/shared/api/axios';
+import { parseWithSchema } from '@/shared/lib';
 
 import type {
   FollowResponse,
@@ -6,9 +7,13 @@ import type {
   FollowingListResponse,
   GetProfileResponse,
 } from '../model/types/types';
+import { getProfileResponseSchema } from '../model/schemas';
 
-export const getProfile = (accountname: string) =>
-  axiosInstance.get<GetProfileResponse>(`/profile/${accountname}`);
+export const getProfile = async (accountname: string): Promise<GetProfileResponse> => {
+  const response = await axiosInstance.get(`/profile/${accountname}`);
+
+  return parseWithSchema(getProfileResponseSchema, response.data, 'getProfile');
+};
 
 export const followUser = (accountname: string) =>
   axiosInstance.post<FollowResponse>(`/profile/${accountname}/follow`);

@@ -1,18 +1,8 @@
 import axiosInstance from '@/shared/api/axios';
 
-export type FollowUser = {
-  _id: string;
-  username: string;
-  email: string;
-  accountname: string;
-  intro: string;
-  image: string;
-  following: string[];
-  follower: string[];
-  followerCount: number;
-  followingCount: number;
-  isfollow?: boolean;
-};
+import type { Profile } from '../model/types/types';
+
+export type FollowUser = Profile;
 
 export type FollowersResponse = {
   follower: FollowUser[];
