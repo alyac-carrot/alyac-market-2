@@ -6,9 +6,10 @@ import svgr from 'vite-plugin-svgr';
 
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '');
+  const appBasePath = process.env.VITE_APP_BASE_PATH || env.VITE_APP_BASE_PATH || '/';
 
   return {
-    base: env.VITE_APP_BASE_PATH || '/',
+    base: appBasePath,
     plugins: [react(), svgr(), tailwindcss()],
     resolve: {
       alias: {
