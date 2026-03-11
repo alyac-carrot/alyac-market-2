@@ -8,9 +8,9 @@ export function useProfilePosts(accountname?: string) {
   const userPostsQuery = useGetUserPosts(accountname);
   const deletePostMutation = useDeletePost();
   const likePostMutation = useLikePostMutation();
-  const [optimisticLikes, setOptimisticLikes] = useState<Record<string, { liked: boolean; likeCount: number }>>(
-    {},
-  );
+  const [optimisticLikes, setOptimisticLikes] = useState<
+    Record<string, { liked: boolean; likeCount: number }>
+  >({});
 
   const rawPosts: Post[] = useMemo(() => {
     const arr = userPostsQuery.data?.post ?? [];

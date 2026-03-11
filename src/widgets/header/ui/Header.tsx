@@ -66,14 +66,14 @@ export function Header({
                 설정 및 개인정보
               </button>
 
-              <div className="flex items-center px-4 py-3 text-sm transition-colors hover:bg-accent">
+              <div className="hover:bg-accent flex items-center px-4 py-3 text-sm transition-colors">
                 <span className="w-10">테마:</span>
 
                 <button
                   type="button"
                   onClick={cycleTheme}
                   title={`현재: ${theme}`}
-                  className="inline-flex w-10 items-center justify-center rounded-sm transition-colors hover:bg-accent/80"
+                  className="hover:bg-accent/80 inline-flex w-10 items-center justify-center rounded-sm transition-colors"
                 >
                   <ThemeIcon className="h-5 w-5" />
                 </button>

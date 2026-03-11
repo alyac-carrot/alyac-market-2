@@ -15,7 +15,9 @@ export function useUpdateProduct() {
   return useMutation({
     mutationFn: ({ productId, data }: UpdateProductVariables) => updateProduct(productId, data),
     onSuccess: async (_data, variables) => {
-      await queryClient.invalidateQueries({ queryKey: productQueryKeys.detail(variables.productId) });
+      await queryClient.invalidateQueries({
+        queryKey: productQueryKeys.detail(variables.productId),
+      });
       await queryClient.invalidateQueries({ queryKey: ['product', 'user'] });
     },
   });

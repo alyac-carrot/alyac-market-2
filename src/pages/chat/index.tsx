@@ -49,9 +49,7 @@ export default function ChatListPage() {
                     {c.date}
                   </span>
                 </div>
-                <p className="truncate text-xs text-zinc-500 dark:text-zinc-400">
-                  {c.lastMessage}
-                </p>
+                <p className="truncate text-xs text-zinc-500 dark:text-zinc-400">{c.lastMessage}</p>
               </div>
             </li>
           ))}

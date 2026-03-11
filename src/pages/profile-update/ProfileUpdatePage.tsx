@@ -14,8 +14,17 @@ type ProfileUpdateInitial = {
 };
 
 function ProfileUpdateContent({ profile }: { profile: ProfileUpdateInitial }) {
-  const { register, errors, fileInputRef, avatarSrc, canSave, isSaving, onPickImage, onChangeFile, submit } =
-    useProfileUpdateForm({ initial: profile });
+  const {
+    register,
+    errors,
+    fileInputRef,
+    avatarSrc,
+    canSave,
+    isSaving,
+    onPickImage,
+    onChangeFile,
+    submit,
+  } = useProfileUpdateForm({ initial: profile });
 
   return (
     <PageWithHeader
@@ -61,7 +70,11 @@ export default function ProfileUpdatePage() {
   }
 
   if (meQuery.isError || !myAccountname || myProfileQuery.isError || !myProfileQuery.data) {
-    return <div className="text-muted-foreground p-6 text-center text-sm">프로필 정보를 불러오지 못했습니다.</div>;
+    return (
+      <div className="text-muted-foreground p-6 text-center text-sm">
+        프로필 정보를 불러오지 못했습니다.
+      </div>
+    );
   }
 
   return <ProfileUpdateContent profile={myProfileQuery.data} />;

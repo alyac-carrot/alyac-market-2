@@ -1,4 +1,5 @@
 import { memo } from 'react';
+
 import { UserImageLg, UserImageSm } from '@/assets/icon';
 import { cn } from '@/shared/lib/';
 
@@ -15,7 +16,12 @@ const sizeMap = {
   lg: 'h-28 w-28',
 };
 
-export const Avatar = memo(function Avatar({ src, alt = 'avatar', size = 'md', className }: AvatarProps) {
+export const Avatar = memo(function Avatar({
+  src,
+  alt = 'avatar',
+  size = 'md',
+  className,
+}: AvatarProps) {
   const hasImage = Boolean(src?.trim());
 
   return (
@@ -40,4 +46,3 @@ export const Avatar = memo(function Avatar({ src, alt = 'avatar', size = 'md', c
     </div>
   );
 });
-

@@ -11,7 +11,11 @@ interface ProfileInfoSectionProps {
 export function ProfileInfoSection({ register, errors }: ProfileInfoSectionProps) {
   return (
     <div className="space-y-8 px-4 py-8">
-      <FieldGroup label="사용자 이름" error={errors.username?.message} hint="2~10자 이내여야 합니다.">
+      <FieldGroup
+        label="사용자 이름"
+        error={errors.username?.message}
+        hint="2~10자 이내여야 합니다."
+      >
         <UnderlineInput
           id="profile-username"
           type="text"
@@ -35,7 +39,11 @@ export function ProfileInfoSection({ register, errors }: ProfileInfoSectionProps
         />
       </FieldGroup>
 
-      <FieldGroup label="소개" error={errors.intro?.message} hint="최대 60자 이내로 소개를 작성해 주세요.">
+      <FieldGroup
+        label="소개"
+        error={errors.intro?.message}
+        hint="최대 60자 이내로 소개를 작성해 주세요."
+      >
         <UnderlineInput
           id="profile-intro"
           type="text"

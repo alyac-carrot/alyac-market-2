@@ -16,4 +16,3 @@ export type CreateProductRequest = {
 };
 
 export type UpdateProductRequest = CreateProductRequest;
-

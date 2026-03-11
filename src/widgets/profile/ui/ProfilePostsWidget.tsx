@@ -110,7 +110,9 @@ export default function ProfilePostsWidget({
                 <DropdownMenu
                   modal={true}
                   open={canManagePosts && openMenuPostId === post.id}
-                  onOpenChange={(open) => setOpenMenuPostId(open && canManagePosts ? post.id : null)}
+                  onOpenChange={(open) =>
+                    setOpenMenuPostId(open && canManagePosts ? post.id : null)
+                  }
                 >
                   <DropdownMenuTrigger asChild>
                     <Button

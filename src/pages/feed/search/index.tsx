@@ -79,7 +79,13 @@ export default function SearchPage() {
         header={
           <Header
             left={
-              <Button type="button" variant="ghost" size="icon" onClick={() => nav(-1)} aria-label="뒤로가기">
+              <Button
+                type="button"
+                variant="ghost"
+                size="icon"
+                onClick={() => nav(-1)}
+                aria-label="뒤로가기"
+              >
                 <ArrowLeft className="h-6 w-6" />
               </Button>
             }

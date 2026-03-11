@@ -1,13 +1,13 @@
 import axiosInstance from '@/shared/api/axios';
 import { parseWithSchema } from '@/shared/lib';
 
+import { followResponseSchema, getProfileResponseSchema } from '../model/schemas';
 import type {
   FollowResponse,
   FollowerListResponse,
   FollowingListResponse,
   GetProfileResponse,
 } from '../model/types/types';
-import { followResponseSchema, getProfileResponseSchema } from '../model/schemas';
 
 export const getProfile = async (accountname: string): Promise<GetProfileResponse> => {
   const response = await axiosInstance.get(`/profile/${accountname}`);

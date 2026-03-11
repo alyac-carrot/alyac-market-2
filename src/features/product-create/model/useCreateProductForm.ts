@@ -6,9 +6,9 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
 import {
+  type ProductFormValues,
   productFormSchema,
   productRequestSchema,
-  type ProductFormValues,
   useCreateProduct,
 } from '@/entities/product';
 import { useUploadFiles } from '@/entities/upload';
@@ -111,7 +111,9 @@ export function useCreateProductForm() {
       };
       const result = productRequestSchema.safeParse(payload);
       if (!result.success) {
-        setErrorText(result.error.issues[0]?.message ?? '상품 등록에 실패했습니다. 다시 시도해 주세요.');
+        setErrorText(
+          result.error.issues[0]?.message ?? '상품 등록에 실패했습니다. 다시 시도해 주세요.',
+        );
         return;
       }
 
