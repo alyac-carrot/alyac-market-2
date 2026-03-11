@@ -1,6 +1,13 @@
 import axiosInstance from '@/shared/api/axios';
 import { parseWithSchema } from '@/shared/lib';
 
+import {
+  createProductResponseSchema,
+  deleteProductResponseSchema,
+  getProductDetailResponseSchema,
+  getUserProductsResponseSchema,
+  updateProductResponseSchema,
+} from '../model/schemas';
 import type {
   CreateProductRequest,
   CreateProductResponse,
@@ -10,13 +17,6 @@ import type {
   UpdateProductRequest,
   UpdateProductResponse,
 } from '../model/types';
-import {
-  createProductResponseSchema,
-  deleteProductResponseSchema,
-  getProductDetailResponseSchema,
-  getUserProductsResponseSchema,
-  updateProductResponseSchema,
-} from '../model/schemas';
 
 export const getUserProducts = async (accountname: string): Promise<GetUserProductsResponse> => {
   const response = await axiosInstance.get(`/product/${accountname}`);

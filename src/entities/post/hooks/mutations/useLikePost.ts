@@ -1,5 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+
 import { queryKeys } from '@/shared/lib';
+
 import { likePost } from '../../api/likePost';
 
 export const useLikePost = (postId: string) => {
@@ -10,7 +12,7 @@ export const useLikePost = (postId: string) => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: queryKeys.post(postId) });
       queryClient.invalidateQueries({ queryKey: queryKeys.posts });
-      // Note: userPosts invalidation might need accountname, 
+      // Note: userPosts invalidation might need accountname,
       // but invalidating by prefix works for many cases
       queryClient.invalidateQueries({ queryKey: ['userPosts'] });
     },

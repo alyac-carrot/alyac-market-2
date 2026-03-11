@@ -6,9 +6,9 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
 import {
+  type ProductFormValues,
   productFormSchema,
   productRequestSchema,
-  type ProductFormValues,
   useProductDetailQuery,
   useUpdateProduct,
 } from '@/entities/product';
@@ -133,7 +133,9 @@ export function useUpdateProductForm(productId?: string) {
       };
       const result = productRequestSchema.safeParse(payload);
       if (!result.success) {
-        setErrorText(result.error.issues[0]?.message ?? '상품 수정에 실패했습니다. 다시 시도해 주세요.');
+        setErrorText(
+          result.error.issues[0]?.message ?? '상품 수정에 실패했습니다. 다시 시도해 주세요.',
+        );
         return;
       }
 

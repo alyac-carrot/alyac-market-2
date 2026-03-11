@@ -24,12 +24,15 @@ axiosInstance.interceptors.request.use(
 
 // 응답 인터셉터: 401 처리 및 토큰 갱신
 let isRefreshing = false;
-let refreshSubscribers: { 
-  resolve: (token: string) => void; 
-  reject: (err: any) => void; 
+let refreshSubscribers: {
+  resolve: (token: string) => void;
+  reject: (err: unknown) => void;
 }[] = [];
 
-const subscribeTokenRefresh = (resolve: (token: string) => void, reject: (err: any) => void) => {
+const subscribeTokenRefresh = (
+  resolve: (token: string) => void,
+  reject: (err: unknown) => void,
+) => {
   refreshSubscribers.push({ resolve, reject });
 };
 
@@ -38,7 +41,7 @@ const onTokenRefreshed = (token: string) => {
   refreshSubscribers = [];
 };
 
-const onTokenRefreshFailed = (error: any) => {
+const onTokenRefreshFailed = (error: unknown) => {
   refreshSubscribers.forEach((sub) => sub.reject(error));
   refreshSubscribers = [];
 };

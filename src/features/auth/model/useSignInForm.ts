@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 
 import { getSignInErrorMessage, useSignInMutation } from '@/entities/auth';
 
-import { signInSchema, type SignInFormValues } from './schemas';
+import { type SignInFormValues, signInSchema } from './schemas';
 
 export function useSignInForm() {
   const signInMutation = useSignInMutation();

@@ -2,11 +2,11 @@ import axiosInstance from '@/shared/api/axios';
 import { parseWithSchema } from '@/shared/lib';
 
 import {
-  followerListApiResponseSchema,
-  followingListApiResponseSchema,
   type FollowerListResponse,
   type FollowingListResponse,
   type Profile,
+  followerListApiResponseSchema,
+  followingListApiResponseSchema,
 } from '../model/schemas';
 
 export type FollowUser = Profile;

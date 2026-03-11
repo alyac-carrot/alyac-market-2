@@ -1,10 +1,6 @@
 import { useMemo } from 'react';
 
-import {
-  type Profile,
-  useFollowersQuery,
-  useFollowingsQuery,
-} from '@/entities/profile';
+import { type Profile, useFollowersQuery, useFollowingsQuery } from '@/entities/profile';
 
 export type FollowType = 'followers' | 'followings';
 

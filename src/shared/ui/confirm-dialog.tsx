@@ -36,28 +36,28 @@ export function ConfirmDialog({
       <AlertDialogContent
         onOpenAutoFocus={(e) => e.preventDefault()}
         className={cn(
-          'fixed left-[50%] top-[50%] z-50 grid h-38 w-75 translate-x-[-50%] translate-y-[-50%]',
-          'gap-0 overflow-hidden rounded-lg border border-border bg-popover/95 p-0 shadow-lg backdrop-blur-sm',
+          'fixed top-[50%] left-[50%] z-50 grid h-38 w-75 translate-x-[-50%] translate-y-[-50%]',
+          'border-border bg-popover/95 gap-0 overflow-hidden rounded-lg border p-0 shadow-lg backdrop-blur-sm',
         )}
       >
-        <div className="flex flex-col space-y-2 px-4 pb-6 pt-8 text-center sm:text-left">
+        <div className="flex flex-col space-y-2 px-4 pt-8 pb-6 text-center sm:text-left">
           <AlertDialogTitle className="text-center text-lg font-medium">{title}</AlertDialogTitle>
           <AlertDialogDescription className="sr-only">
             {description ?? title}
           </AlertDialogDescription>
         </div>
 
-        <div className="flex border-t border-border">
+        <div className="border-border flex border-t">
           <AlertDialogCancel
             className={cn(
               'mt-0 h-14 flex-1 cursor-pointer rounded-none border-none bg-transparent text-base font-normal',
-              'transition-colors hover:bg-muted hover:text-foreground focus-visible:ring-0',
+              'hover:bg-muted hover:text-foreground transition-colors focus-visible:ring-0',
             )}
           >
             {cancelText}
           </AlertDialogCancel>
 
-          <div className="w-px bg-border" />
+          <div className="bg-border w-px" />
 
           <AlertDialogCancel
             onClick={onConfirm}

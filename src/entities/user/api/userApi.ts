@@ -1,8 +1,12 @@
 import axiosInstance from '@/shared/api/axios';
 import { parseWithSchema } from '@/shared/lib';
 
-import type { MyInfoResponse, UpdateProfileBody, UpdateProfileResponse } from '../model/types/types';
 import { myInfoResponseSchema, updateProfileResponseSchema } from '../model/schemas';
+import type {
+  MyInfoResponse,
+  UpdateProfileBody,
+  UpdateProfileResponse,
+} from '../model/types/types';
 
 export const getMyInfo = async (): Promise<MyInfoResponse> => {
   const response = await axiosInstance.get('/user/myinfo');

@@ -5,11 +5,7 @@ import { useProfilePageData } from '@/features/profile';
 import { ConfirmDialog } from '@/shared/ui';
 import { PageWithFooter } from '@/widgets/footer';
 import { Header, PageWithHeader } from '@/widgets/header';
-import {
-  ProfilePostsWidget,
-  ProfileProductsWidget,
-  ProfileSummaryWidget,
-} from '@/widgets/profile';
+import { ProfilePostsWidget, ProfileProductsWidget, ProfileSummaryWidget } from '@/widgets/profile';
 
 export default function ProfilePage() {
   const navigate = useNavigate();

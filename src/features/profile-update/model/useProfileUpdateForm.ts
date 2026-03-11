@@ -8,7 +8,7 @@ import { useUploadFiles } from '@/entities/upload';
 import { useUpdateMyProfileMutation } from '@/entities/user';
 import { normalizeUploadPath, toImageUrl } from '@/shared/lib';
 
-import { profileUpdateSchema, type ProfileUpdateFormValues } from './schemas';
+import { type ProfileUpdateFormValues, profileUpdateSchema } from './schemas';
 
 interface UseProfileUpdateFormProps {
   initial: {

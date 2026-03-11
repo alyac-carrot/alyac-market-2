@@ -2,7 +2,7 @@ import { treeifyError } from 'zod';
 
 import axiosInstance from '@/shared/api/axios';
 
-import { signInResponseSchema, type SignInResponse } from '../model/schemas';
+import { type SignInResponse, signInResponseSchema } from '../model/schemas';
 
 export type SignInBody = {
   email: string;

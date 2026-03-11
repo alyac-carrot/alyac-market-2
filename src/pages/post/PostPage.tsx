@@ -15,11 +15,17 @@ import type { Comment } from '@/entities/post';
 import { useMeQuery } from '@/entities/user';
 import { CommentItem } from '@/features/post';
 import { formatDate, pickFirstImage, toImageUrl } from '@/shared/lib';
-import { BottomSheetModal, Button, ConfirmDialog, Popover, PopoverContent, PopoverTrigger } from '@/shared/ui';
+import {
+  BottomSheetModal,
+  Button,
+  ConfirmDialog,
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/shared/ui';
 import { Avatar } from '@/shared/ui/Avatar';
 import { Header, PageWithHeader } from '@/widgets/header';
 
-/* ── main page ── */
 export default function PostPage() {
   const { postId = '' } = useParams();
   const navigate = useNavigate();
@@ -27,6 +33,10 @@ export default function PostPage() {
   const [commentText, setCommentText] = useState('');
   const [selectedCommentId, setSelectedCommentId] = useState<string | null>(null);
   const [isPostDeleteDialogOpen, setIsPostDeleteDialogOpen] = useState(false);
+  const [likeOverride, setLikeOverride] = useState<{
+    hearted: boolean;
+    heartCount: number;
+  } | null>(null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -35,10 +45,7 @@ export default function PostPage() {
   const meQuery = useMeQuery();
   const currentUser = meQuery.data?.user;
 
-  // Fetch post data
   const { data: postData, isLoading: isLoadingPost, isError } = useGetPost(postId);
-
-  // Fetch comments for this post
   const { data: commentsData, isLoading: isLoadingComments } = useGetComments(postId);
   const { mutate: submitComment, isPending: isSubmitting } = useCreateComment(postId);
   const { mutate: toggleLike, isPending: isLikePending } = useLikePost(postId);
@@ -46,25 +53,6 @@ export default function PostPage() {
   const { mutate: deletePostMutate, isPending: isDeletingPost } = useDeletePost();
 
   const comments: Comment[] = commentsData?.comment ?? [];
-
-  // Optimistic heart state — synced from server data once loaded
-  const [isHearted, setIsHearted] = useState(false);
-  const [heartCount, setHeartCount] = useState(0);
-
-  useEffect(() => {
-    if (postData?.post) {
-      setIsHearted(postData.post.hearted);
-      setHeartCount(postData.post.heartCount ?? 0);
-    }
-  }, [postData]);
-
-  const handleLikeClick = () => {
-    if (isLikePending) return;
-    // Optimistic update
-    setIsHearted((prev) => !prev);
-    setHeartCount((prev) => (isHearted ? prev - 1 : prev + 1));
-    toggleLike();
-  };
 
   const handleSubmitComment = () => {
     if (!commentText.trim()) return;
@@ -93,14 +81,15 @@ export default function PostPage() {
           setSelectedCommentId(null);
         },
       });
-    } else {
-      setSelectedCommentId(null);
-      setTimeout(() => {
-        if (window.confirm('해당 댓글을 신고하시겠습니까?')) {
-          alert('해당 댓글이 신고되었습니다');
-        }
-      }, 0);
+      return;
     }
+
+    setSelectedCommentId(null);
+    setTimeout(() => {
+      if (window.confirm('해당 댓글을 신고하시겠습니까?')) {
+        alert('해당 댓글을 신고했습니다.');
+      }
+    }, 0);
   };
 
   const handleDeletePost = () => {
@@ -125,11 +114,26 @@ export default function PostPage() {
   }
 
   const post = postData.post;
+  const isHearted = likeOverride?.hearted ?? post.hearted;
+  const heartCount = likeOverride?.heartCount ?? post.heartCount ?? 0;
   const authorAvatar = post.author?.image ? toImageUrl(post.author.image) : '';
   const postImage = toImageUrl(pickFirstImage(post.image));
   const hasText = commentText.trim().length > 0;
-
   const isMyPost = post.author?.accountname === currentUser?.accountname;
+
+  const handleLikeClick = () => {
+    if (isLikePending) return;
+
+    const nextHearted = !isHearted;
+    const nextHeartCount = nextHearted ? heartCount + 1 : Math.max(0, heartCount - 1);
+
+    setLikeOverride({
+      hearted: nextHearted,
+      heartCount: nextHeartCount,
+    });
+
+    toggleLike();
+  };
 
   const postMenu = (
     <Popover>
@@ -165,7 +169,7 @@ export default function PostPage() {
               onClick={() => {
                 setTimeout(() => {
                   if (window.confirm('해당 게시글을 신고하시겠습니까?')) {
-                    alert('해당 게시글이 신고되었습니다');
+                    alert('해당 게시글을 신고했습니다.');
                   }
                 }, 0);
               }}
@@ -185,16 +189,13 @@ export default function PostPage() {
       contentClassName="flex flex-1 flex-col pb-16"
       header={<Header showBackButton right={postMenu} />}
     >
-      {/* ─ scrollable main ─ */}
       <main className="flex-1 overflow-y-auto">
-        {/* post article */}
         <article className="border-border border-b pb-4">
-          {/* post header */}
           <div className="flex items-center gap-3 px-4 py-4">
             <Avatar src={authorAvatar || undefined} size="md" />
             <div className="flex flex-col text-left">
               <span className="text-foreground text-sm font-normal">
-                {post.author?.username ?? '알 수 없음'}
+                {post.author?.username ?? '이름없음'}
               </span>
               <span className="text-muted-foreground text-xs">
                 @ {post.author?.accountname ?? ''}
@@ -202,7 +203,6 @@ export default function PostPage() {
             </div>
           </div>
 
-          {/* post text */}
           {post.content?.trim() && (
             <div className="px-4 pb-4">
               <p className="text-foreground text-left text-base leading-relaxed whitespace-pre-wrap">
@@ -211,7 +211,6 @@ export default function PostPage() {
             </div>
           )}
 
-          {/* post image */}
           {postImage && (
             <div className="mb-4 space-y-2 px-4">
               <img
@@ -222,7 +221,6 @@ export default function PostPage() {
             </div>
           )}
 
-          {/* actions */}
           <div className="flex items-center gap-4 px-4">
             <button
               type="button"
@@ -250,19 +248,16 @@ export default function PostPage() {
             </button>
           </div>
 
-          {/* date */}
           <p className="text-muted-foreground mt-3 px-4 text-left text-xs">
             {formatDate(post.createdAt)}
           </p>
         </article>
 
-        {/* divider */}
         <div className="border-muted border-b" />
 
-        {/* comments */}
         <div className="divide-muted divide-y">
           {isLoadingComments ? (
-            <div className="text-muted-foreground px-4 py-8 text-center text-sm">로드 중...</div>
+            <div className="text-muted-foreground px-4 py-8 text-center text-sm">로딩 중...</div>
           ) : comments.length === 0 ? (
             <div className="text-muted-foreground px-4 py-8 text-center text-sm">
               댓글이 없습니다.
@@ -275,7 +270,6 @@ export default function PostPage() {
         </div>
       </main>
 
-      {/* ─ fixed comment input bar ─ */}
       <div className="border-border bg-background fixed right-0 bottom-0 left-0 z-10 w-full border-t px-4 py-2">
         <div className="flex items-center gap-3">
           <div className="shrink-0">
@@ -308,7 +302,6 @@ export default function PostPage() {
         </div>
       </div>
 
-      {/* ─ comment action bottom sheet ─ */}
       <BottomSheetModal
         isOpen={selectedCommentId !== null}
         onClose={() => setSelectedCommentId(null)}
