@@ -23,6 +23,23 @@ export default function FeedPage() {
     },
   });
 
+  const feedHeader = (
+    <Header
+      center={
+        <Link to="/feed" className="text-lg font-bold">
+          알약마켓 피드
+        </Link>
+      }
+      right={
+        <Button asChild variant="ghost" size="icon" aria-label="검색" className="h-12 w-12">
+          <Link to="/search">
+            <Search className="h-6 w-6" />
+          </Link>
+        </Button>
+      }
+    />
+  );
+
   if (isLoading) {
     return (
       <PageWithFooter>
@@ -46,19 +63,21 @@ export default function FeedPage() {
   if (posts.length === 0) {
     return (
       <PageWithFooter>
-        <div className="flex min-h-[calc(100vh-56px-72px)] items-center justify-center">
-          <div className="flex -translate-y-8 flex-col items-center gap-4">
-            <img src="/mascot.png" alt="마스코트" className="h-auto w-[190px]" />
-            <p className="text-foreground text-sm">유저를 검색해 팔로우해보세요!</p>
+        <PageWithHeader header={feedHeader} headerOffsetClassName="pt-20">
+          <div className="flex min-h-[calc(100vh-56px-72px)] items-center justify-center">
+            <div className="flex -translate-y-8 flex-col items-center gap-4">
+              <img src="/mascot.png" alt="마스코트" className="h-auto w-47.5" />
+              <p className="text-foreground text-sm">유저를 검색해 팔로우 해보세요!</p>
 
-            <Button
-              className="rounded-full px-10 py-6 text-base font-semibold"
-              onClick={() => nav('/search')}
-            >
-              검색하기
-            </Button>
+              <Button
+                className="rounded-full px-10 py-6 text-base font-semibold"
+                onClick={() => nav('/search')}
+              >
+                검색하기
+              </Button>
+            </div>
           </div>
-        </div>
+        </PageWithHeader>
       </PageWithFooter>
     );
   }
@@ -66,22 +85,7 @@ export default function FeedPage() {
   return (
     <PageWithFooter>
       <PageWithHeader
-        header={
-          <Header
-            center={
-              <Link to="/feed" className="text-lg font-bold">
-                알약마켓 피드
-              </Link>
-            }
-            right={
-              <Button asChild variant="ghost" size="icon" aria-label="검색" className="h-12 w-12">
-                <Link to="/search">
-                  <Search className="h-6 w-6" />
-                </Link>
-              </Button>
-            }
-          />
-        }
+        header={feedHeader}
         contentClassName="mx-auto max-w-3xl px-4 pb-24"
         headerOffsetClassName="pt-20"
       >
@@ -92,7 +96,6 @@ export default function FeedPage() {
               onClick={() => nav(`/post/${p.id}`)}
               className="cursor-pointer rounded-2xl bg-white shadow-sm dark:border dark:border-zinc-800 dark:bg-zinc-900"
             >
-              {/* 작성자 */}
               <div className="flex items-center gap-3 px-3 pt-3">
                 <Avatar
                   src={toImageUrl(p.author.image)}
@@ -110,14 +113,12 @@ export default function FeedPage() {
                 </div>
               </div>
 
-              {/* 본문 */}
               {p.content ? (
                 <p className="px-3 pt-2 text-sm whitespace-pre-wrap text-zinc-900 dark:text-zinc-100">
                   {p.content}
                 </p>
               ) : null}
 
-              {/* 이미지 */}
               {p.image ? (
                 <div className="mt-3 px-3">
                   <div className="aspect-square overflow-hidden rounded-2xl bg-zinc-100 dark:bg-zinc-800">
@@ -131,7 +132,6 @@ export default function FeedPage() {
                 </div>
               ) : null}
 
-              {/* 하단 버튼 */}
               <div className="flex items-center gap-4 px-3 pt-3 pb-3 text-xs text-zinc-500 dark:text-zinc-400">
                 <button
                   type="button"
@@ -142,7 +142,7 @@ export default function FeedPage() {
                   }}
                   disabled={isLikePending}
                 >
-                  {p.hearted ? '❤️' : '🤍'} 좋아요 {p.heartCount}
+                  {p.hearted ? '취소' : '찜'} 좋아요 {p.heartCount}
                 </button>
 
                 <button
@@ -153,7 +153,7 @@ export default function FeedPage() {
                     nav(`/post/${p.id}`);
                   }}
                 >
-                  💬 댓글 {p.commentCount}
+                  댓글 보기 {p.commentCount}
                 </button>
               </div>
             </li>

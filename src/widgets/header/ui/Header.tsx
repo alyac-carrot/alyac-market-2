@@ -41,6 +41,9 @@ export function Header({
     setTheme(nextTheme);
   };
 
+  const menuItemClassName =
+    'text-foreground inline-flex w-full px-4 py-3 text-sm transition-colors hover:bg-accent hover:text-accent-foreground';
+
   const rightNode = right
     ? right
     : showMenu && (
@@ -58,19 +61,19 @@ export function Header({
               <button
                 type="button"
                 onClick={() => navigate('/settings')}
-                className="text-foreground inline-flex w-full px-4 py-3 text-sm"
+                className={menuItemClassName}
               >
                 설정 및 개인정보
               </button>
 
-              <div className="flex items-center px-4 py-3 text-sm">
+              <div className="flex items-center px-4 py-3 text-sm transition-colors hover:bg-accent">
                 <span className="w-10">테마:</span>
 
                 <button
                   type="button"
                   onClick={cycleTheme}
                   title={`현재: ${theme}`}
-                  className="inline-flex w-10 items-center justify-center"
+                  className="inline-flex w-10 items-center justify-center rounded-sm transition-colors hover:bg-accent/80"
                 >
                   <ThemeIcon className="h-5 w-5" />
                 </button>
@@ -79,7 +82,7 @@ export function Header({
               <button
                 type="button"
                 onClick={() => setIsLogoutDialogOpen(true)}
-                className="text-foreground inline-flex w-full px-4 py-3 text-sm"
+                className={menuItemClassName}
               >
                 로그아웃
               </button>
