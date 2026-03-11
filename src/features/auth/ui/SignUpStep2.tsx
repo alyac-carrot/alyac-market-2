@@ -39,7 +39,7 @@ export function SignUpStep2({ step1Data, onBack }: { step1Data: Step1Values; onB
     try {
       const formData = new FormData();
       formData.append('image', file);
-      // Use the dedicated uploadApi (VITE_BASE_URL) — not the general axiosInstance
+      // Use the dedicated uploadApi (VITE_API_BASE_URL) instead of the general axiosInstance
       const res = await uploadApi.post<{ filename: string }>('/image/uploadfile', formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });

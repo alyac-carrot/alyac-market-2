@@ -1,4 +1,4 @@
-const RAW = import.meta.env.VITE_BASE_URL || '';
+const RAW = import.meta.env.VITE_IMAGE_BASE_URL || '';
 const IMAGE_BASE_URL = RAW ? RAW.replace(/\/+$/, '') : '';
 
 export function toImageUrl(path?: string) {
