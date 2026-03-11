@@ -1,32 +1,39 @@
 import { Monitor, Moon, Sun } from 'lucide-react';
 
-import { useTheme } from '@/shared/lib/theme';
+import { type Theme, useTheme } from '@/shared/lib/theme';
 import { Button } from '@/shared/ui';
+
+const THEME_ICONS: Record<Theme, React.ReactElement> = {
+  light: <Sun className="h-5 w-5" />,
+  dark: <Moon className="h-5 w-5" />,
+  system: <Monitor className="h-5 w-5" />,
+};
+
+const THEME_LABELS: Record<Theme, string> = {
+  light: '라이트 모드 (클릭 시 다크 모드로 전환)',
+  dark: '다크 모드 (클릭 시 시스템 모드로 전환)',
+  system: '시스템 모드 (클릭 시 라이트 모드로 전환)',
+};
+
+const THEME_CYCLE: Theme[] = ['light', 'dark', 'system'];
 
 export function ThemeToggle() {
   const { theme, setTheme } = useTheme();
 
   const cycleTheme = () => {
-    const themes: Array<'light' | 'dark' | 'system'> = ['light', 'dark', 'system'];
-    const currentIndex = themes.indexOf(theme);
-    const nextTheme = themes[(currentIndex + 1) % themes.length];
-    setTheme(nextTheme);
-  };
-
-  const getIcon = () => {
-    switch (theme) {
-      case 'light':
-        return <Sun className="h-5 w-5" />;
-      case 'dark':
-        return <Moon className="h-5 w-5" />;
-      case 'system':
-        return <Monitor className="h-5 w-5" />;
-    }
+    const currentIndex = THEME_CYCLE.indexOf(theme);
+    setTheme(THEME_CYCLE[(currentIndex + 1) % THEME_CYCLE.length]);
   };
 
   return (
-    <Button variant="ghost" size="icon" onClick={cycleTheme}>
-      {getIcon()}
+    <Button
+      variant="ghost"
+      size="icon"
+      onClick={cycleTheme}
+      aria-label={THEME_LABELS[theme]}
+      title={THEME_LABELS[theme]}
+    >
+      {THEME_ICONS[theme]}
     </Button>
   );
 }
