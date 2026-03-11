@@ -8,14 +8,24 @@ interface Props {
   storageKey?: string;
 }
 
+const VALID_THEMES = new Set<Theme>(['light', 'dark', 'system']);
+
+const getStoredTheme = (key: string, fallback: Theme): Theme => {
+  try {
+    const stored = localStorage.getItem(key);
+    return stored && VALID_THEMES.has(stored as Theme) ? (stored as Theme) : fallback;
+  } catch {
+    // localStorage unavailable in SSR or restricted environments
+    return fallback;
+  }
+};
+
 export const ThemeProvider = ({
   children,
   defaultTheme = 'system',
   storageKey = 'ui-theme',
 }: Props) => {
-  const [theme, setTheme] = useState<Theme>(
-    () => (localStorage.getItem(storageKey) as Theme) || defaultTheme,
-  );
+  const [theme, setTheme] = useState<Theme>(() => getStoredTheme(storageKey, defaultTheme));
 
   useEffect(() => {
     const root = window.document.documentElement;
