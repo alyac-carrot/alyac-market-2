@@ -11,6 +11,7 @@ export {
 export { useCreateProduct } from './hooks/useCreateProduct';
 export { useUpdateProduct } from './hooks/useUpdateProduct';
 export { useDeleteProduct } from './hooks/useDeleteProduct';
+export { productRequestSchema } from './model/schemas';
 
 export type {
   Product,

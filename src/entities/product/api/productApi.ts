@@ -1,4 +1,5 @@
 import axiosInstance from '@/shared/api/axios';
+import { parseWithSchema } from '@/shared/lib';
 
 import type {
   CreateProductRequest,
@@ -9,9 +10,19 @@ import type {
   UpdateProductRequest,
   UpdateProductResponse,
 } from '../model/types';
+import {
+  createProductResponseSchema,
+  deleteProductResponseSchema,
+  getProductDetailResponseSchema,
+  getUserProductsResponseSchema,
+  updateProductResponseSchema,
+} from '../model/schemas';
 
-export const getUserProducts = (accountname: string) =>
-  axiosInstance.get<GetUserProductsResponse>(`/product/${accountname}`);
+export const getUserProducts = async (accountname: string): Promise<GetUserProductsResponse> => {
+  const response = await axiosInstance.get(`/product/${accountname}`);
+
+  return parseWithSchema(getUserProductsResponseSchema, response.data, 'getUserProducts');
+};
 
 export const createProduct = async (data: CreateProductRequest): Promise<CreateProductResponse> => {
   const payload = {
@@ -23,13 +34,16 @@ export const createProduct = async (data: CreateProductRequest): Promise<CreateP
     },
   };
 
-  const response = await axiosInstance.post<CreateProductResponse>('/product', payload);
+  const response = await axiosInstance.post('/product', payload);
 
-  return response.data;
+  return parseWithSchema(createProductResponseSchema, response.data, 'createProduct');
 };
 
-export const getProductDetail = (productId: string) =>
-  axiosInstance.get<GetProductDetailResponse>(`/product/detail/${productId}`);
+export const getProductDetail = async (productId: string): Promise<GetProductDetailResponse> => {
+  const response = await axiosInstance.get(`/product/detail/${productId}`);
+
+  return parseWithSchema(getProductDetailResponseSchema, response.data, 'getProductDetail');
+};
 
 export const updateProduct = async (
   productId: string,
@@ -44,11 +58,11 @@ export const updateProduct = async (
     },
   };
 
-  const response = await axiosInstance.put<UpdateProductResponse>(`/product/${productId}`, payload);
-  return response.data;
+  const response = await axiosInstance.put(`/product/${productId}`, payload);
+  return parseWithSchema(updateProductResponseSchema, response.data, 'updateProduct');
 };
 
 export const deleteProduct = async (productId: string): Promise<DeleteProductResponse> => {
-  const response = await axiosInstance.delete<DeleteProductResponse>(`/product/${productId}`);
-  return response.data;
+  const response = await axiosInstance.delete(`/product/${productId}`);
+  return parseWithSchema(deleteProductResponseSchema, response.data, 'deleteProduct');
 };

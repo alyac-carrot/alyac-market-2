@@ -3,7 +3,7 @@
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-import { useCreateProduct } from '@/entities/product';
+import { productRequestSchema, useCreateProduct } from '@/entities/product';
 import { useUploadFiles } from '@/entities/upload';
 import { normalizeUploadPath } from '@/shared/lib';
 
@@ -30,7 +30,12 @@ export function useCreateProductForm() {
   }, [imagePreviewUrl]);
 
   const canUpload =
-    itemName.trim().length > 0 && Number(price) > 0 && link.trim().length > 0 && !!imageFile;
+    productRequestSchema.safeParse({
+      itemName,
+      price: Number(price),
+      link,
+      itemImage: imageFile ? 'uploadFiles/temp-image.webp' : '',
+    }).success;
 
   const handlePriceChange = (nextValue: string) => {
     setPrice(nextValue.replace(/[^\d]/g, ''));
@@ -61,12 +66,19 @@ export function useCreateProductForm() {
         throw new Error('Image upload failed');
       }
 
-      await createProductMutation.mutateAsync({
+      const payload = {
         itemName: itemName.trim(),
         price: Number(price),
         link: link.trim(),
         itemImage: normalizeUploadPath(filename),
-      });
+      };
+      const result = productRequestSchema.safeParse(payload);
+      if (!result.success) {
+        setErrorText(result.error.issues[0]?.message ?? '상품 등록에 실패했습니다. 다시 시도해 주세요.');
+        return;
+      }
+
+      await createProductMutation.mutateAsync(result.data);
 
       navigate('/profile');
     } catch (error) {

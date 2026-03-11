@@ -6,10 +6,7 @@ import { productQueryKeys } from '../model/queries/queries';
 export function useProductDetailQuery(productId?: string) {
   return useQuery({
     queryKey: productId ? productQueryKeys.detail(productId) : ['product', 'detail', 'disabled'],
-    queryFn: async () => {
-      const res = await getProductDetail(productId!);
-      return res.data.product;
-    },
+    queryFn: async () => (await getProductDetail(productId!)).product,
     enabled: !!productId,
     staleTime: 1000 * 30,
     retry: false,
