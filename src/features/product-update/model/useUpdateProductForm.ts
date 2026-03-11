@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-import { useProductDetailQuery, useUpdateProduct } from '@/entities/product';
+import { productRequestSchema, useProductDetailQuery, useUpdateProduct } from '@/entities/product';
 import { useUploadFiles } from '@/entities/upload';
 import { normalizeUploadPath, toImageUrl } from '@/shared/lib';
 
@@ -44,10 +44,12 @@ export function useUpdateProductForm(productId?: string) {
   }, [imageFile, imagePreviewUrl]);
 
   const canUpload =
-    itemName.trim().length > 0 &&
-    Number(price) > 0 &&
-    link.trim().length > 0 &&
-    imagePreviewUrl.trim().length > 0;
+    productRequestSchema.safeParse({
+      itemName,
+      price: Number(price),
+      link,
+      itemImage: itemImagePath || (imagePreviewUrl.trim().length > 0 ? 'uploadFiles/temp-image.webp' : ''),
+    }).success;
 
   const handlePriceChange = (nextValue: string) => {
     setPrice(nextValue.replace(/[^\d]/g, ''));
@@ -80,14 +82,21 @@ export function useUpdateProductForm(productId?: string) {
         nextItemImage = normalizeUploadPath(filename);
       }
 
+      const payload = {
+        itemName: itemName.trim(),
+        price: Number(price),
+        link: link.trim(),
+        itemImage: nextItemImage,
+      };
+      const result = productRequestSchema.safeParse(payload);
+      if (!result.success) {
+        setErrorText(result.error.issues[0]?.message ?? '상품 수정에 실패했습니다. 다시 시도해 주세요.');
+        return;
+      }
+
       await updateProductMutation.mutateAsync({
         productId,
-        data: {
-          itemName: itemName.trim(),
-          price: Number(price),
-          link: link.trim(),
-          itemImage: nextItemImage,
-        },
+        data: result.data,
       });
 
       navigate('/profile');
