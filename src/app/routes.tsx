@@ -3,32 +3,54 @@ import { lazy } from 'react';
 import { createBrowserRouter } from 'react-router-dom';
 
 import { RootLayout } from '@/app/layouts';
+import { RouterErrorPage } from '@/app/router-error';
 import { RequireAuth } from '@/entities/auth';
 
-const SplashPage = lazy(() => import('@/pages/auth/splash'));
-const LandingPage = lazy(() => import('@/pages/auth/LandingPage'));
-const SignInPage = lazy(() => import('@/pages/auth/signin'));
-const SignUpPage = lazy(() => import('@/pages/auth/signup'));
-const CreatePostPage = lazy(() => import('@/pages/post/CreatePostPage'));
-const CreateProductPage = lazy(() =>
+function lazyWithRetry<T extends React.ComponentType<any>>(
+  importer: () => Promise<{ default: T }>,
+) {
+  return lazy(async () => {
+    try {
+      const module = await importer();
+      sessionStorage.removeItem('lazy-import-reloaded');
+      return module;
+    } catch (error) {
+      const retryKey = 'lazy-import-reloaded';
+      if (sessionStorage.getItem(retryKey) !== '1') {
+        sessionStorage.setItem(retryKey, '1');
+        window.location.reload();
+      }
+      throw error;
+    }
+  });
+}
+
+const SplashPage = lazyWithRetry(() => import('@/pages/auth/splash'));
+const LandingPage = lazyWithRetry(() => import('@/pages/auth/LandingPage'));
+const SignInPage = lazyWithRetry(() => import('@/pages/auth/signin'));
+const SignUpPage = lazyWithRetry(() => import('@/pages/auth/signup'));
+const CreatePostPage = lazyWithRetry(() => import('@/pages/post/CreatePostPage'));
+const CreateProductPage = lazyWithRetry(() =>
   import('@/pages/product').then((m) => ({ default: m.CreateProductPage })),
 );
-const UpdateProductPage = lazy(() =>
+const UpdateProductPage = lazyWithRetry(() =>
   import('@/pages/product').then((m) => ({ default: m.UpdateProductPage })),
 );
-const ProfilePage = lazy(() => import('@/pages/profile').then((m) => ({ default: m.ProfilePage })));
-const ProfileUpdatePage = lazy(() => import('@/pages/profile-update/ProfileUpdatePage'));
-const PostPage = lazy(() => import('@/pages/post/PostPage'));
-const EditPostPage = lazy(() => import('@/pages/post/EditPostPage'));
-const SearchPage = lazy(() => import('@/pages/feed/search'));
-const FeedPage = lazy(() => import('@/pages/feed'));
-const ChatRoomPage = lazy(() => import('@/pages/chat/room'));
-const ChatListPage = lazy(() => import('@/pages/chat'));
-const NotFoundPage = lazy(() => import('@/pages/not-found/NotFoundPage'));
-const FollowersPage = lazy(() =>
+const ProfilePage = lazyWithRetry(() =>
+  import('@/pages/profile').then((m) => ({ default: m.ProfilePage })),
+);
+const ProfileUpdatePage = lazyWithRetry(() => import('@/pages/profile-update/ProfileUpdatePage'));
+const PostPage = lazyWithRetry(() => import('@/pages/post/PostPage'));
+const EditPostPage = lazyWithRetry(() => import('@/pages/post/EditPostPage'));
+const SearchPage = lazyWithRetry(() => import('@/pages/feed/search'));
+const FeedPage = lazyWithRetry(() => import('@/pages/feed'));
+const ChatRoomPage = lazyWithRetry(() => import('@/pages/chat/room'));
+const ChatListPage = lazyWithRetry(() => import('@/pages/chat'));
+const NotFoundPage = lazyWithRetry(() => import('@/pages/not-found/NotFoundPage'));
+const FollowersPage = lazyWithRetry(() =>
   import('@/pages/followers').then((m) => ({ default: m.FollowersPage })),
 );
-const FollowingsPage = lazy(() =>
+const FollowingsPage = lazyWithRetry(() =>
   import('@/pages/followings').then((m) => ({ default: m.FollowingsPage })),
 );
 
@@ -40,6 +62,7 @@ export const router = createBrowserRouter(
     {
       path: '/',
       element: <RootLayout />,
+      errorElement: <RouterErrorPage />,
       children: [
         { index: true, element: <SplashPage /> },
         { path: 'auth/landing', element: <LandingPage /> },
@@ -66,7 +89,7 @@ export const router = createBrowserRouter(
         },
       ],
     },
-    { path: '*', element: <NotFoundPage /> },
+    { path: '*', element: <NotFoundPage />, errorElement: <RouterErrorPage /> },
   ],
   {
     basename: runtimeBasename,

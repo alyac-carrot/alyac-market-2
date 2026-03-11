@@ -19,7 +19,7 @@ export function FollowsListItem({ user, defaultFollowing }: Props) {
   const meQuery = useMeQuery();
 
   const initial = useMemo(() => {
-    if (typeof user.isfollow === 'boolean') return user.isfollow;
+    if (user.isfollow === true) return true;
     return !!defaultFollowing;
   }, [defaultFollowing, user.isfollow]);
 
@@ -75,7 +75,7 @@ export function FollowsListItem({ user, defaultFollowing }: Props) {
                       ?.message ?? ''
                   : '';
 
-              if (next && message.includes('이미 팔로우')) {
+              if (next && message.includes('팔로우')) {
                 setIsFollowing(true);
                 return;
               }

@@ -36,10 +36,7 @@ export function useFollowsPageData({
 
     return rawList.map((profile) => ({
       ...profile,
-      isfollow:
-        typeof profile.isfollow === 'boolean'
-          ? profile.isfollow
-          : myFollowingAccountnames.has(profile.accountname),
+      isfollow: profile.isfollow === true || myFollowingAccountnames.has(profile.accountname),
     }));
   }, [followersQuery.data, followingsQuery.data, myFollowingsQuery.data, type]);
 

@@ -4,30 +4,30 @@ import { queryKeys } from '@/shared/lib';
 import type { GetPostResponse } from '../../model/types/types';
 
 import { likePost } from '../../api/likePost';
+import { unlikePost } from '../../api/unlikePost';
 
 export const useLikePost = (postId: string) => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: () => likePost(postId),
+    mutationFn: (nextHearted: boolean) => (nextHearted ? likePost(postId) : unlikePost(postId)),
     // ── Optimistic update ─────────────────────────────────────────────────
-    onMutate: async () => {
+    onMutate: async (nextHearted) => {
       // Cancel any in-flight refetches so they don't overwrite our optimistic data
       await queryClient.cancelQueries({ queryKey: queryKeys.post(postId) });
 
       // Snapshot previous value for rollback
       const previous = queryClient.getQueryData<GetPostResponse>(queryKeys.post(postId));
 
-      // Optimistically toggle hearted state
+      // Optimistically apply the requested state
       queryClient.setQueryData<GetPostResponse>(queryKeys.post(postId), (old) => {
         if (!old) return old;
-        const hearted = !old.post.hearted;
         return {
           ...old,
           post: {
             ...old.post,
-            hearted,
-            heartCount: hearted
+            hearted: nextHearted,
+            heartCount: nextHearted
               ? old.post.heartCount + 1
               : Math.max(0, old.post.heartCount - 1),
           },

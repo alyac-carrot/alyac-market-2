@@ -45,7 +45,7 @@ export function usePostPage(postId: string) {
 
   const handleLikeClick = () => {
     if (isLikePending || !post) return;
-    toggleLike();
+    toggleLike(!post.hearted);
   };
 
   const handleSubmitComment = () => {

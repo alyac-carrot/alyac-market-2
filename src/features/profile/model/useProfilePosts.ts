@@ -50,7 +50,7 @@ export function useProfilePosts(accountname?: string) {
       [postId]: { liked: nextLiked, likeCount: nextLikeCount },
     }));
 
-    likePostMutation.mutate(postId, {
+    likePostMutation.mutate({ postId, nextHearted: nextLiked }, {
       onSuccess: (data) => {
         const post = data.post;
         setOptimisticLikes((prev) => ({

@@ -53,7 +53,17 @@ export function usePostPage(postId: string) {
       heartCount: nextHeartCount,
     });
 
-    toggleLike();
+    toggleLike(nextHearted, {
+      onSuccess: (data) => {
+        setLikeOverride({
+          hearted: !!data.post.hearted,
+          heartCount: data.post.heartCount ?? 0,
+        });
+      },
+      onError: () => {
+        setLikeOverride(null);
+      },
+    });
   };
 
   const handleSubmitComment = () => {
