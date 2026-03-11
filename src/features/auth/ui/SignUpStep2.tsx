@@ -1,24 +1,19 @@
-import { useState } from 'react';
-
-import axios from 'axios';
 import { useForm } from 'react-hook-form';
 
 import { checkAccountname, useSignUpMutation } from '@/entities/auth';
-import uploadApi from '@/shared/api/uploadApi';
-import { accountnameRule, introRule, normalizeUploadPath, usernameRule } from '@/shared/lib';
-import { FieldGroup, UnderlineInput } from '@/shared/ui';
+import { accountnameRule, getApiErrorMessage, introRule, usernameRule } from '@/shared/lib';
+import { Button, FieldGroup, UnderlineInput } from '@/shared/ui';
 
 import { ProfileImagePicker } from './ProfileImagePicker';
-import type { Step1Values } from './SignUpStep1';
+import { AuthPageLayout } from './AuthPageLayout';
+import type { Step1Values } from '../model/types';
+import { useProfileImageUpload } from '../model/useProfileImageUpload';
 
 type Step2Values = { username: string; accountname: string; intro: string };
 
 export function SignUpStep2({ step1Data, onBack }: { step1Data: Step1Values; onBack: () => void }) {
   const signUpMutation = useSignUpMutation();
-  // filename stored as returned by server (e.g. "1234567890.jpg")
-  const [imageFilename, setImageFilename] = useState<string>('');
-  const [uploadError, setUploadError] = useState('');
-  const [isUploading, setIsUploading] = useState(false);
+  const { imageFilename, uploadError, isUploading, handleImageChange } = useProfileImageUpload();
 
   const {
     register,
@@ -30,28 +25,6 @@ export function SignUpStep2({ step1Data, onBack }: { step1Data: Step1Values; onB
     defaultValues: { username: '', accountname: '', intro: '' },
   });
 
-  const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-
-    setUploadError('');
-    setIsUploading(true);
-    try {
-      const formData = new FormData();
-      formData.append('image', file);
-      // Use the dedicated uploadApi (VITE_BASE_URL) — not the general axiosInstance
-      const res = await uploadApi.post<{ filename: string }>('/image/uploadfile', formData, {
-        headers: { 'Content-Type': 'multipart/form-data' },
-      });
-      // Store the relative path expected by the server
-      setImageFilename(normalizeUploadPath(res.data.filename));
-    } catch {
-      setUploadError('이미지 업로드에 실패했습니다.');
-    } finally {
-      setIsUploading(false);
-    }
-  };
-
   const onSubmit = async (values: Step2Values) => {
     // accountname duplicate check
     try {
@@ -61,12 +34,10 @@ export function SignUpStep2({ step1Data, onBack }: { step1Data: Step1Values; onB
         return;
       }
     } catch (e) {
-      if (axios.isAxiosError(e)) {
-        setError('accountname', {
-          message: `*${e.response?.data?.message ?? '계정 ID 확인 실패'}`,
-        });
-        return;
-      }
+      setError('accountname', {
+        message: `*${getApiErrorMessage(e, '계정 ID 확인 실패')}`,
+      });
+      return;
     }
 
     signUpMutation.mutate(
@@ -80,10 +51,8 @@ export function SignUpStep2({ step1Data, onBack }: { step1Data: Step1Values; onB
       },
       {
         onError: (err) => {
-          if (axios.isAxiosError(err)) {
-            const msg = err.response?.data?.message ?? '회원가입에 실패했습니다.';
-            setError('username', { message: `*${msg}` });
-          }
+          const msg = getApiErrorMessage(err, '회원가입에 실패했습니다.');
+          setError('username', { message: `*${msg}` });
         },
       },
     );
@@ -92,15 +61,17 @@ export function SignUpStep2({ step1Data, onBack }: { step1Data: Step1Values; onB
   const canSubmit = isValid && !signUpMutation.isPending;
 
   return (
-    <div className="flex min-h-screen flex-col bg-white px-8 dark:bg-zinc-950">
+    <AuthPageLayout>
       {/* back button */}
-      <button
+      <Button
         type="button"
+        variant="ghost"
         onClick={onBack}
-        className="mt-6 self-start text-sm text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200"
+        className="mt-6 self-start text-sm text-zinc-400 hover:bg-transparent hover:text-zinc-700 dark:hover:text-zinc-200"
+        style={{ paddingLeft: 0 }}
       >
         ← 이전
-      </button>
+      </Button>
 
       <h1 className="mt-6 text-center text-2xl font-medium text-black dark:text-white">
         프로필 설정
@@ -115,7 +86,7 @@ export function SignUpStep2({ step1Data, onBack }: { step1Data: Step1Values; onB
         onImageChange={handleImageChange}
       />
 
-      <form className="mt-8 flex flex-col gap-8" onSubmit={handleSubmit(onSubmit)} noValidate>
+      <form className="mt-8 flex flex-col gap-8 pb-12" onSubmit={handleSubmit(onSubmit)} noValidate>
         <FieldGroup
           label="사용자 이름"
           error={errors.username?.message}
@@ -151,18 +122,15 @@ export function SignUpStep2({ step1Data, onBack }: { step1Data: Step1Values; onB
           />
         </FieldGroup>
 
-        <button
+        <Button
           type="submit"
           disabled={!canSubmit}
-          className={`mt-4 h-11 w-full rounded-full text-sm font-medium text-white transition-colors ${
-            canSubmit
-              ? 'bg-green-400 hover:bg-green-500 active:scale-95'
-              : 'cursor-not-allowed bg-green-200'
-          }`}
+          aria-busy={signUpMutation.isPending}
+          className="mt-4 h-14 w-full rounded-full bg-green-500 text-base font-semibold text-white hover:bg-green-600 disabled:opacity-50 disabled:hover:bg-green-500"
         >
           {signUpMutation.isPending ? '가입 중...' : '알약마켓 시작하기'}
-        </button>
+        </Button>
       </form>
-    </div>
+    </AuthPageLayout>
   );
 }
