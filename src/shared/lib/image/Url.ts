@@ -15,6 +15,16 @@ export function pickFirstImage(paths?: string) {
   return trimmed.split(',')[0]?.trim() ?? '';
 }
 
+export function splitImagePaths(paths?: string) {
+  const trimmed = paths?.trim();
+  if (!trimmed) return [];
+
+  return trimmed
+    .split(',')
+    .map((path) => path.trim())
+    .filter(Boolean);
+}
+
 export function normalizeUploadPath(filename: string) {
   const trimmed = filename?.trim();
   if (!trimmed) return '';

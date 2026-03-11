@@ -5,6 +5,17 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>alyac-market</title>
+    <script>
+      (function () {
+        const params = new URLSearchParams(window.location.search);
+        const redirectPath = params.get('p');
+
+        if (!redirectPath) return;
+
+        const nextPath = redirectPath + window.location.hash;
+        window.history.replaceState(null, '', nextPath);
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

@@ -24,8 +24,15 @@ export const uploadFiles = async (files: File[]): Promise<UploadResponse[]> => {
     }));
   }
 
+  // Multi-file response can be returned as { filename: ["a.jpg", "b.jpg"] }
+  if (Array.isArray(data?.filename)) {
+    return data.filename
+      .filter((filename: unknown): filename is string => typeof filename === 'string')
+      .map((filename: string) => ({ filename }));
+  }
+
   // Single file response (e.g. { filename: "..." })
-  if (data?.filename) {
+  if (typeof data?.filename === 'string') {
     return [{ filename: data.filename }];
   }
 

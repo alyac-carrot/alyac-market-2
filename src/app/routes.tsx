@@ -32,39 +32,43 @@ const FollowingsPage = lazy(() =>
   import('@/pages/followings').then((m) => ({ default: m.FollowingsPage })),
 );
 
-export const router = createBrowserRouter([
+const runtimeBasename =
+  window.location.hostname === 'alyac-carrot.github.io' ? '/alyac-market-2/' : '/';
+
+export const router = createBrowserRouter(
+  [
+    {
+      path: '/',
+      element: <RootLayout />,
+      children: [
+        { index: true, element: <SplashPage /> },
+        { path: 'auth/landing', element: <LandingPage /> },
+        { path: 'auth/signin', element: <SignInPage /> },
+        { path: 'auth/signup', element: <SignUpPage /> },
+        {
+          element: <RequireAuth />,
+          children: [
+            { path: 'feed', element: <FeedPage /> },
+            { path: 'search', element: <SearchPage /> },
+            { path: 'chat', element: <ChatListPage /> },
+            { path: 'chat/:roomId', element: <ChatRoomPage /> },
+            { path: 'post-create', element: <CreatePostPage /> },
+            { path: 'product/create', element: <CreateProductPage /> },
+            { path: 'product/:productId/edit', element: <UpdateProductPage /> },
+            { path: 'profile', element: <ProfilePage /> },
+            { path: 'profile/:userId', element: <ProfilePage /> },
+            { path: 'profile-update', element: <ProfileUpdatePage /> },
+            { path: 'followers/:accountname', element: <FollowersPage /> },
+            { path: 'followings/:accountname', element: <FollowingsPage /> },
+            { path: 'post/:postId', element: <PostPage /> },
+            { path: 'post/:postId/edit', element: <EditPostPage /> },
+          ],
+        },
+      ],
+    },
+    { path: '*', element: <NotFoundPage /> },
+  ],
   {
-    path: '/',
-    // element: <RootLayout />,
-    children: [
-      { index: true, element: <SplashPage /> }, // ✅ 첫 화면: 스플래시
-      { path: 'auth/landing', element: <LandingPage /> }, // ✅ 랜딩 페이지 경로
-      { path: 'auth/signin', element: <SignInPage /> }, // ✅ 로그인 (있으면)
-      { path: 'auth/signup', element: <SignUpPage /> }, // ✅ 회원가입
-      {
-        element: <RequireAuth />,
-        children: [
-          { path: 'feed', element: <FeedPage /> },
-          { path: 'search', element: <SearchPage /> },
-
-          { path: 'chat', element: <ChatListPage /> },
-          { path: 'chat/:roomId', element: <ChatRoomPage /> },
-
-          { path: 'post-create', element: <CreatePostPage /> },
-          { path: 'product/create', element: <CreateProductPage /> },
-          { path: 'product/:productId/edit', element: <UpdateProductPage /> },
-          { path: 'profile', element: <ProfilePage /> },
-          { path: 'profile/:userId', element: <ProfilePage /> },
-          { path: 'profile-update', element: <ProfileUpdatePage /> },
-          { path: 'followers/:accountname', element: <FollowersPage /> },
-          { path: 'followings/:accountname', element: <FollowingsPage /> },
-
-          { path: 'post/:postId', element: <PostPage /> },
-          { path: 'post/:postId/edit', element: <EditPostPage /> },
-        ],
-      },
-    ],
+    basename: runtimeBasename,
   },
-
-  { path: '*', element: <NotFoundPage /> },
-]);
+);
