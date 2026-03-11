@@ -14,7 +14,7 @@ import {
 import type { Comment } from '@/entities/post';
 import { useMeQuery } from '@/entities/user';
 import { CommentItem } from '@/features/post';
-import { formatDate, pickFirstImage, toImageUrl } from '@/shared/lib';
+import { formatDate, splitImagePaths, toImageUrl } from '@/shared/lib';
 import {
   BottomSheetModal,
   Button,
@@ -117,7 +117,7 @@ export default function PostPage() {
   const isHearted = likeOverride?.hearted ?? post.hearted;
   const heartCount = likeOverride?.heartCount ?? post.heartCount ?? 0;
   const authorAvatar = post.author?.image ? toImageUrl(post.author.image) : '';
-  const postImage = toImageUrl(pickFirstImage(post.image));
+  const postImages = splitImagePaths(post.image).map((path) => toImageUrl(path));
   const hasText = commentText.trim().length > 0;
   const isMyPost = post.author?.accountname === currentUser?.accountname;
 
@@ -211,13 +211,16 @@ export default function PostPage() {
             </div>
           )}
 
-          {postImage && (
+          {postImages.length > 0 && (
             <div className="mb-4 space-y-2 px-4">
-              <img
-                src={postImage}
-                alt="게시글 이미지"
-                className="h-auto w-full rounded-xl object-cover"
-              />
+              {postImages.map((image, index) => (
+                <img
+                  key={`${post.id}-image-${index}`}
+                  src={image}
+                  alt={`게시글 이미지 ${index + 1}`}
+                  className="h-auto w-full rounded-xl object-cover"
+                />
+              ))}
             </div>
           )}
 
