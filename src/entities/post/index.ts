@@ -24,6 +24,7 @@ export { useDeleteComment } from './hooks/mutations/useDeleteComment';
 export { useLikePost } from './hooks/mutations/useLikePost';
 export { useLikePostMutation } from './hooks/mutations/useLikePostMutation';
 export { useGetFeedPosts } from './model/queries/useGetFeedPosts';
+export { usePostPage } from './hooks/usePostPage';
 
 // model – types
 export type {
