@@ -5,9 +5,9 @@ import { formatDate } from '@/shared/lib';
 import { Avatar } from '@/shared/ui/Avatar';
 
 interface Props {
-  post: Pick<Post, 'author' | 'content' | 'createdAt' | 'commentCount'>;
+  post: Pick<Post, 'id' | 'author' | 'content' | 'createdAt' | 'commentCount'>;
   authorAvatar?: string;
-  postImage?: string;
+  postImages?: string[];
   isHearted: boolean;
   heartCount: number;
   isLikePending: boolean;
@@ -17,7 +17,7 @@ interface Props {
 export function PostArticle({
   post,
   authorAvatar,
-  postImage,
+  postImages = [],
   isHearted,
   heartCount,
   isLikePending,
@@ -48,9 +48,16 @@ export function PostArticle({
       )}
 
       {/* image */}
-      {postImage && (
-        <div className="mb-4 px-4">
-          <img src={postImage} alt="게시글 이미지" className="h-auto w-full rounded-xl object-cover" />
+      {postImages.length > 0 && (
+        <div className="mb-4 space-y-2 px-4">
+          {postImages.map((image, index) => (
+            <img
+              key={`${post.id}-image-${index}`}
+              src={image}
+              alt={`게시글 이미지 ${index + 1}`}
+              className="h-auto w-full rounded-xl object-cover"
+            />
+          ))}
         </div>
       )}
 
