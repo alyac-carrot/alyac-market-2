@@ -9,7 +9,7 @@ export { getComments } from './api/getComments';
 export { createComment } from './api/createComment';
 export { deleteComment } from './api/deleteComment';
 export { likePost } from './api/likePost';
-export { getFeedPosts } from './api/getFeedposts';
+export { getFeedPosts } from './api/getFeedPosts';
 
 // model – hooks
 export { useGetPost } from './model/queries/useGetPost';
