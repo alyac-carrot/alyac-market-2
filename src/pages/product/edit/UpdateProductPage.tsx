@@ -16,6 +16,7 @@ export default function UpdateProductPage() {
     link,
     imagePreviewUrl,
     errorText,
+    fieldErrors,
     canUpload,
     isLoading,
     isSubmitting,
@@ -56,6 +57,9 @@ export default function UpdateProductPage() {
         link={link}
         imagePreviewUrl={imagePreviewUrl}
         errorText={errorText}
+        itemNameError={fieldErrors.itemName?.message}
+        priceError={fieldErrors.price?.message}
+        linkError={fieldErrors.link?.message}
         isLoading={isLoading}
         onItemNameChange={setItemName}
         onPriceChange={handlePriceChange}
