@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Search } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { likePost, useGetFeedPosts } from '@/entities/post';
+import { likePost, unlikePost, useGetFeedPosts } from '@/entities/post';
 import { toImageUrl } from '@/shared/lib';
 import { Avatar, Button } from '@/shared/ui';
 import { PageWithFooter } from '@/widgets/footer';
@@ -19,7 +19,8 @@ export default function FeedPage() {
   const posts = data?.posts ?? [];
 
   const { mutate: handleLikePost, isPending: isLikePending } = useMutation({
-    mutationFn: (postId: string) => likePost(postId),
+    mutationFn: ({ postId, nextHearted }: { postId: string; nextHearted: boolean }) =>
+      nextHearted ? likePost(postId) : unlikePost(postId),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['posts'] });
     },
@@ -140,7 +141,7 @@ export default function FeedPage() {
                   className="cursor-pointer transition hover:text-red-500 disabled:cursor-not-allowed disabled:opacity-50"
                   onClick={(e) => {
                     e.stopPropagation();
-                    handleLikePost(p.id);
+                    handleLikePost({ postId: p.id, nextHearted: !p.hearted });
                   }}
                   disabled={isLikePending}
                 >

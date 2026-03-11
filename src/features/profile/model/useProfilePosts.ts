@@ -50,21 +50,24 @@ export function useProfilePosts(accountname?: string) {
       [postId]: { liked: nextLiked, likeCount: nextLikeCount },
     }));
 
-    likePostMutation.mutate(postId, {
-      onSuccess: (data) => {
-        const post = data.post;
-        setOptimisticLikes((prev) => ({
-          ...prev,
-          [postId]: { liked: !!post.hearted, likeCount: post.heartCount ?? 0 },
-        }));
+    likePostMutation.mutate(
+      { postId, nextHearted: nextLiked },
+      {
+        onSuccess: (data) => {
+          const post = data.post;
+          setOptimisticLikes((prev) => ({
+            ...prev,
+            [postId]: { liked: !!post.hearted, likeCount: post.heartCount ?? 0 },
+          }));
+        },
+        onError: () => {
+          setOptimisticLikes((prev) => ({
+            ...prev,
+            [postId]: previous,
+          }));
+        },
       },
-      onError: () => {
-        setOptimisticLikes((prev) => ({
-          ...prev,
-          [postId]: previous,
-        }));
-      },
-    });
+    );
   };
 
   return {

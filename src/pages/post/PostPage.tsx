@@ -132,7 +132,17 @@ export default function PostPage() {
       heartCount: nextHeartCount,
     });
 
-    toggleLike();
+    toggleLike(nextHearted, {
+      onSuccess: (data) => {
+        setLikeOverride({
+          hearted: !!data.post.hearted,
+          heartCount: data.post.heartCount ?? 0,
+        });
+      },
+      onError: () => {
+        setLikeOverride(null);
+      },
+    });
   };
 
   const postMenu = (
@@ -197,9 +207,7 @@ export default function PostPage() {
               <span className="text-foreground text-sm font-normal">
                 {post.author?.username ?? '이름없음'}
               </span>
-              <span className="text-muted-foreground text-xs">
-                @ {post.author?.accountname ?? ''}
-              </span>
+              <span className="text-muted-foreground text-xs">@ {post.author?.accountname ?? ''}</span>
             </div>
           </div>
 
@@ -262,9 +270,7 @@ export default function PostPage() {
           {isLoadingComments ? (
             <div className="text-muted-foreground px-4 py-8 text-center text-sm">로딩 중...</div>
           ) : comments.length === 0 ? (
-            <div className="text-muted-foreground px-4 py-8 text-center text-sm">
-              댓글이 없습니다.
-            </div>
+            <div className="text-muted-foreground px-4 py-8 text-center text-sm">댓글이 없습니다.</div>
           ) : (
             comments.map((c) => (
               <CommentItem key={c.id} comment={c} onKebabClick={(id) => setSelectedCommentId(id)} />
