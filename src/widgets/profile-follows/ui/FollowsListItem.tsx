@@ -19,7 +19,7 @@ export function FollowsListItem({ user, defaultFollowing }: Props) {
   const meQuery = useMeQuery();
 
   const initial = useMemo(() => {
-    if (typeof user.isfollow === 'boolean') return user.isfollow;
+    if (user.isfollow === true) return true;
     return !!defaultFollowing;
   }, [defaultFollowing, user.isfollow]);
 
