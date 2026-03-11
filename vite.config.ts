@@ -6,7 +6,12 @@ import svgr from 'vite-plugin-svgr';
 
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '');
-  const appBasePath = process.env.VITE_APP_BASE_PATH || env.VITE_APP_BASE_PATH || '/';
+  const githubPagesBasePath = '/alyac-market-2/';
+  const isProductionBuild = mode === 'production';
+  const appBasePath =
+    process.env.VITE_APP_BASE_PATH ||
+    env.VITE_APP_BASE_PATH ||
+    (isProductionBuild ? githubPagesBasePath : '/');
 
   return {
     base: appBasePath,
