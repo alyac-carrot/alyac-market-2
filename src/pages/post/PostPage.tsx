@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
 
-import { Heart, MessageCircle } from 'lucide-react';
-import { useParams } from 'react-router-dom';
+import { Heart, MessageCircle, MoreVertical } from 'lucide-react';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import {
   useCreateComment,
   useDeleteComment,
+  useDeletePost,
   useGetComments,
   useGetPost,
   useLikePost,
@@ -14,14 +15,18 @@ import type { Comment } from '@/entities/post';
 import { useMeQuery } from '@/entities/user';
 import { CommentItem } from '@/features/post';
 import { formatDate, pickFirstImage, toImageUrl } from '@/shared/lib';
-import { BottomSheetModal } from '@/shared/ui';
+import { BottomSheetModal, Button, ConfirmDialog, Popover, PopoverContent, PopoverTrigger } from '@/shared/ui';
 import { Avatar } from '@/shared/ui/Avatar';
+import { Header, PageWithHeader } from '@/widgets/header';
 
 /* ── main page ── */
 export default function PostPage() {
   const { postId = '' } = useParams();
+  const navigate = useNavigate();
+
   const [commentText, setCommentText] = useState('');
   const [selectedCommentId, setSelectedCommentId] = useState<string | null>(null);
+  const [isPostDeleteDialogOpen, setIsPostDeleteDialogOpen] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -38,6 +43,7 @@ export default function PostPage() {
   const { mutate: submitComment, isPending: isSubmitting } = useCreateComment(postId);
   const { mutate: toggleLike, isPending: isLikePending } = useLikePost(postId);
   const { mutate: deleteCommentMutate, isPending: isDeleting } = useDeleteComment(postId);
+  const { mutate: deletePostMutate, isPending: isDeletingPost } = useDeletePost();
 
   const comments: Comment[] = commentsData?.comment ?? [];
 
@@ -97,6 +103,15 @@ export default function PostPage() {
     }
   };
 
+  const handleDeletePost = () => {
+    deletePostMutate(postId, {
+      onSuccess: () => {
+        setIsPostDeleteDialogOpen(false);
+        navigate('/', { replace: true });
+      },
+    });
+  };
+
   if (isLoadingPost) {
     return <div className="flex h-screen items-center justify-center">Loading...</div>;
   }
@@ -114,8 +129,62 @@ export default function PostPage() {
   const postImage = toImageUrl(pickFirstImage(post.image));
   const hasText = commentText.trim().length > 0;
 
+  const isMyPost = post.author?.accountname === currentUser?.accountname;
+
+  const postMenu = (
+    <Popover>
+      <PopoverTrigger asChild>
+        <Button type="button" variant="ghost" size="icon">
+          <MoreVertical className="h-6 w-6" />
+        </Button>
+      </PopoverTrigger>
+
+      <PopoverContent align="end" side="bottom" sideOffset={8} className="w-40 p-0">
+        <div className="flex flex-col py-2">
+          <div className="bg-muted mx-auto mb-2 h-1 w-8 rounded-full" />
+          {isMyPost ? (
+            <>
+              <button
+                type="button"
+                onClick={() => navigate(`/post/${postId}/edit`)}
+                className="text-foreground inline-flex w-full px-4 py-3 text-sm"
+              >
+                수정
+              </button>
+              <button
+                type="button"
+                onClick={() => setIsPostDeleteDialogOpen(true)}
+                className="inline-flex w-full px-4 py-3 text-sm text-red-500"
+              >
+                삭제
+              </button>
+            </>
+          ) : (
+            <button
+              type="button"
+              onClick={() => {
+                setTimeout(() => {
+                  if (window.confirm('해당 게시글을 신고하시겠습니까?')) {
+                    alert('해당 게시글이 신고되었습니다');
+                  }
+                }, 0);
+              }}
+              className="inline-flex w-full px-4 py-3 text-sm text-red-500"
+            >
+              신고
+            </button>
+          )}
+        </div>
+      </PopoverContent>
+    </Popover>
+  );
+
   return (
-    <div className="bg-background flex min-h-screen flex-col pb-16 text-left">
+    <PageWithHeader
+      className="bg-background flex min-h-screen flex-col text-left"
+      contentClassName="flex flex-1 flex-col pb-16"
+      header={<Header showBackButton right={postMenu} />}
+    >
       {/* ─ scrollable main ─ */}
       <main className="flex-1 overflow-y-auto">
         {/* post article */}
@@ -252,6 +321,17 @@ export default function PostPage() {
             : '신고하기'
         }
       />
-    </div>
+
+      <ConfirmDialog
+        open={isPostDeleteDialogOpen}
+        onOpenChange={setIsPostDeleteDialogOpen}
+        title="게시글을 삭제하시겠습니까?"
+        cancelText="취소"
+        confirmText="삭제"
+        confirmLoadingText="삭제 중..."
+        onConfirm={handleDeletePost}
+        isLoading={isDeletingPost}
+      />
+    </PageWithHeader>
   );
 }

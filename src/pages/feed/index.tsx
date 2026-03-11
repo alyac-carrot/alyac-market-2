@@ -89,7 +89,8 @@ export default function FeedPage() {
           {posts.map((p) => (
             <li
               key={p.id}
-              className="rounded-2xl bg-white shadow-sm dark:border dark:border-zinc-800 dark:bg-zinc-900"
+              onClick={() => nav(`/post/${p.id}`)}
+              className="cursor-pointer rounded-2xl bg-white shadow-sm dark:border dark:border-zinc-800 dark:bg-zinc-900"
             >
               {/* 작성자 */}
               <div className="flex items-center gap-3 px-3 pt-3">
@@ -135,7 +136,10 @@ export default function FeedPage() {
                 <button
                   type="button"
                   className="cursor-pointer transition hover:text-red-500 disabled:cursor-not-allowed disabled:opacity-50"
-                  onClick={() => handleLikePost(p.id)}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleLikePost(p.id);
+                  }}
                   disabled={isLikePending}
                 >
                   {p.hearted ? '❤️' : '🤍'} 좋아요 {p.heartCount}
@@ -144,7 +148,10 @@ export default function FeedPage() {
                 <button
                   type="button"
                   className="cursor-pointer transition hover:text-zinc-900 dark:hover:text-zinc-100"
-                  onClick={() => nav(`/post/${p.id}`)}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    nav(`/post/${p.id}`);
+                  }}
                 >
                   💬 댓글 {p.commentCount}
                 </button>
