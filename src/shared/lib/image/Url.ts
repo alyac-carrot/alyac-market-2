@@ -1,7 +1,5 @@
-const RAW_IMAGE = import.meta.env.VITE_IMAGE_BASE_URL || '';
-const RAW_API = import.meta.env.VITE_API_BASE_URL || '';
-const IMAGE_BASE_URL = RAW_IMAGE ? RAW_IMAGE.replace(/\/+$/, '') : '';
-const API_BASE_URL = RAW_API ? RAW_API.replace(/\/+$/, '') : '';
+const RAW = import.meta.env.VITE_IMAGE_BASE_URL || '';
+const IMAGE_BASE_URL = RAW ? RAW.replace(/\/+$/, '') : '';
 
 export function toImageUrl(path?: string) {
   const trimmed = path?.trim();
@@ -9,13 +7,7 @@ export function toImageUrl(path?: string) {
   if (/^https?:\/\//.test(trimmed)) return trimmed;
   const normalized = trimmed.replace(/^\/+/, '');
 
-  // Uploaded files are stored as `uploadFiles/...` and have historically been served by the API host.
-  if (normalized.startsWith('uploadFiles/')) {
-    const baseUrl = API_BASE_URL || IMAGE_BASE_URL;
-    return baseUrl ? `${baseUrl}/${normalized}` : `/${normalized}`;
-  }
-
-  return IMAGE_BASE_URL ? `${IMAGE_BASE_URL}/${normalized}` : `/${normalized}`;
+  return `${IMAGE_BASE_URL}/${normalized}`;
 }
 
 export function pickFirstImage(paths?: string) {
