@@ -35,7 +35,7 @@ const FollowingsPage = lazy(() =>
 export const router = createBrowserRouter([
   {
     path: '/',
-    element: <RootLayout />,
+    // element: <RootLayout />,
     children: [
       { index: true, element: <SplashPage /> }, // ✅ 첫 화면: 스플래시
       { path: 'auth/landing', element: <LandingPage /> }, // ✅ 랜딩 페이지 경로
