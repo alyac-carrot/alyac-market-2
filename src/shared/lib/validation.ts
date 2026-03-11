@@ -15,7 +15,11 @@ export const passwordRule = {
   required: '*비밀번호를 입력해 주세요.',
   minLength: {
     value: 6,
-    message: '*비밀번호는 6자 이상이어야 합니다.',
+    message: '*비밀번호는 6자 이상 30자 이하여야 합니다.',
+  },
+  maxLength: {
+    value: 30,
+    message: '*비밀번호는 6자 이상 30자 이하여야 합니다.',
   },
 };
 
@@ -87,7 +91,10 @@ export const zodPasswordSchema = z
     message: '비밀번호를 입력해 주세요.',
   })
   .min(6, {
-    message: '비밀번호는 6자 이상이어야 합니다.',
+    message: '비밀번호는 6자 이상 30자 이하여야 합니다.',
+  })
+  .max(30, {
+    message: '비밀번호는 6자 이상 30자 이하여야 합니다.',
   });
 
 export const zodIntroSchema = z.string().trim().max(60, {

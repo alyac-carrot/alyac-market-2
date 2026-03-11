@@ -1,315 +1,116 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
-import { Heart, MessageCircle, MoreVertical } from 'lucide-react';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import {
-  useCreateComment,
-  useDeleteComment,
-  useDeletePost,
-  useGetComments,
-  useGetPost,
-  useLikePost,
-} from '@/entities/post';
-import type { Comment } from '@/entities/post';
-import { useMeQuery } from '@/entities/user';
-import { CommentItem } from '@/features/post';
-import { formatDate, splitImagePaths, toImageUrl } from '@/shared/lib';
-import {
-  BottomSheetModal,
-  Button,
-  ConfirmDialog,
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '@/shared/ui';
-import { Avatar } from '@/shared/ui/Avatar';
+import { usePostPage } from '@/features/post';
+import { splitImagePaths, toImageUrl } from '@/shared/lib';
+import { BottomSheetModal, ConfirmDialog } from '@/shared/ui';
 import { Header, PageWithHeader } from '@/widgets/header';
+
+import { CommentInputBar } from './ui/CommentInputBar';
+import { CommentList } from './ui/CommentList';
+import { PostArticle } from './ui/PostArticle';
+import { PostMenu } from './ui/PostMenu';
 
 export default function PostPage() {
   const { postId = '' } = useParams();
   const navigate = useNavigate();
 
-  const [commentText, setCommentText] = useState('');
-  const [selectedCommentId, setSelectedCommentId] = useState<string | null>(null);
-  const [isPostDeleteDialogOpen, setIsPostDeleteDialogOpen] = useState(false);
-  const [likeOverride, setLikeOverride] = useState<{
-    hearted: boolean;
-    heartCount: number;
-  } | null>(null);
+  const {
+    post,
+    comments,
+    currentUser,
+    isMyPost,
+    isHearted,
+    heartCount,
+    isLoadingPost,
+    isLoadingComments,
+    isLikePending,
+    isSubmitting,
+    isDeleting,
+    isDeletingPost,
+    isError,
+    commentText,
+    setCommentText,
+    selectedCommentId,
+    setSelectedCommentId,
+    isPostDeleteDialogOpen,
+    setIsPostDeleteDialogOpen,
+    isReportPostDialogOpen,
+    setIsReportPostDialogOpen,
+    isReportCommentDialogOpen,
+    setIsReportCommentDialogOpen,
+    handleLikeClick,
+    handleSubmitComment,
+    handleActionComment,
+    handleDeletePost,
+  } = usePostPage(postId);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  const meQuery = useMeQuery();
-  const currentUser = meQuery.data?.user;
-
-  const { data: postData, isLoading: isLoadingPost, isError } = useGetPost(postId);
-  const { data: commentsData, isLoading: isLoadingComments } = useGetComments(postId);
-  const { mutate: submitComment, isPending: isSubmitting } = useCreateComment(postId);
-  const { mutate: toggleLike, isPending: isLikePending } = useLikePost(postId);
-  const { mutate: deleteCommentMutate, isPending: isDeleting } = useDeleteComment(postId);
-  const { mutate: deletePostMutate, isPending: isDeletingPost } = useDeletePost();
-
-  const comments: Comment[] = commentsData?.comment ?? [];
-
-  const handleSubmitComment = () => {
-    if (!commentText.trim()) return;
-
-    submitComment(
-      { content: commentText, postId },
-      {
-        onSuccess: () => {
-          setCommentText('');
-        },
-      },
-    );
-  };
-
-  const handleActionComment = () => {
-    if (!selectedCommentId) return;
-
-    const targetComment = comments.find((c) => c.id === selectedCommentId);
-    if (!targetComment) return;
-
-    const isMyComment = targetComment.author?.accountname === currentUser?.accountname;
-
-    if (isMyComment) {
-      deleteCommentMutate(selectedCommentId, {
-        onSuccess: () => {
-          setSelectedCommentId(null);
-        },
-      });
-      return;
-    }
-
-    setSelectedCommentId(null);
-    setTimeout(() => {
-      if (window.confirm('해당 댓글을 신고하시겠습니까?')) {
-        alert('해당 댓글을 신고했습니다.');
-      }
-    }, 0);
-  };
-
-  const handleDeletePost = () => {
-    deletePostMutate(postId, {
-      onSuccess: () => {
-        setIsPostDeleteDialogOpen(false);
-        navigate('/', { replace: true });
-      },
-    });
-  };
-
   if (isLoadingPost) {
-    return <div className="flex h-screen items-center justify-center">Loading...</div>;
-  }
-
-  if (isError || !postData?.post) {
     return (
-      <div className="flex h-screen items-center justify-center">
-        <p className="text-sm text-gray-500">게시글을 불러오지 못했습니다.</p>
+      <div role="status" aria-live="polite" className="flex h-screen items-center justify-center">
+        <span className="text-muted-foreground text-sm">불러오는 중...</span>
       </div>
     );
   }
 
-  const post = postData.post;
-  const isHearted = likeOverride?.hearted ?? post.hearted;
-  const heartCount = likeOverride?.heartCount ?? post.heartCount ?? 0;
-  const authorAvatar = post.author?.image ? toImageUrl(post.author.image) : '';
-  const postImages = splitImagePaths(post.image).map((path) => toImageUrl(path));
-  const hasText = commentText.trim().length > 0;
-  const isMyPost = post.author?.accountname === currentUser?.accountname;
-
-  const handleLikeClick = () => {
-    if (isLikePending) return;
-
-    const nextHearted = !isHearted;
-    const nextHeartCount = nextHearted ? heartCount + 1 : Math.max(0, heartCount - 1);
-
-    setLikeOverride({
-      hearted: nextHearted,
-      heartCount: nextHeartCount,
-    });
-
-    toggleLike(nextHearted, {
-      onSuccess: (data) => {
-        setLikeOverride({
-          hearted: !!data.post.hearted,
-          heartCount: data.post.heartCount ?? 0,
-        });
-      },
-      onError: () => {
-        setLikeOverride(null);
-      },
-    });
-  };
-
-  const postMenu = (
-    <Popover>
-      <PopoverTrigger asChild>
-        <Button type="button" variant="ghost" size="icon">
-          <MoreVertical className="h-6 w-6" />
-        </Button>
-      </PopoverTrigger>
-
-      <PopoverContent align="end" side="bottom" sideOffset={8} className="w-40 p-0">
-        <div className="flex flex-col py-2">
-          <div className="bg-muted mx-auto mb-2 h-1 w-8 rounded-full" />
-          {isMyPost ? (
-            <>
-              <button
-                type="button"
-                onClick={() => navigate(`/post/${postId}/edit`)}
-                className="text-foreground inline-flex w-full px-4 py-3 text-sm"
-              >
-                수정
-              </button>
-              <button
-                type="button"
-                onClick={() => setIsPostDeleteDialogOpen(true)}
-                className="inline-flex w-full px-4 py-3 text-sm text-red-500"
-              >
-                삭제
-              </button>
-            </>
-          ) : (
-            <button
-              type="button"
-              onClick={() => {
-                setTimeout(() => {
-                  if (window.confirm('해당 게시글을 신고하시겠습니까?')) {
-                    alert('해당 게시글을 신고했습니다.');
-                  }
-                }, 0);
-              }}
-              className="inline-flex w-full px-4 py-3 text-sm text-red-500"
-            >
-              신고
-            </button>
-          )}
-        </div>
-      </PopoverContent>
-    </Popover>
-  );
+  if (isError || !post) {
+    return (
+      <div role="alert" className="flex h-screen items-center justify-center">
+        <p className="text-muted-foreground text-sm">게시글을 불러오지 못했습니다.</p>
+      </div>
+    );
+  }
 
   return (
     <PageWithHeader
       className="bg-background flex min-h-screen flex-col text-left"
       contentClassName="flex flex-1 flex-col pb-16"
-      header={<Header showBackButton right={postMenu} />}
+      header={
+        <Header
+          showBackButton
+          right={
+            <PostMenu
+              isMyPost={isMyPost}
+              onEdit={() => navigate(`/post/${postId}/edit`)}
+              onDeleteRequest={() => setIsPostDeleteDialogOpen(true)}
+              onReportRequest={() => setIsReportPostDialogOpen(true)}
+            />
+          }
+        />
+      }
     >
       <main className="flex-1 overflow-y-auto">
-        <article className="border-border border-b pb-4">
-          <div className="flex items-center gap-3 px-4 py-4">
-            <Avatar src={authorAvatar || undefined} size="md" />
-            <div className="flex flex-col text-left">
-              <span className="text-foreground text-sm font-normal">
-                {post.author?.username ?? '이름없음'}
-              </span>
-              <span className="text-muted-foreground text-xs">@ {post.author?.accountname ?? ''}</span>
-            </div>
-          </div>
-
-          {post.content?.trim() && (
-            <div className="px-4 pb-4">
-              <p className="text-foreground text-left text-base leading-relaxed whitespace-pre-wrap">
-                {post.content}
-              </p>
-            </div>
-          )}
-
-          {postImages.length > 0 && (
-            <div className="mb-4 space-y-2 px-4">
-              {postImages.map((image, index) => (
-                <img
-                  key={`${post.id}-image-${index}`}
-                  src={image}
-                  alt={`게시글 이미지 ${index + 1}`}
-                  className="h-auto w-full rounded-xl object-cover"
-                />
-              ))}
-            </div>
-          )}
-
-          <div className="flex items-center gap-4 px-4">
-            <button
-              type="button"
-              onClick={handleLikeClick}
-              disabled={isLikePending}
-              className="flex items-center gap-1.5 transition-transform active:scale-90 disabled:opacity-70"
-            >
-              <Heart
-                className="h-5 w-5 transition-colors"
-                strokeWidth={1.5}
-                fill={isHearted ? '#ef4444' : 'none'}
-                stroke={isHearted ? '#ef4444' : 'currentColor'}
-                style={isHearted ? {} : { color: 'var(--muted-foreground)' }}
-              />
-              <span
-                className="text-xs transition-colors"
-                style={{ color: isHearted ? '#ef4444' : 'var(--muted-foreground)' }}
-              >
-                {heartCount}
-              </span>
-            </button>
-            <button type="button" className="flex items-center gap-1.5">
-              <MessageCircle className="text-muted-foreground h-5 w-5" strokeWidth={1.5} />
-              <span className="text-muted-foreground text-xs">{post.commentCount ?? 0}</span>
-            </button>
-          </div>
-
-          <p className="text-muted-foreground mt-3 px-4 text-left text-xs">
-            {formatDate(post.createdAt)}
-          </p>
-        </article>
+        <PostArticle
+          post={post}
+          authorAvatar={post.author?.image ? toImageUrl(post.author.image) : undefined}
+          postImages={splitImagePaths(post.image).map((path) => toImageUrl(path))}
+          isHearted={isHearted}
+          heartCount={heartCount}
+          isLikePending={isLikePending}
+          onLike={handleLikeClick}
+        />
 
         <div className="border-muted border-b" />
 
-        <div className="divide-muted divide-y">
-          {isLoadingComments ? (
-            <div className="text-muted-foreground px-4 py-8 text-center text-sm">로딩 중...</div>
-          ) : comments.length === 0 ? (
-            <div className="text-muted-foreground px-4 py-8 text-center text-sm">댓글이 없습니다.</div>
-          ) : (
-            comments.map((c) => (
-              <CommentItem key={c.id} comment={c} onKebabClick={(id) => setSelectedCommentId(id)} />
-            ))
-          )}
-        </div>
+        <CommentList
+          comments={comments}
+          isLoading={isLoadingComments}
+          onKebabClick={setSelectedCommentId}
+        />
       </main>
 
-      <div className="border-border bg-background fixed right-0 bottom-0 left-0 z-10 w-full border-t px-4 py-2">
-        <div className="flex items-center gap-3">
-          <div className="shrink-0">
-            <Avatar src={toImageUrl(currentUser?.image)} size="sm" />
-          </div>
-          <div className="relative flex-1">
-            <input
-              type="text"
-              value={commentText}
-              onChange={(e) => setCommentText(e.target.value)}
-              placeholder="댓글 입력하기..."
-              className="border-border bg-muted placeholder:text-muted-foreground h-10 w-full rounded-full border px-4 pr-14 text-sm outline-none focus:ring-0"
-              onKeyDown={(e) => {
-                if (e.key === 'Enter' && !isSubmitting) handleSubmitComment();
-              }}
-            />
-            <button
-              type="button"
-              onClick={handleSubmitComment}
-              disabled={!hasText || isSubmitting}
-              className={`absolute top-1/2 right-3 -translate-y-1/2 text-sm font-semibold transition-colors ${
-                hasText && !isSubmitting
-                  ? 'text-green-500 hover:text-green-600'
-                  : 'text-muted-foreground cursor-not-allowed'
-              }`}
-            >
-              {isSubmitting ? '로딩...' : '게시'}
-            </button>
-          </div>
-        </div>
-      </div>
+      <CommentInputBar
+        avatarSrc={toImageUrl(currentUser?.image)}
+        value={commentText}
+        onChange={setCommentText}
+        onSubmit={handleSubmitComment}
+        isSubmitting={isSubmitting}
+      />
 
       <BottomSheetModal
         isOpen={selectedCommentId !== null}
@@ -333,6 +134,28 @@ export default function PostPage() {
         confirmLoadingText="삭제 중..."
         onConfirm={handleDeletePost}
         isLoading={isDeletingPost}
+      />
+
+      <ConfirmDialog
+        open={isReportPostDialogOpen}
+        onOpenChange={setIsReportPostDialogOpen}
+        title="해당 게시글을 신고하시겠습니까?"
+        cancelText="취소"
+        confirmText="신고"
+        onConfirm={() => {
+          setIsReportPostDialogOpen(false);
+        }}
+      />
+
+      <ConfirmDialog
+        open={isReportCommentDialogOpen}
+        onOpenChange={setIsReportCommentDialogOpen}
+        title="해당 댓글을 신고하시겠습니까?"
+        cancelText="취소"
+        confirmText="신고"
+        onConfirm={() => {
+          setIsReportCommentDialogOpen(false);
+        }}
       />
     </PageWithHeader>
   );

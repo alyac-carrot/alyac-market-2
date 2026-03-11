@@ -1,11 +1,11 @@
-import axios from 'axios';
 import { useForm } from 'react-hook-form';
 
 import { checkEmail } from '@/entities/auth';
-import { emailRule, passwordRule } from '@/shared/lib';
-import { FieldGroup, UnderlineInput } from '@/shared/ui';
+import { emailRule, getApiErrorMessage, passwordRule } from '@/shared/lib';
+import { Button, FieldGroup, UnderlineInput } from '@/shared/ui';
 
-export type Step1Values = { email: string; password: string };
+import type { Step1Values } from '../model/types';
+import { AuthPageLayout } from './AuthPageLayout';
 
 export function SignUpStep1({ onNext }: { onNext: (data: Step1Values) => void }) {
   const {
@@ -23,10 +23,8 @@ export function SignUpStep1({ onNext }: { onNext: (data: Step1Values) => void })
         return;
       }
     } catch (e) {
-      if (axios.isAxiosError(e)) {
-        setError('email', { message: `*${e.response?.data?.message ?? '이메일 확인 실패'}` });
-        return;
-      }
+      setError('email', { message: `*${getApiErrorMessage(e, '이메일 확인 실패')}` });
+      return;
     }
     onNext({ email: values.email.trim(), password: values.password });
   };
@@ -34,7 +32,7 @@ export function SignUpStep1({ onNext }: { onNext: (data: Step1Values) => void })
   const canSubmit = isValid && !isSubmitting;
 
   return (
-    <div className="flex min-h-screen flex-col bg-white px-8 dark:bg-zinc-950">
+    <AuthPageLayout>
       <h1 className="mt-14 text-2xl font-medium text-black dark:text-white">이메일로 회원가입</h1>
 
       <form className="mt-12 flex flex-col gap-8" onSubmit={handleSubmit(onSubmit)} noValidate>
@@ -54,22 +52,20 @@ export function SignUpStep1({ onNext }: { onNext: (data: Step1Values) => void })
             type="password"
             placeholder="비밀번호를 설정해 주세요."
             autoComplete="new-password"
+            maxLength={30}
             {...register('password', passwordRule)}
           />
         </FieldGroup>
 
-        <button
+        <Button
           type="submit"
           disabled={!canSubmit}
-          className={`mt-4 h-11 w-full rounded-full text-sm font-medium text-white transition-colors ${
-            canSubmit
-              ? 'bg-green-400 hover:bg-green-500 active:scale-95'
-              : 'cursor-not-allowed bg-green-200'
-          }`}
+          aria-busy={isSubmitting}
+          className="mt-4 h-14 w-full rounded-full bg-green-500 text-base font-semibold text-white hover:bg-green-600 disabled:opacity-50 disabled:hover:bg-green-500"
         >
           {isSubmitting ? '확인 중...' : '다음'}
-        </button>
+        </Button>
       </form>
-    </div>
+    </AuthPageLayout>
   );
 }
