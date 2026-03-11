@@ -8,6 +8,8 @@ import { Avatar, Button } from '@/shared/ui';
 import { PageWithFooter } from '@/widgets/footer';
 import { Header, PageWithHeader } from '@/widgets/header';
 
+const mascotUrl = `${import.meta.env.BASE_URL}mascot.png`;
+
 export default function FeedPage() {
   const nav = useNavigate();
   const queryClient = useQueryClient();
@@ -66,8 +68,8 @@ export default function FeedPage() {
         <PageWithHeader header={feedHeader} headerOffsetClassName="pt-20">
           <div className="flex min-h-[calc(100vh-56px-72px)] items-center justify-center">
             <div className="flex -translate-y-8 flex-col items-center gap-4">
-              <img src="/mascot.png" alt="마스코트" className="h-auto w-47.5" />
-              <p className="text-foreground text-sm">유저를 검색해 팔로우 해보세요!</p>
+              <img src={mascotUrl} alt="마스코트" className="h-auto w-47.5" />
+              <p className="text-foreground text-sm">유저를 검색해 팔로우해보세요!</p>
 
               <Button
                 className="rounded-full px-10 py-6 text-base font-semibold"
@@ -142,7 +144,7 @@ export default function FeedPage() {
                   }}
                   disabled={isLikePending}
                 >
-                  {p.hearted ? '취소' : '찜'} 좋아요 {p.heartCount}
+                  {p.hearted ? '취소' : '좋아요'} {p.heartCount}
                 </button>
 
                 <button
