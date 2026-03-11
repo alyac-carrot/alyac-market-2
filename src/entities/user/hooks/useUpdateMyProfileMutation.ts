@@ -4,16 +4,13 @@ import { profileQueryKeys } from '@/entities/profile/model/queries/queries';
 import { queryKeys } from '@/shared/lib';
 
 import { updateMyProfile } from '../api/userApi';
-import type { UpdateProfileBody, UpdateProfileResponse } from '../model/types/types';
+import type { UpdateProfileBody } from '../model/types/types';
 
 export function useUpdateMyProfileMutation() {
   const qc = useQueryClient();
 
   return useMutation({
-    mutationFn: async (body: UpdateProfileBody) => {
-      const res = await updateMyProfile(body);
-      return res.data as UpdateProfileResponse;
-    },
+    mutationFn: (body: UpdateProfileBody) => updateMyProfile(body),
 
     onSuccess: async (data) => {
       const updatedUser = data.user;

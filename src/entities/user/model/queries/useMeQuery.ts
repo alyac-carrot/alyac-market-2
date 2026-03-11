@@ -11,10 +11,7 @@ export function useMeQuery() {
 
   return useQuery<MyInfoResponse>({
     queryKey: queryKeys.me,
-    queryFn: async () => {
-      const res = await getMyInfo();
-      return res.data;
-    },
+    queryFn: () => getMyInfo(),
     enabled: hasToken,
     staleTime: 1000 * 60,
     retry: false,

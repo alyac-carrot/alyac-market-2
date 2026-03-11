@@ -1,4 +1,5 @@
 import axiosInstance from '@/shared/api/axios';
+import { parseWithSchema } from '@/shared/lib';
 
 import type {
   FollowResponse,
@@ -6,15 +7,25 @@ import type {
   FollowingListResponse,
   GetProfileResponse,
 } from '../model/types/types';
+import { followResponseSchema, getProfileResponseSchema } from '../model/schemas';
 
-export const getProfile = (accountname: string) =>
-  axiosInstance.get<GetProfileResponse>(`/profile/${accountname}`);
+export const getProfile = async (accountname: string): Promise<GetProfileResponse> => {
+  const response = await axiosInstance.get(`/profile/${accountname}`);
 
-export const followUser = (accountname: string) =>
-  axiosInstance.post<FollowResponse>(`/profile/${accountname}/follow`);
+  return parseWithSchema(getProfileResponseSchema, response.data, 'getProfile');
+};
 
-export const unfollowUser = (accountname: string) =>
-  axiosInstance.delete<FollowResponse>(`/profile/${accountname}/unfollow`);
+export const followUser = async (accountname: string): Promise<FollowResponse> => {
+  const response = await axiosInstance.post(`/profile/${accountname}/follow`);
+
+  return parseWithSchema(followResponseSchema, response.data, 'followUser');
+};
+
+export const unfollowUser = async (accountname: string): Promise<FollowResponse> => {
+  const response = await axiosInstance.delete(`/profile/${accountname}/unfollow`);
+
+  return parseWithSchema(followResponseSchema, response.data, 'unfollowUser');
+};
 
 export const getFollowingList = (accountname: string) =>
   axiosInstance.get<FollowingListResponse>(`/profile/${accountname}/following`);
