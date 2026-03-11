@@ -1,5 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 
+const notFoundLogoUrl = `${import.meta.env.BASE_URL}full-logo-alyac-404.png`;
+
 export default function NotFoundPage() {
   const navigate = useNavigate();
 
@@ -8,7 +10,7 @@ export default function NotFoundPage() {
       <div className="flex flex-col items-center gap-8 text-center">
         {/* Logo */}
         <div className="w-24">
-          <img src="/full-logo-alyac-404.png" alt="404" className="h-auto w-full" />
+          <img src={notFoundLogoUrl} alt="404" className="h-auto w-full" />
         </div>
 
         {/* Message */}
