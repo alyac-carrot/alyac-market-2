@@ -9,6 +9,7 @@ export { getComments } from './api/getComments';
 export { createComment } from './api/createComment';
 export { deleteComment } from './api/deleteComment';
 export { likePost } from './api/likePost';
+export { getFeedPosts } from './api/getFeedposts';
 
 // model – hooks
 export { useGetPost } from './model/queries/useGetPost';
@@ -22,6 +23,7 @@ export { useCreateComment } from './hooks/mutations/useCreateComment';
 export { useDeleteComment } from './hooks/mutations/useDeleteComment';
 export { useLikePost } from './hooks/mutations/useLikePost';
 export { useLikePostMutation } from './hooks/mutations/useLikePostMutation';
+export { useGetFeedPosts } from './model/queries/useGetFeedPosts';
 
 // model – types
 export type {

@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Search } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { likePost, useGetPosts } from '@/entities/post';
+import { likePost, useGetFeedPosts } from '@/entities/post';
 import { toImageUrl } from '@/shared/lib';
 import { Avatar, Button } from '@/shared/ui';
 import { PageWithFooter } from '@/widgets/footer';
@@ -12,7 +12,7 @@ export default function FeedPage() {
   const nav = useNavigate();
   const queryClient = useQueryClient();
 
-  const { data, isLoading, isError } = useGetPosts(10);
+  const { data, isLoading, isError } = useGetFeedPosts(10);
 
   const posts = data?.posts ?? [];
 
