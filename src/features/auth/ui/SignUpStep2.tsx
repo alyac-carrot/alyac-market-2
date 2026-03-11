@@ -96,6 +96,7 @@ export function SignUpStep2({ step1Data, onBack }: { step1Data: Step1Values; onB
             id="signup-username"
             type="text"
             placeholder="2~10자 이내여야 합니다."
+            maxLength={10}
             {...register('username', usernameRule)}
           />
         </FieldGroup>
@@ -109,6 +110,7 @@ export function SignUpStep2({ step1Data, onBack }: { step1Data: Step1Values; onB
             id="signup-accountname"
             type="text"
             placeholder="영문, 숫자, 특수문자(.),(_)만 사용 가능합니다."
+            maxLength={20}
             {...register('accountname', accountnameRule)}
           />
         </FieldGroup>
@@ -118,6 +120,7 @@ export function SignUpStep2({ step1Data, onBack }: { step1Data: Step1Values; onB
             id="signup-intro"
             type="text"
             placeholder="자신과 판매할 상품에 대해 소개해 주세요!"
+            maxLength={60}
             {...register('intro', introRule)}
           />
         </FieldGroup>

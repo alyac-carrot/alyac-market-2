@@ -52,6 +52,7 @@ export function SignUpStep1({ onNext }: { onNext: (data: Step1Values) => void })
             type="password"
             placeholder="비밀번호를 설정해 주세요."
             autoComplete="new-password"
+            maxLength={30}
             {...register('password', passwordRule)}
           />
         </FieldGroup>
