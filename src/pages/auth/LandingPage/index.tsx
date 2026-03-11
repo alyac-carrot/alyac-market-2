@@ -4,22 +4,21 @@ import { SocialLoginButtons } from '@/features/auth';
 
 export { GoogleIcon, FacebookIcon } from '@/shared/ui/icons';
 
+const mascotUrl = `${import.meta.env.BASE_URL}mascot.png`;
+
 export default function LandingPage() {
   const nav = useNavigate();
 
   return (
     <div className="bottom-sheet flex min-h-screen flex-col bg-green-500">
-      {/* 상단 로고 영역 */}
       <div className="flex flex-1 items-center justify-center">
-        <img src="/mascot.png" alt="mascot" className="h-28 w-28 object-contain" />
+        <img src={mascotUrl} alt="mascot" className="h-28 w-28 object-contain" />
       </div>
 
-      {/* 하단 카드 */}
       <div className="rounded-t-3xl bg-white px-6 pt-8 pb-10 dark:bg-zinc-950">
         <div className="mx-auto w-full max-w-sm space-y-3">
           <SocialLoginButtons />
 
-          {/* 하단 링크 */}
           <div className="mt-4 flex items-center justify-center gap-4 text-sm text-zinc-500 dark:text-zinc-400">
             <button
               type="button"

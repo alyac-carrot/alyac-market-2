@@ -25,6 +25,28 @@ export function SignUpStep2({ step1Data, onBack }: { step1Data: Step1Values; onB
     defaultValues: { username: '', accountname: '', intro: '' },
   });
 
+  const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setUploadError('');
+    setIsUploading(true);
+    try {
+      const formData = new FormData();
+      formData.append('image', file);
+      // Use the dedicated uploadApi (VITE_API_BASE_URL) instead of the general axiosInstance
+      const res = await uploadApi.post<{ filename: string }>('/image/uploadfile', formData, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      });
+      // Store the relative path expected by the server
+      setImageFilename(normalizeUploadPath(res.data.filename));
+    } catch {
+      setUploadError('이미지 업로드에 실패했습니다.');
+    } finally {
+      setIsUploading(false);
+    }
+  };
+
   const onSubmit = async (values: Step2Values) => {
     // accountname duplicate check
     try {

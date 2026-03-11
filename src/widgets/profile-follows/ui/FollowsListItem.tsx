@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -24,6 +24,10 @@ export function FollowsListItem({ user, defaultFollowing }: Props) {
   }, [defaultFollowing, user.isfollow]);
 
   const [isFollowing, setIsFollowing] = useState(initial);
+
+  useEffect(() => {
+    setIsFollowing(initial);
+  }, [initial]);
 
   const followMutation = useFollowMutation(user.accountname);
   const isSelf = meQuery.data?.user.accountname === user.accountname;
@@ -60,7 +64,24 @@ export function FollowsListItem({ user, defaultFollowing }: Props) {
           setIsFollowing(next);
 
           followMutation.mutate(next, {
-            onError: () => setIsFollowing((prev) => !prev),
+            onError: (error) => {
+              const message: string =
+                typeof error === 'object' &&
+                error !== null &&
+                'response' in error &&
+                typeof (error as { response?: { data?: { message?: unknown } } }).response?.data
+                  ?.message === 'string'
+                  ? (error as { response?: { data?: { message?: string } } }).response?.data
+                      ?.message ?? ''
+                  : '';
+
+              if (next && message.includes('이미 팔로우')) {
+                setIsFollowing(true);
+                return;
+              }
+
+              setIsFollowing((prev) => !prev);
+            },
           });
         }}
       >
