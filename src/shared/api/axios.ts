@@ -2,8 +2,8 @@ import axios from 'axios';
 
 import { getRefreshToken, getToken, removeToken, saveToken } from '@/entities/auth/lib/token';
 
-const VITE_BASE_URL = import.meta.env.VITE_BASE_URL;
-const API_URL = `${VITE_BASE_URL}/api`;
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+const API_URL = `${API_BASE_URL}/api`;
 
 const axiosInstance = axios.create({
   baseURL: API_URL,

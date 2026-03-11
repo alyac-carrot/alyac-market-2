@@ -4,14 +4,24 @@ import { checkAccountname, useSignUpMutation } from '@/entities/auth';
 import { accountnameRule, getApiErrorMessage, introRule, usernameRule } from '@/shared/lib';
 import { Button, FieldGroup, UnderlineInput } from '@/shared/ui';
 
-import { ProfileImagePicker } from './ProfileImagePicker';
-import { AuthPageLayout } from './AuthPageLayout';
-import type { Step1Values } from '../model/types';
 import { useProfileImageUpload } from '../model/useProfileImageUpload';
+import type { Step1Values } from '../model/types';
+import { AuthPageLayout } from './AuthPageLayout';
+import { ProfileImagePicker } from './ProfileImagePicker';
 
-type Step2Values = { username: string; accountname: string; intro: string };
+type Step2Values = {
+  username: string;
+  accountname: string;
+  intro: string;
+};
 
-export function SignUpStep2({ step1Data, onBack }: { step1Data: Step1Values; onBack: () => void }) {
+export function SignUpStep2({
+  step1Data,
+  onBack,
+}: {
+  step1Data: Step1Values;
+  onBack: () => void;
+}) {
   const signUpMutation = useSignUpMutation();
   const { imageFilename, uploadError, isUploading, handleImageChange } = useProfileImageUpload();
 
@@ -26,7 +36,6 @@ export function SignUpStep2({ step1Data, onBack }: { step1Data: Step1Values; onB
   });
 
   const onSubmit = async (values: Step2Values) => {
-    // accountname duplicate check
     try {
       const res = await checkAccountname(values.accountname.trim());
       if (!res.data.ok) {
@@ -62,7 +71,6 @@ export function SignUpStep2({ step1Data, onBack }: { step1Data: Step1Values; onB
 
   return (
     <AuthPageLayout>
-      {/* back button */}
       <Button
         type="button"
         variant="ghost"
@@ -70,15 +78,16 @@ export function SignUpStep2({ step1Data, onBack }: { step1Data: Step1Values; onB
         className="mt-6 self-start text-sm text-zinc-400 hover:bg-transparent hover:text-zinc-700 dark:hover:text-zinc-200"
         style={{ paddingLeft: 0 }}
       >
-        ← 이전
+        이전
       </Button>
 
       <h1 className="mt-6 text-center text-2xl font-medium text-black dark:text-white">
         프로필 설정
       </h1>
-      <p className="mt-2 text-center text-sm text-zinc-400">계정 ID는 변경할 수 없습니다.</p>
+      <p className="mt-2 text-center text-sm text-zinc-400">
+        계정 ID는 변경할 수 없습니다.
+      </p>
 
-      {/* profile image picker */}
       <ProfileImagePicker
         imageFilename={imageFilename}
         isUploading={isUploading}
