@@ -32,6 +32,9 @@ const FollowingsPage = lazy(() =>
   import('@/pages/followings').then((m) => ({ default: m.FollowingsPage })),
 );
 
+const runtimeBasename =
+  window.location.hostname === 'alyac-carrot.github.io' ? '/alyac-market-2/' : '/';
+
 export const router = createBrowserRouter(
   [
     {
@@ -66,6 +69,6 @@ export const router = createBrowserRouter(
     { path: '*', element: <NotFoundPage /> },
   ],
   {
-    basename: import.meta.env.BASE_URL,
+    basename: runtimeBasename,
   },
 );
