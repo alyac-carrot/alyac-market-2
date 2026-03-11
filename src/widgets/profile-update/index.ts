@@ -1,0 +1,2 @@
+export { ProfileImageUploadSection } from './ui/ProfileImageUploadSection';
+export { ProfileInfoSection } from './ui/ProfileInfoSection';

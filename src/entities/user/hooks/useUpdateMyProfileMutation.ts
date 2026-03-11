@@ -1,0 +1,32 @@
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+
+import { profileQueryKeys } from '@/entities/profile/model/queries/queries';
+import { queryKeys } from '@/shared/lib';
+
+import { updateMyProfile } from '../api/userApi';
+import type { UpdateProfileBody } from '../model/types/types';
+
+export function useUpdateMyProfileMutation() {
+  const qc = useQueryClient();
+
+  return useMutation({
+    mutationFn: (body: UpdateProfileBody) => updateMyProfile(body),
+
+    onSuccess: async (data) => {
+      const updatedUser = data.user;
+      const accountname = updatedUser.accountname;
+
+      qc.setQueryData(queryKeys.me, { user: updatedUser });
+
+      qc.setQueryData(profileQueryKeys.profile(accountname), (prev: unknown) => {
+        return {
+          ...updatedUser,
+          ...(typeof prev === 'object' && prev !== null ? prev : {}),
+        };
+      });
+
+      await qc.invalidateQueries({ queryKey: queryKeys.me });
+      await qc.invalidateQueries({ queryKey: profileQueryKeys.profile(accountname) });
+    },
+  });
+}
