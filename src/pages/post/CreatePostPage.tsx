@@ -6,7 +6,7 @@ import { useCreatePost } from '@/entities/post';
 import { useUploadFiles } from '@/entities/upload';
 import { useMeQuery } from '@/entities/user';
 import { PostImagePicker } from '@/features/upload';
-import { toImageUrl } from '@/shared/lib';
+import { normalizeUploadPath, toImageUrl } from '@/shared/lib';
 import { Avatar, SubmitActionButton } from '@/shared/ui';
 import { Header, PageWithHeader } from '@/widgets/header';
 
@@ -41,7 +41,7 @@ export default function CreatePostPage() {
     try {
       const uploadedFiles = files.length > 0 ? await uploadFilesMutation.mutateAsync(files) : [];
       const imageString =
-        uploadedFiles.map((f) => `uploadFiles/${f.filename}`).join(',') || undefined;
+        uploadedFiles.map((f) => normalizeUploadPath(f.filename)).join(',') || undefined;
 
       await createPostMutation.mutateAsync({
         content: text.trim(),

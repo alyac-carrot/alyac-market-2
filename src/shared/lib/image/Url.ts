@@ -5,7 +5,9 @@ export function toImageUrl(path?: string) {
   const trimmed = path?.trim();
   if (!trimmed) return '';
   if (/^https?:\/\//.test(trimmed)) return trimmed;
-  const normalized = trimmed.replace(/^\/+/, '');
+  const normalized = trimmed
+    .replace(/^\/+/, '')
+    .replace(/^uploadFiles\/uploadFiles\//, 'uploadFiles/');
 
   return `${IMAGE_BASE_URL}/${normalized}`;
 }
