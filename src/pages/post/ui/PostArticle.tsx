@@ -1,7 +1,7 @@
 import { Heart, MessageCircle } from 'lucide-react';
 
 import type { Post } from '@/entities/post';
-import { formatDate } from '@/shared/lib';
+import { cn, formatDate } from '@/shared/lib';
 import { Avatar } from '@/shared/ui/Avatar';
 
 interface Props {
@@ -47,7 +47,7 @@ export function PostArticle({
         </div>
       )}
 
-      {/* image */}
+      {/* images */}
       {postImages.length > 0 && (
         <div className="mb-4 space-y-2 px-4">
           {postImages.map((image, index) => (
@@ -72,15 +72,19 @@ export function PostArticle({
           className="flex items-center gap-1.5 transition-transform active:scale-90 disabled:opacity-70"
         >
           <Heart
-            className="h-5 w-5 transition-colors"
             strokeWidth={1.5}
-            fill={isHearted ? '#ef4444' : 'none'}
-            stroke={isHearted ? '#ef4444' : 'currentColor'}
-            style={isHearted ? {} : { color: 'var(--muted-foreground)' }}
+            className={cn(
+              'h-5 w-5 transition-colors',
+              isHearted
+                ? 'fill-red-500 stroke-red-500'
+                : 'fill-none stroke-muted-foreground',
+            )}
           />
           <span
-            className="text-xs transition-colors"
-            style={{ color: isHearted ? '#ef4444' : 'var(--muted-foreground)' }}
+            className={cn(
+              'text-xs transition-colors',
+              isHearted ? 'text-red-500' : 'text-muted-foreground',
+            )}
           >
             {heartCount}
           </span>

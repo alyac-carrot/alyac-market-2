@@ -49,8 +49,8 @@ function MenuButton({
     <button
       type="button"
       onClick={onClick}
-      className={`inline-flex w-full px-4 py-3 text-sm ${
-        destructive ? 'text-red-500' : 'text-foreground'
+      className={`inline-flex w-full px-4 py-3 text-sm transition-colors hover:bg-muted ${
+        destructive ? 'text-destructive' : 'text-foreground'
       }`}
     >
       {children}
