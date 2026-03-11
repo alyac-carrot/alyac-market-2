@@ -2,10 +2,10 @@ import { useEffect } from 'react';
 
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { usePostPage } from '@/entities/post';
 import { splitImagePaths, toImageUrl } from '@/shared/lib';
 import { BottomSheetModal, ConfirmDialog } from '@/shared/ui';
 import { Header, PageWithHeader } from '@/widgets/header';
+import { usePostPage } from '@/features/post';
 
 import { CommentInputBar } from './ui/CommentInputBar';
 import { CommentList } from './ui/CommentList';
@@ -36,6 +36,10 @@ export default function PostPage() {
     setSelectedCommentId,
     isPostDeleteDialogOpen,
     setIsPostDeleteDialogOpen,
+    isReportPostDialogOpen,
+    setIsReportPostDialogOpen,
+    isReportCommentDialogOpen,
+    setIsReportCommentDialogOpen,
     handleLikeClick,
     handleSubmitComment,
     handleActionComment,
@@ -47,13 +51,24 @@ export default function PostPage() {
   }, []);
 
   if (isLoadingPost) {
-    return <div className="flex h-screen items-center justify-center">Loading...</div>;
+    return (
+      <div
+        role="status"
+        aria-live="polite"
+        className="flex h-screen items-center justify-center"
+      >
+        <span className="text-muted-foreground text-sm">불러오는 중...</span>
+      </div>
+    );
   }
 
   if (isError || !post) {
     return (
-      <div className="flex h-screen items-center justify-center">
-        <p className="text-sm text-gray-500">게시글을 불러오지 못했습니다.</p>
+      <div
+        role="alert"
+        className="flex h-screen items-center justify-center"
+      >
+        <p className="text-muted-foreground text-sm">게시글을 불러오지 못했습니다.</p>
       </div>
     );
   }
@@ -70,13 +85,7 @@ export default function PostPage() {
               isMyPost={isMyPost}
               onEdit={() => navigate(`/post/${postId}/edit`)}
               onDeleteRequest={() => setIsPostDeleteDialogOpen(true)}
-              onReportRequest={() => {
-                setTimeout(() => {
-                  if (window.confirm('해당 게시글을 신고하시겠습니까?')) {
-                    alert('해당 게시글을 신고했습니다.');
-                  }
-                }, 0);
-              }}
+              onReportRequest={() => setIsReportPostDialogOpen(true)}
             />
           }
         />
@@ -110,6 +119,7 @@ export default function PostPage() {
         isSubmitting={isSubmitting}
       />
 
+      {/* Comment action sheet (delete mine / report others) */}
       <BottomSheetModal
         isOpen={selectedCommentId !== null}
         onClose={() => setSelectedCommentId(null)}
@@ -123,6 +133,7 @@ export default function PostPage() {
         }
       />
 
+      {/* Post delete confirm dialog */}
       <ConfirmDialog
         open={isPostDeleteDialogOpen}
         onOpenChange={setIsPostDeleteDialogOpen}
@@ -132,6 +143,32 @@ export default function PostPage() {
         confirmLoadingText="삭제 중..."
         onConfirm={handleDeletePost}
         isLoading={isDeletingPost}
+      />
+
+      {/* Post report confirm dialog */}
+      <ConfirmDialog
+        open={isReportPostDialogOpen}
+        onOpenChange={setIsReportPostDialogOpen}
+        title="해당 게시글을 신고하시겠습니까?"
+        cancelText="취소"
+        confirmText="신고"
+        onConfirm={() => {
+          // TODO: wire up report API when available
+          setIsReportPostDialogOpen(false);
+        }}
+      />
+
+      {/* Comment report confirm dialog */}
+      <ConfirmDialog
+        open={isReportCommentDialogOpen}
+        onOpenChange={setIsReportCommentDialogOpen}
+        title="해당 댓글을 신고하시겠습니까?"
+        cancelText="취소"
+        confirmText="신고"
+        onConfirm={() => {
+          // TODO: wire up report API when available
+          setIsReportCommentDialogOpen(false);
+        }}
       />
     </PageWithHeader>
   );

@@ -20,7 +20,9 @@ export function CommentInputBar({ avatarSrc, value, onChange, onSubmit, isSubmit
 
         <div className="relative flex-1">
           <input
+            id="comment-input"
             type="text"
+            aria-label="댓글 입력"
             value={value}
             onChange={(e) => onChange(e.target.value)}
             onKeyDown={(e) => {
