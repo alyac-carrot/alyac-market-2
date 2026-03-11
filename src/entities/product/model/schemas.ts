@@ -5,11 +5,29 @@ import { zodAccountnameSchema, zodEmailSchema, zodImageUrlSchema } from '@/share
 export const productItemNameSchema = z
   .string()
   .trim()
-  .min(2, { message: '상품명은 2자 이상 입력해 주세요.' })
-  .max(15, { message: '상품명은 15자 이하로 입력해 주세요.' });
+  .min(2, { message: '상품명은 2~15자 이내여야 합니다.' })
+  .max(15, { message: '상품명은 2~15자 이내여야 합니다.' });
 
 export const productPriceSchema = z.number().min(1, {
   message: '가격은 1원 이상이어야 합니다.',
+});
+
+export const productFormSchema = z.object({
+  itemName: productItemNameSchema,
+  price: z
+    .string()
+    .trim()
+    .min(1, { message: '가격을 입력해주세요.' })
+    .refine((value) => /^\d+$/.test(value), {
+      message: '가격은 숫자만 입력 가능합니다.',
+    }),
+  link: z
+    .string()
+    .trim()
+    .min(1, { message: '판매 링크를 입력해 주세요.' })
+    .refine((value) => z.url().safeParse(value).success, {
+      message: '판매 링크는 올바른 URL 형식을 입력해 주세요.',
+    }),
 });
 
 export const productLinkSchema = z
@@ -78,6 +96,7 @@ export const deleteProductResponseSchema = z.object({
 });
 
 export type ProductAuthor = z.infer<typeof productAuthorSchema>;
+export type ProductFormValues = z.infer<typeof productFormSchema>;
 export type ProductRequest = z.infer<typeof productRequestSchema>;
 export type Product = z.infer<typeof productSchema>;
 export type GetUserProductsResponse = z.infer<typeof getUserProductsResponseSchema>;

@@ -9,6 +9,9 @@ type ProductEditorFormProps = {
   link: string;
   imagePreviewUrl: string;
   errorText: string;
+  itemNameError?: string;
+  priceError?: string;
+  linkError?: string;
   isLoading?: boolean;
   onItemNameChange: (value: string) => void;
   onPriceChange: (value: string) => void;
@@ -24,6 +27,9 @@ export default function ProductEditorForm({
   link,
   imagePreviewUrl,
   errorText,
+  itemNameError,
+  priceError,
+  linkError,
   isLoading = false,
   onItemNameChange,
   onPriceChange,
@@ -48,6 +54,9 @@ export default function ProductEditorForm({
             itemName={itemName}
             price={price}
             link={link}
+            itemNameError={itemNameError}
+            priceError={priceError}
+            linkError={linkError}
             onItemNameChange={onItemNameChange}
             onPriceChange={onPriceChange}
             onLinkChange={onLinkChange}

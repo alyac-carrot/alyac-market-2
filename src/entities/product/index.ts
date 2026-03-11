@@ -11,7 +11,7 @@ export {
 export { useCreateProduct } from './hooks/useCreateProduct';
 export { useUpdateProduct } from './hooks/useUpdateProduct';
 export { useDeleteProduct } from './hooks/useDeleteProduct';
-export { productRequestSchema } from './model/schemas';
+export { productFormSchema, productRequestSchema } from './model/schemas';
 
 export type {
   Product,
@@ -23,3 +23,4 @@ export type {
   UpdateProductResponse,
   DeleteProductResponse,
 } from './model/types';
+export type { ProductFormValues } from './model/schemas';

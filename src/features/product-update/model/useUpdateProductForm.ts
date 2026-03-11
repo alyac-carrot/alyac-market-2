@@ -1,9 +1,17 @@
 import { useEffect, useRef, useState } from 'react';
 
+import { zodResolver } from '@hookform/resolvers/zod';
 import axios from 'axios';
+import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
-import { productRequestSchema, useProductDetailQuery, useUpdateProduct } from '@/entities/product';
+import {
+  productFormSchema,
+  productRequestSchema,
+  type ProductFormValues,
+  useProductDetailQuery,
+  useUpdateProduct,
+} from '@/entities/product';
 import { useUploadFiles } from '@/entities/upload';
 import { normalizeUploadPath, toImageUrl } from '@/shared/lib';
 
@@ -15,9 +23,26 @@ export function useUpdateProductForm(productId?: string) {
   const updateProductMutation = useUpdateProduct();
   const uploadFilesMutation = useUploadFiles();
 
-  const [itemName, setItemName] = useState('');
-  const [price, setPrice] = useState('');
-  const [link, setLink] = useState('');
+  const {
+    watch,
+    reset,
+    setValue,
+    handleSubmit,
+    formState: { errors, isValid },
+  } = useForm<ProductFormValues>({
+    resolver: zodResolver(productFormSchema),
+    mode: 'onChange',
+    defaultValues: {
+      itemName: '',
+      price: '',
+      link: '',
+    },
+  });
+
+  const itemName = watch('itemName');
+  const price = watch('price');
+  const link = watch('link');
+
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imagePreviewUrl, setImagePreviewUrl] = useState('');
   const [itemImagePath, setItemImagePath] = useState('');
@@ -27,13 +52,15 @@ export function useUpdateProductForm(productId?: string) {
   useEffect(() => {
     if (!productQuery.data || isInitialized) return;
 
-    setItemName(productQuery.data.itemName ?? '');
-    setPrice(String(productQuery.data.price ?? ''));
-    setLink(productQuery.data.link ?? '');
+    reset({
+      itemName: productQuery.data.itemName ?? '',
+      price: String(productQuery.data.price ?? ''),
+      link: productQuery.data.link ?? '',
+    });
     setItemImagePath(productQuery.data.itemImage ?? '');
     setImagePreviewUrl(toImageUrl(productQuery.data.itemImage));
     setIsInitialized(true);
-  }, [isInitialized, productQuery.data]);
+  }, [isInitialized, productQuery.data, reset]);
 
   useEffect(() => {
     return () => {
@@ -43,16 +70,27 @@ export function useUpdateProductForm(productId?: string) {
     };
   }, [imageFile, imagePreviewUrl]);
 
-  const canUpload =
-    productRequestSchema.safeParse({
-      itemName,
-      price: Number(price),
-      link,
-      itemImage: itemImagePath || (imagePreviewUrl.trim().length > 0 ? 'uploadFiles/temp-image.webp' : ''),
-    }).success;
+  const canUpload = isValid && imagePreviewUrl.trim().length > 0;
+
+  const setItemName = (value: string) => {
+    setValue('itemName', value, {
+      shouldDirty: true,
+      shouldValidate: true,
+    });
+  };
+
+  const setLink = (value: string) => {
+    setValue('link', value, {
+      shouldDirty: true,
+      shouldValidate: true,
+    });
+  };
 
   const handlePriceChange = (nextValue: string) => {
-    setPrice(nextValue.replace(/[^\d]/g, ''));
+    setValue('price', nextValue.replace(/[^\d]/g, ''), {
+      shouldDirty: true,
+      shouldValidate: true,
+    });
   };
 
   const handleImagePick = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -68,8 +106,13 @@ export function useUpdateProductForm(productId?: string) {
     setErrorText('');
   };
 
-  const handleSubmit = async () => {
-    if (!productId || !canUpload) return;
+  const onSubmit = async (values: ProductFormValues) => {
+    if (!productId) return;
+
+    if (!imagePreviewUrl.trim()) {
+      setErrorText('상품 이미지를 등록해 주세요.');
+      return;
+    }
 
     try {
       setErrorText('');
@@ -83,9 +126,9 @@ export function useUpdateProductForm(productId?: string) {
       }
 
       const payload = {
-        itemName: itemName.trim(),
-        price: Number(price),
-        link: link.trim(),
+        itemName: values.itemName.trim(),
+        price: Number(values.price),
+        link: values.link.trim(),
         itemImage: nextItemImage,
       };
       const result = productRequestSchema.safeParse(payload);
@@ -121,6 +164,7 @@ export function useUpdateProductForm(productId?: string) {
     link,
     imagePreviewUrl,
     errorText,
+    fieldErrors: errors,
     canUpload,
     isLoading: productQuery.isLoading && !isInitialized,
     isSubmitting: updateProductMutation.isPending || uploadFilesMutation.isPending,
@@ -128,6 +172,6 @@ export function useUpdateProductForm(productId?: string) {
     setLink,
     handlePriceChange,
     handleImagePick,
-    handleSubmit,
+    handleSubmit: handleSubmit(onSubmit),
   };
 }

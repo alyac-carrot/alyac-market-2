@@ -31,6 +31,16 @@ export const followerListResponseSchema = z.object({
   follower: z.array(profileSchema),
 });
 
+export const followingListApiResponseSchema = z.union([
+  followingListResponseSchema,
+  z.array(profileSchema).transform((following) => ({ following })),
+]);
+
+export const followerListApiResponseSchema = z.union([
+  followerListResponseSchema,
+  z.array(profileSchema).transform((follower) => ({ follower })),
+]);
+
 export type Profile = z.infer<typeof profileSchema>;
 export type GetProfileResponse = z.infer<typeof getProfileResponseSchema>;
 export type FollowResponse = z.infer<typeof followResponseSchema>;

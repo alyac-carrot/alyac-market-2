@@ -2,8 +2,8 @@ import axiosInstance from '@/shared/api/axios';
 import { parseWithSchema } from '@/shared/lib';
 
 import {
-  followerListResponseSchema,
-  followingListResponseSchema,
+  followerListApiResponseSchema,
+  followingListApiResponseSchema,
   type FollowerListResponse,
   type FollowingListResponse,
   type Profile,
@@ -20,7 +20,7 @@ export const getFollowers = async (
     params: { limit, skip },
   });
 
-  return parseWithSchema(followerListResponseSchema, response.data, 'getFollowers');
+  return parseWithSchema(followerListApiResponseSchema, response.data, 'getFollowers');
 };
 
 export const getFollowings = async (
@@ -32,5 +32,5 @@ export const getFollowings = async (
     params: { limit, skip },
   });
 
-  return parseWithSchema(followingListResponseSchema, response.data, 'getFollowings');
+  return parseWithSchema(followingListApiResponseSchema, response.data, 'getFollowings');
 };

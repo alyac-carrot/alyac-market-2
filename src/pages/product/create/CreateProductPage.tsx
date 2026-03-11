@@ -13,6 +13,7 @@ export default function CreateProductPage() {
     link,
     imagePreviewUrl,
     errorText,
+    fieldErrors,
     canUpload,
     isSubmitting,
     setItemName,
@@ -51,6 +52,9 @@ export default function CreateProductPage() {
         link={link}
         imagePreviewUrl={imagePreviewUrl}
         errorText={errorText}
+        itemNameError={fieldErrors.itemName?.message}
+        priceError={fieldErrors.price?.message}
+        linkError={fieldErrors.link?.message}
         onItemNameChange={setItemName}
         onPriceChange={handlePriceChange}
         onLinkChange={setLink}

@@ -1,9 +1,16 @@
-﻿import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
+import { zodResolver } from '@hookform/resolvers/zod';
 import axios from 'axios';
+import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
-import { productRequestSchema, useCreateProduct } from '@/entities/product';
+import {
+  productFormSchema,
+  productRequestSchema,
+  type ProductFormValues,
+  useCreateProduct,
+} from '@/entities/product';
 import { useUploadFiles } from '@/entities/upload';
 import { normalizeUploadPath } from '@/shared/lib';
 
@@ -14,9 +21,25 @@ export function useCreateProductForm() {
   const createProductMutation = useCreateProduct();
   const uploadFilesMutation = useUploadFiles();
 
-  const [itemName, setItemName] = useState('');
-  const [price, setPrice] = useState('');
-  const [link, setLink] = useState('');
+  const {
+    watch,
+    setValue,
+    handleSubmit,
+    formState: { errors, isValid },
+  } = useForm<ProductFormValues>({
+    resolver: zodResolver(productFormSchema),
+    mode: 'onChange',
+    defaultValues: {
+      itemName: '',
+      price: '',
+      link: '',
+    },
+  });
+
+  const itemName = watch('itemName');
+  const price = watch('price');
+  const link = watch('link');
+
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imagePreviewUrl, setImagePreviewUrl] = useState('');
   const [errorText, setErrorText] = useState('');
@@ -29,16 +52,27 @@ export function useCreateProductForm() {
     };
   }, [imagePreviewUrl]);
 
-  const canUpload =
-    productRequestSchema.safeParse({
-      itemName,
-      price: Number(price),
-      link,
-      itemImage: imageFile ? 'uploadFiles/temp-image.webp' : '',
-    }).success;
+  const canUpload = isValid && !!imageFile;
+
+  const setItemName = (value: string) => {
+    setValue('itemName', value, {
+      shouldDirty: true,
+      shouldValidate: true,
+    });
+  };
+
+  const setLink = (value: string) => {
+    setValue('link', value, {
+      shouldDirty: true,
+      shouldValidate: true,
+    });
+  };
 
   const handlePriceChange = (nextValue: string) => {
-    setPrice(nextValue.replace(/[^\d]/g, ''));
+    setValue('price', nextValue.replace(/[^\d]/g, ''), {
+      shouldDirty: true,
+      shouldValidate: true,
+    });
   };
 
   const handleImagePick = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -54,8 +88,11 @@ export function useCreateProductForm() {
     setErrorText('');
   };
 
-  const handleSubmit = async () => {
-    if (!canUpload || !imageFile) return;
+  const onSubmit = async (values: ProductFormValues) => {
+    if (!imageFile) {
+      setErrorText('상품 이미지를 등록해 주세요.');
+      return;
+    }
 
     try {
       setErrorText('');
@@ -67,9 +104,9 @@ export function useCreateProductForm() {
       }
 
       const payload = {
-        itemName: itemName.trim(),
-        price: Number(price),
-        link: link.trim(),
+        itemName: values.itemName.trim(),
+        price: Number(values.price),
+        link: values.link.trim(),
         itemImage: normalizeUploadPath(filename),
       };
       const result = productRequestSchema.safeParse(payload);
@@ -102,12 +139,13 @@ export function useCreateProductForm() {
     link,
     imagePreviewUrl,
     errorText,
+    fieldErrors: errors,
     canUpload,
     isSubmitting: createProductMutation.isPending || uploadFilesMutation.isPending,
     setItemName,
     setLink,
     handlePriceChange,
     handleImagePick,
-    handleSubmit,
+    handleSubmit: handleSubmit(onSubmit),
   };
 }
