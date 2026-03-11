@@ -1,5 +1,5 @@
-const RAW = import.meta.env.VITE_BASE_URL;
-const IMAGE_BASE_URL = RAW.replace(/\/+$/, '');
+const RAW = import.meta.env.VITE_BASE_URL || '';
+const IMAGE_BASE_URL = RAW ? RAW.replace(/\/+$/, '') : '';
 
 export function toImageUrl(path?: string) {
   const trimmed = path?.trim();
