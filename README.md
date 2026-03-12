@@ -2,8 +2,6 @@
 
 > **알약마켓 프로젝트** — 상품 거래 및 SNS 피드 기능을 갖춘 모바일 웹 앱
 
-[![Deploy to GitHub Pages](https://github.com/alyac-carrot/alyac-market-2/actions/workflows/deploy-pages.yml/badge.svg)](https://github.com/alyac-carrot/alyac-market-2/actions/workflows/deploy-pages.yml)
-
 ---
 
 ## 📋 목차
@@ -30,10 +28,11 @@
 
 ## 👥 팀원
 
-| 이름 | 역할 | GitHub |
-| 조준환 | 팀장 / 공통 UI, 프로필, 상품등록, 로그인 | [https://github.com/JunHwanJo](https://github.com/JunHwanJo) |
-| 고은표 | 팀원 / 피드페이지, 채팅, 검색, 회의록 작성 | [https://github.com/goeunpyo8-debug](https://github.com/goeunpyo8-debug) |
-| 신지수 | 팀원 / 게시물, 회원가입, 테마 | [https://github.com/Anyarzy](https://github.com/Anyarzy) |
+| 이름   | 역할                                       | GitHub                                                                   |
+| ------ | ------------------------------------------ | ------------------------------------------------------------------------ |
+| 조준환 | 팀장 / 공통 UI, 프로필, 상품등록, 로그인   | [https://github.com/JunHwanJo](https://github.com/JunHwanJo)             |
+| 고은표 | 팀원 / 랜딩페이지, 피드, 검색, 회의록 작성 | [https://github.com/goeunpyo8-debug](https://github.com/goeunpyo8-debug) |
+| 신지수 | 팀원 / 게시물, 회원가입, 테마              | [https://github.com/Anyarzy](https://github.com/Anyarzy)                 |
 
 ---
 
@@ -45,7 +44,6 @@
 | 📰 **SNS 피드**  | 게시물 작성, 수정, 삭제, 좋아요, 검색 |
 | 🛒 **상품 거래** | 상품 등록, 수정, 삭제                 |
 | 👤 **프로필**    | 프로필 조회, 수정, 팔로워/팔로잉 목록 |
-| 💬 **채팅**      | 채팅방 목록, 1:1 채팅                 |
 | 🌗 **다크 모드** | 라이트/다크 테마 전환                 |
 
 ---
