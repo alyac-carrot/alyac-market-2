@@ -2,8 +2,6 @@
 
 > **알약마켓 프로젝트** — 상품 거래 및 SNS 피드 기능을 갖춘 모바일 웹 앱
 
-[![Deploy to GitHub Pages](https://github.com/alyac-carrot/alyac-market-2/actions/workflows/deploy-pages.yml/badge.svg)](https://github.com/alyac-carrot/alyac-market-2/actions/workflows/deploy-pages.yml)
-
 ---
 
 ## 📋 목차
