@@ -6,5 +6,6 @@ export const useGetFeedPosts = (limit?: number) => {
   return useQuery({
     queryKey: ['posts', 'feed', limit],
     queryFn: () => getFeedPosts(limit),
+    retry: false,
   });
 };
