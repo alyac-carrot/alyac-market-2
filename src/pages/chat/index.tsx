@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { PageWithFooter } from '@/widgets/footer';
 import { Header, PageWithHeader } from '@/widgets/header';
 
+const mascotUrl = `${import.meta.env.BASE_URL}mascot.png`;
+
 type ChatItem = {
   id: string;
   name: string;
@@ -19,21 +21,21 @@ const MOCK_CHATS: ChatItem[] = [
     lastMessage: '안녕하세요',
     date: '2020.10.25',
     unread: true,
-    image: '/mascot.png',
+    image: mascotUrl,
   },
   {
     id: '2',
     name: '알약 클라우드 이스트 시큐리티',
     lastMessage: '테스트',
     date: '2020.10.25',
-    image: '/mascot.png',
+    image: mascotUrl,
   },
   {
     id: '3',
     name: '보안 닥터스 알약',
     lastMessage: '반가워요',
     date: '2020.10.25',
-    image: '/mascot.png',
+    image: mascotUrl,
   },
 ];
 
@@ -50,7 +52,7 @@ export default function ChatListPage() {
               onClick={() => nav(`/chat/${c.id}`)}
               className="flex cursor-pointer items-center gap-3"
             >
-              <div className="relative h-11 w-11 overflow-hidden rounded-full">
+              <div className="relative h-11 w-11 overflow-hidden rounded-full bg-zinc-200 dark:bg-zinc-700">
                 <img src={c.image} alt={c.name} className="h-full w-full object-cover" />
 
                 {c.unread && (
