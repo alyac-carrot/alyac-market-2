@@ -7,7 +7,7 @@ const API_URL = `${API_BASE_URL}/api`;
 
 const axiosInstance = axios.create({
   baseURL: API_URL,
-  timeout: 10000,
+  timeout: 30000,
 });
 
 // 요청 인터셉터: 토큰 자동 추가
