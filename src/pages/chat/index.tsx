@@ -9,6 +9,7 @@ type ChatItem = {
   lastMessage: string;
   date: string;
   unread?: boolean;
+  image: string;
 };
 
 const MOCK_CHATS: ChatItem[] = [
@@ -18,9 +19,22 @@ const MOCK_CHATS: ChatItem[] = [
     lastMessage: '안녕하세요',
     date: '2020.10.25',
     unread: true,
+    image: '/mascot.png',
   },
-  { id: '2', name: '알약 클라우드 이스트 시큐리티', lastMessage: '테스트', date: '2020.10.25' },
-  { id: '3', name: '보안 닥터스 알약', lastMessage: '반가워요', date: '2020.10.25' },
+  {
+    id: '2',
+    name: '알약 클라우드 이스트 시큐리티',
+    lastMessage: '테스트',
+    date: '2020.10.25',
+    image: '/mascot.png',
+  },
+  {
+    id: '3',
+    name: '보안 닥터스 알약',
+    lastMessage: '반가워요',
+    date: '2020.10.25',
+    image: '/mascot.png',
+  },
 ];
 
 export default function ChatListPage() {
@@ -36,7 +50,9 @@ export default function ChatListPage() {
               onClick={() => nav(`/chat/${c.id}`)}
               className="flex cursor-pointer items-center gap-3"
             >
-              <div className="relative h-11 w-11 rounded-full bg-zinc-200 dark:bg-zinc-700">
+              <div className="relative h-11 w-11 overflow-hidden rounded-full">
+                <img src={c.image} alt={c.name} className="h-full w-full object-cover" />
+
                 {c.unread && (
                   <span className="absolute top-4 -left-1 h-2.5 w-2.5 rounded-full bg-green-500" />
                 )}
