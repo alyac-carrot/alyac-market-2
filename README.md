@@ -1,14 +1,15 @@
-# 💊 Alyac Market
+# 💊 2조 당근🥕 Alyac Market 💊
 
 > **알약마켓 프로젝트** — 상품 거래 및 SNS 피드 기능을 갖춘 모바일 웹 앱
 
-<!-- TODO: 배지 (빌드 상태, 라이선스 등) 추가 -->
+[![Deploy to GitHub Pages](https://github.com/alyac-carrot/alyac-market-2/actions/workflows/deploy-pages.yml/badge.svg)](https://github.com/alyac-carrot/alyac-market-2/actions/workflows/deploy-pages.yml)
 
 ---
 
 ## 📋 목차
 
 - [프로젝트 소개](#-프로젝트-소개)
+- [팀원](#-팀원)
 - [주요 기능](#-주요-기능)
 - [기술 스택](#-기술-스택)
 - [아키텍처](#-아키텍처)
@@ -16,7 +17,6 @@
 - [환경 변수](#-환경-변수)
 - [스크립트](#-스크립트)
 - [배포](#-배포)
-- [팀원](#-팀원)
 
 ---
 
@@ -25,8 +25,15 @@
 **Alyac Market**은 상품 거래 플랫폼 프로젝트입니다.  
 사용자는 SNS 피드를 통해 게시물을 올리고, 팔로우 기반의 소셜 기능과 실시간 채팅을 통해 소통하며, 상품을 등록·거래할 수 있습니다.
 
-- 🔗 **배포 URL**: [https://alyac-market-2.vercel.app/](https://alyac-market-2.vercel.app/)
-- 🗓️ **개발 기간**: <!-- TODO: 개발 기간 작성 -->
+- 🔗 **배포 URL**: [https://alyac-carrot.github.io/alyac-market-2/](https://alyac-carrot.github.io/alyac-market-2/)
+- 🗓️ **개발 기간**: 2026.02.13 ~ 2026.03.16
+
+## 👥 팀원
+
+| 이름 | 역할 | GitHub |
+| 조준환 | 팀장 / 공통 UI, 프로필, 상품등록, 로그인 | [https://github.com/JunHwanJo](https://github.com/JunHwanJo) |
+| 고은표 | 팀원 / 피드페이지, 채팅, 검색, 회의록 작성 | [https://github.com/goeunpyo8-debug](https://github.com/goeunpyo8-debug) |
+| 신지수 | 팀원 / 게시물, 회원가입, 테마 | [https://github.com/Anyarzy](https://github.com/Anyarzy) |
 
 ---
 
@@ -36,7 +43,7 @@
 | ---------------- | ------------------------------------- |
 | 🔐 **인증**      | 회원가입(2단계), 로그인, 소셜 로그인  |
 | 📰 **SNS 피드**  | 게시물 작성, 수정, 삭제, 좋아요, 검색 |
-| 🛒 **중고 거래** | 상품 등록, 수정, 삭제                 |
+| 🛒 **상품 거래** | 상품 등록, 수정, 삭제                 |
 | 👤 **프로필**    | 프로필 조회, 수정, 팔로워/팔로잉 목록 |
 | 💬 **채팅**      | 채팅방 목록, 1:1 채팅                 |
 | 🌗 **다크 모드** | 라이트/다크 테마 전환                 |
@@ -71,7 +78,15 @@
 
 ### Backend
 
-<!-- TODO: 백엔드 기술 스택 작성 (Firebase Cloud Functions, Firestore, Firebase Storage 등) -->
+| 분류             | 기술                                                        |
+| ---------------- | ----------------------------------------------------------- |
+| **Runtime**      | Node.js                                                     |
+| **Framework**    | Express v5                                                  |
+| **데이터베이스** | json-server v0.17 (lowdb 기반)                              |
+| **인증**         | JWT (jsonwebtoken) — Access Token (1h) + Refresh Token (1d) |
+| **파일 업로드**  | Multer (로컬 디스크 저장, 최대 10MB)                        |
+| **API 문서**     | Swagger (swagger-jsdoc + swagger-ui-express)                |
+| **개발 서버**    | nodemon                                                     |
 
 ---
 
@@ -159,17 +174,26 @@ src/
 
 ### 설치 및 실행
 
-```bash
-# 저장소 클론
-git clone https://github.com/alyac-carrot/alyac-market-2.git
-cd alyac-market-2
+#### 1. 백엔드 서버 실행
 
-# 의존성 설치
+```bash
+# 프로젝트 루트(alyac-project/)에서
+cd alyac-project  # 상위 백엔드 폴더로 이동
+npm install
+npm start         # nodemon으로 서버 실행 (기본 포트: 3000)
+```
+
+> Swagger API 문서: `http://localhost:3000/api-docs`
+
+#### 2. 프론트엔드 개발 서버 실행
+
+```bash
+# alyac-market/ 폴더에서
 npm install
 
 # 환경 변수 설정
 cp .env.example .env
-# .env 파일을 열어 값 입력 (아래 환경 변수 섹션 참고)
+# .env의 VITE_API_BASE_URL=http://localhost:3000 확인
 
 # 개발 서버 시작
 npm run dev
@@ -219,14 +243,6 @@ VITE_APP_BASE_PATH=/
 
 - 빌드 환경: **Node.js 20**, `ubuntu-latest`
 - 배포 대상: `./dist` 폴더 → GitHub Pages
+- 🔗 **배포 URL**: [https://alyac-carrot.github.io/alyac-market-2/](https://alyac-carrot.github.io/alyac-market-2/)
 
 ---
-
-## 👥 팀원
-
-<!-- TODO: 팀원 정보 작성 -->
-
-| 이름 | 역할 | GitHub |
-| ---- | ---- | ------ |
-|      |      |        |
-|      |      |        |
