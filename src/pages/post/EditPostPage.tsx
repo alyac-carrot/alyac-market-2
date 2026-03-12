@@ -6,7 +6,7 @@ import { useGetPost, useUpdatePost } from '@/entities/post';
 import { useUploadFiles } from '@/entities/upload';
 import { useMeQuery } from '@/entities/user';
 import { PostImagePicker } from '@/features/upload';
-import { toImageUrl } from '@/shared/lib';
+import { normalizeUploadPath, toImageUrl } from '@/shared/lib';
 import { Avatar, Button, SubmitActionButton } from '@/shared/ui';
 import { Header, PageWithHeader } from '@/widgets/header';
 
@@ -117,7 +117,7 @@ function EditPostForm({ postId, post }: EditPostFormProps) {
 
       const uploadedFiles =
         newFiles.length > 0 ? await uploadFilesMutation.mutateAsync(newFiles) : [];
-      const uploadedNewFileNames = uploadedFiles.map((f) => `uploadFiles/${f.filename}`);
+      const uploadedNewFileNames = uploadedFiles.map((f) => normalizeUploadPath(f.filename));
 
       const imageString = [...oldFiles, ...uploadedNewFileNames].join(',');
 

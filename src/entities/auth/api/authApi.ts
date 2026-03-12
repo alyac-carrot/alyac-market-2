@@ -1,4 +1,3 @@
-import { treeifyError } from 'zod';
 
 import axiosInstance from '@/shared/api/axios';
 
@@ -17,7 +16,7 @@ export const signIn = async (body: SignInBody): Promise<SignInResponse> => {
   const result = signInResponseSchema.safeParse(response.data);
 
   if (!result.success) {
-    console.error('[zod:signIn]', treeifyError(result.error));
+    console.error('[zod:signIn]', result.error.flatten());
     throw new Error('로그인 응답 데이터 형식이 올바르지 않습니다.');
   }
 

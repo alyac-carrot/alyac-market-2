@@ -1,4 +1,4 @@
-﻿import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -6,14 +6,16 @@ import type { Msg } from '@/entities/chat';
 import { ChatMessage } from '@/features/chat';
 import { Header, PageWithHeader } from '@/widgets/header';
 
+const mascotUrl = `${import.meta.env.BASE_URL}mascot.png`;
+
 export default function ChatRoomPage() {
   const nav = useNavigate();
 
   const [openSheet, setOpenSheet] = useState(false);
   const [input, setInput] = useState('');
 
-  const meAvatarUrl = '/mascot.png';
-  const themAvatarUrl = '/mascot.png';
+  const meAvatarUrl = mascotUrl;
+  const themAvatarUrl = mascotUrl;
 
   const [messages, setMessages] = useState<Msg[]>([
     { id: 'a', from: 'them', text: '테스트용 말', time: '12:39' },
