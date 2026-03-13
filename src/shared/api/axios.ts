@@ -8,7 +8,7 @@ const signInPath = `${import.meta.env.BASE_URL}auth/signin`;
 
 const axiosInstance = axios.create({
   baseURL: API_URL,
-  timeout: 30000,
+  timeout: 60000,
 });
 
 // 요청 인터셉터: 토큰 자동 추가
