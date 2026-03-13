@@ -10,6 +10,16 @@ import { Header, PageWithHeader } from '@/widgets/header';
 
 const mascotUrl = `${import.meta.env.BASE_URL}mascot.png`;
 
+const getFirstImage = (image?: string) => {
+  if (!image) return '';
+  return (
+    image
+      .split(',')
+      .map((item) => item.trim())
+      .filter(Boolean)[0] ?? ''
+  );
+};
+
 export default function FeedPage() {
   const nav = useNavigate();
   const queryClient = useQueryClient();
@@ -93,74 +103,78 @@ export default function FeedPage() {
         headerOffsetClassName="pt-20"
       >
         <ul className="space-y-6">
-          {posts.map((p) => (
-            <li
-              key={p.id}
-              onClick={() => nav(`/post/${p.id}`)}
-              className="cursor-pointer rounded-2xl bg-white shadow-sm dark:border dark:border-zinc-800 dark:bg-zinc-900"
-            >
-              <div className="flex items-center gap-3 px-3 pt-3">
-                <Avatar
-                  src={toImageUrl(p.author.image)}
-                  alt={p.author.username}
-                  className="h-10 w-10"
-                />
+          {posts.map((p) => {
+            const firstImage = getFirstImage(p.image);
 
-                <div className="min-w-0">
-                  <div className="text-sm font-semibold text-zinc-900 dark:text-zinc-100">
-                    {p.author.username}
-                  </div>
-                  <div className="text-xs text-zinc-500 dark:text-zinc-400">
-                    @{p.author.accountname}
-                  </div>
-                </div>
-              </div>
+            return (
+              <li
+                key={p.id}
+                onClick={() => nav(`/post/${p.id}`)}
+                className="cursor-pointer rounded-2xl bg-white shadow-sm dark:border dark:border-zinc-800 dark:bg-zinc-900"
+              >
+                <div className="flex items-center gap-3 px-3 pt-3">
+                  <Avatar
+                    src={toImageUrl(p.author.image)}
+                    alt={p.author.username}
+                    className="h-10 w-10"
+                  />
 
-              {p.content ? (
-                <p className="px-3 pt-2 text-sm whitespace-pre-wrap text-zinc-900 dark:text-zinc-100">
-                  {p.content}
-                </p>
-              ) : null}
-
-              {p.image ? (
-                <div className="mt-3 px-3">
-                  <div className="aspect-square overflow-hidden rounded-2xl bg-zinc-100 dark:bg-zinc-800">
-                    <img
-                      src={toImageUrl(p.image)}
-                      alt=""
-                      className="h-full w-full object-cover"
-                      loading="lazy"
-                    />
+                  <div className="min-w-0">
+                    <div className="text-sm font-semibold text-zinc-900 dark:text-zinc-100">
+                      {p.author.username}
+                    </div>
+                    <div className="text-xs text-zinc-500 dark:text-zinc-400">
+                      @{p.author.accountname}
+                    </div>
                   </div>
                 </div>
-              ) : null}
 
-              <div className="flex items-center gap-4 px-3 pt-3 pb-3 text-xs text-zinc-500 dark:text-zinc-400">
-                <button
-                  type="button"
-                  className="cursor-pointer transition hover:text-red-500 disabled:cursor-not-allowed disabled:opacity-50"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleLikePost({ postId: p.id, nextHearted: !p.hearted });
-                  }}
-                  disabled={isLikePending}
-                >
-                  {p.hearted ? '취소' : '좋아요'} {p.heartCount}
-                </button>
+                {p.content ? (
+                  <p className="px-3 pt-2 text-sm whitespace-pre-wrap text-zinc-900 dark:text-zinc-100">
+                    {p.content}
+                  </p>
+                ) : null}
 
-                <button
-                  type="button"
-                  className="cursor-pointer transition hover:text-zinc-900 dark:hover:text-zinc-100"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    nav(`/post/${p.id}`);
-                  }}
-                >
-                  댓글 보기 {p.commentCount}
-                </button>
-              </div>
-            </li>
-          ))}
+                {firstImage ? (
+                  <div className="mt-3 px-3">
+                    <div className="aspect-square overflow-hidden rounded-2xl bg-zinc-100 dark:bg-zinc-800">
+                      <img
+                        src={toImageUrl(firstImage)}
+                        alt=""
+                        className="h-full w-full object-cover"
+                        loading="lazy"
+                      />
+                    </div>
+                  </div>
+                ) : null}
+
+                <div className="flex items-center gap-4 px-3 pt-3 pb-3 text-xs text-zinc-500 dark:text-zinc-400">
+                  <button
+                    type="button"
+                    className="cursor-pointer transition hover:text-red-500 disabled:cursor-not-allowed disabled:opacity-50"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleLikePost({ postId: p.id, nextHearted: !p.hearted });
+                    }}
+                    disabled={isLikePending}
+                  >
+                    {p.hearted ? '취소' : '좋아요'} {p.heartCount}
+                  </button>
+
+                  <button
+                    type="button"
+                    className="cursor-pointer transition hover:text-zinc-900 dark:hover:text-zinc-100"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      nav(`/post/${p.id}`);
+                    }}
+                  >
+                    댓글 보기 {p.commentCount}
+                  </button>
+                </div>
+              </li>
+            );
+          })}
         </ul>
       </PageWithHeader>
     </PageWithFooter>
