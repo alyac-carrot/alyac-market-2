@@ -2,8 +2,9 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-import { type SignInBody, signIn } from '@/entities/auth/api/authApi';
+import { signIn } from '@/entities/auth/api/authApi';
 import { saveToken } from '@/entities/auth/lib/token';
+import type { SignInBody } from '@/entities/auth/model/type';
 import { queryKeys } from '@/shared/lib';
 
 const isObject = (v: unknown): v is Record<string, unknown> => typeof v === 'object' && v !== null;
@@ -16,10 +17,10 @@ const getErrorMessage = (data: unknown): string | undefined => {
 
 export function getSignInErrorMessage(err: unknown) {
   if (axios.isAxiosError(err)) {
-    if (err.response?.status === 422) return '이메일 또는 비밀번호가 일치하지 않습니다.';
-    return getErrorMessage(err.response?.data) ?? '로그인에 실패했습니다.';
+    if (err.response?.status === 422) return '?대찓???먮뒗 鍮꾨?踰덊샇媛 ?쇱튂?섏? ?딆뒿?덈떎.';
+    return getErrorMessage(err.response?.data) ?? '濡쒓렇?몄뿉 ?ㅽ뙣?덉뒿?덈떎.';
   }
-  return '로그인에 실패했습니다.';
+  return '濡쒓렇?몄뿉 ?ㅽ뙣?덉뒿?덈떎.';
 }
 
 export function useSignInMutation() {

@@ -31,7 +31,3 @@ export const signInUserSchema = authUserBaseSchema.extend({
 export const signInResponseSchema = z.object({
   user: signInUserSchema,
 });
-
-export type AuthUser = z.infer<typeof authUserSchema>;
-export type SignInUser = z.infer<typeof signInUserSchema>;
-export type SignInResponse = z.infer<typeof signInResponseSchema>;

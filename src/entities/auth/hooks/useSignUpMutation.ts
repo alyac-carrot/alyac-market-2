@@ -1,7 +1,8 @@
 import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 
-import { type SignUpBody, signUp } from '@/entities/auth/api/signUpApi';
+import { signUp } from '@/entities/auth/api/signUpApi';
+import type { SignUpBody } from '@/entities/auth/model/type';
 
 export function useSignUpMutation() {
   const navigate = useNavigate();

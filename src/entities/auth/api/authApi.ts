@@ -1,12 +1,8 @@
 
 import axiosInstance from '@/shared/api/axios';
 
-import { type SignInResponse, signInResponseSchema } from '../model/schemas';
-
-export type SignInBody = {
-  email: string;
-  password: string;
-};
+import { type SignInBody, type SignInResponse } from '../model/type';
+import { signInResponseSchema } from '../model/schemas';
 
 export const signIn = async (body: SignInBody): Promise<SignInResponse> => {
   const response = await axiosInstance.post('/user/signin', {
