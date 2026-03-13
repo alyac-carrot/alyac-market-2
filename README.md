@@ -1,6 +1,6 @@
 # 2조 팀 프로젝트 Alyac Market
 
-> 거래 기능과 SNS 피드를 결합한 모바일 중심 소셜 마켓 웹 애플리케이션
+> 중고거래 기능과 SNS 피드를 결합한 모바일 중심 소셜 마켓 웹 애플리케이션
 
 ---
 
@@ -40,11 +40,11 @@
 
 ## 팀원
 
-| 이름   | 역할                                                                      | GitHub                                                                   |
-| ------ | ------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
-| 조준환 | 팀장 / 공통 UI 구조 설계, 프로필 페이지 구현, 상품 등록 및 수정 기능 구현 | [https://github.com/JunHwanJo](https://github.com/JunHwanJo)             |
-| 고은표 | 팀원 / 랜딩 페이지 구현, 피드 조회 화면 구현, 검색 기능 구현              | [https://github.com/goeunpyo8-debug](https://github.com/goeunpyo8-debug) |
-| 신지수 | 팀원 / 게시글 기능 구현, 회원가입 흐름 구현, 테마 전환 기능 구현          | [https://github.com/Anyarzy](https://github.com/Anyarzy)                 |
+| 이름 | 역할 | GitHub |
+| --- | --- | --- |
+| 조준환 | 팀장 / 공통 UI, 프로필, 상품 기능 구현 | [JunHwanJo](https://github.com/JunHwanJo) |
+| 고은표 | 팀원 / 랜딩, 피드, 검색 기능 구현 | [goeunpyo8-debug](https://github.com/goeunpyo8-debug) |
+| 신지수 | 팀원 / 게시글, 회원가입, 테마 기능 구현 | [Anyarzy](https://github.com/Anyarzy) |
 
 ### 역할 분담 요약
 
@@ -95,27 +95,27 @@
 
 ### 프론트엔드
 
-| 분류            | 기술                            |
-| --------------- | ------------------------------- |
-| 프레임워크      | React 19                        |
-| 언어            | TypeScript 5                    |
-| 빌드 도구       | Vite 7                          |
-| 라우팅          | React Router DOM v7             |
-| 서버 상태 관리  | TanStack Query (React Query) v5 |
-| 폼 및 검증      | React Hook Form + Zod           |
-| HTTP 클라이언트 | Axios                           |
-| 스타일링        | Tailwind CSS v4 + shadcn/ui     |
-| 아이콘          | Lucide React                    |
-| SVG 처리        | vite-plugin-svgr                |
+| 분류 | 기술 |
+| --- | --- |
+| 프레임워크 | React 19 |
+| 언어 | TypeScript 5 |
+| 빌드 도구 | Vite 7 |
+| 라우팅 | React Router DOM v7 |
+| 서버 상태 관리 | TanStack Query (React Query) v5 |
+| 폼 및 검증 | React Hook Form + Zod |
+| HTTP 클라이언트 | Axios |
+| 스타일링 | Tailwind CSS v4 + shadcn/ui |
+| 아이콘 | Lucide React |
+| SVG 처리 | vite-plugin-svgr |
 
 ### 개발 도구
 
-| 분류        | 기술                                   |
-| ----------- | -------------------------------------- |
-| 린트        | ESLint 9 (TypeScript-ESLint)           |
-| 포맷팅      | Prettier + prettier-plugin-tailwindcss |
-| 타입 검사   | TypeScript (`tsc --noEmit`)            |
-| 배포 자동화 | GitHub Actions, GitHub Pages           |
+| 분류 | 기술 |
+| --- | --- |
+| 린트 | ESLint 9 (TypeScript-ESLint) |
+| 포맷팅 | Prettier + prettier-plugin-tailwindcss |
+| 타입 검사 | TypeScript (`tsc --noEmit`) |
+| 배포 자동화 | GitHub Actions, GitHub Pages |
 
 ### 백엔드
 
@@ -123,15 +123,15 @@
 
 - 백엔드 저장소: [https://github.com/KDT-10/alyac-market-server](https://github.com/KDT-10/alyac-market-server)
 
-| 분류         | 기술                                         |
-| ------------ | -------------------------------------------- |
-| 런타임       | Node.js                                      |
-| 프레임워크   | Express v5                                   |
-| 데이터베이스 | json-server v0.17 (lowdb 기반)               |
-| 인증         | JWT, Access Token (1h), Refresh Token (1d)   |
-| 파일 업로드  | Multer                                       |
-| API 문서     | Swagger (swagger-jsdoc + swagger-ui-express) |
-| 개발 서버    | nodemon                                      |
+| 분류 | 기술 |
+| --- | --- |
+| 런타임 | Node.js |
+| 프레임워크 | Express v5 |
+| 데이터베이스 | json-server v0.17 (lowdb 기반) |
+| 인증 | JWT, Access Token (1h), Refresh Token (1d) |
+| 파일 업로드 | Multer |
+| API 문서 | Swagger (swagger-jsdoc + swagger-ui-express) |
+| 개발 서버 | nodemon |
 
 ---
 
@@ -152,26 +152,26 @@ src/
 
 ### 라우트
 
-| 경로                       | 페이지        | 인증 필요 |
-| -------------------------- | ------------- | --------- |
-| `/`                        | 스플래시      | 아니오    |
-| `/auth/landing`            | 랜딩          | 아니오    |
-| `/auth/signin`             | 로그인        | 아니오    |
-| `/auth/signup`             | 회원가입      | 아니오    |
-| `/feed`                    | 피드          | 예        |
-| `/search`                  | 검색          | 예        |
-| `/post-create`             | 게시글 작성   | 예        |
-| `/post/:postId`            | 게시글 상세   | 예        |
-| `/post/:postId/edit`       | 게시글 수정   | 예        |
-| `/product/create`          | 상품 등록     | 예        |
-| `/product/:productId/edit` | 상품 수정     | 예        |
-| `/profile`                 | 내 프로필     | 예        |
-| `/profile/:userId`         | 사용자 프로필 | 예        |
-| `/profile-update`          | 프로필 수정   | 예        |
-| `/followers/:accountname`  | 팔로워 목록   | 예        |
-| `/followings/:accountname` | 팔로잉 목록   | 예        |
-| `/chat`                    | 채팅 목록     | 예        |
-| `/chat/:roomId`            | 채팅방        | 예        |
+| 경로 | 페이지 | 인증 필요 |
+| --- | --- | --- |
+| `/` | 스플래시 | 아니오 |
+| `/auth/landing` | 랜딩 | 아니오 |
+| `/auth/signin` | 로그인 | 아니오 |
+| `/auth/signup` | 회원가입 | 아니오 |
+| `/feed` | 피드 | 예 |
+| `/search` | 검색 | 예 |
+| `/post-create` | 게시글 작성 | 예 |
+| `/post/:postId` | 게시글 상세 | 예 |
+| `/post/:postId/edit` | 게시글 수정 | 예 |
+| `/product/create` | 상품 등록 | 예 |
+| `/product/:productId/edit` | 상품 수정 | 예 |
+| `/profile` | 내 프로필 | 예 |
+| `/profile/:userId` | 사용자 프로필 | 예 |
+| `/profile-update` | 프로필 수정 | 예 |
+| `/followers/:accountname` | 팔로워 목록 | 예 |
+| `/followings/:accountname` | 팔로잉 목록 | 예 |
+| `/chat` | 채팅 목록 | 예 |
+| `/chat/:roomId` | 채팅방 | 예 |
 
 ---
 
@@ -237,16 +237,16 @@ VITE_APP_BASE_PATH=/
 
 ## 스크립트
 
-| 명령어                 | 설명                     |
-| ---------------------- | ------------------------ |
-| `npm run dev`          | 개발 서버 실행 (HMR)     |
-| `npm run build`        | 프로덕션 빌드            |
-| `npm run build:pages`  | GitHub Pages 배포용 빌드 |
-| `npm run preview`      | 프로덕션 빌드 미리보기   |
-| `npm run type-check`   | TypeScript 타입 검사     |
-| `npm run lint`         | ESLint 실행              |
-| `npm run format`       | Prettier 포맷팅          |
-| `npm run format:check` | Prettier 포맷 검사       |
+| 명령어 | 설명 |
+| --- | --- |
+| `npm run dev` | 개발 서버 실행 (HMR) |
+| `npm run build` | 프로덕션 빌드 |
+| `npm run build:pages` | GitHub Pages 배포용 빌드 |
+| `npm run preview` | 프로덕션 빌드 미리보기 |
+| `npm run type-check` | TypeScript 타입 검사 |
+| `npm run lint` | ESLint 실행 |
+| `npm run format` | Prettier 포맷팅 |
+| `npm run format:check` | Prettier 포맷 검사 |
 
 ---
 
