@@ -4,8 +4,10 @@ import { useDeletePost, useGetUserPosts, useLikePostMutation } from '@/entities/
 import type { Post } from '@/entities/profile';
 import { pickFirstImage, toImageUrl } from '@/shared/lib/';
 
+const PROFILE_POSTS_PAGE_SIZE = 10;
+
 export function useProfilePosts(accountname?: string) {
-  const userPostsQuery = useGetUserPosts(accountname);
+  const userPostsQuery = useGetUserPosts(accountname, PROFILE_POSTS_PAGE_SIZE);
   const deletePostMutation = useDeletePost();
   const likePostMutation = useLikePostMutation();
   const [optimisticLikes, setOptimisticLikes] = useState<
@@ -13,7 +15,7 @@ export function useProfilePosts(accountname?: string) {
   >({});
 
   const rawPosts: Post[] = useMemo(() => {
-    const arr = userPostsQuery.data?.post ?? [];
+    const arr = userPostsQuery.data?.pages.flatMap((page) => page.post) ?? [];
     return arr.map((p) => ({
       id: p.id,
       content: p.content,
@@ -36,6 +38,11 @@ export function useProfilePosts(accountname?: string) {
       };
     });
   }, [optimisticLikes, rawPosts]);
+
+  const fetchNextPosts = () => {
+    if (!userPostsQuery.hasNextPage || userPostsQuery.isFetchingNextPage) return;
+    userPostsQuery.fetchNextPage();
+  };
 
   const togglePostLike = (postId: string) => {
     const target = posts.find((p) => p.id === postId);
@@ -76,5 +83,8 @@ export function useProfilePosts(accountname?: string) {
     togglePostLike,
     likePostMutation,
     posts,
+    hasNextPage: userPostsQuery.hasNextPage,
+    isFetchingNextPage: userPostsQuery.isFetchingNextPage,
+    fetchNextPosts,
   };
 }
