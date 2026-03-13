@@ -1,10 +1,11 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useMemo, useState } from 'react';
 
 import { EllipsisVertical, Heart, MessageCircle } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { PostAlbumOff, PostAlbumOn, PostListOff, PostListOn } from '@/assets/icon';
 import type { Post, PostViewMode, UIProfile as Profile } from '@/entities/profile';
+import { useInfiniteScroll } from '@/shared/lib';
 import {
   Avatar,
   Button,
@@ -42,28 +43,13 @@ export default function ProfilePostsWidget({
   const navigate = useNavigate();
 
   const [openMenuPostId, setOpenMenuPostId] = useState<string | null>(null);
-  const loadMoreRef = useRef<HTMLDivElement | null>(null);
+  const loadMoreRef = useInfiniteScroll({
+    hasNextPage,
+    isFetching: isFetchingNextPage,
+    onLoadMore,
+  });
 
   const mediaPosts = useMemo(() => posts.filter((p) => Boolean(p.imageUrl?.trim())), [posts]);
-
-  useEffect(() => {
-    const target = loadMoreRef.current;
-    if (!target || !hasNextPage || !onLoadMore) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const [entry] = entries;
-        if (entry?.isIntersecting && !isFetchingNextPage) {
-          onLoadMore();
-        }
-      },
-      { rootMargin: '200px 0px' },
-    );
-
-    observer.observe(target);
-
-    return () => observer.disconnect();
-  }, [hasNextPage, isFetchingNextPage, onLoadMore]);
 
   return (
     <section className="mx-auto max-w-240 px-4 py-6">

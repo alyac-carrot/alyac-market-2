@@ -17,7 +17,7 @@ export const getFollowers = async (
   skip = 0,
 ): Promise<FollowerListResponse> => {
   const response = await axiosInstance.get(`/profile/${accountname}/follower`, {
-    params: { limit, skip },
+    params: { limit, skip, _t: Date.now() },
   });
 
   return parseWithSchema(followerListApiResponseSchema, response.data, 'getFollowers');
@@ -29,7 +29,7 @@ export const getFollowings = async (
   skip = 0,
 ): Promise<FollowingListResponse> => {
   const response = await axiosInstance.get(`/profile/${accountname}/following`, {
-    params: { limit, skip },
+    params: { limit, skip, _t: Date.now() },
   });
 
   return parseWithSchema(followingListApiResponseSchema, response.data, 'getFollowings');

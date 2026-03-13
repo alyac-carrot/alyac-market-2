@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom';
 
 import { type Profile, useFollowsPageData } from '@/features/follows';
+import { useInfiniteScroll } from '@/shared/lib';
 import { PageWithFooter } from '@/widgets/footer';
 import { Header, PageWithHeader } from '@/widgets/header';
 import { FollowsListItem } from '@/widgets/profile-follows';
@@ -8,9 +9,14 @@ import { FollowsListItem } from '@/widgets/profile-follows';
 export default function FollowersPage() {
   const { accountname } = useParams<{ accountname: string }>();
 
-  const { list, isLoading, isError } = useFollowsPageData({
+  const { list, isLoading, isError, hasNextPage, isFetchingNextPage, fetchNext } = useFollowsPageData({
     accountname,
     type: 'followers',
+  });
+  const loadMoreRef = useInfiniteScroll({
+    hasNextPage,
+    isFetching: isFetchingNextPage,
+    onLoadMore: fetchNext,
   });
 
   return (
@@ -31,6 +37,12 @@ export default function FollowersPage() {
         {list.map((u: Profile) => (
           <FollowsListItem key={u._id} user={u} />
         ))}
+
+        {(hasNextPage || isFetchingNextPage) && (
+          <div ref={loadMoreRef} className="text-muted-foreground p-6 text-center text-sm">
+            {isFetchingNextPage ? '목록 불러오는 중...' : '아래로 스크롤하면 더 불러옵니다.'}
+          </div>
+        )}
       </PageWithHeader>
     </PageWithFooter>
   );
