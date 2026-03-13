@@ -1,13 +1,11 @@
 export { RequireAuth } from './lib/RequireAuth';
-export { useLogout } from './model/mutations/useLogout';
-export { useSignInMutation, getSignInErrorMessage } from './model/mutations/useSignInMutation';
-export { useSignUpMutation } from './model/mutations/useSignUpMutation';
+export { useLogout } from './hooks/useLogout';
+export { useSignInMutation, getSignInErrorMessage } from './hooks/useSignInMutation';
+export { useSignUpMutation } from './hooks/useSignUpMutation';
 
 export { signIn } from './api/authApi';
-export type { SignInBody } from './api/authApi';
-export type { AuthUser, SignInResponse } from './model/schemas';
+export type { AuthUser, SignInBody, SignInResponse, SignInUser, SignUpBody, SignUpResponse } from './model/type';
 
 export { signUp, checkEmail, checkAccountname } from './api/signUpApi';
-export type { SignUpBody, SignUpResponse } from './api/signUpApi';
 
 export { getToken, removeToken, saveToken } from './lib/token';
