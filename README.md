@@ -42,9 +42,9 @@
 
 | 이름 | 역할 | GitHub |
 | --- | --- | --- |
-| 조준환 | 팀장 / 공통 UI 구조 설계, 프로필 페이지 구현, 상품 등록 및 수정 기능 구현 | [https://github.com/JunHwanJo](https://github.com/JunHwanJo)             |
-| 고은표 | 팀원 / 랜딩 페이지 구현, 피드 조회 화면 구현, 검색 기능 구현              | [https://github.com/goeunpyo8-debug](https://github.com/goeunpyo8-debug) |
-| 신지수 | 팀원 / 게시글 기능 구현, 회원가입 흐름 구현, 테마 전환 기능 구현          | [https://github.com/Anyarzy](https://github.com/Anyarzy)                 |
+| 조준환 | 팀장 / 공통 UI 구조 설계, 프로필 페이지 구현, 상품 기능 구현 | [https://github.com/JunHwanJo](https://github.com/JunHwanJo)             |
+| 고은표 | 팀원 / 랜딩 페이지 구현, 피드 화면 구현, 검색 기능 구현              | [https://github.com/goeunpyo8-debug](https://github.com/goeunpyo8-debug) |
+| 신지수 | 팀원 / 게시글 기능 구현, 회원가입 구현, 테마 전환 기능 구현          | [https://github.com/Anyarzy](https://github.com/Anyarzy)                 |
 
 ### 역할 분담 요약
 
