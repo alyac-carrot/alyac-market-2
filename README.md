@@ -28,19 +28,11 @@
 
 ## 👥 팀원
 
-<<<<<<< HEAD
-| 이름 | 역할 | GitHub |
-| ---- | ---- | ---- |
-| 조준환 | 팀장 / 공통 UI, 프로필, 상품등록, 로그인 | [https://github.com/JunHwanJo](https://github.com/JunHwanJo) |
-| 고은표 | 팀원 / 피드페이지, 채팅, 검색, 회의록 작성 | [https://github.com/goeunpyo8-debug](https://github.com/goeunpyo8-debug) |
-| 신지수 | 팀원 / 게시물, 회원가입, 테마 | [https://github.com/Anyarzy](https://github.com/Anyarzy) |
-=======
 | 이름   | 역할                                       | GitHub                                                                   |
 | ------ | ------------------------------------------ | ------------------------------------------------------------------------ |
 | 조준환 | 팀장 / 공통 UI, 프로필, 상품등록, 로그인   | [https://github.com/JunHwanJo](https://github.com/JunHwanJo)             |
 | 고은표 | 팀원 / 랜딩페이지, 피드, 검색, 회의록 작성 | [https://github.com/goeunpyo8-debug](https://github.com/goeunpyo8-debug) |
 | 신지수 | 팀원 / 게시물, 회원가입, 테마              | [https://github.com/Anyarzy](https://github.com/Anyarzy)                 |
->>>>>>> main
 
 ---
 
