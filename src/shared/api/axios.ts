@@ -84,7 +84,7 @@ axiosInstance.interceptors.response.use(
         // Refresh token으로 새 토큰 요청
         const response = await axios.post(
           `${API_URL}/user/refresh`,
-          {},
+          { refreshToken },
           {
             headers: {
               Authorization: `Bearer ${refreshToken}`,
