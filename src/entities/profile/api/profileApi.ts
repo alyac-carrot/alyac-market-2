@@ -7,7 +7,7 @@ import type {
   FollowerListResponse,
   FollowingListResponse,
   GetProfileResponse,
-} from '../model/types/types';
+} from '../model/type';
 
 export const getProfile = async (accountname: string): Promise<GetProfileResponse> => {
   const response = await axiosInstance.get(`/profile/${accountname}`);
