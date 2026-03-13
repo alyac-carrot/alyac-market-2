@@ -1,4 +1,4 @@
-import { lazy } from 'react';
+import { lazy, type ComponentType } from 'react';
 
 import { createBrowserRouter } from 'react-router-dom';
 
@@ -6,7 +6,7 @@ import { RootLayout } from '@/app/layouts';
 import { RouterErrorPage } from '@/app/router-error';
 import { RequireAuth } from '@/entities/auth';
 
-function lazyWithRetry<T extends React.ComponentType<any>>(
+function lazyWithRetry<T extends ComponentType<unknown>>(
   importer: () => Promise<{ default: T }>,
 ) {
   return lazy(async () => {
