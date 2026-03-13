@@ -1,4 +1,4 @@
-﻿import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 
 import { EllipsisVertical, Heart, MessageCircle } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
@@ -22,6 +22,9 @@ interface PostsSectionProps {
   onViewModeChange: (mode: PostViewMode) => void;
   onToggleLikePost: (postId: string) => void;
   onDeletePost: (postId: string) => void;
+  hasNextPage?: boolean;
+  isFetchingNextPage?: boolean;
+  onLoadMore?: () => void;
 }
 
 export default function ProfilePostsWidget({
@@ -32,12 +35,35 @@ export default function ProfilePostsWidget({
   onViewModeChange,
   onToggleLikePost,
   onDeletePost,
+  hasNextPage = false,
+  isFetchingNextPage = false,
+  onLoadMore,
 }: PostsSectionProps) {
   const navigate = useNavigate();
 
   const [openMenuPostId, setOpenMenuPostId] = useState<string | null>(null);
+  const loadMoreRef = useRef<HTMLDivElement | null>(null);
 
   const mediaPosts = useMemo(() => posts.filter((p) => Boolean(p.imageUrl?.trim())), [posts]);
+
+  useEffect(() => {
+    const target = loadMoreRef.current;
+    if (!target || !hasNextPage || !onLoadMore) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const [entry] = entries;
+        if (entry?.isIntersecting && !isFetchingNextPage) {
+          onLoadMore();
+        }
+      },
+      { rootMargin: '200px 0px' },
+    );
+
+    observer.observe(target);
+
+    return () => observer.disconnect();
+  }, [hasNextPage, isFetchingNextPage, onLoadMore]);
 
   return (
     <section className="mx-auto max-w-240 px-4 py-6">
@@ -195,6 +221,12 @@ export default function ProfilePostsWidget({
               </div>
             </article>
           ))}
+        </div>
+      )}
+
+      {(hasNextPage || isFetchingNextPage) && (
+        <div ref={loadMoreRef} className="py-4 text-center text-sm text-gray-500">
+          {isFetchingNextPage ? '게시글 불러오는 중...' : '아래로 스크롤하면 더 불러옵니다.'}
         </div>
       )}
     </section>

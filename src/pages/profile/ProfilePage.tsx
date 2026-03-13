@@ -28,11 +28,14 @@ export default function ProfilePage() {
     posts,
     postViewMode,
     deleteTargetPostId,
+    hasNextPostPage,
     isMe,
     isFollowing,
     isLoading,
     isError,
     deletePostMutation,
+    fetchNextPosts,
+    isFetchingNextPostPage,
     togglePostLike,
     followMutation,
     setPostViewMode,
@@ -111,6 +114,9 @@ export default function ProfilePage() {
           onViewModeChange={setPostViewMode}
           onToggleLikePost={togglePostLike}
           onDeletePost={setDeleteTargetPostId}
+          hasNextPage={hasNextPostPage}
+          isFetchingNextPage={isFetchingNextPostPage}
+          onLoadMore={fetchNextPosts}
         />
 
         <ConfirmDialog

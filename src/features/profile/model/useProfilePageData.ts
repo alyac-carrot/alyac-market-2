@@ -27,6 +27,8 @@ export function useProfilePageData({ targetAccountname, isMeByRoute }: UseProfil
     posts: postData.posts,
     postViewMode: viewState.postViewMode,
     deleteTargetPostId: viewState.deleteTargetPostId,
+    hasNextPostPage: postData.hasNextPage,
+    isFetchingNextPostPage: postData.isFetchingNextPage,
     // Flags
     isMe: identity.isMe,
     isFollowing: identity.isFollowing,
@@ -35,6 +37,7 @@ export function useProfilePageData({ targetAccountname, isMeByRoute }: UseProfil
     // Mutations
     deletePostMutation: postData.deletePostMutation,
     togglePostLike: postData.togglePostLike,
+    fetchNextPosts: postData.fetchNextPosts,
     followMutation: identity.followMutation,
     // Setters
     setPostViewMode: viewState.setPostViewMode,
