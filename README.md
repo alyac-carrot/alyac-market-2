@@ -21,18 +21,26 @@
 ## 📖 프로젝트 소개
 
 **Alyac Market**은 상품 거래 플랫폼 프로젝트입니다.  
-사용자는 SNS 피드를 통해 게시물을 올리고, 팔로우 기반의 소셜 기능과 실시간 채팅을 통해 소통하며, 상품을 등록·거래할 수 있습니다.
+사용자는 SNS 피드를 통해 게시물을 올리고, 팔로우 기반의 소셜 기능을 통해 소통하며, 상품을 등록·거래할 수 있습니다.
 
 - 🔗 **배포 URL**: [https://alyac-carrot.github.io/alyac-market-2/](https://alyac-carrot.github.io/alyac-market-2/)
 - 🗓️ **개발 기간**: 2026.02.13 ~ 2026.03.16
 
 ## 👥 팀원
 
+<<<<<<< HEAD
 | 이름 | 역할 | GitHub |
 | ---- | ---- | ---- |
 | 조준환 | 팀장 / 공통 UI, 프로필, 상품등록, 로그인 | [https://github.com/JunHwanJo](https://github.com/JunHwanJo) |
 | 고은표 | 팀원 / 피드페이지, 채팅, 검색, 회의록 작성 | [https://github.com/goeunpyo8-debug](https://github.com/goeunpyo8-debug) |
 | 신지수 | 팀원 / 게시물, 회원가입, 테마 | [https://github.com/Anyarzy](https://github.com/Anyarzy) |
+=======
+| 이름   | 역할                                       | GitHub                                                                   |
+| ------ | ------------------------------------------ | ------------------------------------------------------------------------ |
+| 조준환 | 팀장 / 공통 UI, 프로필, 상품등록, 로그인   | [https://github.com/JunHwanJo](https://github.com/JunHwanJo)             |
+| 고은표 | 팀원 / 랜딩페이지, 피드, 검색, 회의록 작성 | [https://github.com/goeunpyo8-debug](https://github.com/goeunpyo8-debug) |
+| 신지수 | 팀원 / 게시물, 회원가입, 테마              | [https://github.com/Anyarzy](https://github.com/Anyarzy)                 |
+>>>>>>> main
 
 ---
 
@@ -44,7 +52,6 @@
 | 📰 **SNS 피드**  | 게시물 작성, 수정, 삭제, 좋아요, 검색 |
 | 🛒 **상품 거래** | 상품 등록, 수정, 삭제                 |
 | 👤 **프로필**    | 프로필 조회, 수정, 팔로워/팔로잉 목록 |
-| 💬 **채팅**      | 채팅방 목록, 1:1 채팅                 |
 | 🌗 **다크 모드** | 라이트/다크 테마 전환                 |
 
 ---
