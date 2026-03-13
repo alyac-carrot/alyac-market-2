@@ -6,9 +6,11 @@ export type {
   PostViewMode,
   FollowerListResponse,
   FollowingListResponse,
-} from './model/types/types';
+  GetProfileResponse,
+  FollowResponse,
+} from './model/type';
 export { useProfileQuery } from './model/queries/useProfileQuery';
-export { useFollowMutation } from './model/mutations/useFollowMutation';
+export { useFollowMutation } from './hooks/useFollowMutation';
 export { useFollowersQuery } from './model/queries/useFollowersQuery';
 export { useFollowingsQuery } from './model/queries/useFollowingsQuery';
 export { profileQueryKeys } from './model/queries/queries';
