@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { updateProduct } from '../api/productApi';
 import { productQueryKeys } from '../model/queries/queries';
-import type { UpdateProductRequest } from '../model/types';
+import type { UpdateProductRequest } from '../model/type';
 
 type UpdateProductVariables = {
   productId: string;
@@ -18,7 +18,7 @@ export function useUpdateProduct() {
       await queryClient.invalidateQueries({
         queryKey: productQueryKeys.detail(variables.productId),
       });
-      await queryClient.invalidateQueries({ queryKey: ['product', 'user'] });
+      await queryClient.invalidateQueries({ queryKey: productQueryKeys.user });
     },
   });
 }

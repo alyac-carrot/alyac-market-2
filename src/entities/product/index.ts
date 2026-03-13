@@ -1,5 +1,5 @@
-export { useUserProductsQuery } from './hooks/useUserProductsQuery';
-export { useProductDetailQuery } from './hooks/useProductDetailQuery';
+export { useUserProductsQuery } from './model/queries/useUserProductsQuery';
+export { useProductDetailQuery } from './model/queries/useProductDetailQuery';
 export { productQueryKeys } from './model/queries/queries';
 export {
   getUserProducts,
@@ -15,6 +15,8 @@ export { productFormSchema, productRequestSchema } from './model/schemas';
 
 export type {
   Product,
+  ProductAuthor,
+  ProductRequest,
   GetUserProductsResponse,
   GetProductDetailResponse,
   CreateProductRequest,
@@ -22,5 +24,5 @@ export type {
   UpdateProductRequest,
   UpdateProductResponse,
   DeleteProductResponse,
-} from './model/types';
-export type { ProductFormValues } from './model/schemas';
+} from './model/type';
+export type { ProductFormValues } from './model/type';

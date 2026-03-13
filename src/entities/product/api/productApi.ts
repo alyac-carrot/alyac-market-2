@@ -16,7 +16,7 @@ import type {
   GetUserProductsResponse,
   UpdateProductRequest,
   UpdateProductResponse,
-} from '../model/types';
+} from '../model/type';
 
 export const getUserProducts = async (accountname: string): Promise<GetUserProductsResponse> => {
   const response = await axiosInstance.get(`/product/${accountname}`);
