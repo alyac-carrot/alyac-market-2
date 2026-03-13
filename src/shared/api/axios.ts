@@ -4,6 +4,7 @@ import { getRefreshToken, getToken, removeToken, saveToken } from '@/entities/au
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 const API_URL = `${API_BASE_URL}/api`;
+const signInPath = `${import.meta.env.BASE_URL}auth/signin`;
 
 const axiosInstance = axios.create({
   baseURL: API_URL,
@@ -75,7 +76,7 @@ axiosInstance.interceptors.response.use(
       if (!refreshToken) {
         // Refresh token 없으면 로그아웃
         removeToken();
-        window.location.href = '/auth/signin';
+        window.location.href = signInPath;
         return Promise.reject(error);
       }
 
@@ -104,7 +105,7 @@ axiosInstance.interceptors.response.use(
         // Refresh 실패 시 로그아웃 및 대기 중인 요청들 취소
         onTokenRefreshFailed(refreshError);
         removeToken();
-        window.location.href = '/auth/signin';
+        window.location.href = signInPath;
         return Promise.reject(refreshError);
       } finally {
         isRefreshing = false;
